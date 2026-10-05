@@ -839,6 +839,10 @@
      full-width first line, and fixOrphans() trims just that sentence if its
      tail would be left with only a word or two. */
   .copy-line{ display:block; text-wrap:pretty; }
+  @media (max-width:767px){
+    #modal-scroll p.max-w-5xl .copy-line{ text-wrap:balance; }
+    #modal-scroll p.max-w-5xl .copy-line + .copy-line{ margin-top:.6rem; }
+  }
   .cosmos-note{ font-size:.75rem; color:rgba(255,255,255,.38); margin-top:.9rem; }
 
   /* two-column "text | media" split used by most sections */
@@ -1128,6 +1132,14 @@
   .dd-jump-in::-webkit-scrollbar{ display:none; }
   .dd-jump-label{ flex:none; font-size:.62rem; letter-spacing:.2em; color:rgba(255,255,255,.38); margin-right:.6rem; }
   .dd-jump-btn{ flex:none; font:inherit; font-size:.74rem; letter-spacing:.04em; color:rgba(255,255,255,.6); background:none; border:1px solid rgba(255,255,255,.1); border-radius:999px; padding:.42rem .95rem; cursor:pointer; transition:color .25s, border-color .25s, background-color .25s; white-space:nowrap; }
+  .dd-subjump{ top:3.05rem; z-index:6; background:rgba(14,14,14,.94); border-top:0; }
+  .dd-subjump .dd-jump-in{ padding-top:.45rem; padding-bottom:.45rem; }
+  .dd-subjump .dd-jump-btn{ font-size:.66rem; padding:.3rem .7rem; letter-spacing:.06em; }
+  .dd-pdf-dl{ flex:none; margin-left:auto; font-size:.66rem; letter-spacing:.06em; color:var(--accent); text-decoration:none; border:1px solid rgba(242,219,134,.4); border-radius:999px; padding:.3rem .8rem; white-space:nowrap; }
+  .dd-pdf-dl:hover{ background:rgba(242,219,134,.12); }
+  .dd-pdf .uxs-pdf{ margin-top:0; scroll-margin-top:6.2rem; }
+  .dd-pdf .modal-image{ display:block; margin:0; width:100%; }
+  @media (max-width:767px){ .dd-subjump{ top:2.8rem; } .dd-pdf .uxs-pdf{ scroll-margin-top:5.6rem; } }
   .dd-jump-btn:hover{ color:#fff; border-color:rgba(255,255,255,.3); }
   .dd-jump-btn.is-on{ color:#0a0a0a; background:var(--accent); border-color:var(--accent); font-weight:600; }
   #modal-images:has(.dd-jump) .uxs-sticky{ top:3.05rem; }
@@ -3860,9 +3872,11 @@
     /* Lazy images above the target can still be loading while the smooth
        scroll runs, which moves the target; re-aim a few times until it lands. */
     var aimTimer = null;
+    var mainBar = bar.hasAttribute('data-dd-sub') ? root.querySelector('.dd-jump:not([data-dd-sub])') : null;
+    function extra(){ return mainBar ? mainBar.offsetHeight : 0; }
     function go(id, tries){
       var t = document.getElementById(id); if (!t) return;
-      var delta = t.getBoundingClientRect().top - sc.getBoundingClientRect().top - bar.offsetHeight + 1;
+      var delta = t.getBoundingClientRect().top - sc.getBoundingClientRect().top - bar.offsetHeight - extra() + 1;
       if (tries && Math.abs(delta) < 4) return;
       sc.scrollTo({ top: sc.scrollTop + delta, behavior: reduceMotion ? 'auto' : 'smooth' });
       clearTimeout(aimTimer);
@@ -3873,7 +3887,7 @@
     var ticking = false;
     function spy(){
       ticking = false; if (!bar.isConnected){ sc.removeEventListener('scroll', onScroll); return; }
-      var line = sc.getBoundingClientRect().top + bar.offsetHeight + 80, cur = null;
+      var line = sc.getBoundingClientRect().top + bar.offsetHeight + extra() + 80, cur = null;
       ids.forEach(function(id){ var t = document.getElementById(id); if (t && t.getBoundingClientRect().top <= line) cur = id; });
       btns.forEach(function(b){ var on = b.getAttribute('data-dd-go') === cur; b.classList.toggle('is-on', on); if (on && b.scrollIntoView && bar.scrollWidth > bar.clientWidth) { var inn = bar.querySelector('.dd-jump-in'); inn.scrollTo({ left: b.offsetLeft - 40, behavior:'smooth' }); } });
       bar.classList.toggle('is-stuck', bar.getBoundingClientRect().top <= sc.getBoundingClientRect().top + 1);
@@ -4277,6 +4291,7 @@
          guide's own cover page was dropped. */
       lead:[{custom:'<div class="modal-image sprite-player" style="aspect-ratio:640/360;background:#000 url(images/dddm-video/dddm-reveal-poster.jpg) center/cover no-repeat;line-height:0" data-sprite="images/dddm-video/dddm-reveal-sprite.jpg" data-cols="10" data-n="75" data-w="640" data-h="360" data-fps="12"><canvas></canvas></div>'}, dddmJumpBlock, dddmStoryBlock, dddmYtBlock, mzShelfBlock, mzDistBlock, dddmFeedBlock, dddmRetouchBlock],
       index:{ title:"DDDM BRAND GUIDE", unit:"PARTS", label:"파트" },
+      pdfFlow:true, pdfFile:"images/dddm-guide/DDDM-Brand-Guide.pdf", pdfCover:"images/dddm-guide/dddm-guide-01.jpg",
       images:[],
       sections:[
         { id:"dd", eyebrow:"PART 01", title:"DDDM", sum:"심볼형·워드마크형 채널 로고와 ddd.MUSIC · ddd.STORE 서브 브랜드 체계", period:"", tools:"", cover:"images/dddm-guide/dddm-guide-03.jpg", coverPos:"66% 32%", show:["images/dddm-guide/dddm-guide-02.jpg","images/dddm-guide/dddm-guide-03.jpg"], more:["images/dddm-guide/dddm-guide-04.jpg"] },
@@ -5841,7 +5856,17 @@
           }).join('') + '</div>' +
         '</div>' +
         autoJump +
-        p.sections.map(function(sec){
+        (p.pdfFlow ? '<div class="dd-pdf">' +
+          '<nav class="dd-jump dd-subjump" data-dd-jump data-dd-sub aria-label="가이드 파트 바로가기"><div class="dd-jump-in"><span class="dd-jump-label">PARTS</span>' +
+            p.sections.map(function(sec){ return '<button type="button" class="dd-jump-btn" data-dd-go="uxs-' + sec.id + '">' + (sec.short || sec.title) + '</button>'; }).join('') +
+            '<a class="dd-pdf-dl" href="' + p.pdfFile + '" target="_blank" rel="noopener">PDF 전체 보기 ↗</a>' +
+          '</div></nav>' +
+          '<img class="modal-image" src="' + p.pdfCover + '" alt="' + p.title + ' 표지" loading="lazy" decoding="async">' +
+          p.sections.map(function(sec){
+            return '<section class="uxs-sec uxs-pdf" id="uxs-' + sec.id + '">' + renderGalleryImages(sec.show.concat(sec.more || []), sec.title) + '</section>';
+          }).join('') +
+        '</div>' : '') +
+        (p.pdfFlow ? '' : p.sections.map(function(sec){
           if (p.noFold && sec.more && sec.more.length){ sec = Object.assign({}, sec, { show: sec.show.concat(sec.more), more: null }); }
           return '<section class="uxs-sec" id="uxs-' + sec.id + '">' +
             '<div class="uxs-sticky"><span class="uxs-sticky-eyebrow">' + sec.eyebrow + '</span><span class="uxs-sticky-title">' + sec.title + '</span>' +
@@ -5853,7 +5878,7 @@
               '<button type="button" class="uxs-more" aria-expanded="false"><span class="uxs-more-label">펼쳐서 보기 (' + sec.more.length + '장 더)</span><i data-lucide="chevron-down" class="w-3.5 h-3.5 uxs-more-chev"></i></button>' +
               '<div class="uxs-panel">' + renderGalleryImages(sec.more, sec.title) + '</div>' : '') +
           '</section>';
-        }).join('') +
+        }).join('')) +
         (p.tail && p.tail.length ? renderGalleryImages(p.tail, p.title) : '');
       modalImages.querySelectorAll('.uxs-hm-thumb').forEach(function(btn){
         btn.addEventListener('click', function(){
