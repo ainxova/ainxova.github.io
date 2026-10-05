@@ -379,10 +379,12 @@
     .skills-toggle i{ display:inline-block; }
     .skills-toggle{ pointer-events:auto; cursor:pointer; }
     .exp-links-toggle, .skills-toggle{ display:flex; align-items:center; justify-content:space-between; gap:.6rem; background:none; border:1px solid rgba(255,255,255,.14); color:rgba(255,255,255,.6); font-size:.74rem; padding:.5rem .8rem; margin-top:.75rem; cursor:pointer; }
-    .skills-toggle{ width:100%; margin-top:0; letter-spacing:.3em; padding:.8rem 1rem; }
-    .exp-links-toggle i, .skills-toggle i{ transition:transform .3s; }
-    .skills-toggle.is-open i{ transform:rotate(180deg); }
-    .exp-links.is-open .exp-links-toggle i{ transform:rotate(180deg); }
+    .skills-toggle{ width:100%; margin-top:0; letter-spacing:.3em; padding:1.05rem 1.1rem; font-size:.85rem; font-weight:600; color:#fff; background:rgba(242,219,134,.07); border-color:rgba(242,219,134,.5); }
+    .skills-toggle svg, .skills-toggle i{ width:1.1rem !important; height:1.1rem !important; color:var(--accent); stroke-width:2.2; }
+    .skills-toggle span::after{ content:' · 09'; color:var(--accent); letter-spacing:.2em; }
+    .exp-links-toggle i, .skills-toggle i, .exp-links-toggle svg, .skills-toggle svg{ transition:transform .3s; }
+    .skills-toggle.is-open i, .skills-toggle.is-open svg{ transform:rotate(180deg); }
+    .exp-links.is-open .exp-links-toggle i, .exp-links.is-open .exp-links-toggle svg{ transform:rotate(180deg); }
     .exp-links .exp-links-list{ display:none !important; }
     .exp-links.is-open .exp-links-list{ display:flex !important; }
     .skills-body{ display:none; }
