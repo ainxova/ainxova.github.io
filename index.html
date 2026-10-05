@@ -3556,7 +3556,7 @@
         '<p class="cosmos-copy"><span class="copy-line">관람객이 입장과 함께 받는 구성품을 하나의 그래픽 톤으로 정리했습니다.</span><span class="copy-line">위의 12컬러 입장 팔찌와 오더시트에 더해, 입장 특전 포토카드(4종 중 1종 랜덤)·리플렛, 그리고 현장 운영용 비표 4종까지 같은 톤으로 이어집니다.</span></p>' +
       '</div>' +
       '<div class="cx-kit">' +
-        '<figure class="cx-kit-item"><img src="' + CP + 'photocards.jpg" alt="입장 특전 포토카드" loading="lazy" decoding="async"><figcaption><b>PHOTOCARD</b>입장 특전 4종(GD · TY · DS · BIGBANG) 중 1종 랜덤</figcaption></figure>' +
+        '<figure class="cx-kit-item"><img src="' + CP + 'photocards.jpg" alt="입장 특전 포토카드" loading="lazy" decoding="async"><figcaption><b>PHOTOCARD</b>입장 특전 4종(GD · TY · DS · BIGBANG) 중\u00a01종\u00a0랜덤</figcaption></figure>' +
         '<div class="cx-passes">' +
         ['aaa','press','vip','staff'].map(function(n){
           return '<figure><img src="' + CP + 'pass-' + n + '.jpg" alt="' + n.toUpperCase() + ' 비표" loading="lazy" decoding="async"></figure>';
@@ -3788,7 +3788,7 @@
         '<div><b>SIGNED COPY</b><p>작업이 끝난 뒤 JAY B가 감사의 마음을 담아 직접 사인한 MUSE.D를 전해주었습니다.</p></div>' +
       '</div>' +
       '<div class="jbs-kind" style="margin-top:2.5rem"><b>02 · INSTAGRAM EVENT</b><span>그 외 아티스트 편</span></div>' +
-      '<p class="jbs-note">나머지 아티스트 편은 DDDM 인스타그램 이벤트 게시물로 참여자를 모집하고, 당첨자에게 배포했습니다. 모든 호를 같은 흐름으로 진행했고, 아래는 그중 한 편의 포맷 예시입니다.</p>' +
+      '<p class="jbs-note"><span class="copy-line">나머지 아티스트 편은 DDDM 인스타그램 이벤트 게시물로 참여자를 모집하고, 당첨자에게 배포했습니다.</span><span class="copy-line">모든 호를 같은 흐름으로 진행했고, 아래는 그중 한 편의 포맷 예시입니다.</span></p>' +
       '<div class="jbs-steps">' +
         '<div class="jbs-step"><span class="jbs-step-n">STEP 1</span><b>이벤트 공지</b><img src="images/mused-jayb-site/event-xlov.jpg" alt="인스타그램 이벤트 공지 게시물 예시" loading="lazy" decoding="async"><p>피드 게시물로 이벤트를 공지</p></div>' +
         '<div class="jbs-step is-text"><span class="jbs-step-n">STEP 2</span><b>이벤트 참여</b><ul class="jbs-how"><li><i>01</i><span><em>구글폼으로 신청</em>구글폼을 통해 참여를 접수</span></li><li><i>02</i><span><em>유튜브 구독 인증</em>DDDM 채널 구독 화면으로 인증</span></li><li><i>03</i><span><em>댓글 + 캡처 인증</em>아티스트 영상에 댓글을 남기고 캡처로 인증</span></li></ul><p>구글폼으로 참여자를 모집</p></div>' +
@@ -5568,8 +5568,26 @@
     return out.replace(/([가-힣A-Za-z0-9)])·(?=[가-힣A-Za-z0-9(])/g, '$1\u2060·\u2060');
   }
   var GLUE_SEL = 'p, dd, li, figcaption, h1, h2, h3, h4, .cosmos-step-copy, .cosmos-content-desc, .cosmos-content-name, .uxs-card-sum';
+  /* Multi-sentence paragraphs: one sentence per line, so a line never ends
+     mid-sentence with the rest dangling on the next one. */
+  function splitSentences(root){
+    root.querySelectorAll('p').forEach(function(el){
+      if (el.children.length || el.closest('.uxs-hm, svg, .copy-line')) return;
+      var t = el.textContent; if (t.length < 45 || !/[가-힣]/.test(t)) return;
+      var parts = t.split(/(?<=[가-힣])[.!?]\s+(?=[가-힣A-Za-z0-9'‘“「『@])/);
+      if (parts.length < 2) return;
+      var ends = t.match(/(?<=[가-힣])[.!?](?=\s)/g) || [];
+      el.textContent = '';
+      parts.forEach(function(seg, i){
+        var sp = document.createElement('span'); sp.className = 'copy-line';
+        sp.textContent = seg + (i < parts.length - 1 ? (ends[i] || '.') : '');
+        el.appendChild(sp);
+      });
+    });
+  }
   function glueKorean(root){
     if (!root) return;
+    splitSentences(root);
     root.querySelectorAll(GLUE_SEL).forEach(function(el){
       if (el.closest('.uxs-hm, svg')) return;
       var w = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, null), n;
