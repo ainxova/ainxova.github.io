@@ -786,6 +786,11 @@
   .jbs-grid figure{ margin:0; position:relative; aspect-ratio:4/3; overflow:hidden; background:#000; }
   .jbs-grid img{ width:100%; height:100%; object-fit:cover; display:block; }
   .jbs-grid figcaption{ position:absolute; left:.7rem; top:.7rem; font-size:.62rem; font-weight:700; letter-spacing:.12em; color:#fff; background:rgba(0,0,0,.6); padding:.3rem .55rem; }
+  .jbs-kind{ display:flex; gap:.8rem; align-items:baseline; flex-wrap:wrap; margin-top:1.75rem; }
+  .jbs-kind b{ font-size:.7rem; letter-spacing:.14em; color:var(--accent); }
+  .jbs-kind span{ font-size:1.05rem; font-weight:800; color:#fff; }
+  .jbs-note{ margin:.5rem 0 0; font-size:.9rem; line-height:1.6; color:rgba(255,255,255,.7); }
+  .jbs-event img{ width:11rem; }
   .jbs-signed{ display:flex; gap:1.5rem; align-items:center; margin-top:1rem; padding:1.25rem; background:#151211; border:1px solid rgba(255,255,255,.07); width:100%; }
   .jbs-signed img{ width:13rem; flex:0 0 auto; display:block; }
   .jbs-signed b{ display:block; font-size:.68rem; letter-spacing:.14em; color:var(--accent); margin-bottom:.4rem; }
@@ -3750,13 +3755,15 @@
     '<span class="copy-line">실제 인쇄된 MUSE.D 클로즈 유어 아이즈 편을 표지부터 뒤표지까지 그대로 넘겨 볼 수 있게 옮겼습니다.</span><span class="copy-line">멤버별 개인 컷과 단체 컷을 하나의 톤으로 엮어, 화보 디렉팅부터 리터칭·지면 레이아웃·표지까지 한 권의 흐름으로 설계했습니다.</span>');
   var mzBookBlock = mzBlock('jayb', 'MUSE.D — JAY B ISSUE',
     '<span class="copy-line">실제 인쇄된 MUSE.D JAY B 편을 표지부터 뒤표지까지 그대로 넘겨 볼 수 있게 옮겼습니다.</span><span class="copy-line">화보 디렉팅과 리터칭, 지면 레이아웃과 표지 디자인까지 한 권의 흐름으로 설계한 결과물입니다.</span>');
-  var mzJbSiteBlock = {
+  var mzDistBlock = {
     custom: '<div class="cosmos-block jbs">' +
       '<div class="cosmos-head">' +
-        '<div class="cosmos-eyebrow">MUSE.D · On-site</div>' +
-        '<h3 class="cosmos-title">TR.EE LISTENING SESSION</h3>' +
-        '<p class="cosmos-copy"><span class="copy-line">JAY B 신곡 청음회와 함께 진행되어, 행사장에서 MUSE.D JAY B 편을 전시하고 판매했습니다.</span><span class="copy-line">화보 디렉팅과 지면 제작을 맡은 인쇄물이 팬들과 직접 만나는 현장입니다.</span></p>' +
+        '<div class="cosmos-eyebrow">02-B · Distribution</div>' +
+        '<h3 class="cosmos-title">DDDM을 알리는 매거진 배포</h3>' +
+        '<p class="cosmos-copy"><span class="copy-line">MUSE.D는 DDDM 채널을 홍보하기 위한 콘텐츠이기도 합니다. 이벤트로 배포하거나, 아티스트와 협업해 판매·배포했습니다.</span></p>' +
       '</div>' +
+      '<div class="jbs-kind"><b>01 · ARTIST COLLAB</b><span>JAY B — TR.EE 청음회</span></div>' +
+      '<p class="jbs-note">JAY B 신곡 청음회와 함께 진행되어, 행사장에서 MUSE.D JAY B 편을 전시하고 판매했습니다.</p>' +
       '<div class="jbs-grid">' +
         '<figure><img src="images/mused-jayb-site/listening-hall.jpg" alt="JAY B TR.EE 청음회 현장" loading="lazy" decoding="async"><figcaption>청음회 현장</figcaption></figure>' +
         '<figure><img src="images/mused-jayb-site/booth.jpg" alt="TR.EE 청음회 전시 공간" loading="lazy" decoding="async"><figcaption>전시 공간</figcaption></figure>' +
@@ -3765,6 +3772,12 @@
       '<div class="jbs-signed">' +
         '<img src="images/mused-jayb-site/signed.jpg" alt="JAY B가 사인해 전달한 MUSE.D JAY B 편" loading="lazy" decoding="async">' +
         '<div><b>SIGNED COPY</b><p>작업이 끝난 뒤 JAY B가 감사의 마음을 담아 직접 사인한 MUSE.D를 전해주었습니다.</p></div>' +
+      '</div>' +
+      '<div class="jbs-kind" style="margin-top:2.5rem"><b>02 · INSTAGRAM EVENT</b><span>그 외 아티스트 편</span></div>' +
+      '<p class="jbs-note">나머지 아티스트 편은 DDDM 인스타그램 이벤트 게시물로 참여자를 모집하고, 당첨자에게 배포했습니다.</p>' +
+      '<div class="jbs-signed jbs-event">' +
+        '<img src="images/mused-jayb-site/event-xlov.jpg" alt="XLOV MUSE.D 매거진 인스타그램 이벤트 게시물" loading="lazy" decoding="async">' +
+        '<div><b>EVENT POST · XLOV</b><p>매거진 표지 목업과 함께 올린 인스타그램 이벤트 게시물입니다.</p></div>' +
       '</div>' +
     '</div>'
   };
@@ -3779,7 +3792,7 @@
   /* MUSE.D bookshelf: the five printed issues as cover mockups on one shelf;
      picking a cover swaps the single page-turn viewer below to that issue. */
   var MZ_ISSUES = [
-    { id:'jayb', name:'JAY B',           block:{ custom: mzBookBlock.custom + mzJbSiteBlock.custom } },
+    { id:'jayb', name:'JAY B',           block:mzBookBlock },
     { id:'cye',  name:'CLOSE YOUR EYES', block:mzCyeBlock },
     { id:'xlov', name:'XLOV',            block:mzXlovBlock },
     { id:'yp',   name:'YOUNG POSSE',     block:mzYpBlock },
@@ -4247,7 +4260,7 @@
          right after the divider (the part's logo page), framed on the logo
          via coverPos. The reveal clip sits above the index as `lead`; the
          guide's own cover page was dropped. */
-      lead:[{custom:'<div class="modal-image sprite-player" style="aspect-ratio:640/360;background:#000 url(images/dddm-video/dddm-reveal-poster.jpg) center/cover no-repeat;line-height:0" data-sprite="images/dddm-video/dddm-reveal-sprite.jpg" data-cols="10" data-n="75" data-w="640" data-h="360" data-fps="12"><canvas></canvas></div>'}, dddmJumpBlock, dddmStoryBlock, dddmYtBlock, mzShelfBlock, dddmFeedBlock, dddmRetouchBlock],
+      lead:[{custom:'<div class="modal-image sprite-player" style="aspect-ratio:640/360;background:#000 url(images/dddm-video/dddm-reveal-poster.jpg) center/cover no-repeat;line-height:0" data-sprite="images/dddm-video/dddm-reveal-sprite.jpg" data-cols="10" data-n="75" data-w="640" data-h="360" data-fps="12"><canvas></canvas></div>'}, dddmJumpBlock, dddmStoryBlock, dddmYtBlock, mzShelfBlock, mzDistBlock, dddmFeedBlock, dddmRetouchBlock],
       index:{ title:"DDDM BRAND GUIDE", unit:"PARTS", label:"파트" },
       images:[],
       sections:[
