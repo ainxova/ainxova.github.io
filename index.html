@@ -2571,30 +2571,12 @@
   }
 
   /* Hero background reel: key work clips looping behind the headline */
-  .hero-reel{ position:absolute; inset:0; z-index:0; pointer-events:none; overflow:hidden; background:#0a0a0a url(images/hero/reel/cosmos-1.jpg) center/cover no-repeat; }
-  /* Select-works reel: still frames of the key projects, one at a time. Plain
-     opacity cross-fades + a slow push-in (no canvas redraw), so nothing flickers. */
-  .hr-slide{ position:absolute; inset:0; background-size:cover; background-position:center; opacity:0;
-    transform:scale(1.07); transition:opacity 1.4s ease, transform 7s linear; will-change:opacity, transform; filter:saturate(.92); }
-  .hr-slide.on{ opacity:1; transform:scale(1); z-index:1; }
-  .hr-slide.out{ opacity:0; transform:scale(1); z-index:0; transition:opacity 1.4s ease, transform 7s linear; }
-  .hr-cap{ position:absolute; left:clamp(1.25rem,4vw,3.5rem); bottom:5.2rem; z-index:2; display:flex; align-items:center; gap:1rem; color:rgba(255,255,255,.8); text-decoration:none; font-size:.7rem; letter-spacing:.14em; }
-  .hr-cap:hover{ color:#fff; }
-  .hr-cap-no{ color:var(--accent); letter-spacing:.2em; }
-  .hr-cap-txt{ display:flex; flex-direction:column; gap:.3rem; text-align:left; min-width:0; }
-  .hr-cap-name{ font-weight:600; letter-spacing:.12em; font-size:.76rem; transition:opacity .5s; }
-  .hr-cap-sub{ color:rgba(255,255,255,.5); letter-spacing:.06em; font-size:.68rem; transition:opacity .5s; }
-  .hr-ticks{ display:flex; gap:.35rem; }
-  .hr-tick{ width:1.6rem; height:2px; background:rgba(255,255,255,.22); position:relative; overflow:hidden; }
-  .hr-tick i{ position:absolute; inset:0; background:var(--accent); transform:scaleX(0); transform-origin:left; }
-  .hr-tick.done i{ transform:scaleX(1); }
-  .hr-tick.cur i{ animation:hr-fill var(--hr-dur,5200ms) linear forwards; }
-  @keyframes hr-fill{ to{ transform:scaleX(1); } }
-  @media (max-width:640px){ .hr-cap{ left:1.25rem; right:1.25rem; bottom:4.6rem; } .hr-tick{ width:1.2rem; } }
-  @media (prefers-reduced-motion:reduce){ .hr-slide{ transition:opacity .01s; transform:none !important; } .hr-tick.cur i{ animation:none; transform:scaleX(1); } }
-  .hero-reel::after{ content:''; position:absolute; inset:0; z-index:3;
+  .hero-reel{ position:absolute; inset:0; z-index:0; pointer-events:none; overflow:hidden; background:#0a0a0a; }
+  .hero-reel{ background:#0a0a0a url(images/hero/hero-reel3-poster.jpg) center/cover no-repeat; }
+  .hero-reel canvas{ position:absolute; inset:0; width:100%; height:100%; display:block; filter:saturate(.9); }
+  .hero-reel::after{ content:''; position:absolute; inset:0;
     background:
-      radial-gradient(ellipse 70% 60% at 50% 45%, rgba(10,10,10,.38) 0%, rgba(10,10,10,.55) 60%, rgba(10,10,10,.82) 100%),
+      radial-gradient(ellipse 70% 60% at 50% 45%, rgba(10,10,10,.55) 0%, rgba(10,10,10,.72) 60%, rgba(10,10,10,.88) 100%),
       linear-gradient(180deg, rgba(10,10,10,.35) 0%, rgba(10,10,10,0) 30%, rgba(10,10,10,0) 70%, #0a0a0a 100%); }
 
   /* Category jump: brief highlight on the cards of the chosen category */
@@ -2681,12 +2663,9 @@
 
 <!-- HERO -->
 <header id="top" class="relative min-h-[100svh] flex flex-col justify-center items-center text-center px-6 md:px-10 pt-24 pb-10 overflow-hidden">
-  <div class="hero-reel" aria-hidden="true" id="hero-reel"></div>
-  <a href="#work" class="hr-cap font-display" id="hr-cap" aria-label="Selected Works 보러가기">
-    <span class="hr-cap-no tabular-nums" id="hr-no">01</span>
-    <span class="hr-cap-txt"><span class="hr-cap-name" id="hr-name"></span><span class="hr-cap-sub" id="hr-sub"></span></span>
-    <span class="hr-ticks" id="hr-ticks"></span>
-  </a>
+  <div class="hero-reel" aria-hidden="true">
+    <canvas id="hero-reel-canvas"></canvas>
+  </div>
   <div class="max-w-5xl mx-auto w-full relative" style="z-index:1">
     <!-- AIN as a creative identity: a dictionary-style entry over "ALL IN.",
          whose A · I · N stay lit while the rest dims once the letters settle. -->
@@ -6343,40 +6322,58 @@
   })();
 
 
-  /* Hero reel: the four Selected Works, shown as stills that cross-fade (no
-     canvas / video, so no flicker and it plays on the public artifact link). */
+  /* Hero reel: frames from one sprite sheet (COSMOS -> DDDM, looping; MBN clip removed Oct 2026)
+     drawn to a canvas and cross-faded — images play reliably on the public artifact
+     link, where <video> autoplay does not. */
   (function(){
-    var box = document.getElementById('hero-reel'); if (!box) return;
-    var WORKS = [
-      { name:'COSMOS', sub:'BIGBANG 20주년 기념 전시 아트 디렉션', imgs:['cosmos-1','cosmos-2','cosmos-3'] },
-      { name:'HEARTBEAT BY DUDUDO', sub:'페스티벌 아트 디렉션 · 진행 중', imgs:['hb-1','hb-2'] },
-      { name:'DDDM × MUSE.D', sub:'음악 채널 & 매거진 크리에이티브', imgs:['dddm-1','dddm-2','dddm-3'] },
-      { name:'UX/UI 프로젝트 시리즈', sub:'앱 · 게임 UI', imgs:['ux-1','ux-2'] }
-    ];
-    var DUR = 5200, flat = [];
-    WORKS.forEach(function(w, wi){ w.imgs.forEach(function(n){ flat.push({ w:wi, src:'images/hero/reel/' + n + '.jpg' }); }); });
-    var slides = flat.map(function(f, i){ var d = document.createElement('div'); d.className = 'hr-slide';
-      d.style.backgroundImage = 'url(' + f.src + ')'; box.appendChild(d); return d; });
-    var ticksEl = document.getElementById('hr-ticks'), ticks = WORKS.map(function(){ var t = document.createElement('span'); t.className = 'hr-tick'; t.innerHTML = '<i></i>'; ticksEl.appendChild(t); return t; });
-    var noEl = document.getElementById('hr-no'), nameEl = document.getElementById('hr-name'), subEl = document.getElementById('hr-sub');
-    box.style.setProperty('--hr-dur', DUR + 'ms'); ticksEl.style.setProperty('--hr-dur', DUR + 'ms');
-    var cur = -1, lastW = -1, timer = 0, loaded = 0, started = false, inView = true;
-    function show(i){
-      var prev = cur; cur = i % slides.length; var f = flat[cur], w = WORKS[f.w];
-      slides.forEach(function(el, k){ el.classList.toggle('on', k === cur); el.classList.toggle('out', k === prev && k !== cur); });
-      if (lastW !== f.w){
-        lastW = f.w; noEl.textContent = ('0' + (f.w + 1)).slice(-2); nameEl.textContent = w.name; subEl.textContent = w.sub;
-        ticks.forEach(function(t, k){ t.classList.toggle('done', k < f.w); t.classList.remove('cur'); });
-        void ticks[f.w].offsetWidth; ticks[f.w].style.setProperty('--hr-dur', (w.imgs.length * DUR) + 'ms'); ticks[f.w].classList.add('cur');
+    var canvas = document.getElementById('hero-reel-canvas'); if (!canvas) return;
+    var ctx = canvas.getContext('2d');
+    var COLS = 12, CW = 480, CH = 270, N = 62, FPS = 8;
+    var sprite = new Image(), ready = false, head = 0, raf = 0, last = 0, inView = true;
+    var off = null, offCtx = null;
+    function resize(){ var d = Math.min(window.devicePixelRatio || 1, 1.5);
+      canvas.width = Math.round(canvas.clientWidth * d); canvas.height = Math.round(canvas.clientHeight * d); if (ready) draw(head); }
+    /* Portrait screens: a plain cover-fit zooms the 16:9 frame ~5x, so faces
+       fill the phone and outrank the type. There we lay a blurred cover-fit
+       copy down as the mood layer and draw the frame itself at a gentler
+       scale on top, so the footage reads as atmosphere behind ALL IN. */
+    function cell(i, a){ var sx = (i % COLS) * CW, sy = Math.floor(i / COLS) * CH, cw = canvas.width, ch = canvas.height;
+      var cover = Math.max(cw / CW, ch / CH);
+      if (ch > cw * 1.15){
+        var dwC = CW * cover, dhC = CH * cover;
+        ctx.save(); ctx.globalAlpha = a * 0.7; ctx.filter = 'blur(' + Math.round(cw / 40) + 'px)';
+        ctx.drawImage(sprite, sx, sy, CW, CH, (cw - dwC) / 2, (ch - dhC) / 2, dwC, dhC); ctx.restore();
+        var sc = Math.min(cover, Math.max(cw / CW * 1.75, ch / CH * 0.5)), dw = CW * sc, dh = CH * sc;
+        /* feather the top/bottom edges so the sharper frame melts into the blur */
+        if (!off){ off = document.createElement('canvas'); offCtx = off.getContext('2d'); }
+        var ow = Math.round(dw), oh = Math.round(dh);
+        if (off.width !== ow || off.height !== oh){ off.width = ow; off.height = oh; }
+        offCtx.globalCompositeOperation = 'source-over'; offCtx.clearRect(0, 0, ow, oh);
+        offCtx.drawImage(sprite, sx, sy, CW, CH, 0, 0, ow, oh);
+        var g = offCtx.createLinearGradient(0, 0, 0, oh);
+        g.addColorStop(0, 'rgba(0,0,0,0)'); g.addColorStop(0.28, 'rgba(0,0,0,1)'); g.addColorStop(0.72, 'rgba(0,0,0,1)'); g.addColorStop(1, 'rgba(0,0,0,0)');
+        offCtx.globalCompositeOperation = 'destination-in'; offCtx.fillStyle = g; offCtx.fillRect(0, 0, ow, oh);
+        ctx.globalAlpha = a; ctx.drawImage(off, (cw - dw) / 2, (ch - dh) / 2, dw, dh);
+        return;
       }
-    }
-    function next(){ show(cur + 1); }
-    function play(){ if (timer || reduceMotion || !inView || document.hidden) return; timer = setInterval(next, DUR); }
-    function pause(){ clearInterval(timer); timer = 0; }
-    /* preload every frame before starting, so a slide never fades in half-loaded */
-    flat.forEach(function(f){ var im = new Image(); im.onload = im.onerror = function(){ if (++loaded === flat.length && !started){ started = true; show(0); play(); } }; im.src = f.src; });
-    if ('IntersectionObserver' in window){ new IntersectionObserver(function(es){ inView = es[0].isIntersecting; inView ? play() : pause(); }).observe(box); }
-    document.addEventListener('visibilitychange', function(){ document.hidden ? pause() : play(); });
+      var dw = CW * cover, dh = CH * cover;
+      ctx.globalAlpha = a; ctx.drawImage(sprite, sx, sy, CW, CH, (cw - dw) / 2, (ch - dh) / 2, dw, dh); }
+    /* The sprite already has dissolves baked in (red-overlay frames); blending on
+       top of them read as a double exposure. Skip those frames and only blend
+       briefly at the end of each step so each shot stays crisp. */
+    var SKIP = {31:1,32:1,33:1,58:1,59:1,60:1,61:1}, FR = [];
+    for (var k = 0; k < N; k++) if (!SKIP[k]) FR.push(k);
+    function draw(f){ var M = FR.length, n = Math.floor(f) % M, i0 = FR[n], i1 = FR[(n + 1) % M], t = f - Math.floor(f);
+      var b = t > 0.7 ? (t - 0.7) / 0.3 : 0;
+      ctx.globalAlpha = 1; cell(i0, 1); if (b > 0.02) cell(i1, b); ctx.globalAlpha = 1; }
+    function tick(ts){ if (!inView){ raf = 0; return; } if (!last) last = ts;
+      var dt = Math.min(0.1, (ts - last) / 1000); last = ts; head = (head + dt * FPS) % FR.length; draw(head); raf = requestAnimationFrame(tick); }
+    function start(){ if (!raf && ready && inView && !reduceMotion){ last = 0; raf = requestAnimationFrame(tick); } }
+    sprite.onload = function(){ ready = true; resize(); draw(0); start(); };
+    sprite.src = 'images/hero/hero-reel4-sprite.jpg';
+    window.addEventListener('resize', resize); resize();
+    if ('IntersectionObserver' in window){ new IntersectionObserver(function(es){ inView = es[0].isIntersecting; if (inView) start(); }).observe(canvas); }
+    document.addEventListener('visibilitychange', function(){ inView = !document.hidden; start(); });
   })();
 
 
