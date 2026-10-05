@@ -796,6 +796,8 @@
   .hbo-col{ border:1px solid rgba(255,255,255,.1); padding:1.25rem 1.4rem; }
   .hbo-col h4{ margin:0 0 .6rem; font-size:.68rem; letter-spacing:.16em; color:var(--accent); font-weight:600; }
   .hbo-col p{ margin:0; font-size:.86rem; line-height:1.65; color:rgba(255,255,255,.72); }
+  .hb-early-note{ max-width:44rem; margin:0 auto 2rem; padding:0 1.5rem; color:rgba(255,255,255,.7); font-size:.95rem; line-height:1.8; }
+  .hb-early-note b{ color:var(--accent); font-weight:600; }
   .hbo-figs{ display:grid; grid-template-columns:minmax(0,1fr) minmax(0,.42fr); gap:1.25rem; align-items:start; margin-top:1.75rem; }
   .hbo-figs .hbo-fig{ margin:0; }
   @media(max-width:700px){ .hbo-figs{ grid-template-columns:1fr; } .hbo-fig-tall{ max-width:15rem; } }
@@ -4241,7 +4243,6 @@
       tools:["Illustrator", "Photoshop", "Art Direction", "현장 시공·연출"],
       thumb:"images/thumbs/heartbeat-thumb.jpg",
       links:[ { label:"티켓 예매", url:"https://tr.ee/Nwms6HjeAv", icon:"ticket" } ],
-      crossLink:{ eyebrow:"RELATED PROJECT", label:"DUDUDO CONCERT — 페스티벌 개편 전 브랜드 아이덴티티 초기 제안 보러가기", key:"dududo-concert", thumb:"images/thumbs/dududo-concert-thumb-poster.jpg" },
       /* Rebuilt (Oct 2026) to the same structure as COSMOS: cover + overview
          lead, a 5-part hover index, and the client PDF's own sections (nav
          bars cropped off, images/hb/) inside each part. Future on-site concert
@@ -4261,7 +4262,9 @@
         { id:"hb-os", short:"On-site", eyebrow:"PART 05", title:"ON-SITE", sum:"포토월과 입체 로고 조형물, 7개 구역 46종의 현장 출력물, 홀로그램 존, 날짜×좌석 4종 컬러 시스템의 입장 팔찌", period:"", tools:"",
           cover:HB + "t-onsite.jpg", coverPos:"50% 50%", show:[hbGateBlock, hbWallBlock, hbSiteBlock, hbHoloBlock, HB + "hb-wristband.jpg"] },
         { id:"hb-ops", short:"Design Ops", eyebrow:"PART 06", title:"DESIGN OPS", sum:"디자이너 1명으로 운영되도록 설계한 약 20종의 Figma 포맷, PM 3명 교육, PM이 직접 만드는 인스타그램 콘텐츠", period:"", tools:"Figma",
-          cover:HB + "hb-figma-ops.jpg", coverPos:"40% 30%", show:[hbOpsBlock] }
+          cover:HB + "hb-figma-ops.jpg", coverPos:"40% 30%", show:[hbOpsBlock] },
+        { id:"hb-early", short:"Early Proposal", eyebrow:"PART 07", title:"EARLY PROPOSAL", sum:"페스티벌로 개편되기 전, DUDUDO CONCERT 시절 제안한 초기 브랜드 아이덴티티와 “DON’T DO THAT” 픽토그램", period:"", tools:"Illustrator · Photoshop",
+          cover:"images/dududo-concert-01.jpg", coverPos:"50% 50%", show:[{ custom:'<div class="hb-early-note"><p>페스티벌로 개편되기 전, <b>dududo concert</b>라는 이름으로 기획되던 초기 단계에 제안한 브랜드 아이덴티티입니다. 로고와 와이드 그리드 시스템, “DON’T DO THAT” 촬영 금지 픽토그램 세트, 컬러 팔레트, 포스터 배리에이션과 실사 목업까지 하나의 완결된 시스템으로 구축했고, 이후 행사가 페스티벌 형식으로 전면 개편되며 HEARTBEAT BY DUDUDO로 이어졌습니다.</p></div>' }, "images/dududo-concert-01.jpg","images/dududo-concert-02.jpg","images/dududo-concert-03.jpg","images/dududo-concert-04.jpg","images/dududo-concert-05.jpg","images/dududo-concert-06.jpg","images/dududo-concert-07.jpg","images/dududo-concert-08.jpg"] }
       ],
       tail:["images/dududo-case/dh-09-outro.jpg"] },
     { group:"Branding & Art Direction", key:"dddm", category:"Channel Creative Direction · Branding · Editorial · Photo Direction · Social", title:"DDDM × MUSE.D: 음악 채널 & 매거진 크리에이티브 총괄", idea:"유튜브, 인쇄 매거진, 인스타그램을 하나의 톤으로", forms:["Brand", "Program IP", "Editorial", "Photo Direction", "Motion"], year:"2026",
@@ -4317,12 +4320,6 @@
         { id:"dg", short:"Digital", eyebrow:"PART 04", title:"DIGITAL CONTENT", sum:"공식 인스타그램 채널 세팅과 성과, COSMOS 알파벳 캐러셀, PHASE 2 티저, B.STAGE 공지(국·영문)", period:"", tools:"",
           cover:CX + "phase2-poster.jpg", coverPos:"50% 74%", show:[cosmosFeedBlock, cxSocialResultBlock, cxAcroBlock, cosmosChannelBlock, cosmosDetailPageBlock] }
       ] },
-    { group:"Branding & Art Direction", key:"dududo-concert", archive:{ order:1, name:"DUDUDO CONCERT", line:"브랜드 아이덴티티 초기 제안 — HEARTBEAT BY DUDUDO의 전신", fact:"Brand · Proposal" }, category:"Brand Proposal · Identity System", title:"DUDUDO CONCERT: 브랜드 아이덴티티 초기 제안", idea:"'DON'T DO THAT' 픽토그램까지 갖춘 초기 아이덴티티", forms:["Logo", "Grid", "Pictogram", "Poster"], year:"2026",
-      blurb:"페스티벌로 개편되기 전, 초기 콘서트 콘셉트를 위해 설계한 브랜드 아이덴티티 제안.",
-      desc:"'dududo concert'라는 이름으로 기획되던 초기 단계에 제안한 브랜드 아이덴티티입니다. 로고와 와이드 그리드 시스템, 'DON'T DO THAT' 촬영 금지 픽토그램 세트, 컬러 팔레트, 포스터 배리에이션과 실사 목업까지 하나의 완결된 시스템으로 구축했습니다. 이후 행사가 페스티벌 형식으로 전면 개편되며 'HEARTBEAT BY DUDUDO'로 이어졌습니다.",
-      tools:["Illustrator", "Photoshop"],
-      thumb:"images/thumbs/dududo-concert-thumb.mp4",
-      images:["images/dududo-concert-01.jpg","images/dududo-concert-02.jpg","images/dududo-concert-03.jpg","images/dududo-concert-04.jpg","images/dududo-concert-05.jpg","images/dududo-concert-06.jpg","images/dududo-concert-07.jpg","images/dududo-concert-08.jpg"] },
     { group:"UX/UI", key:"uxui", category:"UX/UI Design · App · Game UI", title:"UX/UI 프로젝트 시리즈", idea:"콘셉트부터 UI 리소스까지, 네 개의 앱·게임", forms:["App", "Game UI", "UX Flow", "UI Resource"], year:"2024 – 2025",
       blurb:"브로큰 아카이브 · 하트싱크 · 인호야 · MAFIUS. 콘셉트부터 UI 리소스까지 단독으로 설계한 네 개의 앱·게임 프로젝트와 리디자인 스터디.",
       desc:"기존 IP의 세계관을 전환한 '브로큰 아카이브', 감정일기 기반 AI 연애 시뮬레이션 '하트싱크', 캐릭터 IP 기반 파티 게임 '인호야', GPS 기반 소셜 게임 'MAFIUS'까지. 콘셉트 설계와 정보 구조, 와이어프레임, 전체 UI 화면과 그래픽 리소스를 단독으로 완성한 프로젝트들입니다. 여기에 유니클로·티머니 앱의 사용자 플로우를 분석해 재설계한 리디자인 스터디를 더했습니다. 아래 목차에서 프로젝트를 선택해 바로 이동할 수 있습니다.",
