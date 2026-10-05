@@ -5638,8 +5638,17 @@
     for (var j = 0; j < lines.length - 1; j++) full = Math.max(full, lines[j].r - lines[j].l);
     return { n: lines.length, ratio: full ? (last.r - last.l) / full : 1 };
   }
+  /* Disabled: narrowing blocks to dodge short last lines made text stop well
+     short of the container edge on real phones (font metrics differ from the
+     desktop test) and put line breaks in odd places. text-wrap:pretty/balance
+     in CSS handles it without shrinking the measure. */
+  var ORPHAN_FIX_ENABLED = false;
   function fixOrphans(root){
     if (!root) return;
+    if (!ORPHAN_FIX_ENABLED){
+      root.querySelectorAll(ORPHAN_SEL).forEach(function(el){ if (el._orphanFixed){ el.style.maxWidth = ''; el._orphanFixed = false; } });
+      return;
+    }
     root.querySelectorAll(ORPHAN_SEL).forEach(function(el){
       if (el.closest('.uxs-hm') || !el.offsetParent) return;
       if (el.querySelector('p, div, dd, ul, ol, img, br, .copy-line')) return;
