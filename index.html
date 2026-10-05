@@ -372,6 +372,22 @@
      from the corner of your eye; the frame now also takes the accent for
      the 1.8s the confirmation is showing. */
   #copy-email.is-copied, #copy-kakao.is-copied{ border-color:var(--accent); color:var(--accent); }
+  .exp-links-toggle{ display:none; }
+  .skills-toggle{ display:block; background:none; border:0; padding:0; text-align:left; cursor:default; pointer-events:none; }
+  .skills-toggle i{ display:none; }
+  @media (max-width:767px){
+    .skills-toggle i{ display:inline-block; }
+    .skills-toggle{ pointer-events:auto; cursor:pointer; }
+    .exp-links-toggle, .skills-toggle{ display:flex; align-items:center; justify-content:space-between; gap:.6rem; background:none; border:1px solid rgba(255,255,255,.14); color:rgba(255,255,255,.6); font-size:.74rem; padding:.5rem .8rem; margin-top:.75rem; cursor:pointer; }
+    .skills-toggle{ width:100%; margin-top:0; letter-spacing:.3em; padding:.8rem 1rem; }
+    .exp-links-toggle i, .skills-toggle i{ transition:transform .3s; }
+    .skills-toggle.is-open i{ transform:rotate(180deg); }
+    .exp-links.is-open .exp-links-toggle i{ transform:rotate(180deg); }
+    .exp-links .exp-links-list{ display:none !important; }
+    .exp-links.is-open .exp-links-list{ display:flex !important; }
+    .skills-body{ display:none; }
+    .skills-body.is-open{ display:block; margin-top:.8rem; }
+  }
   .exp-expand-toggle{
     display:inline-flex; align-items:center; gap:.4rem; margin-top:.9rem;
     padding:.5rem .9rem; border:1px solid rgba(255,255,255,.15);
@@ -2821,8 +2837,8 @@
       <div id="accordion" class="border-t border-white/10"></div>
 
       <div class="mt-20">
-        <p class="text-xs tracking-[0.3em] text-white/40 font-display mb-4">SKILLS</p>
-        <div class="capability-track">
+        <button type="button" class="skills-toggle text-xs tracking-[0.3em] text-white/40 font-display mb-4" aria-expanded="false"><span>SKILLS</span><i data-lucide="chevron-down" class="w-3 h-3"></i></button>
+        <div class="skills-body"><div class="capability-track">
           <div class="capability-card px-5 py-4 border border-white/10 bg-panel">
             <p class="cap-no">01</p>
             <p class="text-sm font-semibold">Art Direction</p>
@@ -2868,7 +2884,7 @@
             <p class="text-sm font-semibold">3D Design</p>
             <p class="text-xs text-white/40 mt-1"><span class="nw">Maya ·</span> <span class="nw">3ds Max ·</span> <span class="nw">Blender</span></p>
           </div>
-        </div>
+        </div></div>
       </div>
     </div>
   </div>
@@ -4968,7 +4984,7 @@
     item.className = 'experience-item' + (i === 0 ? '' : ' border-t border-white/10');
     function linksHtmlFor(links){
       return (links && links.length)
-        ? '<div class="flex flex-wrap gap-2 mt-3">' +
+        ? '<div class="exp-links"><button type="button" class="exp-links-toggle" aria-expanded="false"><span>링크 ' + links.length + '개 보기</span><i data-lucide="chevron-down" class="w-3 h-3"></i></button><div class="flex flex-wrap gap-2 mt-3 exp-links-list">' +
             links.map(function(l){
               var icon = LINK_ICONS[l.icon] || LINK_ICONS.globe;
               return '<a href="' + l.url + '" target="_blank" rel="noopener noreferrer" class="exp-link group">' +
@@ -4976,7 +4992,7 @@
                 '<i data-lucide="arrow-up-right" class="w-3 h-3 text-white/35 group-hover:text-accent transition-colors"></i>' +
               '</a>';
             }).join('') +
-          '</div>'
+          '</div></div>'
         : '';
     }
     var subsHtml = '';
@@ -5024,6 +5040,13 @@
         label.textContent = open ? '세부 이력 닫기' : '세부 이력 보기';
       });
     }
+  });
+
+  document.addEventListener('click', function(ev){
+    var lt = ev.target.closest && ev.target.closest('.exp-links-toggle');
+    if (lt) { var w = lt.parentNode, o = w.classList.toggle('is-open'); lt.setAttribute('aria-expanded', o ? 'true' : 'false'); lt.firstChild.textContent = o ? '링크 접기' : '링크 ' + w.querySelectorAll('a').length + '개 보기'; return; }
+    var st = ev.target.closest && ev.target.closest('.skills-toggle');
+    if (st) { var b = st.nextElementSibling, o2 = b.classList.toggle('is-open'); st.classList.toggle('is-open', o2); st.setAttribute('aria-expanded', o2 ? 'true' : 'false'); if (o2 && window.gsap) gsap.set(b.querySelectorAll('.capability-card'), { clearProps:'opacity,visibility,transform' }); }
   });
 
   /* ---------------- Icons ---------------- */
