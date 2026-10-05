@@ -782,6 +782,15 @@
   @media(max-width:700px){ .hbo-figs{ grid-template-columns:1fr; } .hbo-fig-tall{ max-width:15rem; } }
   .hbg .hbo-fig{ position:relative; max-width:none; }
   .hbg-badge{ position:absolute; left:1rem; top:1rem; z-index:2; padding:.35rem .7rem; background:rgba(10,10,10,.82); color:#F2DB86; font-size:.68rem; font-weight:700; letter-spacing:.14em; }
+  .jbs-grid{ display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:.6rem; width:100%; margin-top:1.5rem; }
+  .jbs-grid figure{ margin:0; position:relative; aspect-ratio:4/3; overflow:hidden; background:#000; }
+  .jbs-grid img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .jbs-grid figcaption{ position:absolute; left:.7rem; top:.7rem; font-size:.62rem; font-weight:700; letter-spacing:.12em; color:#fff; background:rgba(0,0,0,.6); padding:.3rem .55rem; }
+  .jbs-signed{ display:flex; gap:1.5rem; align-items:center; margin-top:1rem; padding:1.25rem; background:#151211; border:1px solid rgba(255,255,255,.07); width:100%; }
+  .jbs-signed img{ width:13rem; flex:0 0 auto; display:block; }
+  .jbs-signed b{ display:block; font-size:.68rem; letter-spacing:.14em; color:var(--accent); margin-bottom:.4rem; }
+  .jbs-signed p{ margin:0; font-size:.9rem; line-height:1.6; color:rgba(255,255,255,.7); }
+  @media(max-width:700px){ .jbs-grid{ grid-template-columns:1fr; } .jbs-signed{ flex-direction:column; align-items:flex-start; } .jbs-signed img{ width:70%; } }
   .hbo-fig{ margin:1.75rem 0 0; width:100%; max-width:62rem; }
   .hbo-fig img{ display:block; width:100%; height:auto; border:1px solid rgba(255,255,255,.1); }
   .hbo-fig figcaption{ margin-top:.8rem; font-size:.75rem; color:rgba(255,255,255,.5); }
@@ -3741,6 +3750,24 @@
     '<span class="copy-line">실제 인쇄된 MUSE.D 클로즈 유어 아이즈 편을 표지부터 뒤표지까지 그대로 넘겨 볼 수 있게 옮겼습니다.</span><span class="copy-line">멤버별 개인 컷과 단체 컷을 하나의 톤으로 엮어, 화보 디렉팅부터 리터칭·지면 레이아웃·표지까지 한 권의 흐름으로 설계했습니다.</span>');
   var mzBookBlock = mzBlock('jayb', 'MUSE.D — JAY B ISSUE',
     '<span class="copy-line">실제 인쇄된 MUSE.D JAY B 편을 표지부터 뒤표지까지 그대로 넘겨 볼 수 있게 옮겼습니다.</span><span class="copy-line">화보 디렉팅과 리터칭, 지면 레이아웃과 표지 디자인까지 한 권의 흐름으로 설계한 결과물입니다.</span>');
+  var mzJbSiteBlock = {
+    custom: '<div class="cosmos-block jbs">' +
+      '<div class="cosmos-head">' +
+        '<div class="cosmos-eyebrow">MUSE.D · On-site</div>' +
+        '<h3 class="cosmos-title">TR.EE LISTENING SESSION</h3>' +
+        '<p class="cosmos-copy"><span class="copy-line">JAY B 신곡 청음회와 함께 진행되어, 행사장에서 MUSE.D JAY B 편을 전시하고 판매했습니다.</span><span class="copy-line">화보 디렉팅과 지면 제작을 맡은 인쇄물이 팬들과 직접 만나는 현장입니다.</span></p>' +
+      '</div>' +
+      '<div class="jbs-grid">' +
+        '<figure><img src="images/mused-jayb-site/listening-hall.jpg" alt="JAY B TR.EE 청음회 현장" loading="lazy" decoding="async"><figcaption>청음회 현장</figcaption></figure>' +
+        '<figure><img src="images/mused-jayb-site/booth.jpg" alt="TR.EE 청음회 전시 공간" loading="lazy" decoding="async"><figcaption>전시 공간</figcaption></figure>' +
+        '<figure><img src="images/mused-jayb-site/display.jpg" alt="MUSE.D JAY B 편 현장 진열" loading="lazy" decoding="async"><figcaption>MUSE.D 진열 · 판매</figcaption></figure>' +
+      '</div>' +
+      '<div class="jbs-signed">' +
+        '<img src="images/mused-jayb-site/signed.jpg" alt="JAY B가 사인해 전달한 MUSE.D JAY B 편" loading="lazy" decoding="async">' +
+        '<div><b>SIGNED COPY</b><p>작업이 끝난 뒤 JAY B가 감사의 마음을 담아 직접 사인한 MUSE.D를 전해주었습니다.</p></div>' +
+      '</div>' +
+    '</div>'
+  };
   var mzXlovBlock = mzBlock('xlov', 'MUSE.D — XLOV ISSUE',
     '<span class="copy-line">실제 인쇄된 MUSE.D 엑스러브 편을 표지부터 뒤표지까지 그대로 넘겨 볼 수 있게 옮겼습니다.</span><span class="copy-line">화보 컷과 인터뷰 지면이 번갈아 호흡하도록 지면 리듬을 설계하고, 리터칭부터 표지 디자인까지 맡았습니다.</span>');
   var mzYpBlock = mzBlock('yp', 'MUSE.D — YOUNG POSSE ISSUE',
@@ -3753,7 +3780,7 @@
      picking a cover swaps the single page-turn viewer below to that issue. */
   var MZ_ISSUES = [
     { id:'cye',  name:'CLOSE YOUR EYES', block:mzCyeBlock },
-    { id:'jayb', name:'JAY B',           block:mzBookBlock },
+    { id:'jayb', name:'JAY B',           block:{ custom: mzBookBlock.custom + mzJbSiteBlock.custom } },
     { id:'xlov', name:'XLOV',            block:mzXlovBlock },
     { id:'yp',   name:'YOUNG POSSE',     block:mzYpBlock },
     { id:'nct',  name:'NCT WISH',        block:mzNctBlock }
