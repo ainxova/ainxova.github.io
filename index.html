@@ -3779,8 +3779,8 @@
   /* MUSE.D bookshelf: the five printed issues as cover mockups on one shelf;
      picking a cover swaps the single page-turn viewer below to that issue. */
   var MZ_ISSUES = [
-    { id:'cye',  name:'CLOSE YOUR EYES', block:mzCyeBlock },
     { id:'jayb', name:'JAY B',           block:{ custom: mzBookBlock.custom + mzJbSiteBlock.custom } },
+    { id:'cye',  name:'CLOSE YOUR EYES', block:mzCyeBlock },
     { id:'xlov', name:'XLOV',            block:mzXlovBlock },
     { id:'yp',   name:'YOUNG POSSE',     block:mzYpBlock },
     { id:'nct',  name:'NCT WISH',        block:mzNctBlock }
@@ -3899,7 +3899,7 @@
 
   var dddmStoryBlock = { custom: (function(){
     var thumbs = ['01','02','03','04','05'].map(function(n, k){ return '<img src="images/thumbs/dddm-cycle-' + n + '.jpg" alt="" loading="lazy" decoding="async"' + (k ? ' class="is-off"' : '') + '>'; }).join('');
-    var covers = ['cye','jayb','xlov','yp','nct'].map(function(id){ return '<img src="' + MZ_BOOKS[id][0][0] + '" alt="" loading="lazy" decoding="async">'; }).join('');
+    var covers = ['jayb','cye','xlov','yp','nct'].map(function(id){ return '<img src="' + MZ_BOOKS[id][0][0] + '" alt="" loading="lazy" decoding="async">'; }).join('');
     function card(n, go, media, kicker, name, items, cta){
       return '<button type="button" class="dd-hub-card" data-dd-go="' + go + '">' +
         media +
