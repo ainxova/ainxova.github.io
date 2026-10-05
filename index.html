@@ -839,10 +839,6 @@
      full-width first line, and fixOrphans() trims just that sentence if its
      tail would be left with only a word or two. */
   .copy-line{ display:block; text-wrap:pretty; }
-  @media (max-width:767px){
-    #modal-scroll p.max-w-5xl .copy-line{ text-wrap:balance; }
-    #modal-scroll p.max-w-5xl .copy-line + .copy-line{ margin-top:.6rem; }
-  }
   .cosmos-note{ font-size:.75rem; color:rgba(255,255,255,.38); margin-top:.9rem; }
 
   /* two-column "text | media" split used by most sections */
@@ -2691,6 +2687,8 @@
      two-line title splits into two even lines. Browsers without support
      simply keep the old wrapping. */
   p, dd, li, figcaption, blockquote{ text-wrap:pretty; }
+  /* Phones: no balancing/pretty — lines fill the full width and break only where the text runs out. */
+  @media (max-width:767px){ p, dd, li, figcaption, blockquote, span, .copy-line, [class*="-copy"], [class*="-sum"], [class*="-desc"]{ text-wrap:wrap !important; } }
   h1, h2, h3, h4, .cosmos-title, .dududo-showroom-title, .dh-stickerpack-title, #modal-title{ text-wrap:balance; }
 </style>
 </head>
@@ -5561,6 +5559,7 @@
      Chunks are capped at 16 characters so a long run can still wrap. */
   var KO_DET = ['이','그','저','각','총','약','더','또','및','첫','새','두','세','네','몇','온','전','모든','어떤','같은','다른','여러','매','본','단','해당','좀','잘','꼭','늘','곧','다','안','못'];
   var KO_DEP = ['수','것','중','때','등','뿐','만큼','데','바','줄','듯','측','간','외'];
+  function GLUE_MAX(){ return window.innerWidth < 768 ? 9 : 16; }
   function glueKoreanText(t){
     if (!/[가-힣]/.test(t)) return t;
     var parts = t.split(' ');
@@ -5575,34 +5574,17 @@
         else if ((a === '수' || a === '것') && /^(있|없|아니|같)/.test(b)) glue = true;      /* 할 수 있는 */
         else if (/[A-Za-z]$/.test(a) && /^\d/.test(b)) glue = true;                          /* PHASE 2, Season 1 */
       }
-      if (glue && chunk + 1 + b.length <= 16){ out += ' ' + b; chunk += 1 + b.length; }
+      if (glue && chunk + 1 + b.length <= GLUE_MAX()){ out += ' ' + b; chunk += 1 + b.length; }
       else { out += ' ' + b; chunk = b.length; }
     }
     /* No break right after a middle dot joining two words (미디어아트·프로젝션):
        a word joiner keeps the pair on one line. */
+    if (window.innerWidth < 768) return out.replace(/\u2060/g, '');
     return out.replace(/([가-힣A-Za-z0-9)])·(?=[가-힣A-Za-z0-9(])/g, '$1\u2060·\u2060');
   }
   var GLUE_SEL = 'p, dd, li, figcaption, h1, h2, h3, h4, .cosmos-step-copy, .cosmos-content-desc, .cosmos-content-name, .uxs-card-sum';
-  /* Multi-sentence paragraphs: one sentence per line, so a line never ends
-     mid-sentence with the rest dangling on the next one. */
-  function splitSentences(root){
-    root.querySelectorAll('p').forEach(function(el){
-      if (el.children.length || el.closest('.uxs-hm, svg, .copy-line')) return;
-      var t = el.textContent; if (t.length < 45 || !/[가-힣]/.test(t)) return;
-      var parts = t.split(/(?<=[가-힣])[.!?]\s+(?=[가-힣A-Za-z0-9'‘“「『@])/);
-      if (parts.length < 2) return;
-      var ends = t.match(/(?<=[가-힣])[.!?](?=\s)/g) || [];
-      el.textContent = '';
-      parts.forEach(function(seg, i){
-        var sp = document.createElement('span'); sp.className = 'copy-line';
-        sp.textContent = seg + (i < parts.length - 1 ? (ends[i] || '.') : '');
-        el.appendChild(sp);
-      });
-    });
-  }
   function glueKorean(root){
     if (!root) return;
-    splitSentences(root);
     root.querySelectorAll(GLUE_SEL).forEach(function(el){
       if (el.closest('.uxs-hm, svg')) return;
       var w = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, null), n;
