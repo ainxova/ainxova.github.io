@@ -6328,11 +6328,13 @@
   (function(){
     var canvas = document.getElementById('hero-reel-canvas'); if (!canvas) return;
     var ctx = canvas.getContext('2d');
-    var COLS = 12, CW = 480, CH = 270, N = 62, FPS = 8;
-    var sprite = new Image(), ready = false, head = 0, raf = 0, last = 0, inView = true;
+    var COLS = 12, CW = 480, CH = 270;
+    /* hard-cut edit, no blending: COSMOS (2 takes, 10fps source) -> DDDM x MUSE.D (12fps) */
+    var SEG = [{ n:48, fps:10 }, { n:32, fps:10 }, { n:41, fps:12 }], TOTAL = 0; SEG.forEach(function(g){ g.d = g.n / g.fps; TOTAL += g.d; });
+    var sprite = new Image(), ready = false, head = 0, raf = 0, last = 0, lastFi = -1, inView = true;
     var off = null, offCtx = null;
     function resize(){ var d = Math.min(window.devicePixelRatio || 1, 1.5);
-      canvas.width = Math.round(canvas.clientWidth * d); canvas.height = Math.round(canvas.clientHeight * d); if (ready) draw(head); }
+      canvas.width = Math.round(canvas.clientWidth * d); canvas.height = Math.round(canvas.clientHeight * d); lastFi = -1; if (ready) draw(head); }
     /* Portrait screens: a plain cover-fit zooms the 16:9 frame ~5x, so faces
        fill the phone and outrank the type. There we lay a blurred cover-fit
        copy down as the mood layer and draw the frame itself at a gentler
@@ -6358,19 +6360,13 @@
       }
       var dw = CW * cover, dh = CH * cover;
       ctx.globalAlpha = a; ctx.drawImage(sprite, sx, sy, CW, CH, (cw - dw) / 2, (ch - dh) / 2, dw, dh); }
-    /* The sprite already has dissolves baked in (red-overlay frames); blending on
-       top of them read as a double exposure. Skip those frames and only blend
-       briefly at the end of each step so each shot stays crisp. */
-    var SKIP = {31:1,32:1,33:1,58:1,59:1,60:1,61:1}, FR = [];
-    for (var k = 0; k < N; k++) if (!SKIP[k]) FR.push(k);
-    function draw(f){ var M = FR.length, n = Math.floor(f) % M, i0 = FR[n], i1 = FR[(n + 1) % M], t = f - Math.floor(f);
-      var b = t > 0.7 ? (t - 0.7) / 0.3 : 0;
-      ctx.globalAlpha = 1; cell(i0, 1); if (b > 0.02) cell(i1, b); ctx.globalAlpha = 1; }
+    function frameAt(t){ var base = 0; for (var k = 0; k < SEG.length; k++){ var g = SEG[k]; if (t < g.d || k === SEG.length - 1) return base + Math.min(g.n - 1, Math.floor(t * g.fps)); t -= g.d; base += g.n; } return 0; }
+    function draw(t){ ctx.globalAlpha = 1; ctx.fillStyle = '#0a0a0a'; ctx.fillRect(0, 0, canvas.width, canvas.height); cell(frameAt(t), 1); }
     function tick(ts){ if (!inView){ raf = 0; return; } if (!last) last = ts;
-      var dt = Math.min(0.1, (ts - last) / 1000); last = ts; head = (head + dt * FPS) % FR.length; draw(head); raf = requestAnimationFrame(tick); }
+      var dt = Math.min(0.1, (ts - last) / 1000); last = ts; head = (head + dt) % TOTAL; var fi = frameAt(head); if (fi !== lastFi){ lastFi = fi; draw(head); } raf = requestAnimationFrame(tick); }
     function start(){ if (!raf && ready && inView && !reduceMotion){ last = 0; raf = requestAnimationFrame(tick); } }
     sprite.onload = function(){ ready = true; resize(); draw(0); start(); };
-    sprite.src = 'images/hero/hero-reel4-sprite.jpg';
+    sprite.src = 'images/hero/hero-reel5-sprite.jpg';
     window.addEventListener('resize', resize); resize();
     if ('IntersectionObserver' in window){ new IntersectionObserver(function(es){ inView = es[0].isIntersecting; if (inView) start(); }).observe(canvas); }
     document.addEventListener('visibilitychange', function(){ inView = !document.hidden; start(); });
