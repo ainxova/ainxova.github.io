@@ -3967,6 +3967,22 @@
   var HBS_ZONES = ['외부','F&B존','입장 게이트','티켓존','내부 1F','내부 B1F','출력물'];
   /* keep long tent/railing banners together at the end of each zone so they pair up in short rows */
   HBS_ITEMS = HBS_ITEMS.map(function(r, i){ return [r, i]; }).sort(function(x, y){ var zx = HBS_ZONES.indexOf(x[0][0]), zy = HBS_ZONES.indexOf(y[0][0]); if (zx !== zy) return zx - zy; var wx = x[0][6] > 3.4 ? 1 : 0, wy = y[0][6] > 3.4 ? 1 : 0; return wx - wy || x[1] - y[1]; }).map(function(p){ return p[0]; });
+  /* HEARTBEAT · Hologram zone: booth exterior sheet design + a pre-event test of the
+     inner playback image on the real hologram unit. Design stage, so captions say so. */
+  var hbHoloBlock = {
+    custom: '<div class="cosmos-block">' +
+      '<div class="cosmos-head">' +
+        '<div class="cosmos-eyebrow">On-site · Hologram Zone</div>' +
+        '<h3 class="cosmos-title">HOLOGRAM ZONE</h3>' +
+        '<p class="cosmos-copy">홀로그램 부스의 외부 시트지를 디자인하고, 기기 안에서 송출될 영상 이미지도 제작했습니다. 행사 전에 실제 홀로그램 기기에 넣어 송출 화면을 미리 테스트했고, 부스 시트지는 현재 제작 단계입니다.</p>' +
+      '</div>' +
+      '<div class="cx-print">' +
+        '<figure class="cx-print-item"><div class="cx-print-img"><img src="' + HB + 'hb-holo-test.jpg" alt="홀로그램 기기에 내부 송출 영상을 넣어 테스트한 사진" loading="lazy" decoding="async"></div><figcaption><b>HOLOGRAM UNIT · TEST</b>기기 내부 송출 영상 이미지를 미리 넣어 확인한 테스트 사진</figcaption></figure>' +
+        '<figure class="cx-print-item"><div class="cx-print-img is-sheet"><img src="' + HB + 'hb-holo-sheet.jpg" alt="홀로그램 부스 외부 시트지 디자인" loading="lazy" decoding="async"></div><figcaption><b>BOOTH SHEET · DESIGN</b>홀로그램 부스 외부 시트지 디자인 (제작 진행 중)</figcaption></figure>' +
+      '</div>' +
+    '</div>'
+  };
+
   var hbSiteBlock = { custom: (function(){
     var chips = '<button type="button" class="hbs-chip is-on" data-z="*">ALL <i>' + HBS_ITEMS.length + '</i></button>' +
       HBS_ZONES.map(function(z){ var n = HBS_ITEMS.filter(function(r){ return r[0] === z; }).length;
@@ -4027,10 +4043,10 @@
           cover:HB + "t-kv.jpg", coverPos:"35% 50%", show:[HB + "hb-keyvisual.jpg", dududoMotionBlock] },
         { id:"hb-pr", eyebrow:"PART 03", title:"PROMOTION", sum:"데이별 SNS 포스터, CD 티저와 유튜브 플레이리스트 썸네일, 예매처 상세페이지, 더현대 쇼룸 프로모션", period:"", tools:"",
           cover:HB + "t-promo.jpg", coverPos:"40% 30%", show:[HB + "hb-sns.jpg", dududoCdYtBlock, HB + "hb-ticket.jpg", dududoShowroomBlock] },
-        { id:"hb-md", eyebrow:"PART 04", title:"MERCHANDISE", sum:"블러 워드마크 공식 티셔츠 3종·리유저블백·볼캡·스태프 티, 다이컷 스티커 팩", period:"", tools:"",
-          cover:HB + "t-md.jpg", coverPos:"50% 40%", show:[HB + "hb-merch.jpg", dhStickerPackBlock] },
-        { id:"hb-os", eyebrow:"PART 05", title:"ON-SITE", sum:"포토월과 입체 로고 조형물, 7개 구역 46종의 현장 출력물, 날짜×좌석 4종 컬러 시스템의 입장 팔찌", period:"", tools:"",
-          cover:HB + "t-onsite.jpg", coverPos:"50% 50%", show:[HB + "hb-onsite.jpg", hbSiteBlock, HB + "hb-wristband.jpg"] }
+        { id:"hb-md", eyebrow:"PART 04", title:"MERCHANDISE", sum:"블러 워드마크 공식 티셔츠 3종·리유저블백·볼캡·스태프 티·다이컷 스티커 팩", period:"", tools:"",
+          cover:HB + "t-md.jpg", coverPos:"50% 40%", show:[HB + "hb-merch.jpg"] },
+        { id:"hb-os", eyebrow:"PART 05", title:"ON-SITE", sum:"포토월과 입체 로고 조형물, 7개 구역 46종의 현장 출력물, 홀로그램 존, 날짜×좌석 4종 컬러 시스템의 입장 팔찌", period:"", tools:"",
+          cover:HB + "t-onsite.jpg", coverPos:"50% 50%", show:[HB + "hb-onsite.jpg", hbSiteBlock, hbHoloBlock, HB + "hb-wristband.jpg"] }
       ],
       tail:["images/dududo-case/dh-09-outro.jpg"] },
     { group:"Branding & Art Direction", key:"cosmos", category:"Exhibition Art Direction · Key Visual · Space Graphics · MD · Digital", title:"COSMOS: BIGBANG 20주년 기념 전시 아트 디렉션", idea:"무한(∞) 모티프로 이은 전시의 모든 접점", forms:["Key Visual", "Space", "VMD", "MD", "Digital"], year:"2026",
