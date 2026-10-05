@@ -786,15 +786,20 @@
   .jbs-grid figure{ margin:0; position:relative; aspect-ratio:4/3; overflow:hidden; background:#000; }
   .jbs-grid img{ width:100%; height:100%; object-fit:cover; display:block; }
   .jbs-grid figcaption{ position:absolute; left:.7rem; top:.7rem; font-size:.62rem; font-weight:700; letter-spacing:.12em; color:#fff; background:rgba(0,0,0,.6); padding:.3rem .55rem; }
-  .jbs-steps{ display:grid; grid-template-columns:1.1fr .8fr 1fr; gap:.75rem; align-items:stretch; margin-top:1rem; padding:1.25rem; background:#151211; border:1px solid rgba(255,255,255,.07); }
+  .jbs-steps{ display:grid; grid-template-columns:1.05fr 1fr 1fr; gap:.75rem; align-items:stretch; margin-top:1rem; padding:1.25rem; background:#151211; border:1px solid rgba(255,255,255,.07); }
   .jbs-step{ display:flex; flex-direction:column; gap:.55rem; min-width:0; }
   .jbs-step-n{ font-size:.62rem; letter-spacing:.16em; font-weight:700; color:var(--accent); }
   .jbs-step b{ font-size:1rem; color:#fff; }
   .jbs-step img{ width:100%; display:block; }
   .jbs-step img.is-story{ max-width:15rem; }
-  .jbs-step p{ margin:0; font-size:.78rem; line-height:1.5; color:rgba(255,255,255,.6); }
-  .jbs-step.is-text{ justify-content:center; padding:0 .5rem; border-left:1px dashed rgba(255,255,255,.15); border-right:1px dashed rgba(255,255,255,.15); }
-  @media(max-width:700px){ .jbs-steps{ grid-template-columns:1fr; } .jbs-step.is-text{ border:0; border-top:1px dashed rgba(255,255,255,.15); border-bottom:1px dashed rgba(255,255,255,.15); padding:.9rem 0; } .jbs-step img{ max-width:15rem; } }
+  .jbs-step p{ margin:auto 0 0; padding-top:.2rem; font-size:.78rem; line-height:1.5; color:rgba(255,255,255,.6); }
+  .jbs-step.is-text{ padding:0 .9rem; border-left:1px dashed rgba(255,255,255,.15); border-right:1px dashed rgba(255,255,255,.15); }
+  .jbs-how{ list-style:none; margin:0; padding:0; flex:1; display:flex; flex-direction:column; gap:.6rem; }
+  .jbs-how li{ flex:1; display:flex; gap:.8rem; align-items:center; padding:.9rem; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08); }
+  .jbs-how i{ font-style:normal; font-size:.7rem; font-weight:700; letter-spacing:.1em; color:var(--accent); }
+  .jbs-how span{ font-size:.78rem; line-height:1.5; color:rgba(255,255,255,.6); }
+  .jbs-how em{ display:block; font-style:normal; font-size:.92rem; font-weight:700; color:#fff; margin-bottom:.15rem; }
+  @media(max-width:700px){ .jbs-steps{ grid-template-columns:1fr; } .jbs-step.is-text{ border:0; border-top:1px dashed rgba(255,255,255,.15); border-bottom:1px dashed rgba(255,255,255,.15); padding:1.1rem 0; } .jbs-step img{ max-width:15rem; } }
   .jbs-kind{ display:flex; gap:.8rem; align-items:baseline; flex-wrap:wrap; margin-top:1.75rem; }
   .jbs-kind b{ font-size:.7rem; letter-spacing:.14em; color:var(--accent); }
   .jbs-kind span{ font-size:1.05rem; font-weight:800; color:#fff; }
@@ -3786,7 +3791,7 @@
       '<p class="jbs-note">나머지 아티스트 편은 DDDM 인스타그램 이벤트 게시물로 참여자를 모집하고, 당첨자에게 배포했습니다. 모든 호를 같은 흐름으로 진행했고, 아래는 그중 한 편의 포맷 예시입니다.</p>' +
       '<div class="jbs-steps">' +
         '<div class="jbs-step"><span class="jbs-step-n">STEP 1</span><b>이벤트 공지</b><img src="images/mused-jayb-site/event-xlov.jpg" alt="인스타그램 이벤트 공지 게시물 예시" loading="lazy" decoding="async"><p>피드 게시물로 이벤트를 공지</p></div>' +
-        '<div class="jbs-step is-text"><span class="jbs-step-n">STEP 2</span><b>이벤트 참여</b><p>인스타그램에서 참여자를 모집</p></div>' +
+        '<div class="jbs-step is-text"><span class="jbs-step-n">STEP 2</span><b>이벤트 참여</b><ul class="jbs-how"><li><i>01</i><span><em>구글폼으로 신청</em>구글폼을 통해 참여를 접수</span></li><li><i>02</i><span><em>유튜브 구독 인증</em>DDDM 채널 구독 화면으로 인증</span></li><li><i>03</i><span><em>댓글 + 캡처 인증</em>아티스트 영상에 댓글을 남기고 캡처로 인증</span></li></ul><p>구글폼으로 참여자를 모집</p></div>' +
         '<div class="jbs-step"><span class="jbs-step-n">STEP 3</span><b>당첨자 발표</b><img class="is-story" src="images/mused-jayb-site/event-story.jpg" alt="인스타그램 스토리 당첨자 발표 예시" loading="lazy" decoding="async"><p>스토리로 발표하고 당첨자를 태그, 이후 배포</p></div>' +
       '</div>' +
     '</div>'
