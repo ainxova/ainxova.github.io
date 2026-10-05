@@ -6358,10 +6358,16 @@
       }
       var dw = CW * cover, dh = CH * cover;
       ctx.globalAlpha = a; ctx.drawImage(sprite, sx, sy, CW, CH, (cw - dw) / 2, (ch - dh) / 2, dw, dh); }
-    function draw(f){ var i0 = Math.floor(f) % N, i1 = (i0 + 1) % N, t = f - Math.floor(f);
-      ctx.globalAlpha = 1; cell(i0, 1); if (t > 0.02) cell(i1, t); ctx.globalAlpha = 1; }
+    /* The sprite already has dissolves baked in (red-overlay frames); blending on
+       top of them read as a double exposure. Skip those frames and only blend
+       briefly at the end of each step so each shot stays crisp. */
+    var SKIP = {31:1,32:1,33:1,58:1,59:1,60:1,61:1}, FR = [];
+    for (var k = 0; k < N; k++) if (!SKIP[k]) FR.push(k);
+    function draw(f){ var M = FR.length, n = Math.floor(f) % M, i0 = FR[n], i1 = FR[(n + 1) % M], t = f - Math.floor(f);
+      var b = t > 0.7 ? (t - 0.7) / 0.3 : 0;
+      ctx.globalAlpha = 1; cell(i0, 1); if (b > 0.02) cell(i1, b); ctx.globalAlpha = 1; }
     function tick(ts){ if (!inView){ raf = 0; return; } if (!last) last = ts;
-      var dt = Math.min(0.1, (ts - last) / 1000); last = ts; head = (head + dt * FPS) % N; draw(head); raf = requestAnimationFrame(tick); }
+      var dt = Math.min(0.1, (ts - last) / 1000); last = ts; head = (head + dt * FPS) % FR.length; draw(head); raf = requestAnimationFrame(tick); }
     function start(){ if (!raf && ready && inView && !reduceMotion){ last = 0; raf = requestAnimationFrame(tick); } }
     sprite.onload = function(){ ready = true; resize(); draw(0); start(); };
     sprite.src = 'images/hero/hero-reel4-sprite.jpg';
