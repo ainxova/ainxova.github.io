@@ -3481,6 +3481,19 @@
     { id:'photozone', en:'HOLOGRAM PHOTO ZONE', kr:'홀로그램 포토존', note:'멤버와 함께 남기는 홀로그램 촬영 부스' },
     { id:'draw', en:'DRAW OUR COSMOS', kr:'함께 그리는 코스모스', note:'관람객의 메시지로 완성되는 마지막 벽' }
   ];
+  var cxVmdBlock = {
+    custom: '<div class="cosmos-block">' +
+      '<div class="cosmos-head">' +
+        '<div class="cosmos-eyebrow">VMD · MD Zone</div>' +
+        '<h3 class="cosmos-title">PIECES OF COSMOS</h3>' +
+        '<p class="cosmos-copy"><span class="copy-line">공식 MD 판매 존의 VMD를 기획하고, 현장에서 직접 디렉팅했습니다.</span><span class="copy-line">상품 진열과 동선, 조명 분위기까지 디자인 시안에서 실제 공간으로 옮기는 과정을 맡았습니다.</span></p>' +
+      '</div>' +
+      '<div class="cx-zones"><div class="cx-zone-stage">' +
+        '<figure class="cx-zone-fig"><img src="' + CP + 'zone-vmd-design.jpg" alt="MD존 VMD 디자인 시안" decoding="async"><figcaption>DESIGN PROPOSAL</figcaption></figure>' +
+        '<figure class="cx-zone-fig is-site"><img src="' + CP + 'zone-vmd-site.jpg" alt="MD존 VMD 현장" decoding="async"><figcaption>ON-SITE</figcaption></figure>' +
+      '</div>' +
+    '</div>'
+  };
   var cxZonesBlock = {
     custom: '<div class="cosmos-block">' +
       '<div class="cosmos-head">' +
@@ -4179,7 +4192,7 @@
         { id:"kv", short:"Key Visual", eyebrow:"PART 01", title:"ART DIRECTION & KEY VISUAL", sum:"6종 이상의 콘셉트 시안 → 최종 셀렉 2안 → 메인 키비주얼, 인물 컷 정밀 보정·합성", period:"", tools:"",
           cover:CX + "cosmos-keyvisual-960.jpg", coverPos:"50% 40%", show:[cxKeyVisualBlock, cxKvProcessBlock] },
         { id:"sp", short:"Space & VMD", eyebrow:"PART 02", title:"SPACE GRAPHICS & VMD", sum:"11개 존 동선 설계, 디자인 시안과 현장, 전시 맵·사이니지·MD존 VMD·입장 구성품", period:"", tools:"",
-          cover:"images/cosmos-add/cosmos-map.jpg", coverPos:"22% 45%", show:[cosmosContentBlock, cosmosFloorplanBlock, cxZonesBlock, cosmosMapBlock, cosmosOnsiteBlock, cosmosXbannerBlock, cosmosWristbandBlock, cxEntranceKitBlock] },
+          cover:"images/cosmos-add/cosmos-map.jpg", coverPos:"22% 45%", show:[cosmosContentBlock, cosmosFloorplanBlock, cxZonesBlock, cxVmdBlock, cosmosMapBlock, cosmosOnsiteBlock, cosmosXbannerBlock, cosmosWristbandBlock, cxEntranceKitBlock] },
         { id:"md", short:"MD & Campaign", eyebrow:"PART 03", title:"MERCHANDISE & CAMPAIGN", sum:"30여 종 공식 MD 리드, 직접 디자인한 MD 판매 실적, 점 잇기 쇼핑백과 팬 참여 캠페인", period:"", tools:"",
           cover:CX + "cosmos-bag-typeA-mockup.jpg", coverPos:"30% 60%", show:[cxMdBlock, cosmosBagBlock, cosmosPromoEventsBlock] },
         { id:"dg", short:"Digital", eyebrow:"PART 04", title:"DIGITAL CONTENT", sum:"공식 인스타그램 채널 세팅과 성과, COSMOS 알파벳 캐러셀, PHASE 2 티저, B.STAGE 공지(국·영문)", period:"", tools:"",
