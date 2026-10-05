@@ -4085,7 +4085,16 @@
       '<figure class="hbo-fig"><div class="hbg-badge">DESIGN PROPOSAL</div><img src="' + HB + 'hb-gate-proposal.jpg" alt="입장 게이트·계단·대형 현수막 디자인 시안" loading="lazy" decoding="async"><figcaption>입장 게이트 · 계단 시트지 · 대형 현수막 시안 (현장 시공 전)</figcaption></figure>' +
     '</div>'
   };
-  var hbWallBlock = { custom: '<div class="hbg"><figure class="hbo-fig"><div class="hbg-badge">DESIGN PROPOSAL</div><img src="' + HB + 'hb-onsite.jpg" alt="현장 포토월 · 입체 로고 조형물 시안" loading="lazy" decoding="async"></figure></div>' };
+  var hbWallBlock = {
+    custom: '<div class="cosmos-block hbg">' +
+      '<div class="cosmos-head">' +
+        '<div class="cosmos-eyebrow">Space · Design Proposal to Site</div>' +
+        '<h3 class="cosmos-title">PHOTO WALL PROPOSAL</h3>' +
+        '<p class="cosmos-copy"><span class="copy-line">키비주얼을 대형 배너로 확장하고, 전면에 입체 레드 로고 조형물을 세워 관객이 브랜드 안으로 들어와 사진을 남기는 포토존으로 설계했습니다.</span><span class="copy-line">현장 제작 후, 완성된 모습과 나란히 비교해 보여드릴 예정입니다.</span></p>' +
+      '</div>' +
+      '<figure class="hbo-fig"><div class="hbg-badge">DESIGN PROPOSAL</div><img src="' + HB + 'hb-wall-proposal.jpg" alt="현장 포토월 · 입체 로고 조형물 디자인 시안" loading="lazy" decoding="async"><figcaption>현장 포토월 · 입체 로고 조형물 시안 (현장 제작 전)</figcaption></figure>' +
+    '</div>'
+  };
   var hbSiteBlock = { custom: (function(){
     var chips = '<button type="button" class="hbs-chip is-on" data-z="*">ALL <i>' + HBS_ITEMS.length + '</i></button>' +
       HBS_ZONES.map(function(z){ var n = HBS_ITEMS.filter(function(r){ return r[0] === z; }).length;
