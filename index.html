@@ -435,9 +435,16 @@
     overflow-y:auto;
     -webkit-overflow-scrolling:touch;
     overscroll-behavior:contain;
+    overflow-x:hidden;
+    touch-action:pan-y pinch-zoom;
     scrollbar-width:thin;
     scrollbar-color: rgba(242,219,134,.45) transparent;
   }
+  /* Horizontal strips inside the detail modal (DDDM jump bar, shorts row…):
+     keep a sideways swipe inside the strip — when it hits its end the swipe
+     must not chain out and drag the whole sheet sideways on iOS. */
+  #modal-scroll .dd-jump-in, #modal-scroll .dd-yt-shorts, #modal-scroll .dd-yt-thumbs{ overscroll-behavior-x:contain; touch-action:pan-x pan-y; }
+  #modal-overlay{ overscroll-behavior:none; }
   #modal-scroll::-webkit-scrollbar{ width:10px; }
   #modal-scroll::-webkit-scrollbar-track{ background:transparent; }
   #modal-scroll::-webkit-scrollbar-thumb{
