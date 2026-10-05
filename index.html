@@ -780,6 +780,8 @@
   .hbo-figs{ display:grid; grid-template-columns:minmax(0,1fr) minmax(0,.42fr); gap:1.25rem; align-items:start; margin-top:1.75rem; }
   .hbo-figs .hbo-fig{ margin:0; }
   @media(max-width:700px){ .hbo-figs{ grid-template-columns:1fr; } .hbo-fig-tall{ max-width:15rem; } }
+  .hbg .hbo-fig{ position:relative; max-width:none; }
+  .hbg-badge{ position:absolute; left:1rem; top:1rem; z-index:2; padding:.35rem .7rem; background:rgba(10,10,10,.82); color:#F2DB86; font-size:.68rem; font-weight:700; letter-spacing:.14em; }
   .hbo-fig{ margin:1.75rem 0 0; width:100%; max-width:62rem; }
   .hbo-fig img{ display:block; width:100%; height:auto; border:1px solid rgba(255,255,255,.1); }
   .hbo-fig figcaption{ margin-top:.8rem; font-size:.75rem; color:rgba(255,255,255,.5); }
@@ -4073,6 +4075,16 @@
     '</div>'
   };
 
+  var hbGateBlock = {
+    custom: '<div class="cosmos-block hbg">' +
+      '<div class="cosmos-head">' +
+        '<div class="cosmos-eyebrow">Space · Design Proposal to Site</div>' +
+        '<h3 class="cosmos-title">ENTRANCE GATE PROPOSAL</h3>' +
+        '<p class="cosmos-copy"><span class="copy-line">실제 입구 계단 사진 위에 대형 현수막과 계단 시트지, 도시 방향 사인 구조물을 합성해 현장 분위기를 미리 잡은 시안입니다.</span><span class="copy-line">10/16 현장 시공 후, 완성된 모습과 나란히 비교해 보여드릴 예정입니다.</span></p>' +
+      '</div>' +
+      '<figure class="hbo-fig"><div class="hbg-badge">DESIGN PROPOSAL</div><img src="' + HB + 'hb-gate-proposal.jpg" alt="입장 게이트·계단·대형 현수막 디자인 시안" loading="lazy" decoding="async"><figcaption>입장 게이트 · 계단 시트지 · 대형 현수막 시안 (현장 시공 전)</figcaption></figure>' +
+    '</div>'
+  };
   var hbSiteBlock = { custom: (function(){
     var chips = '<button type="button" class="hbs-chip is-on" data-z="*">ALL <i>' + HBS_ITEMS.length + '</i></button>' +
       HBS_ZONES.map(function(z){ var n = HBS_ITEMS.filter(function(r){ return r[0] === z; }).length;
@@ -4136,7 +4148,7 @@
         { id:"hb-md", short:"Merchandise", eyebrow:"PART 04", title:"MERCHANDISE", sum:"블러 워드마크 공식 티셔츠 3종·리유저블백·볼캡·스태프 티·다이컷 스티커 팩", period:"", tools:"",
           cover:HB + "t-md.jpg", coverPos:"50% 40%", show:[HB + "hb-merch.jpg"] },
         { id:"hb-os", short:"On-site", eyebrow:"PART 05", title:"ON-SITE", sum:"포토월과 입체 로고 조형물, 7개 구역 46종의 현장 출력물, 홀로그램 존, 날짜×좌석 4종 컬러 시스템의 입장 팔찌", period:"", tools:"",
-          cover:HB + "t-onsite.jpg", coverPos:"50% 50%", show:[HB + "hb-onsite.jpg", hbSiteBlock, hbHoloBlock, HB + "hb-wristband.jpg"] },
+          cover:HB + "t-onsite.jpg", coverPos:"50% 50%", show:[HB + "hb-onsite.jpg", hbGateBlock, hbSiteBlock, hbHoloBlock, HB + "hb-wristband.jpg"] },
         { id:"hb-ops", short:"Design Ops", eyebrow:"PART 06", title:"DESIGN OPS", sum:"디자이너 1명으로 운영되도록 설계한 약 20종의 Figma 포맷, PM 3명 교육, PM이 직접 만드는 인스타그램 콘텐츠", period:"", tools:"Figma",
           cover:HB + "hb-figma-ops.jpg", coverPos:"40% 30%", show:[hbOpsBlock] }
       ],
