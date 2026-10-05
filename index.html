@@ -1314,12 +1314,12 @@
   @media (max-height:820px){ #top .hero-scroll-indicator{ display:none; } }
   @media (max-width:767px){ #top .hero-scroll-indicator{ bottom:5.9rem; } .clients-item{ font-size:1rem; gap:1.6rem; padding-right:1.6rem; } }
   .clients-marquee{ overflow:hidden; -webkit-mask-image:linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); mask-image:linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); }
-  .clients-track{ display:flex; width:max-content; animation:clientsMove 46s linear infinite; }
-  .clients-band:hover .clients-track{ animation-play-state:paused; }
+  .clients-track{ display:flex; width:max-content; animation:clientsMove 46s linear infinite; will-change:transform; backface-visibility:hidden; }
+  /* no hover-pause: on touch screens :hover sticks after a tap and froze the band */
   .clients-item{ display:inline-flex; align-items:center; gap:2.4rem; padding-right:2.4rem; white-space:nowrap; font-size:clamp(1rem, 1.6vw, 1.35rem); font-weight:600; letter-spacing:-.01em; color:rgba(255,255,255,.82); }
   .clients-item small{ font-size:.55em; font-weight:500; letter-spacing:.06em; color:rgba(255,255,255,.38); margin-left:.6em; }
   .clients-item::after{ content:'✦'; font-size:.5em; color:var(--accent); opacity:.7; }
-  @keyframes clientsMove{ from{ transform:translateX(0); } to{ transform:translateX(-50%); } }
+  @keyframes clientsMove{ from{ transform:translate3d(0,0,0); } to{ transform:translate3d(-50%,0,0); } }
   @media (prefers-reduced-motion: reduce){ .clients-track{ animation:none; flex-wrap:wrap; width:auto; justify-content:center; } }
 
   /* ---- Work card meta (index · discipline · year) + one-line blurb ---- */
@@ -4382,6 +4382,16 @@
     var names = [['CJ ENM','Digital Content'],['DIGGLE','YouTube · Early Launch'],['MBN','Broadcast'],['BIGBANG','20th Anniversary Exhibition'],['HEARTBEAT BY DUDUDO','Festival'],['HK inno.N','Character'],['한가인 · 이창용','우아한 미담'],['DDDM','Music Channel'],['MUSE.D','Magazine'],['단꿈아이','BX']];
     var html = names.map(function(n){ return '<span class="clients-item">' + n[0] + '<small>' + n[1] + '</small></span>'; }).join('');
     t.innerHTML = html + html;
+    /* watchdog: some browsers drop a CSS animation after tab/app switches or bfcache
+       restores. If the band has not moved between two checks, restart it. */
+    if (!reduceMotion){
+      var lastM = '', still = 0;
+      function kick(){ t.style.animation = 'none'; void t.offsetWidth; t.style.animation = ''; }
+      setInterval(function(){ if (document.hidden) return; var m = getComputedStyle(t).transform;
+        if (m === lastM){ if (++still >= 2){ kick(); still = 0; } } else still = 0; lastM = m; }, 1500);
+      window.addEventListener('pageshow', kick);
+      document.addEventListener('visibilitychange', function(){ if (!document.hidden) kick(); });
+    }
   })();
 
   /* Archive: credits-style rows (client name first) + fold toggle that swaps
