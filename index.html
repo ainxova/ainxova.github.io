@@ -857,7 +857,8 @@
   .hbk-link{ display:inline-flex; align-items:center; gap:.5rem; margin-top:1.5rem; padding:.8rem 1.2rem; border:1px solid rgba(242,219,134,.5); color:#fff; font-size:.85rem; text-decoration:none; background:rgba(242,219,134,.06); }
   .hbk-link:hover{ border-color:var(--accent); color:var(--accent); }
   @media(max-width:700px){ .hbk-grid{ grid-template-columns:repeat(2,minmax(0,1fr)); gap:.7rem; } }
-  .hbo-figs{ display:grid; grid-template-columns:minmax(0,1fr) minmax(0,.42fr); gap:1.25rem; align-items:start; margin-top:1.75rem; }
+  .hbo-figs{ display:grid; grid-template-columns:minmax(0,1fr) minmax(0,.42fr); gap:1.25rem; align-items:start; margin-top:.5rem; }
+  .hbd-ops{ margin-top:1.75rem; width:100%; max-width:none; }
   .hbo-figs .hbo-fig{ margin:0; }
   @media(max-width:700px){ .hbo-figs{ grid-template-columns:1fr; } .hbo-fig-tall{ max-width:15rem; } }
   .hbg .hbo-fig{ position:relative; max-width:none; }
@@ -4281,10 +4282,13 @@
         '<div class="hbo-col"><h4>PM이 맡는 것</h4><p>스폰서 모집, 티켓 안내 카드, 예매처 상세페이지 등 반복되는 SNS·상세페이지 콘텐츠를 포맷에 넣어 제작하고 업로드합니다.</p></div>' +
         '<div class="hbo-col"><h4>디자이너가 맡는 것</h4><p>키비주얼, 현장 출력물과 시공, 홀로그램 기기 내·외부 제작처럼 기술 난도가 높은 작업에 시간을 집중합니다.</p></div>' +
       '</div>' +
-      '<div class="hbo-figs">' +
-        '<figure class="hbo-fig"><img src="' + HB + 'hb-figma-ops.jpg" alt="PM용 Figma 디자인 포맷 보드" loading="lazy" decoding="async"><figcaption>PM에게 배포한 Figma 포맷 보드 — 스폰서 모집, 티켓 안내, 상세페이지, 소셜용 포맷</figcaption></figure>' +
-        '<figure class="hbo-fig hbo-fig-tall"><img src="' + HB + 'hb-figma-all.jpg" alt="Figma 디자인방 전체 보드" loading="lazy" decoding="async"><figcaption>디자인방 전체 — 콘셉트·이벤트·라인업·스폰서·소셜 포맷을 한 페이지에서 관리</figcaption></figure>' +
-      '</div>' +
+      '<details class="hbd hbd-ops">' +
+        '<summary><span class="hbd-t"><span class="cosmos-eyebrow">Figma Boards</span><b>PM에게 배포한 포맷 보드</b><em>스폰서 모집·티켓 안내·상세페이지·소셜용 포맷과, 콘셉트부터 소셜까지 한 페이지에서 관리한 디자인방 전체 보드</em></span><span class="hbd-btn"><i>+</i><span class="hbd-closed">펼쳐보기</span><span class="hbd-open">접기</span></span></summary>' +
+        '<div class="hbd-body"><div class="hbo-figs">' +
+          '<figure class="hbo-fig"><img src="' + HB + 'hb-figma-ops.jpg" alt="PM용 Figma 디자인 포맷 보드" loading="lazy" decoding="async"><figcaption>PM에게 배포한 Figma 포맷 보드</figcaption></figure>' +
+          '<figure class="hbo-fig hbo-fig-tall"><img src="' + HB + 'hb-figma-all.jpg" alt="Figma 디자인방 전체 보드" loading="lazy" decoding="async"><figcaption>디자인방 전체 보드</figcaption></figure>' +
+        '</div></div>' +
+      '</details>' +
     '</div>'
   };
 
