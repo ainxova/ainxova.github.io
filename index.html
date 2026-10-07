@@ -1183,7 +1183,7 @@
   .dd-jump-in{ display:flex; align-items:center; gap:.35rem; padding:.7rem 4.75rem .7rem 6.25%; overflow-x:auto; scrollbar-width:none; }
   .dd-jump-in::-webkit-scrollbar{ display:none; }
   .dd-jump-label{ flex:none; font-size:.62rem; letter-spacing:.2em; color:rgba(255,255,255,.38); margin-right:.6rem; }
-  .dd-jump-btn{ flex:none; font:inherit; font-size:.74rem; letter-spacing:.04em; color:rgba(255,255,255,.6); background:none; border:1px solid rgba(255,255,255,.1); border-radius:999px; padding:.42rem .95rem; cursor:pointer; transition:color .25s, border-color .25s, background-color .25s; white-space:nowrap; }
+  .dd-jump-btn{ flex:none; font:inherit; font-size:.74rem; letter-spacing:.04em; color:rgba(255,255,255,.6); background:none; border:1px solid rgba(255,255,255,.1); border-radius:999px; padding:.42rem .82rem; cursor:pointer; transition:color .25s, border-color .25s, background-color .25s; white-space:nowrap; }
   .dd-subjump{ top:3.05rem; z-index:6; background:rgba(14,14,14,.94); border-top:0; }
   .dd-subjump .dd-jump-in{ padding-top:.45rem; padding-bottom:.45rem; }
   .dd-subjump .dd-jump-btn{ font-size:.66rem; padding:.3rem .7rem; letter-spacing:.06em; }
@@ -4228,7 +4228,7 @@
   var hbRealBlock = {
     custom: '<div class="cosmos-block">' +
       '<div class="cosmos-head">' +
-        '<div class="cosmos-eyebrow">On-site · Admission Goods</div>' +
+        '<div class="cosmos-eyebrow">Production · Admission Goods</div>' +
         '<h3 class="cosmos-title">PRODUCED<br>ADMISSION GOODS</h3>' +
         '<p class="cosmos-copy">시안으로 설계한 VIP 비표, 입장 밴드, 19세 이상 성인 종이팔찌가 실물로 제작되어 도착하고 있습니다. 완성된 실물의 질감과 인쇄 상태를 확인했습니다.</p>' +
       '</div>' +
@@ -4365,11 +4365,13 @@
           cover:HB + "t-promo.jpg", coverPos:"40% 30%", show:[HB + "hb-sns.jpg", dududoCdYtBlock, hbTicketBlock, hbTicketEventBlock, dududoShowroomBlock] },
         { id:"hb-md", short:"Merchandise", eyebrow:"PART 04", title:"MERCHANDISE", sum:"블러 워드마크 공식 티셔츠 3종·리유저블백·볼캡·스태프 티·다이컷 스티커 팩", period:"", tools:"",
           cover:HB + "t-md.jpg", coverPos:"50% 40%", show:[HB + "hb-merch.jpg"] },
-        { id:"hb-os", short:"On-site", eyebrow:"PART 05", title:"ON-SITE", sum:"포토월과 입체 로고 조형물, 7개 구역 46종의 현장 출력물, 홀로그램 존과 부스 태블릿 UI, 날짜×좌석 4종 컬러 시스템의 입장 팔찌", period:"", tools:"",
-          cover:HB + "t-onsite.jpg", coverPos:"50% 50%", show:[hbGateBlock, hbWallBlock, hbSiteBlock, hbHoloBlock, hbKioskBlock, HB + "hb-wristband.jpg", hbRealBlock] },
-        { id:"hb-ops", short:"Design Ops", eyebrow:"PART 06", title:"DESIGN OPS", sum:"디자이너 1명으로 운영되도록 설계한 약 20종의 Figma 포맷, PM 3명 교육, PM이 직접 만드는 인스타그램 콘텐츠", period:"", tools:"Figma",
+        { id:"hb-os", short:"On-site", eyebrow:"PART 05", title:"ON-SITE DESIGN", sum:"홀로그램 존과 부스 태블릿 UI, 입장 게이트·포토월 시안, 7개 구역 46종의 현장 출력물, 날짜×좌석 4종 컬러 시스템의 입장 팔찌", period:"", tools:"",
+          cover:HB + "t-onsite.jpg", coverPos:"50% 50%", show:[hbHoloBlock, hbKioskBlock, hbGateBlock, hbWallBlock, hbSiteBlock, HB + "hb-wristband.jpg"] },
+        { id:"hb-prod", short:"Production", eyebrow:"PART 06", title:"PRODUCTION & SITE", sum:"시안으로 설계한 VIP 비표와 입장 밴드의 실물 제작물, 현장 시공과 행사 기록", period:"", tools:"",
+          cover:HB + "hb-real-bands.jpg", coverPos:"50% 50%", show:[hbRealBlock] },
+        { id:"hb-ops", short:"Design Ops", eyebrow:"PART 07", title:"DESIGN OPS", sum:"디자이너 1명으로 운영되도록 설계한 약 20종의 Figma 포맷, PM 3명 교육, PM이 직접 만드는 인스타그램 콘텐츠", period:"", tools:"Figma",
           cover:HB + "hb-figma-ops.jpg", coverPos:"40% 30%", show:[hbOpsBlock] },
-        { id:"hb-early", short:"Early Proposal", eyebrow:"PART 07", title:"EARLY PROPOSAL", sum:"페스티벌로 개편되기 전, DUDUDO CONCERT 시절 제안한 초기 브랜드 아이덴티티와 “DON’T DO THAT” 픽토그램", period:"", tools:"Illustrator · Photoshop",
+        { id:"hb-early", short:"Early Work", eyebrow:"PART 08", title:"EARLY PROPOSAL", sum:"페스티벌로 개편되기 전, DUDUDO CONCERT 시절 제안한 초기 브랜드 아이덴티티와 “DON’T DO THAT” 픽토그램", period:"", tools:"Illustrator · Photoshop",
           cover:"images/dududo-concert-01.jpg", coverPos:"50% 50%", show:[{ custom:'<div class="cosmos-block"><div class="cosmos-head"><p class="cosmos-copy">페스티벌로 개편되기 전, <b>dududo concert</b>라는 이름으로 기획되던 초기 단계에 제안한 브랜드 아이덴티티입니다. 로고와 와이드 그리드 시스템, “DON’T DO THAT” 촬영 금지 픽토그램 세트, 컬러 팔레트, 포스터 배리에이션과 실사 목업까지 하나의 완결된 시스템으로 구축했고, 이후 행사가 페스티벌 형식으로 전면 개편되며 HEARTBEAT BY DUDUDO로 이어졌습니다.</p></div></div>' }, "images/dududo-concert-01.jpg","images/dududo-concert-02.jpg","images/dududo-concert-03.jpg","images/dududo-concert-04.jpg","images/dududo-concert-05.jpg","images/dududo-concert-06.jpg","images/dududo-concert-07.jpg","images/dududo-concert-08.jpg"] }
       ],
       tail:["images/dududo-case/dh-09-outro.jpg"] },
