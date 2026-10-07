@@ -798,6 +798,15 @@
   .hbo-col p{ margin:0; font-size:.86rem; line-height:1.65; color:rgba(255,255,255,.72); }
   .hb-early-note{ max-width:44rem; margin:0 auto 2rem; padding:0 1.5rem; color:rgba(255,255,255,.7); font-size:.95rem; line-height:1.8; }
   .hb-early-note b{ color:var(--accent); font-weight:600; }
+  .hbk-grid{ display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:1rem; margin-top:1.75rem; }
+  .hbk-item{ margin:0; }
+  .hbk-item img{ display:block; width:100%; height:auto; border:1px solid rgba(255,255,255,.1); }
+  .hbk-item figcaption{ margin-top:.6rem; font-size:.74rem; line-height:1.55; color:rgba(255,255,255,.5); }
+  .hbk-item figcaption i{ font-style:normal; color:var(--accent); margin-right:.55rem; letter-spacing:.1em; }
+  .hbk-item figcaption b{ display:block; color:rgba(255,255,255,.85); font-weight:600; letter-spacing:.08em; margin:.1rem 0 .2rem; }
+  .hbk-link{ display:inline-flex; align-items:center; gap:.5rem; margin-top:1.5rem; padding:.8rem 1.2rem; border:1px solid rgba(242,219,134,.5); color:#fff; font-size:.85rem; text-decoration:none; background:rgba(242,219,134,.06); }
+  .hbk-link:hover{ border-color:var(--accent); color:var(--accent); }
+  @media(max-width:700px){ .hbk-grid{ grid-template-columns:repeat(2,minmax(0,1fr)); gap:.7rem; } }
   .hbo-figs{ display:grid; grid-template-columns:minmax(0,1fr) minmax(0,.42fr); gap:1.25rem; align-items:start; margin-top:1.75rem; }
   .hbo-figs .hbo-fig{ margin:0; }
   @media(max-width:700px){ .hbo-figs{ grid-template-columns:1fr; } .hbo-fig-tall{ max-width:15rem; } }
@@ -4134,6 +4143,26 @@
     '</div>'
   };
 
+  /* HEARTBEAT · Hologram booth tablet UI: 6 screens of the touch flow + Figma prototype link. */
+  var hbKioskBlock = {
+    custom: '<div class="cosmos-block">' +
+      '<div class="cosmos-head">' +
+        '<div class="cosmos-eyebrow">On-site · Booth Tablet UI</div>' +
+        '<h3 class="cosmos-title">BOOTH TABLET UI</h3>' +
+        '<p class="cosmos-copy">홀로그램 부스에서 촬영할 때 참가자가 태블릿으로 직접 누르는 화면을 디자인하고, Figma 프로토타입으로 흐름까지 제작했습니다. 시작 화면에서 촬영 모드(3D 얼굴 필터 / 기본 촬영)를 고르면 촬영 화면으로 이어집니다.</p>' +
+      '</div>' +
+      '<div class="hbk-grid">' +
+      '<figure class="hbk-item"><img src="' + HB + 'hb-kiosk-01.jpg" alt="홀로그램 부스 태블릿 화면 · TAP TO START" loading="lazy" decoding="async"><figcaption><i>01</i><b>TAP TO START</b>시작 화면</figcaption></figure>' +
+      '<figure class="hbk-item"><img src="' + HB + 'hb-kiosk-02.jpg" alt="홀로그램 부스 태블릿 화면 · SELECT MODE" loading="lazy" decoding="async"><figcaption><i>02</i><b>SELECT MODE</b>촬영 모드 선택 안내</figcaption></figure>' +
+      '<figure class="hbk-item"><img src="' + HB + 'hb-kiosk-03.jpg" alt="홀로그램 부스 태블릿 화면 · MODE · 3D / BASIC" loading="lazy" decoding="async"><figcaption><i>03</i><b>MODE · 3D / BASIC</b>3D 얼굴 필터와 기본 촬영, 두 가지 모드</figcaption></figure>' +
+      '<figure class="hbk-item"><img src="' + HB + 'hb-kiosk-04.jpg" alt="홀로그램 부스 태블릿 화면 · MODE · BASIC" loading="lazy" decoding="async"><figcaption><i>04</i><b>MODE · BASIC</b>‘기본 촬영’ 선택 시 반대편 모드가 어두워지는 상태</figcaption></figure>' +
+      '<figure class="hbk-item"><img src="' + HB + 'hb-kiosk-05.jpg" alt="홀로그램 부스 태블릿 화면 · MODE · 3D FILTER" loading="lazy" decoding="async"><figcaption><i>05</i><b>MODE · 3D FILTER</b>‘3D 얼굴 필터’ 선택 시 반대편 모드가 어두워지는 상태</figcaption></figure>' +
+      '<figure class="hbk-item"><img src="' + HB + 'hb-kiosk-06.jpg" alt="홀로그램 부스 태블릿 화면 · ON CAMERA" loading="lazy" decoding="async"><figcaption><i>06</i><b>ON CAMERA</b>촬영 진입 화면</figcaption></figure>' +
+      '</div>' +
+      '<a class="hbk-link" href="https://www.figma.com/proto/uHJCnzlLlZNRACrypWQaAs/HEARTBEAT-CONCERT?node-id=721-4448&p=f&viewport=416%2C539%2C0.21&t=190ojc1VOEHIp0Tl-1&scaling=scale-down&content-scaling=fixed&page-id=721%3A4437" target="_blank" rel="noopener noreferrer">Figma 프로토타입 직접 눌러보기 <span aria-hidden="true">↗</span></a>' +
+    '</div>'
+  };
+
   /* HEARTBEAT · Ticket detail page (Melon Ticket): full-length page, auto-scrolling phone frame. */
   var hbTicketBlock = {
     custom: '<div class="cosmos-block">' +
@@ -4259,8 +4288,8 @@
           cover:HB + "t-promo.jpg", coverPos:"40% 30%", show:[HB + "hb-sns.jpg", dududoCdYtBlock, hbTicketBlock, dududoShowroomBlock] },
         { id:"hb-md", short:"Merchandise", eyebrow:"PART 04", title:"MERCHANDISE", sum:"블러 워드마크 공식 티셔츠 3종·리유저블백·볼캡·스태프 티·다이컷 스티커 팩", period:"", tools:"",
           cover:HB + "t-md.jpg", coverPos:"50% 40%", show:[HB + "hb-merch.jpg"] },
-        { id:"hb-os", short:"On-site", eyebrow:"PART 05", title:"ON-SITE", sum:"포토월과 입체 로고 조형물, 7개 구역 46종의 현장 출력물, 홀로그램 존, 날짜×좌석 4종 컬러 시스템의 입장 팔찌", period:"", tools:"",
-          cover:HB + "t-onsite.jpg", coverPos:"50% 50%", show:[hbGateBlock, hbWallBlock, hbSiteBlock, hbHoloBlock, HB + "hb-wristband.jpg"] },
+        { id:"hb-os", short:"On-site", eyebrow:"PART 05", title:"ON-SITE", sum:"포토월과 입체 로고 조형물, 7개 구역 46종의 현장 출력물, 홀로그램 존과 부스 태블릿 UI, 날짜×좌석 4종 컬러 시스템의 입장 팔찌", period:"", tools:"",
+          cover:HB + "t-onsite.jpg", coverPos:"50% 50%", show:[hbGateBlock, hbWallBlock, hbSiteBlock, hbHoloBlock, hbKioskBlock, HB + "hb-wristband.jpg"] },
         { id:"hb-ops", short:"Design Ops", eyebrow:"PART 06", title:"DESIGN OPS", sum:"디자이너 1명으로 운영되도록 설계한 약 20종의 Figma 포맷, PM 3명 교육, PM이 직접 만드는 인스타그램 콘텐츠", period:"", tools:"Figma",
           cover:HB + "hb-figma-ops.jpg", coverPos:"40% 30%", show:[hbOpsBlock] },
         { id:"hb-early", short:"Early Proposal", eyebrow:"PART 07", title:"EARLY PROPOSAL", sum:"페스티벌로 개편되기 전, DUDUDO CONCERT 시절 제안한 초기 브랜드 아이덴티티와 “DON’T DO THAT” 픽토그램", period:"", tools:"Illustrator · Photoshop",
