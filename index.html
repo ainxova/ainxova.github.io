@@ -798,6 +798,17 @@
   .hbo-col p{ margin:0; font-size:.86rem; line-height:1.65; color:rgba(255,255,255,.72); }
   .hb-early-note{ max-width:44rem; margin:0 auto 2rem; padding:0 1.5rem; color:rgba(255,255,255,.7); font-size:.95rem; line-height:1.8; }
   .hb-early-note b{ color:var(--accent); font-weight:600; }
+  .hbe-grid{ display:grid; grid-template-columns:repeat(2,minmax(0,22rem)); gap:1.25rem; margin-top:1.75rem; }
+  .hbe-item{ margin:0; }
+  .hbe-item img{ display:block; width:100%; height:auto; border:1px solid rgba(255,255,255,.1); }
+  .hbe-item figcaption{ margin-top:.6rem; font-size:.74rem; color:rgba(255,255,255,.5); }
+  .hbe-item figcaption b{ display:block; color:rgba(255,255,255,.85); font-weight:600; letter-spacing:.08em; margin-bottom:.15rem; }
+  .hbe-info{ margin-top:1.75rem; max-width:46rem; }
+  .hbe-facts{ margin:1.5rem 0 0; display:grid; gap:.55rem; }
+  .hbe-facts > div{ display:grid; grid-template-columns:7rem 1fr; gap:1rem; padding-top:.55rem; border-top:1px solid rgba(255,255,255,.1); font-size:.85rem; }
+  .hbe-facts dt{ color:var(--accent); letter-spacing:.06em; }
+  .hbe-facts dd{ margin:0; color:rgba(255,255,255,.75); }
+  @media(max-width:700px){ .hbe-grid{ grid-template-columns:repeat(2,minmax(0,1fr)); gap:.7rem; } .hbe-facts > div{ grid-template-columns:5.5rem 1fr; gap:.7rem; } }
   .hbk-grid{ display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:1rem; margin-top:1.75rem; }
   .hbk-item{ margin:0; }
   .hbk-item img{ display:block; width:100%; height:auto; border:1px solid rgba(255,255,255,.1); }
@@ -4163,6 +4174,35 @@
     '</div>'
   };
 
+  /* HEARTBEAT · Concert ticket event posts on the dddm Instagram (2 posts, one per day). */
+  var hbTicketEventBlock = {
+    custom: '<div class="cosmos-block">' +
+      '<div class="cosmos-head">' +
+        '<div class="cosmos-eyebrow">Promotion · dddm Instagram</div>' +
+        '<h3 class="cosmos-title">TICKET EVENT</h3>' +
+        '<p class="cosmos-copy">콘서트 홍보 이벤트로 dddm 채널에 올린 티켓 이벤트 게시물입니다. 아티스트가 직접 큐레이팅한 ‘HEARTBEAT BY DUDUDO’ 플레이리스트를 감상하고 감상평을 남기면, 추첨을 통해 콘서트 티켓을 드렸습니다. 10.17 BAND 회차와 10.18 HIP-HOP 회차를 각각의 게시물로 나누어 운영했습니다.</p>' +
+      '</div>' +
+      '<div class="hbe-grid">' +
+        '<figure class="hbe-item"><img src="' + HB + 'hb-ticket-event-01.jpg" alt="HEARTBEAT 콘서트 티켓 이벤트 게시물 · 10.17 BAND DAY" loading="lazy" decoding="async"><figcaption><b>10.17 (SAT) · BAND DAY</b>BAND 회차 티켓 이벤트 게시물</figcaption></figure>' +
+        '<figure class="hbe-item"><img src="' + HB + 'hb-ticket-event-02.jpg" alt="HEARTBEAT 콘서트 티켓 이벤트 게시물 · 10.18 HIP-HOP DAY" loading="lazy" decoding="async"><figcaption><b>10.18 (SUN) · HIP-HOP DAY</b>HIP-HOP 회차 티켓 이벤트 게시물</figcaption></figure>' +
+      '</div>' +
+      '<div class="hbe-info">' +
+        '<ol class="hbt-list">' +
+          '<li><i>01</i>dddm YouTube 채널 구독 및 ‘HEARTBEAT PLAYLIST’ 감상</li>' +
+          '<li><i>02</i>가장 마음에 드는 플레이리스트를 골라 YouTube 콘텐츠에 감상평 댓글 작성</li>' +
+          '<li><i>03</i>이벤트 게시물에 선택한 아티스트명을 댓글로 작성</li>' +
+          '<li><i>04</i>DM으로 자동 발송된 이벤트 참여 폼 작성</li>' +
+        '</ol>' +
+        '<dl class="hbe-facts">' +
+          '<div><dt>기간</dt><dd>2026.10.07 – 10.11</dd></div>' +
+          '<div><dt>당첨자 발표</dt><dd>2026.10.12 · 개별 안내</dd></div>' +
+          '<div><dt>당첨 인원</dt><dd>총 20인 (1인 2매)</dd></div>' +
+          '<div><dt>경품</dt><dd>10.17 BAND 티켓 10매 · 10.18 HIP-HOP 티켓 10매</dd></div>' +
+        '</dl>' +
+      '</div>' +
+    '</div>'
+  };
+
   /* HEARTBEAT · Ticket detail page (Melon Ticket): full-length page, auto-scrolling phone frame. */
   var hbTicketBlock = {
     custom: '<div class="cosmos-block">' +
@@ -4284,8 +4324,8 @@
           cover:HB + "t-identity.jpg", coverPos:"30% 50%", show:[HB + "hb-concept.jpg", HB + "hb-identity.jpg"] },
         { id:"hb-kv", short:"Key Visual", eyebrow:"PART 02", title:"KEY VISUAL & MOTION", sum:"유리 심장 키 오브젝트, 양일간의 라인업을 한 화면에 담은 메인 포스터와 루프 모션 포스터", period:"", tools:"",
           cover:HB + "t-kv.jpg", coverPos:"35% 50%", show:[HB + "hb-keyvisual.jpg", dududoMotionBlock] },
-        { id:"hb-pr", short:"Promotion", eyebrow:"PART 03", title:"PROMOTION", sum:"데이별 SNS 포스터, CD 티저와 유튜브 플레이리스트 썸네일, 예매처 상세페이지, 더현대 쇼룸 프로모션", period:"", tools:"",
-          cover:HB + "t-promo.jpg", coverPos:"40% 30%", show:[HB + "hb-sns.jpg", dududoCdYtBlock, hbTicketBlock, dududoShowroomBlock] },
+        { id:"hb-pr", short:"Promotion", eyebrow:"PART 03", title:"PROMOTION", sum:"데이별 SNS 포스터, CD 티저와 유튜브 플레이리스트 썸네일, 예매처 상세페이지, 인스타그램 티켓 이벤트, 더현대 쇼룸 프로모션", period:"", tools:"",
+          cover:HB + "t-promo.jpg", coverPos:"40% 30%", show:[HB + "hb-sns.jpg", dududoCdYtBlock, hbTicketBlock, hbTicketEventBlock, dududoShowroomBlock] },
         { id:"hb-md", short:"Merchandise", eyebrow:"PART 04", title:"MERCHANDISE", sum:"블러 워드마크 공식 티셔츠 3종·리유저블백·볼캡·스태프 티·다이컷 스티커 팩", period:"", tools:"",
           cover:HB + "t-md.jpg", coverPos:"50% 40%", show:[HB + "hb-merch.jpg"] },
         { id:"hb-os", short:"On-site", eyebrow:"PART 05", title:"ON-SITE", sum:"포토월과 입체 로고 조형물, 7개 구역 46종의 현장 출력물, 홀로그램 존과 부스 태블릿 UI, 날짜×좌석 4종 컬러 시스템의 입장 팔찌", period:"", tools:"",
@@ -4293,7 +4333,7 @@
         { id:"hb-ops", short:"Design Ops", eyebrow:"PART 06", title:"DESIGN OPS", sum:"디자이너 1명으로 운영되도록 설계한 약 20종의 Figma 포맷, PM 3명 교육, PM이 직접 만드는 인스타그램 콘텐츠", period:"", tools:"Figma",
           cover:HB + "hb-figma-ops.jpg", coverPos:"40% 30%", show:[hbOpsBlock] },
         { id:"hb-early", short:"Early Proposal", eyebrow:"PART 07", title:"EARLY PROPOSAL", sum:"페스티벌로 개편되기 전, DUDUDO CONCERT 시절 제안한 초기 브랜드 아이덴티티와 “DON’T DO THAT” 픽토그램", period:"", tools:"Illustrator · Photoshop",
-          cover:"images/dududo-concert-01.jpg", coverPos:"50% 50%", show:[{ custom:'<div class="hb-early-note"><p>페스티벌로 개편되기 전, <b>dududo concert</b>라는 이름으로 기획되던 초기 단계에 제안한 브랜드 아이덴티티입니다. 로고와 와이드 그리드 시스템, “DON’T DO THAT” 촬영 금지 픽토그램 세트, 컬러 팔레트, 포스터 배리에이션과 실사 목업까지 하나의 완결된 시스템으로 구축했고, 이후 행사가 페스티벌 형식으로 전면 개편되며 HEARTBEAT BY DUDUDO로 이어졌습니다.</p></div>' }, "images/dududo-concert-01.jpg","images/dududo-concert-02.jpg","images/dududo-concert-03.jpg","images/dududo-concert-04.jpg","images/dududo-concert-05.jpg","images/dududo-concert-06.jpg","images/dududo-concert-07.jpg","images/dududo-concert-08.jpg"] }
+          cover:"images/dududo-concert-01.jpg", coverPos:"50% 50%", show:[{ custom:'<div class="cosmos-block"><div class="cosmos-head"><p class="cosmos-copy">페스티벌로 개편되기 전, <b>dududo concert</b>라는 이름으로 기획되던 초기 단계에 제안한 브랜드 아이덴티티입니다. 로고와 와이드 그리드 시스템, “DON’T DO THAT” 촬영 금지 픽토그램 세트, 컬러 팔레트, 포스터 배리에이션과 실사 목업까지 하나의 완결된 시스템으로 구축했고, 이후 행사가 페스티벌 형식으로 전면 개편되며 HEARTBEAT BY DUDUDO로 이어졌습니다.</p></div></div>' }, "images/dududo-concert-01.jpg","images/dududo-concert-02.jpg","images/dududo-concert-03.jpg","images/dududo-concert-04.jpg","images/dududo-concert-05.jpg","images/dududo-concert-06.jpg","images/dududo-concert-07.jpg","images/dududo-concert-08.jpg"] }
       ],
       tail:["images/dududo-case/dh-09-outro.jpg"] },
     { group:"Branding & Art Direction", key:"dddm", category:"Channel Creative Direction · Branding · Editorial · Photo Direction · Social", title:"DDDM × MUSE.D: 음악 채널 & 매거진 크리에이티브 총괄", idea:"유튜브, 인쇄 매거진, 인스타그램을 하나의 톤으로", forms:["Brand", "Program IP", "Editorial", "Photo Direction", "Motion"], year:"2026",
