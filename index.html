@@ -816,6 +816,22 @@
   .dsr-wrap .cosmos-head{ margin:0; }
   .dsr-media img{ display:block; width:100%; height:auto; border-radius:4px; border:1px solid rgba(255,255,255,.08); }
   @media(max-width:860px){ .dsr-wrap{ grid-template-columns:1fr; gap:1.5rem; } .dsr-media{ max-width:20rem; } }
+  .hbd{ border-top:1px solid rgba(255,255,255,.12); border-bottom:1px solid rgba(255,255,255,.12); }
+  .hbd > summary{ list-style:none; cursor:pointer; display:flex; align-items:center; justify-content:space-between; gap:1.25rem; padding:1.4rem 0; }
+  .hbd > summary::-webkit-details-marker{ display:none; }
+  .hbd-t{ display:block; min-width:0; }
+  .hbd-t .cosmos-eyebrow{ margin-bottom:.45rem; }
+  .hbd-t b{ display:block; font-size:clamp(1.15rem,2.4vw,1.6rem); font-weight:800; letter-spacing:-.01em; color:#fff; line-height:1.1; }
+  .hbd-t em{ display:block; margin-top:.5rem; font-style:normal; font-size:.8rem; line-height:1.55; color:rgba(255,255,255,.5); }
+  .hbd-btn{ flex:none; display:inline-flex; align-items:center; gap:.5rem; padding:.5rem .95rem; border:1px solid rgba(255,255,255,.22); border-radius:999px; font-size:.72rem; letter-spacing:.06em; color:rgba(255,255,255,.75); transition:border-color .25s,color .25s; }
+  .hbd > summary:hover .hbd-btn{ border-color:var(--accent); color:var(--accent); }
+  .hbd-btn i{ font-style:normal; display:inline-block; transition:transform .3s; }
+  .hbd[open] .hbd-btn i{ transform:rotate(45deg); }
+  .hbd .hbd-open{ display:none; } .hbd[open] .hbd-open{ display:inline; } .hbd[open] .hbd-closed{ display:none; }
+  .hbd-body{ padding:.4rem 0 2rem; }
+  .hbd-body img{ display:block; width:100%; height:auto; }
+  .hbd-body .cosmos-copy{ margin:0 0 1.25rem; }
+  @media(max-width:700px){ .hbd > summary{ padding:1.1rem 0; } .hbd-btn{ padding:.45rem .8rem; } }
   .hbm-grid{ display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:1rem; margin-top:1.75rem; }
   .hbm-item{ margin:0; }
   .hbm-item img{ display:block; width:100%; height:auto; aspect-ratio:4/5; object-fit:cover; background:#e3e8e9; }
@@ -831,7 +847,6 @@
   .hbr-item img{ display:block; width:100%; height:auto; border:1px solid rgba(255,255,255,.08); }
   .hbr-item figcaption{ margin-top:.6rem; font-size:.74rem; color:rgba(255,255,255,.5); }
   .hbr-item figcaption b{ display:block; color:rgba(255,255,255,.85); font-weight:600; letter-spacing:.08em; margin-bottom:.15rem; }
-  .hbr-note{ margin:1rem 0 0; font-size:.72rem; color:rgba(255,255,255,.38); }
   @media(max-width:700px){ .hbr-grid{ gap:.7rem; } }
   .hbk-grid{ display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:1rem; margin-top:1.75rem; }
   .hbk-item{ margin:0; }
@@ -4199,12 +4214,18 @@
   };
   var hbMdSheetBlock = {
     custom: '<div class="cosmos-block">' +
-      '<div class="cosmos-head">' +
-        '<div class="cosmos-eyebrow">Merchandise · Design Exploration</div>' +
-        '<h3 class="cosmos-title">MD DESIGN SHEET</h3>' +
-        '<p class="cosmos-copy">최종안을 정하기 전, 티셔츠 3종·리유저블백·볼캡·스태프 티·스티커 팩까지 하나의 톤으로 설계했던 전체 MD 구성안입니다.</p>' +
-      '</div>' +
-      '<figure class="hbm-sheet"><img src="' + HB + 'hb-merch.jpg" alt="HEARTBEAT 전체 MD 디자인 구성안" loading="lazy" decoding="async"></figure>' +
+      '<details class="hbd">' +
+        '<summary><span class="hbd-t"><span class="cosmos-eyebrow">Merchandise · Design Exploration</span><b>MD DESIGN SHEET</b><em>최종안 이전에 티셔츠·리유저블백·볼캡·스태프 티·스티커 팩까지 하나의 톤으로 설계한 전체 MD 구성안</em></span><span class="hbd-btn"><i>+</i><span class="hbd-closed">펼쳐보기</span><span class="hbd-open">접기</span></span></summary>' +
+        '<div class="hbd-body"><img src="' + HB + 'hb-merch.jpg" alt="HEARTBEAT 전체 MD 디자인 구성안" loading="lazy" decoding="async"></div>' +
+      '</details>' +
+    '</div>'
+  };
+  var hbWristbandBlock = {
+    custom: '<div class="cosmos-block">' +
+      '<details class="hbd">' +
+        '<summary><span class="hbd-t"><span class="cosmos-eyebrow">On-site · Wristband Design</span><b>WRISTBAND SYSTEM</b><em>날짜 × 좌석 4종 컬러로 설계한 입장 팔찌 시안. 제작된 실물은 PART 06에서 볼 수 있습니다.</em></span><span class="hbd-btn"><i>+</i><span class="hbd-closed">펼쳐보기</span><span class="hbd-open">접기</span></span></summary>' +
+        '<div class="hbd-body"><img src="' + HB + 'hb-wristband.jpg" alt="날짜와 좌석 구분별 입장 팔찌 디자인" loading="lazy" decoding="async"></div>' +
+      '</details>' +
     '</div>'
   };
 
@@ -4220,7 +4241,6 @@
         '<figure class="hbr-item"><img src="' + HB + 'hb-real-vip.jpg" alt="HEARTBEAT BY DUDUDO VIP 비표와 랜야드 실물" loading="lazy" decoding="async"><figcaption><b>VIP PASS</b>VIP 비표 · 랜야드</figcaption></figure>' +
         '<figure class="hbr-item"><img src="' + HB + 'hb-real-bands.jpg" alt="날짜와 좌석 구분별 입장 밴드와 19+ 종이팔찌 실물" loading="lazy" decoding="async"><figcaption><b>ADMISSION BANDS</b>날짜 · 좌석별 입장 밴드와 19+ 종이팔찌</figcaption></figure>' +
       '</div>' +
-      '<p class="hbr-note">촬영본의 색감과 밝기만 가볍게 보정했으며, 바닥의 스크래치를 정리했습니다.</p>' +
     '</div>'
   };
 
@@ -4350,7 +4370,7 @@
         { id:"hb-md", short:"Merchandise", eyebrow:"PART 04", title:"MERCHANDISE", sum:"최종 판매 MD로 확정된 블랙·레드 티셔츠와 자수 볼캡, 그리고 최종안 이전의 전체 MD 디자인 구성안", period:"", tools:"",
           cover:HB + "t-md.jpg", coverPos:"50% 40%", show:[hbMdFinalBlock, hbMdSheetBlock] },
         { id:"hb-os", short:"On-site", eyebrow:"PART 05", title:"ON-SITE DESIGN", sum:"홀로그램 존과 부스 태블릿 UI, 입장 게이트·포토월 시안, 7개 구역 46종의 현장 출력물, 날짜×좌석 4종 컬러 시스템의 입장 팔찌", period:"", tools:"",
-          cover:HB + "t-onsite.jpg", coverPos:"50% 50%", show:[hbHoloBlock, hbKioskBlock, hbGateBlock, hbWallBlock, hbSiteBlock, HB + "hb-wristband.jpg"] },
+          cover:HB + "t-onsite.jpg", coverPos:"50% 50%", show:[hbHoloBlock, hbKioskBlock, hbGateBlock, hbWallBlock, hbSiteBlock, hbWristbandBlock] },
         { id:"hb-prod", short:"Production", eyebrow:"PART 06", title:"PRODUCTION & SITE", sum:"시안으로 설계한 VIP 비표와 입장 밴드의 실물 제작물, 현장 시공과 행사 기록", period:"", tools:"",
           cover:HB + "hb-real-bands.jpg", coverPos:"50% 50%", show:[hbRealBlock] },
         { id:"hb-ops", short:"Design Ops", eyebrow:"PART 07", title:"DESIGN OPS", sum:"디자이너 1명으로 운영되도록 설계한 약 20종의 Figma 포맷, PM 3명 교육, PM이 직접 만드는 인스타그램 콘텐츠", period:"", tools:"Figma",
