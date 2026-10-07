@@ -2175,48 +2175,6 @@
   .side-index-item.active .side-index-label{ color:var(--accent); font-weight:600; }
   @media (max-width: 900px){ .side-index{ display:none; } }
 
-  /* ---------------- Nav: WORK hover dropdown (jump straight to a category) ----------------
-     Replaced two earlier attempts at an always-visible filter UI (a tab row
-     above the grid, then a side rail next to it) — both felt like clutter
-     sitting permanently in the WORK section. Tucking it behind a nav hover
-     keeps the section itself clean and still gets you there in one click. */
-  .nav-dropdown-wrap{ position:relative; }
-  .nav-work-dropdown{
-    position:absolute; top:100%; left:50%; margin-top:.9rem; min-width:180px;
-    padding:.5rem 0; background:rgba(10,10,10,.94);
-    backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
-    border:1px solid rgba(255,255,255,.12);
-    opacity:0; pointer-events:none; transform:translateX(-50%) translateY(-6px);
-    transition:opacity var(--dur-short) var(--ease-std), transform var(--dur-med) var(--ease-out);
-  }
-  /* Opening is plain :hover/:focus-within, but CLOSING also needs a JS-driven
-     override (.force-closed, below) — clicking an item doesn't move the
-     mouse away, so :hover alone would keep this open until the cursor
-     physically left the nav, which read as "stuck open until I click
-     somewhere else". */
-  .nav-dropdown-wrap:hover .nav-work-dropdown,
-  .nav-dropdown-wrap:focus-within .nav-work-dropdown{
-    opacity:1; pointer-events:auto; transform:translateX(-50%) translateY(0);
-  }
-  .nav-dropdown-wrap.force-closed .nav-work-dropdown{
-    opacity:0 !important; pointer-events:none !important; transform:translateX(-50%) translateY(-4px) !important;
-  }
-  .nav-work-dropdown-label{
-    padding:.4rem 1.25rem .5rem; font-family:'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
-    font-size:10px; letter-spacing:.15em; color:rgba(255,255,255,.35);
-  }
-  .nav-work-dropdown-item{
-    display:flex; align-items:center; gap:.5rem; width:100%; padding:.55rem 1.25rem; border:none; background:transparent;
-    text-align:left; cursor:pointer; white-space:nowrap;
-    font-family:'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
-    font-size:12px; letter-spacing:.02em; color:rgba(255,255,255,.55);
-    transition:color .2s ease, background-color .2s ease;
-  }
-  .nav-work-dropdown-item:hover{ color:#fff; background:rgba(255,255,255,.06); }
-  .nav-work-dropdown-item.active{ color:var(--accent); }
-  .nav-work-dropdown-check{ opacity:0; width:10px; font-size:10px; flex-shrink:0; }
-  .nav-work-dropdown-item.active .nav-work-dropdown-check{ opacity:1; }
-  .nav-work-active-label{ color:var(--accent); }
   .project-card.is-filtered-out{ display:none; }
 
   /* ---------------- Nav: mobile menu ----------------
@@ -2225,10 +2183,7 @@
      included) simply disappeared with nothing standing in for them, so
      there was no way to see or reach the category list at all below the
      "md" breakpoint. This hamburger + slide-down panel is that missing
-     mobile entry point: same links, same category jump behavior (it reuses
-     .nav-work-dropdown-item and the shared delegated click handler in
-     initWorkDropdown, just rendered into its own list here instead of the
-     hover dropdown), just laid out for a full-width tap target instead of a
+     mobile entry point: same links, just laid out for a full-width tap target instead of a
      hover menu. Hidden entirely at the `md` breakpoint via the media query
      at the bottom, where the regular inline nav takes back over. */
   .nav-mobile-toggle{
@@ -2263,12 +2218,6 @@
   .nav-mobile-panel.open > *:nth-child(3){ transition-delay:.12s; }
   .nav-mobile-panel.open > *:nth-child(4){ transition-delay:.16s; }
   .nav-mobile-panel.open > *:nth-child(5){ transition-delay:.20s; }
-  .nav-mobile-categories{ background:rgba(255,255,255,.02); }
-  .nav-mobile-categories .nav-work-dropdown-item{
-    padding:.75rem 1.5rem .75rem 2.25rem; font-size:.85rem;
-    border-bottom:1px solid rgba(255,255,255,.05);
-  }
-  .nav-mobile-categories .nav-work-dropdown-item:hover{ background:rgba(255,255,255,.04); }
   @media (min-width:768px){
     .nav-mobile-toggle{ display:none; }
     .nav-mobile-panel{ display:none; }
@@ -2767,10 +2716,7 @@
   <div class="max-w-7xl mx-auto px-6 md:px-10 h-16 flex items-center justify-between">
     <a href="#top" class="font-display font-semibold tracking-tight text-sm" aria-label="CHOI AIN — 맨 위로">CHOI AIN</a>
     <div class="hidden md:flex items-center gap-8 text-xs tracking-wide text-white/60">
-      <div class="nav-dropdown-wrap">
-        <a href="#work" class="nav-link hover:text-white transition-colors" data-spy="work">WORK<span id="nav-work-active-label" class="nav-work-active-label"></span></a>
-        <div id="nav-work-dropdown" class="nav-work-dropdown"></div>
-      </div>
+      <a href="#work" class="nav-link hover:text-white transition-colors" data-spy="work">WORK</a>
       <a href="#experience" class="nav-link hover:text-white transition-colors" data-spy="experience">EXPERIENCE</a>
       <a href="#about" class="nav-link hover:text-white transition-colors" data-spy="about">ABOUT</a>
       <a href="#contact" class="nav-link hover:text-white transition-colors" data-spy="contact">CONTACT</a>
@@ -2786,7 +2732,6 @@
   </div>
   <div id="nav-mobile-panel" class="nav-mobile-panel">
     <a href="#work" class="nav-mobile-link" data-nav-close>WORK</a>
-    <div id="nav-mobile-categories" class="nav-mobile-categories"></div>
     <a href="#experience" class="nav-mobile-link" data-nav-close>EXPERIENCE</a>
     <a href="#about" class="nav-mobile-link" data-nav-close>ABOUT</a>
     <a href="#contact" class="nav-mobile-link" data-nav-close>CONTACT</a>
@@ -4869,151 +4814,6 @@
     });
   }
   markWide();
-
-  /* ---------------- Nav WORK dropdown: jump straight to a category ----------------
-     Groups are read straight off the projects' own category strings (see
-     categoryGroup above), in first-seen order, so a new project with a new
-     discipline just shows up in the dropdown automatically — no separate
-     list to maintain here. "전체" (All) always leads. Picking an item both
-     filters the grid AND scrolls to it, so it's a one-click jump rather than
-     a filter you'd set and then still have to go find the section for. */
-  (function initWorkDropdown(){
-    var ALL = 'All';
-    var groups = [ALL];
-    projects.forEach(function(p){
-      if (p.archive) return;
-      var g = (p.group || categoryGroup(p.category));
-      if (groups.indexOf(g) === -1) groups.push(g);
-    });
-    if (archiveCount) groups.push('Archive');
-
-    var dropdownEl = document.getElementById('nav-work-dropdown');
-    var mobileListEl = document.getElementById('nav-mobile-categories');
-    var activeLabelEl = document.getElementById('nav-work-active-label');
-    var dropdownWrap = document.querySelector('.nav-dropdown-wrap');
-    var cards = grid.querySelectorAll('.project-card');
-    /* Clears the click-triggered force-close once the mouse actually leaves,
-       so hovering WORK again later still opens it normally. */
-    dropdownWrap.addEventListener('mouseleave', function(){
-      dropdownWrap.classList.remove('force-closed');
-    });
-    /* A small "FILTER" eyebrow plus a check mark on the active row, instead of
-       relying on color alone to say what's selected — single-select (not
-       checkboxes: with only ~5 categories, letting people pick more than one
-       just adds a "clear all" problem for little benefit). The nav label
-       (WORK · 공간 디자인) is the other half of this: it's what tells you a
-       filter is still on even after the dropdown itself is closed, so "전체"
-       disappearing from view once you've picked something else isn't a dead
-       end — the active state is always visible up in the nav.
-       The exact same markup is rendered a second time into the mobile menu's
-       #nav-mobile-categories (see the nav-mobile-panel above) — below the
-       `md` breakpoint the hover dropdown is unreachable (nothing to hover on
-       a phone), so this list is the only way to see or use it there. Both
-       copies share one click handler below rather than duplicating the
-       filtering logic. */
-    var itemsHtml = groups.map(function(g, i){
-      return '<button type="button" class="nav-work-dropdown-item' + (i === 0 ? ' active' : '') +
-        '" data-filter="' + g + '"><span class="nav-work-dropdown-check">✓</span>' + g + '</button>';
-    }).join('');
-    dropdownEl.innerHTML = '<div class="nav-work-dropdown-label">JUMP TO</div>' + itemsHtml;
-    if (mobileListEl) mobileListEl.innerHTML = itemsHtml;
-
-    function applyFilter(g){
-      var visibleIndex = 0;
-      cards.forEach(function(card){
-        var show = (g === ALL) || (card.getAttribute('data-cat-group') === g);
-        card.classList.toggle('is-filtered-out', !show);
-        if (show){
-          /* Re-stagger the alternate-column offset by VISIBLE order, not the
-             card's original index — otherwise filtering leaves the two-column
-             masonry looking randomly uneven once hidden cards drop out of flow. */
-          card.classList.toggle('md:mt-24', visibleIndex % 2 === 1);
-          visibleIndex++;
-        }
-      });
-      markWide();
-      if (window.ScrollTrigger) ScrollTrigger.refresh();
-      activeLabelEl.textContent = g === ALL ? '' : ' · ' + g;
-      setWorkCount(visibleIndex, g !== ALL);
-    }
-
-    /* Jump instead of filter: every card stays in place; the page scrolls to the
-       first card of the chosen category and its cards get a brief highlight. */
-    function jumpTo(g){
-      var target = document.getElementById('work'), offset = -60, hits = [];
-      if (g === 'Archive'){ target = document.getElementById('work-archive') || target; offset = -90; }
-      else if (g !== ALL){
-        cards.forEach(function(card){ if (card.getAttribute('data-cat-group') === g) hits.push(card); });
-        if (hits.length){ target = hits[0]; offset = -110; }
-      }
-      if (lenis) { lenis.scrollTo(target, { offset: offset }); }
-      else { var y = target.getBoundingClientRect().top + window.pageYOffset + offset; window.scrollTo({ top: y, behavior: reduceMotion ? 'auto' : 'smooth' }); }
-      cards.forEach(function(c){ c.classList.remove('is-jump-hit'); });
-      if (hits.length){
-        setTimeout(function(){ hits.forEach(function(c){ c.classList.add('is-jump-hit'); }); }, 500);
-        setTimeout(function(){ hits.forEach(function(c){ c.classList.remove('is-jump-hit'); }); }, 2600);
-      }
-    }
-
-    /* Live category indicator: instead of a second floating "JUMP TO" bar
-       duplicating the WORK nav dropdown (and sitting on top of project art
-       as the page scrolled past it), the nav's own " · 카테고리" label and
-       the dropdown's checkmark now update live off scroll position —
-       one control, always in the same unobtrusive place in the header. */
-    (function(){
-      var cur = null, ticking = false;
-      function update(){
-        ticking = false;
-        var r = grid.getBoundingClientRect(), vh = window.innerHeight;
-        var show = r.top < vh * 0.55 && r.bottom > vh * 0.45;
-        if (!show){
-          if (cur !== null){ cur = null; activeLabelEl.textContent = ''; document.querySelectorAll('.nav-work-dropdown-item').forEach(function(b){ b.classList.remove('active'); }); }
-          return;
-        }
-        /* Pick whichever card's own vertical span actually contains the scan line —
-           not just "nearest top" — so a section with only one short card (e.g. a lone
-           Editorial entry sitting beside a much taller neighbor) still gets picked up
-           for the whole time it's the thing on screen, instead of being skipped over. */
-        var line = vh * 0.4, best = null, bestDist = 1e9;
-        /* Two-column masonry rows can both span the scan line at once (same bottom
-           edge, staggered tops), and a short single-card row sits beside a much
-           taller neighbor — among all cards whose box contains the line, keep the
-           one whose own center sits closest to it, rather than always favoring
-           whichever column happens to start higher. */
-        cards.forEach(function(c){ var r = c.getBoundingClientRect();
-          if (r.top <= line && r.bottom >= line){ var d = Math.abs((r.top + r.bottom) / 2 - line); if (d < bestDist){ bestDist = d; best = c; } } });
-        if (!best){
-          var bt = -1e9;
-          cards.forEach(function(c){ var t = c.getBoundingClientRect().top; if (t <= line && t > bt){ bt = t; best = c; } });
-        }
-        best = best || cards[0];
-        var g = best ? best.getAttribute('data-cat-group') : null;
-        if (g === cur) return; cur = g;
-        activeLabelEl.textContent = g ? ' · ' + g : '';
-        document.querySelectorAll('.nav-work-dropdown-item').forEach(function(b){
-          b.classList.toggle('active', b.getAttribute('data-filter') === g);
-        });
-      }
-      window.addEventListener('scroll', function(){ if (!ticking){ ticking = true; requestAnimationFrame(update); } }, { passive: true });
-      window.addEventListener('resize', update); update();
-    })();
-
-    function onItemClick(ev){
-      var btn = ev.target.closest('.nav-work-dropdown-item');
-      if (!btn) return;
-      document.querySelectorAll('.nav-work-dropdown-item').forEach(function(b){ b.classList.remove('active'); });
-      document.querySelectorAll('.nav-work-dropdown-item[data-filter="' + btn.getAttribute('data-filter') + '"]').forEach(function(b){ b.classList.add('active'); });
-      var g = btn.getAttribute('data-filter');
-      btn.blur();
-      dropdownWrap.classList.add('force-closed');
-      if (window.closeMobileNav) window.closeMobileNav();
-      jumpTo(g);
-      setTimeout(function(){ document.querySelectorAll('.nav-work-dropdown-item').forEach(function(b){ b.classList.toggle('active', b.getAttribute('data-filter') === ALL); }); }, 400);
-    }
-
-    dropdownEl.addEventListener('click', onItemClick);
-    if (mobileListEl) mobileListEl.addEventListener('click', onItemClick);
-  })();
 
   /* ---------------- Nav: mobile menu open/close ----------------
      Plain slide-down panel toggled off a hamburger button — see the
