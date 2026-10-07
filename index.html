@@ -816,6 +816,15 @@
   .dsr-wrap .cosmos-head{ margin:0; }
   .dsr-media img{ display:block; width:100%; height:auto; border-radius:4px; border:1px solid rgba(255,255,255,.08); }
   @media(max-width:860px){ .dsr-wrap{ grid-template-columns:1fr; gap:1.5rem; } .dsr-media{ max-width:20rem; } }
+  .hbm-grid{ display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:1rem; margin-top:1.75rem; }
+  .hbm-item{ margin:0; }
+  .hbm-item img{ display:block; width:100%; height:auto; aspect-ratio:4/5; object-fit:cover; background:#e3e8e9; }
+  .hbm-item figcaption{ margin-top:.65rem; font-size:.74rem; color:rgba(255,255,255,.5); }
+  .hbm-item figcaption b{ display:block; color:rgba(255,255,255,.85); font-weight:600; letter-spacing:.08em; margin-bottom:.15rem; }
+  .hbm-sheet{ margin:1.75rem 0 0; }
+  .hbm-sheet img{ display:block; width:100%; height:auto; }
+  .hbm-sheet figcaption{ margin-top:.65rem; font-size:.74rem; color:rgba(255,255,255,.5); }
+  @media(max-width:700px){ .hbm-grid{ grid-template-columns:repeat(2,minmax(0,1fr)); gap:.7rem; } .hbm-item:last-child{ grid-column:1 / -1; } .hbm-item:last-child img{ aspect-ratio:1/1; object-position:50% 45%; } }
   .hbr-grid{ display:grid; grid-template-columns:minmax(0,.83fr) minmax(0,1.21fr); gap:1rem; margin-top:1.75rem; align-items:start; }
   .hbr-item{ margin:0; }
   .hbr-item.hbr-wide{ grid-column:1 / -1; }
@@ -4173,6 +4182,32 @@
     '</div>'
   };
 
+  /* HEARTBEAT · Final on-sale MD (3 items) + the earlier full MD design sheet. */
+  var hbMdFinalBlock = {
+    custom: '<div class="cosmos-block">' +
+      '<div class="cosmos-head">' +
+        '<div class="cosmos-eyebrow">Merchandise · Final MD</div>' +
+        '<h3 class="cosmos-title">FINAL MD</h3>' +
+        '<p class="cosmos-copy">여러 후보 중 최종 판매 MD로 확정된 3종입니다. 티셔츠 등판을 세로로 가로지르는 블러 처리된 HEARTBEAT 워드마크를 블랙과 레드 두 가지 컬러로 제작하고, 빈티지 워싱 볼캡에는 레드 자수 로고를 더했습니다.</p>' +
+      '</div>' +
+      '<div class="hbm-grid">' +
+        '<figure class="hbm-item"><img src="' + HB + 'hb-md-tee-black.jpg" alt="HEARTBEAT 공식 티셔츠 블랙 등판" loading="lazy" decoding="async"><figcaption><b>OFFICIAL TEE · BLACK</b>블러 워드마크 · 등판</figcaption></figure>' +
+        '<figure class="hbm-item"><img src="' + HB + 'hb-md-tee-red.jpg" alt="HEARTBEAT 공식 티셔츠 레드 등판" loading="lazy" decoding="async"><figcaption><b>OFFICIAL TEE · RED</b>블러 워드마크 · 등판</figcaption></figure>' +
+        '<figure class="hbm-item"><img src="' + HB + 'hb-md-cap.jpg" alt="HEARTBEAT 레드 자수 로고 빈티지 워싱 볼캡" loading="lazy" decoding="async"><figcaption><b>BALL CAP</b>레드 자수 로고 · 빈티지 워싱</figcaption></figure>' +
+      '</div>' +
+    '</div>'
+  };
+  var hbMdSheetBlock = {
+    custom: '<div class="cosmos-block">' +
+      '<div class="cosmos-head">' +
+        '<div class="cosmos-eyebrow">Merchandise · Design Exploration</div>' +
+        '<h3 class="cosmos-title">MD DESIGN SHEET</h3>' +
+        '<p class="cosmos-copy">최종안을 정하기 전, 티셔츠 3종·리유저블백·볼캡·스태프 티·스티커 팩까지 하나의 톤으로 설계했던 전체 MD 구성안입니다.</p>' +
+      '</div>' +
+      '<figure class="hbm-sheet"><img src="' + HB + 'hb-merch.jpg" alt="HEARTBEAT 전체 MD 디자인 구성안" loading="lazy" decoding="async"></figure>' +
+    '</div>'
+  };
+
   /* HEARTBEAT · Admission goods, produced pieces (photos retouched onto a clean studio backdrop). */
   var hbRealBlock = {
     custom: '<div class="cosmos-block">' +
@@ -4294,7 +4329,7 @@
   var projects = [
     { group:"Branding & Art Direction", key:"heartbeat", status:"In Progress", category:"Festival Art Direction · Key Visual · Spatial Graphics · On-site Build", title:"HEARTBEAT BY DUDUDO: 페스티벌 아트 디렉션 총괄", idea:"심전도 파형 하나로 묶은 양일간의 페스티벌", forms:["Identity", "Key Visual", "Motion", "MD", "On-site"], year:"2026",
       blurb:"키비주얼과 MD부터 행사장 전 구역의 공간 그래픽, 현장 설치까지. 10월 17–18일 개최를 앞둔 대형 음악 페스티벌의 아트 전 과정을 단독으로 기획하고 총괄하고 있습니다.",
-      desc:"2026년 10월 17–18일 고려대학교 화정체육관에서 열리는 대형 음악 페스티벌 'HEARTBEAT BY DUDUDO'의 아트 디렉션을 단독으로 맡아, 비주얼 방향 설정부터 현장 설치까지 전 과정을 이끌고 있습니다. 메인 키비주얼과 포스터 배리에이션, 모션 포스터 티저로 페스티벌의 시각 언어를 정립하고 로고·심볼 에셋 시스템을 개발했습니다. 티셔츠 3종·리유저블백·스티커 등 공식 MD와 가로등 배너·현수막·홀로그램 시트지 등 행사장 전 구역의 공간 그래픽 디자인을 마치고, 현재 제작과 인쇄 감리를 진행하고 있습니다. 디자이너가 1명인 환경에서 PM 3명이 SNS·상세페이지 콘텐츠를 직접 제작할 수 있도록 약 20종의 Figma 디자인 포맷을 설계하고 가이드와 교육을 제공했습니다. 관객이 가장 먼저 마주하는 입장 게이트 설치물은 행사 전날인 10월 16일 현장에 입장해 직접 시공·연출합니다. 아크릴 물감으로 녹슨 질감을 직접 칠해 연출하고, 게이트를 장식할 대형 구슬 목걸이도 직접 제작합니다.",
+      desc:"2026년 10월 17–18일 고려대학교 화정체육관에서 열리는 대형 음악 페스티벌 'HEARTBEAT BY DUDUDO'의 아트 디렉션을 단독으로 맡아, 비주얼 방향 설정부터 현장 설치까지 전 과정을 이끌고 있습니다. 메인 키비주얼과 포스터 배리에이션, 모션 포스터 티저로 페스티벌의 시각 언어를 정립하고 로고·심볼 에셋 시스템을 개발했습니다. 블랙·레드 티셔츠와 자수 볼캡 등 최종 공식 MD와 가로등 배너·현수막·홀로그램 시트지 등 행사장 전 구역의 공간 그래픽 디자인을 마치고, 현재 제작과 인쇄 감리를 진행하고 있습니다. 디자이너가 1명인 환경에서 PM 3명이 SNS·상세페이지 콘텐츠를 직접 제작할 수 있도록 약 20종의 Figma 디자인 포맷을 설계하고 가이드와 교육을 제공했습니다. 관객이 가장 먼저 마주하는 입장 게이트 설치물은 행사 전날인 10월 16일 현장에 입장해 직접 시공·연출합니다. 아크릴 물감으로 녹슨 질감을 직접 칠해 연출하고, 게이트를 장식할 대형 구슬 목걸이도 직접 제작합니다.",
       tools:["Illustrator", "Photoshop", "Art Direction", "현장 시공·연출"],
       thumb:"images/thumbs/heartbeat-thumb.jpg",
       links:[ { label:"티켓 예매", url:"https://tr.ee/Nwms6HjeAv", icon:"ticket" } ],
@@ -4312,8 +4347,8 @@
           cover:HB + "t-kv.jpg", coverPos:"35% 50%", show:[HB + "hb-keyvisual.jpg", dududoMotionBlock] },
         { id:"hb-pr", short:"Promotion", eyebrow:"PART 03", title:"PROMOTION", sum:"데이별 SNS 포스터, CD 티저와 유튜브 플레이리스트 썸네일, 예매처 상세페이지, 인스타그램 티켓 이벤트, 더현대 쇼룸 프로모션", period:"", tools:"",
           cover:HB + "t-promo.jpg", coverPos:"40% 30%", show:[HB + "hb-sns.jpg", dududoCdYtBlock, hbTicketBlock, hbTicketEventBlock, dududoShowroomBlock] },
-        { id:"hb-md", short:"Merchandise", eyebrow:"PART 04", title:"MERCHANDISE", sum:"블러 워드마크 공식 티셔츠 3종·리유저블백·볼캡·스태프 티·다이컷 스티커 팩", period:"", tools:"",
-          cover:HB + "t-md.jpg", coverPos:"50% 40%", show:[HB + "hb-merch.jpg"] },
+        { id:"hb-md", short:"Merchandise", eyebrow:"PART 04", title:"MERCHANDISE", sum:"최종 판매 MD로 확정된 블랙·레드 티셔츠와 자수 볼캡, 그리고 최종안 이전의 전체 MD 디자인 구성안", period:"", tools:"",
+          cover:HB + "t-md.jpg", coverPos:"50% 40%", show:[hbMdFinalBlock, hbMdSheetBlock] },
         { id:"hb-os", short:"On-site", eyebrow:"PART 05", title:"ON-SITE DESIGN", sum:"홀로그램 존과 부스 태블릿 UI, 입장 게이트·포토월 시안, 7개 구역 46종의 현장 출력물, 날짜×좌석 4종 컬러 시스템의 입장 팔찌", period:"", tools:"",
           cover:HB + "t-onsite.jpg", coverPos:"50% 50%", show:[hbHoloBlock, hbKioskBlock, hbGateBlock, hbWallBlock, hbSiteBlock, HB + "hb-wristband.jpg"] },
         { id:"hb-prod", short:"Production", eyebrow:"PART 06", title:"PRODUCTION & SITE", sum:"시안으로 설계한 VIP 비표와 입장 밴드의 실물 제작물, 현장 시공과 행사 기록", period:"", tools:"",
