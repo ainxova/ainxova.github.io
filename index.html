@@ -1717,6 +1717,10 @@
   .cx-print-img.is-sheet{ background:#dcdad5; padding:7% 9%; }
   .cx-print-img.is-sheet img{ object-fit:contain; box-shadow:0 18px 40px -16px rgba(0,0,0,.45); }
   .cx-print-item:hover .cx-print-img img{ transform:scale(1.03); }
+  .hbh-3{ grid-template-columns:repeat(3,minmax(0,1fr)); align-items:start; }
+  .hbh-vid{ aspect-ratio:9/16; background:#fff; overflow:hidden; }
+  .hbh-vid video{ display:block; width:100%; height:100%; object-fit:cover; }
+  @media (max-width:768px){ .hbh-3{ grid-template-columns:1fr; } .hbh-vid{ max-width:20rem; margin:0 auto; } }
   .cx-print-item figcaption{ display:flex; flex-direction:column; gap:.2rem; margin-top:.8rem; font-size:.75rem; color:rgba(255,255,255,.55); }
   .cx-print-item figcaption b{ font-size:.68rem; letter-spacing:.14em; color:#fff; }
   @media (max-width:768px){ .cx-print{ grid-template-columns:1fr; } }
@@ -4155,9 +4159,10 @@
         '<h3 class="cosmos-title">HOLOGRAM ZONE</h3>' +
         '<p class="cosmos-copy">홀로그램 부스의 외부 시트지를 디자인하고, 기기 안에서 송출될 영상 이미지도 제작했습니다. 행사 전에 실제 홀로그램 기기에 넣어 송출 화면을 미리 테스트했고, 부스 시트지는 현재 제작 단계입니다.</p>' +
       '</div>' +
-      '<div class="cx-print">' +
+      '<div class="cx-print hbh-3">' +
         '<figure class="cx-print-item"><div class="cx-print-img"><img src="' + HB + 'hb-holo-test.jpg" alt="홀로그램 기기에 내부 송출 영상을 넣어 테스트한 사진" loading="lazy" decoding="async"></div><figcaption><b>HOLOGRAM UNIT · TEST</b>기기 내부 송출 영상 이미지를 미리 넣어 확인한 테스트 사진</figcaption></figure>' +
         '<figure class="cx-print-item"><div class="cx-print-img is-sheet"><img src="' + HB + 'hb-holo-sheet.jpg" alt="홀로그램 부스 외부 시트지 디자인" loading="lazy" decoding="async"></div><figcaption><b>BOOTH SHEET · DESIGN</b>홀로그램 부스 외부 시트지 디자인 (제작 진행 중)</figcaption></figure>' +
+        '<figure class="cx-print-item"><div class="cx-print-img hbh-vid"><video poster="' + HB + 'hb-holo-motion-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-label="홀로그램 기기 내부 송출 영상 테스트"><source src="' + HB + 'hb-holo-motion.webm" type="video/webm"><source src="' + HB + 'hb-holo-motion.mp4" type="video/mp4"></video></div><figcaption><b>INSIDE MOTION · TEST</b>기기 안에 사람이 들어가 섰을 때의 송출 영상 테스트 — 이 모션으로 진행</figcaption></figure>' +
       '</div>' +
     '</div>'
   };
