@@ -2794,12 +2794,14 @@
   /* COSMOS zone slider (audit 2026-10): arrows sit OUTSIDE the photos in their own gutter columns
      (on-photo arrows got lost in busy images), drawn as gold hairline circles with a slow breathing
      gold glow on NEXT only (PREV stays quiet — going back is optional). Hover fills them; reduced-motion = no pulse. */
-  .cx-zone-stage{ grid-template-columns:auto 1fr 1fr auto; align-items:center; column-gap:1rem; }
-  .cx-zone-nav{ position:static; margin:0; width:3rem; height:3rem; background:transparent; color:rgba(242,219,134,.75); border:1px solid rgba(242,219,134,.35); box-shadow:none; backdrop-filter:none; -webkit-backdrop-filter:none; transition:background-color .2s ease, color .2s ease, transform .2s ease; }
-  .cx-zone-nav.is-prev{ order:-1; }
-  .cx-zone-nav.is-next{ order:9; color:var(--accent); border-color:rgba(242,219,134,.7); animation:cxNavGlow 4s ease-in-out infinite; }
+  /* photos keep the full content width (same edges as tabs, progress line, caption);
+     the arrows hang in the modal's side gutter, vertically centred on the photos */
+  .cx-zone-nav{ position:absolute; top:50%; margin:0; transform:translateY(-50%); width:2.4rem; height:2.4rem; background:transparent; color:rgba(242,219,134,.75); border:1px solid rgba(242,219,134,.35); box-shadow:none; backdrop-filter:none; -webkit-backdrop-filter:none; transition:background-color .2s ease, color .2s ease, transform .2s ease; }
+  .cx-zone-nav.is-prev{ left:-2.85rem; right:auto; }
+  .cx-zone-nav.is-next{ right:-2.85rem; left:auto; color:var(--accent); border-color:rgba(242,219,134,.7); animation:cxNavGlow 4s ease-in-out infinite; }
   .cx-zone-nav svg{ width:20px; height:20px; stroke-width:2; }
-  .cx-zone-nav:hover{ background:var(--accent); color:#0a0a0a; transform:scale(1.06); animation:none; box-shadow:0 0 26px 4px rgba(242,219,134,.45); }
+  @media (min-width:1200px){ .cx-zone-nav{ width:3rem; height:3rem; } .cx-zone-nav.is-prev{ left:-3.9rem; } .cx-zone-nav.is-next{ right:-3.9rem; } }
+  .cx-zone-nav:hover{ background:var(--accent); color:#0a0a0a; transform:translateY(-50%) scale(1.06); animation:none; box-shadow:0 0 26px 4px rgba(242,219,134,.45); }
   .cx-zone-nav:focus-visible{ outline:2px solid var(--accent); outline-offset:3px; }
   @keyframes cxNavGlow{
     0%, 100%{ box-shadow:0 0 12px 0 rgba(242,219,134,.12); }
@@ -2813,7 +2815,8 @@
   @media (max-width:767px){
     .cx-zone-stage{ grid-template-columns:1fr 1fr; row-gap:.6rem; }
     .cx-zone-stage .cx-zone-fig{ grid-column:1 / -1; }
-    .cx-zone-nav{ width:2.75rem; height:2.75rem; margin-top:.3rem; }
+    .cx-zone-nav{ position:static; transform:none; width:2.75rem; height:2.75rem; margin-top:.3rem; }
+    .cx-zone-nav:hover{ transform:scale(1.06); }
     .cx-zone-nav.is-prev{ order:9; justify-self:start; } .cx-zone-nav.is-next{ order:10; justify-self:end; }
     }
 </style>
@@ -4595,7 +4598,7 @@
         { id:"kv", short:"Key Visual", eyebrow:"PART 01", title:"ART DIRECTION & KEY VISUAL", sum:"6종 이상의 콘셉트 시안 → 최종 셀렉 2안 → 메인 키비주얼, 인물 컷 정밀 보정·합성", period:"", tools:"",
           cover:CX + "cosmos-keyvisual-960.jpg", coverPos:"50% 40%", show:[cxKeyVisualBlock, cxKvProcessBlock] },
         { id:"sp", short:"Space & VMD", eyebrow:"PART 02", title:"SPACE GRAPHICS & VMD", sum:"11개 존 동선 설계, 디자인 시안과 현장, 전시 맵·사이니지·MD존 VMD·입장 구성품", period:"", tools:"",
-          cover:"images/cosmos-add/cosmos-map.jpg", coverPos:"22% 45%", show:[cosmosContentBlock, cosmosFloorplanBlock, cxZonesBlock, cxVmdBlock, cosmosMapBlock, cosmosOnsiteBlock, cosmosXbannerBlock, cosmosWristbandBlock, cxEntranceKitBlock] },
+          cover:"images/cosmos-add/cosmos-map.jpg", coverPos:"22% 45%", show:[cosmosContentBlock, cosmosFloorplanBlock, cxZonesBlock, cosmosMapBlock, cosmosOnsiteBlock, cosmosXbannerBlock, cosmosWristbandBlock, cxEntranceKitBlock] },
         { id:"md", short:"MD & Campaign", eyebrow:"PART 03", title:"MERCHANDISE & CAMPAIGN", sum:"30여 종 공식 MD 리드, 직접 디자인한 MD 판매 실적, 점 잇기 쇼핑백과 팬 참여 캠페인", period:"", tools:"",
           cover:CX + "cosmos-bag-typeA-mockup.jpg", coverPos:"30% 60%", show:[cxMdBlock, cosmosBagBlock, cosmosPromoEventsBlock] },
         { id:"dg", short:"Digital", eyebrow:"PART 04", title:"DIGITAL CONTENT", sum:"공식 인스타그램 채널 세팅과 성과, COSMOS 알파벳 캐러셀, PHASE 2 티저, B.STAGE 공지(국·영문)", period:"", tools:"",
