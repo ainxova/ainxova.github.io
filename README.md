@@ -9,7 +9,7 @@ github-repo/
 ├── index.html   ← 사이트 전체 (HTML·CSS·JS가 한 파일에 들어 있음)
 ├── images/      ← 사이트에 쓰이는 모든 이미지·영상
 ├── fonts/       ← Pretendard 서브셋 폰트
-├── files/       ← 사이트에서 보기·다운로드하는 이력서 PDF (ChoiAin_Resume.pdf)
+├── files/       ← 이력서: ChoiAin_Resume.pdf(다크·크게 보기), ChoiAin_Resume_Print.pdf(화이트·다운로드), resume/(사이트 안 뷰어용 페이지 이미지)
 └── README.md    ← 이 안내 파일
 ```
 
@@ -23,7 +23,7 @@ github-repo/
 
 > 파일 이름이나 폴더 위치를 바꾸면 이미지가 깨집니다. `index.html`은 `images/…`, `fonts/…`, `files/…` 경로를 그대로 참조합니다.
 >
-> 이력서를 새 버전으로 바꿀 때는 `files/ChoiAin_Resume.pdf`를 **같은 이름으로** 덮어쓰면 됩니다. (사이트에 공개되는 웹용이라 전화번호·생년월일·주소는 빼 둔 버전입니다.)
+> 이력서를 새 버전으로 바꿀 때는 `files/` 안의 두 PDF와 `files/resume/resume-1~3.webp`를 **같은 이름으로** 덮어쓰면 됩니다. (사이트에 공개되는 웹용이라 전화번호·생년월일·주소는 빼 둔 버전입니다.)
 
 ## 참고
 
