@@ -848,15 +848,18 @@
   .hbr-item figcaption{ margin-top:.6rem; font-size:.74rem; color:rgba(255,255,255,.5); }
   .hbr-item figcaption b{ display:block; color:rgba(255,255,255,.85); font-weight:600; letter-spacing:.08em; margin-bottom:.15rem; }
   @media(max-width:700px){ .hbr-grid{ gap:.7rem; } }
-  .hbk-grid{ display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:1rem; margin-top:1.75rem; }
+  .hbk-grid{ display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:.8rem; margin-top:1.75rem; }
+  .hbk-demo{ margin:1.75rem 0 0; max-width:26rem; }
+  .hbk-demo video{ display:block; width:100%; height:auto; border:1px solid rgba(255,255,255,.1); background:#111; }
+  .hbk-demo figcaption{ margin-top:.6rem; font-size:.74rem; line-height:1.55; color:rgba(255,255,255,.5); }
+  .hbk-demo figcaption b{ display:block; color:rgba(255,255,255,.85); font-weight:600; letter-spacing:.08em; margin-bottom:.15rem; }
   .hbk-item{ margin:0; }
   .hbk-item img{ display:block; width:100%; height:auto; border:1px solid rgba(255,255,255,.1); }
-  .hbk-item figcaption{ margin-top:.6rem; font-size:.74rem; line-height:1.55; color:rgba(255,255,255,.5); }
+  .hbk-item figcaption{ margin-top:.5rem; font-size:.7rem; line-height:1.55; color:rgba(255,255,255,.5); }
   .hbk-item figcaption i{ font-style:normal; color:var(--accent); margin-right:.55rem; letter-spacing:.1em; }
   .hbk-item figcaption b{ display:block; color:rgba(255,255,255,.85); font-weight:600; letter-spacing:.08em; margin:.1rem 0 .2rem; }
-  .hbk-link{ display:inline-flex; align-items:center; gap:.5rem; margin-top:1.5rem; padding:.8rem 1.2rem; border:1px solid rgba(242,219,134,.5); color:#fff; font-size:.85rem; text-decoration:none; background:rgba(242,219,134,.06); }
-  .hbk-link:hover{ border-color:var(--accent); color:var(--accent); }
-  @media(max-width:700px){ .hbk-grid{ grid-template-columns:repeat(2,minmax(0,1fr)); gap:.7rem; } }
+  @media(max-width:900px){ .hbk-grid{ grid-template-columns:repeat(3,minmax(0,1fr)); } }
+  @media(max-width:700px){ .hbk-grid{ grid-template-columns:repeat(2,minmax(0,1fr)); gap:.7rem; } .hbk-demo{ max-width:none; } }
   .hbo-figs{ display:grid; grid-template-columns:minmax(0,1fr) minmax(0,.42fr); gap:1.25rem; align-items:start; margin-top:.5rem; }
   .hbd-ops{ margin-top:1.75rem; width:100%; max-width:none; }
   .hbo-figs .hbo-fig{ margin:0; }
@@ -4149,23 +4152,22 @@
     '</div>'
   };
 
-  /* HEARTBEAT · Hologram booth tablet UI: 6 screens of the touch flow + Figma prototype link. */
+  /* HEARTBEAT · Hologram booth tablet UI: 5 final screens of the touch flow + a short simulated-touch demo video. */
   var hbKioskBlock = {
     custom: '<div class="cosmos-block">' +
       '<div class="cosmos-head">' +
         '<div class="cosmos-eyebrow">On-site · Booth Tablet UI</div>' +
         '<h3 class="cosmos-title">BOOTH TABLET UI</h3>' +
-        '<p class="cosmos-copy">홀로그램 부스에서 촬영할 때 참가자가 태블릿으로 직접 누르는 화면을 디자인하고, Figma 프로토타입으로 흐름까지 제작했습니다. 시작 화면에서 촬영 모드(3D 얼굴 필터 / 기본 촬영)를 고르면 촬영 화면으로 이어집니다.</p>' +
+        '<p class="cosmos-copy">홀로그램 부스에서 촬영할 때 참가자가 태블릿으로 직접 누르는 화면을 디자인했습니다. 현장에서 설명 없이도 누를 수 있도록 화면당 선택지를 하나로 줄이고, 큰 글씨와 한 번의 터치로 시작 → 모드 선택 → 촬영으로 이어지는 5개 화면으로 정리했습니다.</p>' +
       '</div>' +
       '<div class="hbk-grid">' +
       '<figure class="hbk-item"><img src="' + HB + 'hb-kiosk-01.jpg" alt="홀로그램 부스 태블릿 화면 · TAP TO START" loading="lazy" decoding="async"><figcaption><i>01</i><b>TAP TO START</b>시작 화면</figcaption></figure>' +
       '<figure class="hbk-item"><img src="' + HB + 'hb-kiosk-02.jpg" alt="홀로그램 부스 태블릿 화면 · SELECT MODE" loading="lazy" decoding="async"><figcaption><i>02</i><b>SELECT MODE</b>촬영 모드 선택 안내</figcaption></figure>' +
-      '<figure class="hbk-item"><img src="' + HB + 'hb-kiosk-03.jpg" alt="홀로그램 부스 태블릿 화면 · MODE · 3D / BASIC" loading="lazy" decoding="async"><figcaption><i>03</i><b>MODE · 3D / BASIC</b>3D 얼굴 필터와 기본 촬영, 두 가지 모드</figcaption></figure>' +
-      '<figure class="hbk-item"><img src="' + HB + 'hb-kiosk-04.jpg" alt="홀로그램 부스 태블릿 화면 · MODE · BASIC" loading="lazy" decoding="async"><figcaption><i>04</i><b>MODE · BASIC</b>‘기본 촬영’ 선택 시 반대편 모드가 어두워지는 상태</figcaption></figure>' +
-      '<figure class="hbk-item"><img src="' + HB + 'hb-kiosk-05.jpg" alt="홀로그램 부스 태블릿 화면 · MODE · 3D FILTER" loading="lazy" decoding="async"><figcaption><i>05</i><b>MODE · 3D FILTER</b>‘3D 얼굴 필터’ 선택 시 반대편 모드가 어두워지는 상태</figcaption></figure>' +
-      '<figure class="hbk-item"><img src="' + HB + 'hb-kiosk-06.jpg" alt="홀로그램 부스 태블릿 화면 · ON CAMERA" loading="lazy" decoding="async"><figcaption><i>06</i><b>ON CAMERA</b>촬영 진입 화면</figcaption></figure>' +
+      '<figure class="hbk-item"><img src="' + HB + 'hb-kiosk-03.jpg" alt="홀로그램 부스 태블릿 화면 · 3D FILTER" loading="lazy" decoding="async"><figcaption><i>03</i><b>3D FILTER</b>‘3D 캐릭터 필터’ 선택 시 반대편은 어두워짐</figcaption></figure>' +
+      '<figure class="hbk-item"><img src="' + HB + 'hb-kiosk-04.jpg" alt="홀로그램 부스 태블릿 화면 · BASIC" loading="lazy" decoding="async"><figcaption><i>04</i><b>BASIC</b>‘기본 촬영’ 선택 시 반대편은 어두워짐</figcaption></figure>' +
+      '<figure class="hbk-item"><img src="' + HB + 'hb-kiosk-05.jpg" alt="홀로그램 부스 태블릿 화면 · ON CAMERA" loading="lazy" decoding="async"><figcaption><i>05</i><b>ON CAMERA</b>촬영 진입 화면</figcaption></figure>' +
       '</div>' +
-      '<a class="hbk-link" href="https://www.figma.com/proto/uHJCnzlLlZNRACrypWQaAs/HEARTBEAT-CONCERT?node-id=721-4448&p=f&viewport=416%2C539%2C0.21&t=190ojc1VOEHIp0Tl-1&scaling=scale-down&content-scaling=fixed&page-id=721%3A4437" target="_blank" rel="noopener noreferrer">Figma 프로토타입 직접 눌러보기 <span aria-hidden="true">↗</span></a>' +
+      '<figure class="hbk-demo"><video poster="' + HB + 'hb-kiosk-demo-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-label="태블릿 화면을 터치해 시작부터 촬영 진입까지 이어지는 시연 영상"><source src="' + HB + 'hb-kiosk-demo.webm" type="video/webm"><source src="' + HB + 'hb-kiosk-demo.mp4" type="video/mp4"></video><figcaption><b>TOUCH FLOW</b>최종 화면을 순서대로 터치하는 시연 영상</figcaption></figure>' +
     '</div>'
   };
 
