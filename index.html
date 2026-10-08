@@ -2742,6 +2742,51 @@
   /* Phones: no balancing/pretty — lines fill the full width and break only where the text runs out. */
   @media (max-width:767px){ p, dd, li, figcaption, blockquote, span, .copy-line, [class*="-copy"], [class*="-sum"], [class*="-desc"]{ text-wrap:wrap !important; } }
   h1, h2, h3, h4, .cosmos-title, .dududo-showroom-title, .dh-stickerpack-title, #modal-title{ text-wrap:balance; }
+
+  /* ───────── audit 2026-10: readability floor ─────────
+     Meta text (card no./year, archive facts, skill numbers, footer, eyebrows) ran at 9–10px
+     and 35–45% white ≈ 3.5:1 on #0a0a0a. Lifted to ≥11px and ≥55–60% white (≈5:1+). */
+  .text-white\/40{ color:rgba(255,255,255,.58); }
+  .card-meta{ font-size:11px; }
+  @media (min-width:768px){ .card-meta{ font-size:11.5px; } }
+  .card-no, .card-year{ color:rgba(255,255,255,.6); }
+  .card-meta .card-status{ white-space:nowrap !important; text-wrap:nowrap !important; } /* beats the mobile span{text-wrap:wrap !important} reset */
+  @media (max-width:767px){ .card-meta{ letter-spacing:.05em; gap:.55rem; } }
+  .card-forms{ font-size:.72rem; color:rgba(255,255,255,.6); }
+  @media (max-width:767px){ .card-forms{ font-size:11px !important; } }
+  .wa-num{ font-size:.74rem; color:rgba(255,255,255,.55); }
+  .wa-fact{ font-size:.7rem; }
+  .wa-year{ color:rgba(255,255,255,.6); }
+  .cap-no{ font-size:.7rem; }
+  .experience-role-badge{ color:rgba(255,255,255,.6); }
+  .clients-item small{ color:rgba(255,255,255,.5); }
+  @media (max-width:767px){ .clients-item small{ font-size:max(.62em, 10px); } }
+  .hero-scroll-label{ color:rgba(255,255,255,.55); }
+
+  /* hero job title — readable at a glance, sits where the 10px discipline list was */
+  .hero-role{ margin:1.7rem 0 0; font-size:.82rem; font-weight:500; letter-spacing:.24em; text-transform:uppercase; color:rgba(255,255,255,.82); }
+  .hero-role i{ font-style:normal; color:var(--accent); margin:0 .5em; }
+  @media (max-width:767px){ .hero-role{ font-size:.72rem; letter-spacing:.18em; margin-top:1.3rem; } }
+
+  /* skip link: invisible until keyboard focus */
+  .skip-link{ position:fixed; left:1rem; top:-3rem; z-index:9999; padding:.6rem 1rem; background:var(--accent); color:#0a0a0a; font-size:.8rem; font-weight:600; border-radius:999px; transition:top .2s ease; }
+  .skip-link:focus{ top:1rem; outline:none; }
+  #main:focus{ outline:none; }
+
+  /* contact actions: primary mail CTA + secondary copy chips + QR, then the resume line */
+  .contact-actions{ margin-top:2.25rem; display:flex; flex-wrap:wrap; align-items:center; gap:.75rem 1rem; }
+  .contact-cta-primary{ display:inline-flex; align-items:center; gap:.65rem; padding:1rem 1.6rem; border-radius:999px; background:var(--accent); color:#0a0a0a; font-size:.9rem; font-weight:600; transition:background-color .25s ease, transform .25s ease, box-shadow .25s ease; }
+  .contact-cta-primary:hover{ background:#fff; box-shadow:0 10px 30px -12px rgba(242,219,134,.55); }
+  .contact-cta-primary:focus-visible, .contact-resume a:focus-visible{ outline:2px solid var(--accent); outline-offset:3px; }
+  .contact-actions > .flex{ margin-left:.25rem; }
+  .contact-resume{ margin-top:1.4rem; font-size:.85rem; line-height:1.7; color:rgba(255,255,255,.6); }
+  .contact-resume a{ color:#fff; text-decoration:underline; text-decoration-color:rgba(242,219,134,.6); text-underline-offset:3px; transition:color .2s ease, text-decoration-color .2s ease; }
+  .contact-resume a:hover{ color:var(--accent); text-decoration-color:var(--accent); }
+  @media (max-width:767px){
+    .contact-actions{ flex-direction:column; align-items:stretch; }
+    .contact-actions > *{ justify-content:center; }
+    .contact-actions > .flex{ margin-left:0; justify-content:flex-start; }
+  }
 </style>
 </head>
 <body class="font-body">
@@ -2754,6 +2799,7 @@
 <div id="progress-bar"></div>
 
 <!-- NAV -->
+<a href="#main" class="skip-link">본문 바로가기</a>
 <nav id="site-nav" class="fixed top-0 left-0 right-0 z-50 border-b border-white/10 bg-ink/70 backdrop-blur-md" style="padding-top:env(safe-area-inset-top,0px)">
   <div class="max-w-7xl mx-auto px-6 md:px-10 h-16 flex items-center justify-between">
     <a href="#top" class="font-display font-semibold tracking-tight text-sm" aria-label="CHOI AIN — 맨 위로">CHOI AIN</a>
@@ -2798,7 +2844,8 @@
 
     <p class="hero-motto font-display" data-animate><span>Many disciplines.</span> <span>One idea.</span></p>
     <p class="hero-ko" data-animate><span class="hl">하나의 아이디어를 완성하기 위해,</span> <span class="hl">필요한 것들을 넘나듭니다.</span></p>
-    <p class="hero-tagline font-display" data-animate>BRAND · VISUAL · DIGITAL · ART DIRECTION</p>
+    <!-- audit 2026-10: the 3-second answer to "who is this?" — job title in readable type (was a 10px, 42%-white discipline list) -->
+    <p class="hero-role font-display" data-animate>Art Director <i aria-hidden="true">·</i> Visual Designer</p>
   </div>
 
   <div class="hero-scroll-indicator scroll-indicator" data-animate aria-hidden="true">
@@ -2812,6 +2859,7 @@
   </div>
 </header>
 
+<main id="main" tabindex="-1">
 <!-- FEATURED WORK: full-bleed cinematic showcase for standout projects -->
 <section id="featured" class="border-t border-white/10">
   <div id="featured-slides"></div>
@@ -2931,6 +2979,7 @@
       <p class="text-xs tracking-[0.3em] text-white/40 font-display about-eyebrow-wipe" id="about-eyebrow"><span class="about-eyebrow-bar" aria-hidden="true"></span>ABOUT</p>
     </div>
     <div class="md:col-span-8">
+      <h2 class="sr-only">About — 최아인 소개</h2>
       <div id="about-paragraph" class="font-display text-xl md:text-3xl leading-snug about-copy">
         <p data-animate><span class="hl">최아인은 브랜드와 비주얼, 디지털 경험을 넘나들며</span> <span class="hl">하나의 아이디어를 다양한 형태로 발전시키는 디자이너입니다.</span></p>
         <p data-animate><span class="hl">여러 매체를 다루는 건 할 수 있어서가 아니라,</span> <span class="hl">그 아이디어에 가장 알맞은 형태를 찾기 위해서입니다.</span></p>
@@ -2954,6 +3003,26 @@
           LET'S MAKE<br>SOMETHING.
         </h2>
         <p class="contact-sub" data-animate><span class="copy-line">새로운 프로젝트, 협업, 채용 제안 등</span><span class="copy-line">편하게 연락 주세요.</span></p>
+        <!-- audit 2026-10: contact actions live right under the copy (were below the 420–460px badge,
+             ~890px down on phones). Primary = open a mail draft; copy buttons + QR stay as secondary. -->
+        <div class="contact-actions" data-animate>
+      <a href="mailto:ainxova@gmail.com" class="magnetic-btn contact-cta-primary"><i data-lucide="mail" class="w-4 h-4"></i><span>메일 보내기</span><i data-lucide="arrow-up-right" class="w-4 h-4"></i></a>
+      <button id="copy-email" class="magnetic-btn group flex items-center gap-3 px-6 py-4 rounded-full border border-white/20 hover:border-accent transition-colors" title="이메일 주소 복사">
+        <i data-lucide="mail" class="w-4 h-4"></i>
+        <span id="copy-email-label" class="text-sm">ainxova@gmail.com</span>
+        <i data-lucide="copy" class="w-3.5 h-3.5 text-white/40 group-hover:text-accent transition-colors"></i>
+      </button>
+      <button id="copy-kakao" class="magnetic-btn group flex items-center gap-3 px-6 py-4 rounded-full border border-white/20 hover:border-accent transition-colors" title="카카오톡 아이디 복사">
+        <i data-lucide="message-circle" class="w-4 h-4"></i>
+        <span id="copy-kakao-label" class="text-sm">카카오톡 eun_doi</span>
+        <i data-lucide="copy" class="w-3.5 h-3.5 text-white/40 group-hover:text-accent transition-colors"></i>
+      </button>
+      <div class="flex items-center gap-3">
+        <img src="images/kakao-qr.png" alt="카카오톡 친구 추가 QR 코드" class="w-16 h-16 rounded-xl border border-white/15" loading="lazy" decoding="async">
+        <span class="text-xs text-white/40 leading-snug">카톡으로<br>추가하기</span>
+      </div>
+    </div>
+        <p class="contact-resume" data-animate>이력서와 경력기술서는 <a href="mailto:ainxova@gmail.com?subject=%5B%EC%9D%B4%EB%A0%A5%EC%84%9C%20%EC%9A%94%EC%B2%AD%5D%20">메일로 요청</a>해 주시면 바로 보내드립니다.</p>
       </div>
 
       <div id="contact-badge" class="contact-badge-stage" data-animate>
@@ -2993,30 +3062,16 @@
       </div>
     </div>
 
-    <div class="mt-14 flex flex-col md:flex-row md:items-center gap-6 md:gap-10" data-animate>
-      <button id="copy-email" class="magnetic-btn group flex items-center gap-3 px-6 py-4 rounded-full border border-white/20 hover:border-accent transition-colors">
-        <i data-lucide="mail" class="w-4 h-4"></i>
-        <span id="copy-email-label" class="text-sm">ainxova@gmail.com</span>
-        <i data-lucide="copy" class="w-3.5 h-3.5 text-white/40 group-hover:text-accent transition-colors"></i>
-      </button>
-      <button id="copy-kakao" class="magnetic-btn group flex items-center gap-3 px-6 py-4 rounded-full border border-white/20 hover:border-accent transition-colors">
-        <i data-lucide="message-circle" class="w-4 h-4"></i>
-        <span id="copy-kakao-label" class="text-sm">카카오톡 eun_doi</span>
-        <i data-lucide="copy" class="w-3.5 h-3.5 text-white/40 group-hover:text-accent transition-colors"></i>
-      </button>
-      <div class="flex items-center gap-3">
-        <img src="images/kakao-qr.png" alt="카카오톡 친구 추가 QR 코드" class="w-16 h-16 rounded-xl border border-white/15" loading="lazy" decoding="async">
-        <span class="text-xs text-white/40 leading-snug">카톡으로<br>추가하기</span>
-      </div>
-    </div>
 
-    <div class="site-foot mt-24 border-t border-white/10 pt-8 pb-8 text-xs text-white/40">
+
+    <footer class="site-foot mt-24 border-t border-white/10 pt-8 pb-8 text-xs text-white/40">
       <span>© 2026 CHOI AIN.</span>
       <span>Seoul <span class="site-foot-time" id="foot-time">--:--</span> KST</span>
       <button type="button" class="to-top font-display" id="to-top">BACK TO TOP <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
-    </div>
+    </footer>
   </div>
 </section>
+</main>
 
 <!-- MODAL: Behance-style fullscreen overlay -->
 <div id="modal-overlay" aria-hidden="true">
@@ -3043,7 +3098,29 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/lucide@0.469.0/dist/umd/lucide.js"></script>
+<script>
+/* Lucide subset (audit 2026-10): the site only uses 10 icons, so instead of loading the
+   full lucide@0.469.0 UMD bundle (~588KB) we inline just those icon nodes, copied from the
+   same lucide version, behind the same lucide.createIcons() API every caller already uses. */
+(function(){
+  var I = {"arrow-up-right":[["path",{"d":"M7 7h10v10"}],["path",{"d":"M7 17 17 7"}]],"chevron-down":[["path",{"d":"m6 9 6 6 6-6"}]],"copy":[["rect",{"width":"14","height":"14","x":"8","y":"8","rx":"2","ry":"2"}],["path",{"d":"M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"}]],"x":[["path",{"d":"M18 6 6 18"}],["path",{"d":"m6 6 12 12"}]],"ticket":[["path",{"d":"M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"}],["path",{"d":"M13 5v2"}],["path",{"d":"M13 17v2"}],["path",{"d":"M13 11v2"}]],"refresh-cw":[["path",{"d":"M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"}],["path",{"d":"M21 3v5h-5"}],["path",{"d":"M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"}],["path",{"d":"M8 16H3v5"}]],"message-circle":[["path",{"d":"M7.9 20A9 9 0 1 0 4 16.1L2 22Z"}]],"menu":[["line",{"x1":"4","x2":"20","y1":"12","y2":"12"}],["line",{"x1":"4","x2":"20","y1":"6","y2":"6"}],["line",{"x1":"4","x2":"20","y1":"18","y2":"18"}]],"mail":[["rect",{"width":"20","height":"16","x":"2","y":"4","rx":"2"}],["path",{"d":"m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"}]],"globe":[["circle",{"cx":"12","cy":"12","r":"10"}],["path",{"d":"M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"}],["path",{"d":"M2 12h20"}]]};
+  var NS = "http://www.w3.org/2000/svg";
+  var BASE = { xmlns:NS, width:24, height:24, viewBox:"0 0 24 24", fill:"none", stroke:"currentColor", "stroke-width":2, "stroke-linecap":"round", "stroke-linejoin":"round" };
+  function createIcons(){
+    document.querySelectorAll("i[data-lucide]").forEach(function(el){
+      var name = el.getAttribute("data-lucide"), node = I[name]; if (!node) return;
+      var svg = document.createElementNS(NS, "svg"), k;
+      for (k in BASE) svg.setAttribute(k, BASE[k]);
+      for (var i = 0; i < el.attributes.length; i++){ var at = el.attributes[i]; if (at.name !== "class") svg.setAttribute(at.name, at.value); }
+      svg.setAttribute("class", ("lucide lucide-" + name + " " + (el.getAttribute("class") || "")).trim());
+      svg.setAttribute("aria-hidden", "true");
+      node.forEach(function(c){ var e = document.createElementNS(NS, c[0]); for (var a in c[1]) e.setAttribute(a, c[1][a]); svg.appendChild(e); });
+      el.parentNode.replaceChild(svg, el);
+    });
+  }
+  window.lucide = { createIcons:createIcons, icons:I };
+})();
+</script>
 
 <script>
 (function(){
@@ -6632,7 +6709,10 @@
       var dt = Math.min(0.1, (ts - last) / 1000); last = ts; head = (head + dt) % TOTAL; var fi = frameAt(head); if (fi !== lastFi){ lastFi = fi; draw(head); } raf = requestAnimationFrame(tick); }
     function start(){ if (!raf && ready && inView && !reduceMotion){ last = 0; raf = requestAnimationFrame(tick); } }
     sprite.onload = function(){ ready = true; resize(); draw(0); start(); };
-    sprite.src = 'images/hero/hero-reel5-sprite.jpg';
+    /* audit 2026-10: WebP sprite (~40% lighter) fetched after window load; the CSS poster covers the gap. */
+    var spriteSrc = 'images/hero/hero-reel5-sprite.webp';
+    if (document.readyState === 'complete') sprite.src = spriteSrc;
+    else window.addEventListener('load', function(){ sprite.src = spriteSrc; }, { once:true });
     window.addEventListener('resize', resize); resize();
     if ('IntersectionObserver' in window){ new IntersectionObserver(function(es){ inView = es[0].isIntersecting; if (inView) start(); }).observe(canvas); }
     document.addEventListener('visibilitychange', function(){ inView = !document.hidden; start(); });
