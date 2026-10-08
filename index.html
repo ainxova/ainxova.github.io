@@ -2775,8 +2775,12 @@
 
   /* contact actions: primary mail CTA + secondary copy chips + QR, then the resume line */
   .contact-actions{ margin-top:2.25rem; display:flex; flex-wrap:wrap; align-items:center; gap:.75rem 1rem; }
-  .contact-cta-primary{ display:inline-flex; align-items:center; gap:.65rem; padding:1rem 1.6rem; border-radius:999px; background:var(--accent); color:#0a0a0a; font-size:.9rem; font-weight:600; transition:background-color .25s ease, transform .25s ease, box-shadow .25s ease; }
-  .contact-cta-primary:hover{ background:#fff; box-shadow:0 10px 30px -12px rgba(242,219,134,.55); }
+  /* mail CTA: same square outlined chip as the copy buttons (gold fill read as off-brand and the label lost contrast);
+     set apart only by a gold hairline + gold arrow, and a soft gold fill on hover */
+  .contact-cta-primary{ display:inline-flex; align-items:center; gap:.75rem; padding:1rem 1.5rem; border-radius:0; border:1px solid rgba(242,219,134,.55); color:#fff; font-size:.875rem; font-weight:500; background:transparent; transition:border-color .25s ease, background-color .25s ease, color .25s ease; }
+  .contact-cta-primary svg:last-child{ color:var(--accent); transition:transform .25s ease; }
+  .contact-cta-primary:hover{ border-color:var(--accent); background:rgba(242,219,134,.08); color:var(--accent); }
+  .contact-cta-primary:hover svg:last-child{ transform:translate(2px,-2px); }
   .contact-cta-primary:focus-visible, .contact-resume a:focus-visible{ outline:2px solid var(--accent); outline-offset:3px; }
   .contact-actions > .flex{ margin-left:.25rem; }
   .contact-resume{ margin-top:1.4rem; font-size:.85rem; line-height:1.7; color:rgba(255,255,255,.6); }
@@ -2784,7 +2788,6 @@
   .contact-resume a:hover{ color:var(--accent); text-decoration-color:var(--accent); }
   @media (max-width:767px){
     .contact-actions{ flex-direction:column; align-items:stretch; }
-    .contact-actions > *{ justify-content:center; }
     .contact-actions > .flex{ margin-left:0; justify-content:flex-start; }
   }
 </style>
