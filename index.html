@@ -837,6 +837,16 @@
   .hbm-item img{ display:block; width:100%; height:auto; aspect-ratio:4/5; object-fit:cover; background:#e3e8e9; }
   .hbm-item figcaption{ margin-top:.65rem; font-size:.74rem; color:rgba(255,255,255,.5); }
   .hbm-item figcaption b{ display:block; color:rgba(255,255,255,.85); font-weight:600; letter-spacing:.08em; margin-bottom:.15rem; }
+  .hbm-guide{ display:grid; grid-template-columns:3fr 7fr; gap:1rem; margin-top:1.75rem; align-items:stretch; }
+  .hbm-xb{ margin:0; display:flex; flex-direction:column; }
+  .hbm-xb .hbm-xbimg{ flex:1; min-height:0; position:relative; background:#111; overflow:hidden; }
+  .hbm-xb img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block; }
+  .hbm-ig{ display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:1rem; margin:0; }
+  .hbm-ig figure{ margin:0; }
+  .hbm-ig img{ display:block; width:100%; height:auto; aspect-ratio:4/5; object-fit:cover; background:#111; }
+  .hbm-guide figcaption{ margin-top:.65rem; font-size:.74rem; color:rgba(255,255,255,.5); }
+  .hbm-guide figcaption b{ display:block; color:rgba(255,255,255,.85); font-weight:600; letter-spacing:.08em; margin-bottom:.15rem; }
+  @media(max-width:700px){ .hbm-guide{ grid-template-columns:1fr; gap:1.25rem; } .hbm-ig{ order:1; gap:.7rem; } .hbm-xb{ order:2; width:62%; margin:0 auto; } .hbm-xb .hbm-xbimg{ flex:none; aspect-ratio:1/3; } }
   .hbm-sheet{ margin:1.75rem 0 0; }
   .hbm-sheet img{ display:block; width:100%; height:auto; }
   .hbm-sheet figcaption{ margin-top:.65rem; font-size:.74rem; color:rgba(255,255,255,.5); }
@@ -4206,12 +4216,30 @@
       '<div class="cosmos-head">' +
         '<div class="cosmos-eyebrow">Merchandise · Final MD</div>' +
         '<h3 class="cosmos-title">FINAL MD</h3>' +
-        '<p class="cosmos-copy">여러 후보 중 최종 판매 MD로 확정된 3종입니다. 티셔츠 등판을 세로로 가로지르는 블러 처리된 HEARTBEAT 워드마크를 블랙과 레드 두 가지 컬러로 제작하고, 빈티지 워싱 볼캡에는 레드 자수 로고를 더했습니다.</p>' +
+        '<p class="cosmos-copy">여러 후보 중 최종 판매 MD로 확정된 티셔츠·볼캡·스티커 세트입니다. 티셔츠 등판을 세로로 가로지르는 블러 처리된 HEARTBEAT 워드마크를 블랙과 레드 두 가지 컬러로 제작하고, 빈티지 워싱 볼캡에는 레드 자수 로고를 더했습니다. 스티커 세트는 아래 안내 카드에서 볼 수 있습니다.</p>' +
       '</div>' +
       '<div class="hbm-grid">' +
         '<figure class="hbm-item"><img src="' + HB + 'hb-md-tee-black.jpg" alt="HEARTBEAT 공식 티셔츠 블랙 등판" loading="lazy" decoding="async"><figcaption><b>OFFICIAL TEE · BLACK</b>블러 워드마크 · 등판</figcaption></figure>' +
         '<figure class="hbm-item"><img src="' + HB + 'hb-md-tee-red.jpg" alt="HEARTBEAT 공식 티셔츠 레드 등판" loading="lazy" decoding="async"><figcaption><b>OFFICIAL TEE · RED</b>블러 워드마크 · 등판</figcaption></figure>' +
         '<figure class="hbm-item"><img src="' + HB + 'hb-md-cap.jpg" alt="HEARTBEAT 레드 자수 로고 빈티지 워싱 볼캡" loading="lazy" decoding="async"><figcaption><b>BALL CAP</b>레드 자수 로고 · 빈티지 워싱</figcaption></figure>' +
+      '</div>' +
+    '</div>'
+  };
+  var hbMdGuideBlock = {
+    custom: '<div class="cosmos-block">' +
+      '<div class="cosmos-head">' +
+        '<div class="cosmos-eyebrow">Merchandise · Guide</div>' +
+        '<h3 class="cosmos-title">MD INFO — INSTAGRAM & X-BANNER</h3>' +
+        '<p class="cosmos-copy">MD 판매 정보를 안내하는 인스타그램 카드 4종(전체 리스트·티셔츠·볼캡·스티커 세트)과, 현장 입장 게이트에 세우는 X배너입니다. 같은 구성으로 온라인과 현장에서 가격과 라인업을 안내합니다.</p>' +
+      '</div>' +
+      '<div class="hbm-guide">' +
+        '<figure class="hbm-xb"><div class="hbm-xbimg"><img src="images/hb-site/p55.jpg" alt="MD 물품 안내 X배너" loading="lazy" decoding="async"></div><figcaption><b>X-BANNER</b>입장 게이트 · 600×1800</figcaption></figure>' +
+        '<div class="hbm-ig">' +
+          '<figure><img src="' + HB + 'hb-md-ig-list.jpg" alt="MD LIST 인스타그램 카드" loading="lazy" decoding="async"><figcaption><b>MD LIST</b>전체 라인업</figcaption></figure>' +
+          '<figure><img src="' + HB + 'hb-md-ig-tee.jpg" alt="HBBDD Symbol T-Shirt 인스타그램 카드" loading="lazy" decoding="async"><figcaption><b>SYMBOL T-SHIRT</b>레드 · 블랙 · ₩39,000</figcaption></figure>' +
+          '<figure><img src="' + HB + 'hb-md-ig-cap.jpg" alt="HBBDD Logo Cap 인스타그램 카드" loading="lazy" decoding="async"><figcaption><b>LOGO CAP</b>₩34,000</figcaption></figure>' +
+          '<figure><img src="' + HB + 'hb-md-ig-sticker.jpg" alt="HBBDD Sticker Set 인스타그램 카드" loading="lazy" decoding="async"><figcaption><b>STICKER SET</b>₩5,000</figcaption></figure>' +
+        '</div>' +
       '</div>' +
     '</div>'
   };
@@ -4394,8 +4422,8 @@
           cover:HB + "t-kv.jpg", coverPos:"35% 50%", show:[HB + "hb-keyvisual.jpg", dududoMotionBlock] },
         { id:"hb-pr", short:"Promotion", eyebrow:"PART 03", title:"PROMOTION", sum:"데이별 SNS 포스터, CD 티저와 유튜브 플레이리스트 썸네일, 예매처 상세페이지, 인스타그램 티켓 이벤트, 더현대 쇼룸 프로모션, 아티스트 사인용 포스터", period:"", tools:"",
           cover:HB + "t-promo.jpg", coverPos:"40% 30%", show:[HB + "hb-sns.jpg", dududoCdYtBlock, hbTicketBlock, hbTicketEventBlock, dududoShowroomBlock, hbSignBlock] },
-        { id:"hb-md", short:"Merchandise", eyebrow:"PART 04", title:"MERCHANDISE", sum:"최종 판매 MD로 확정된 블랙·레드 티셔츠와 자수 볼캡, 그리고 최종안 이전의 전체 MD 디자인 구성안", period:"", tools:"",
-          cover:HB + "t-md.jpg", coverPos:"50% 40%", show:[hbMdFinalBlock, hbMdSheetBlock] },
+        { id:"hb-md", short:"Merchandise", eyebrow:"PART 04", title:"MERCHANDISE", sum:"최종 판매 MD로 확정된 블랙·레드 티셔츠와 자수 볼캡, 인스타그램·X배너 MD 안내, 그리고 최종안 이전의 전체 MD 디자인 구성안", period:"", tools:"",
+          cover:HB + "t-md.jpg", coverPos:"50% 40%", show:[hbMdFinalBlock, hbMdGuideBlock, hbMdSheetBlock] },
         { id:"hb-os", short:"On-site", eyebrow:"PART 05", title:"ON-SITE DESIGN", sum:"홀로그램 존과 부스 태블릿 UI, 입장 게이트·포토월·프레스존 시안, 7개 구역 47종의 현장 출력물, 날짜×좌석 4종 컬러 시스템의 입장 팔찌", period:"", tools:"",
           cover:HB + "t-onsite.jpg", coverPos:"50% 50%", show:[hbHoloBlock, hbKioskBlock, hbGateBlock, hbWallBlock, hbPressBlock, hbSiteBlock, hbWristbandBlock] },
         { id:"hb-prod", short:"Production", eyebrow:"PART 06", title:"PRODUCTION & SITE", sum:"시안으로 설계한 VIP 비표와 입장 밴드의 실물 제작물, 현장 시공과 행사 기록", period:"", tools:"",
