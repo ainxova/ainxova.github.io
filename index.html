@@ -2796,16 +2796,18 @@
      gold glow on NEXT only (PREV stays quiet — going back is optional). Hover fills them; reduced-motion = no pulse. */
   /* photos keep the full content width (same edges as tabs, progress line, caption);
      the arrows hang in the modal's side gutter, vertically centred on the photos */
-  .cx-zone-nav{ position:absolute; top:50%; margin:0; transform:translateY(-50%); width:2.4rem; height:2.4rem; background:transparent; color:rgba(242,219,134,.75); border:1px solid rgba(242,219,134,.35); box-shadow:none; backdrop-filter:none; -webkit-backdrop-filter:none; transition:background-color .2s ease, color .2s ease, transform .2s ease; }
-  .cx-zone-nav.is-prev{ left:-2.85rem; right:auto; }
-  .cx-zone-nav.is-next{ right:-2.85rem; left:auto; color:var(--accent); border-color:rgba(242,219,134,.7); animation:cxNavGlow 4s ease-in-out infinite; }
+  .cx-zone-nav{ position:absolute; top:50%; margin:0; transform:translateY(-50%); width:2.25rem; height:2.25rem; background:transparent; color:rgba(242,219,134,.75); border:1px solid rgba(242,219,134,.35); box-shadow:none; backdrop-filter:none; -webkit-backdrop-filter:none; transition:background-color .2s ease, color .2s ease, transform .2s ease; }
+  /* centred in the side gutter: the block gutter is 6.25% of the block = 7.14% of this stage,
+     so half of it is 3.57% of the stage width, minus half the button */
+  .cx-zone-nav.is-prev{ left:calc(-3.57% - 1.125rem); right:auto; }
+  .cx-zone-nav.is-next{ right:calc(-3.57% - 1.125rem); left:auto; color:var(--accent); border-color:rgba(242,219,134,.7); animation:cxNavGlow 4s ease-in-out infinite; }
   .cx-zone-nav svg{ width:20px; height:20px; stroke-width:2; }
-  @media (min-width:1200px){ .cx-zone-nav{ width:3rem; height:3rem; } .cx-zone-nav.is-prev{ left:-3.9rem; } .cx-zone-nav.is-next{ right:-3.9rem; } }
+  @media (min-width:768px) and (max-width:1000px){ .cx-zone-nav{ width:1.9rem; height:1.9rem; } .cx-zone-nav svg{ width:16px; height:16px; } .cx-zone-nav.is-prev{ left:calc(-3.57% - .95rem); } .cx-zone-nav.is-next{ right:calc(-3.57% - .95rem); } }
   .cx-zone-nav:hover{ background:var(--accent); color:#0a0a0a; transform:translateY(-50%) scale(1.06); animation:none; box-shadow:0 0 26px 4px rgba(242,219,134,.45); }
   .cx-zone-nav:focus-visible{ outline:2px solid var(--accent); outline-offset:3px; }
   @keyframes cxNavGlow{
-    0%, 100%{ box-shadow:0 0 12px 0 rgba(242,219,134,.12); }
-    50%{ box-shadow:0 0 22px 3px rgba(242,219,134,.3); }
+    0%, 100%{ box-shadow:0 0 8px 0 rgba(242,219,134,.1); }
+    50%{ box-shadow:0 0 14px 2px rgba(242,219,134,.28); }
   }
   @media (prefers-reduced-motion: reduce){ .cx-zone-nav.is-next{ animation:none; box-shadow:0 0 16px 1px rgba(242,219,134,.22); } }
   .cx-zone-prog{ position:relative; height:2px; margin-top:.8rem; background:rgba(255,255,255,.12); overflow:hidden; }
