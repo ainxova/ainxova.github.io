@@ -4314,6 +4314,17 @@
       '<figure class="hbo-fig"><div class="hbg-badge">DESIGN PROPOSAL</div><img src="' + HB + 'hb-wall-proposal.jpg" alt="현장 포토월 · 입체 로고 조형물 디자인 시안" loading="lazy" decoding="async"><figcaption>현장 포토월 · 입체 로고 조형물 시안 (현장 제작 전)</figcaption></figure>' +
     '</div>'
   };
+  var hbPressBlock = {
+    custom: '<div class="cosmos-block hbg">' +
+      '<div class="cosmos-head">' +
+        '<div class="cosmos-eyebrow">Space · Design Proposal to Site</div>' +
+        '<h3 class="cosmos-title">PRESS ZONE PROPOSAL</h3>' +
+        '<p class="cosmos-copy"><span class="copy-line">프레스존이 들어설 왼쪽 벽면에 맞춰, 벽 크기에 딱 맞는 현수막으로 제작했습니다. 공식 로고와 참여사 로고를 반복 배치해 어디서 촬영해도 브랜드가 함께 담기도록 했습니다.</span><span class="copy-line">현장 설치 후, 완성된 모습과 나란히 비교해 보여드릴 예정입니다.</span></p>' +
+      '</div>' +
+      '<figure class="hbo-fig"><div class="hbg-badge">DESIGN PROPOSAL</div><img src="' + HB + 'hb-press-proposal.jpg" alt="프레스존 벽면 현수막 디자인 시안 합성" loading="lazy" decoding="async"><figcaption>프레스존 벽면 시안 (현장 사진 위 합성 · 설치 전)</figcaption></figure>' +
+      '<figure class="hbo-fig"><img src="' + HB + 'hb-press-banner.jpg" alt="프레스존 현수막 디자인 원본" loading="lazy" decoding="async"><figcaption>현수막 디자인 (벽 크기에 맞춰 제작)</figcaption></figure>' +
+    '</div>'
+  };
   var hbSiteBlock = { custom: (function(){
     var chips = '<button type="button" class="hbs-chip is-on" data-z="*">ALL <i>' + HBS_ITEMS.length + '</i></button>' +
       HBS_ZONES.map(function(z){ var n = HBS_ITEMS.filter(function(r){ return r[0] === z; }).length;
@@ -4375,8 +4386,8 @@
           cover:HB + "t-promo.jpg", coverPos:"40% 30%", show:[HB + "hb-sns.jpg", dududoCdYtBlock, hbTicketBlock, hbTicketEventBlock, dududoShowroomBlock] },
         { id:"hb-md", short:"Merchandise", eyebrow:"PART 04", title:"MERCHANDISE", sum:"최종 판매 MD로 확정된 블랙·레드 티셔츠와 자수 볼캡, 그리고 최종안 이전의 전체 MD 디자인 구성안", period:"", tools:"",
           cover:HB + "t-md.jpg", coverPos:"50% 40%", show:[hbMdFinalBlock, hbMdSheetBlock] },
-        { id:"hb-os", short:"On-site", eyebrow:"PART 05", title:"ON-SITE DESIGN", sum:"홀로그램 존과 부스 태블릿 UI, 입장 게이트·포토월 시안, 7개 구역 46종의 현장 출력물, 날짜×좌석 4종 컬러 시스템의 입장 팔찌", period:"", tools:"",
-          cover:HB + "t-onsite.jpg", coverPos:"50% 50%", show:[hbHoloBlock, hbKioskBlock, hbGateBlock, hbWallBlock, hbSiteBlock, hbWristbandBlock] },
+        { id:"hb-os", short:"On-site", eyebrow:"PART 05", title:"ON-SITE DESIGN", sum:"홀로그램 존과 부스 태블릿 UI, 입장 게이트·포토월·프레스존 시안, 7개 구역 46종의 현장 출력물, 날짜×좌석 4종 컬러 시스템의 입장 팔찌", period:"", tools:"",
+          cover:HB + "t-onsite.jpg", coverPos:"50% 50%", show:[hbHoloBlock, hbKioskBlock, hbGateBlock, hbWallBlock, hbPressBlock, hbSiteBlock, hbWristbandBlock] },
         { id:"hb-prod", short:"Production", eyebrow:"PART 06", title:"PRODUCTION & SITE", sum:"시안으로 설계한 VIP 비표와 입장 밴드의 실물 제작물, 현장 시공과 행사 기록", period:"", tools:"",
           cover:HB + "hb-real-bands.jpg", coverPos:"50% 50%", show:[hbRealBlock] },
         { id:"hb-ops", short:"Design Ops", eyebrow:"PART 07", title:"DESIGN OPS", sum:"디자이너 1명으로 운영되도록 설계한 약 20종의 Figma 포맷, PM 3명 교육, PM이 직접 만드는 인스타그램 콘텐츠", period:"", tools:"Figma",
