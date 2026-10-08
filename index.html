@@ -2793,36 +2793,29 @@
 
   /* COSMOS zone slider (audit 2026-10): arrows sit OUTSIDE the photos in their own gutter columns
      (on-photo arrows got lost in busy images), drawn as gold hairline circles with a slow breathing
-     gold glow so they read as "tap me" without shouting. Hover fills them; reduced-motion = no pulse. */
+     gold glow on NEXT only (PREV stays quiet — going back is optional). Hover fills them; reduced-motion = no pulse. */
   .cx-zone-stage{ grid-template-columns:auto 1fr 1fr auto; align-items:center; column-gap:1rem; }
-  .cx-zone-nav{ position:static; margin:0; width:3rem; height:3rem; background:rgba(242,219,134,.04); color:var(--accent); border:1px solid rgba(242,219,134,.6); box-shadow:none; backdrop-filter:none; -webkit-backdrop-filter:none; animation:cxNavGlow 2.6s ease-in-out infinite; transition:background-color .2s ease, color .2s ease, transform .2s ease; }
-  .cx-zone-nav.is-prev{ order:-1; animation-delay:1.3s; }
-  .cx-zone-nav.is-next{ order:9; }
+  .cx-zone-nav{ position:static; margin:0; width:3rem; height:3rem; background:transparent; color:rgba(242,219,134,.75); border:1px solid rgba(242,219,134,.35); box-shadow:none; backdrop-filter:none; -webkit-backdrop-filter:none; transition:background-color .2s ease, color .2s ease, transform .2s ease; }
+  .cx-zone-nav.is-prev{ order:-1; }
+  .cx-zone-nav.is-next{ order:9; color:var(--accent); border-color:rgba(242,219,134,.7); animation:cxNavGlow 4s ease-in-out infinite; }
   .cx-zone-nav svg{ width:20px; height:20px; stroke-width:2; }
   .cx-zone-nav:hover{ background:var(--accent); color:#0a0a0a; transform:scale(1.06); animation:none; box-shadow:0 0 26px 4px rgba(242,219,134,.45); }
-  .cx-zone-nav:focus-visible, .cx-zone-next:focus-visible{ outline:2px solid var(--accent); outline-offset:3px; }
+  .cx-zone-nav:focus-visible{ outline:2px solid var(--accent); outline-offset:3px; }
   @keyframes cxNavGlow{
-    0%, 100%{ box-shadow:0 0 0 0 rgba(242,219,134,0), 0 0 10px 0 rgba(242,219,134,.12); border-color:rgba(242,219,134,.45); }
-    50%{ box-shadow:0 0 0 5px rgba(242,219,134,.08), 0 0 26px 6px rgba(242,219,134,.42); border-color:rgba(242,219,134,1); }
+    0%, 100%{ box-shadow:0 0 12px 0 rgba(242,219,134,.12); }
+    50%{ box-shadow:0 0 22px 3px rgba(242,219,134,.3); }
   }
-  @media (prefers-reduced-motion: reduce){ .cx-zone-nav{ animation:none; box-shadow:0 0 14px 2px rgba(242,219,134,.3); } }
+  @media (prefers-reduced-motion: reduce){ .cx-zone-nav.is-next{ animation:none; box-shadow:0 0 16px 1px rgba(242,219,134,.22); } }
   .cx-zone-prog{ position:relative; height:2px; margin-top:.8rem; background:rgba(255,255,255,.12); overflow:hidden; }
   .cx-zone-prog i{ position:absolute; left:0; top:0; bottom:0; background:var(--accent); transition:width .45s var(--ease-std, ease); }
   .cx-zone-cap{ align-items:center; }
   .cx-zone-cap-num{ color:rgba(255,255,255,.6); }
-  .cx-zone-next{ margin-left:auto; display:inline-flex; align-items:center; gap:.6rem; padding:.7rem 1rem; border:1px solid rgba(242,219,134,.55); color:#fff; font-size:.72rem; letter-spacing:.14em; white-space:nowrap; transition:border-color .2s ease, background-color .2s ease, color .2s ease; }
-  .cx-zone-next span{ color:var(--accent); font-weight:700; }
-  .cx-zone-next b{ font-weight:600; }
-  .cx-zone-next svg{ width:16px; height:16px; transition:transform .2s ease; }
-  .cx-zone-next:hover{ background:rgba(242,219,134,.1); border-color:var(--accent); color:var(--accent); }
-  .cx-zone-next:hover svg{ transform:translateX(3px); }
   @media (max-width:767px){
     .cx-zone-stage{ grid-template-columns:1fr 1fr; row-gap:.6rem; }
     .cx-zone-stage .cx-zone-fig{ grid-column:1 / -1; }
     .cx-zone-nav{ width:2.75rem; height:2.75rem; margin-top:.3rem; }
     .cx-zone-nav.is-prev{ order:9; justify-self:start; } .cx-zone-nav.is-next{ order:10; justify-self:end; }
-    .cx-zone-next{ margin-left:0; width:100%; justify-content:center; margin-top:.4rem; }
-  }
+    }
 </style>
 </head>
 <body class="font-body">
@@ -3720,10 +3713,9 @@
           '<button type="button" class="cx-zone-nav is-prev" data-cx-step="-1" aria-label="이전 공간"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg></button>' +
           '<button type="button" class="cx-zone-nav is-next" data-cx-step="1" aria-label="다음 공간"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></button>' +
         '</div>' +
-        /* progress line + labelled NEXT button: the on-photo arrows alone were easy to miss */
+        /* progress line under the stage: shows how many zones are left */
         '<div class="cx-zone-prog" aria-hidden="true"><i style="width:' + (100 / cxZones.length) + '%"></i></div>' +
         '<div class="cx-zone-cap"><span class="cx-zone-cap-num">01 / ' + String(cxZones.length).padStart(2, '0') + '</span><span class="cx-zone-cap-name">' + cxZones[0].en + ' <em>' + cxZones[0].kr + '</em></span><span class="cx-zone-cap-note">' + cxZones[0].note + '</span>' +
-          '<button type="button" class="cx-zone-next" data-cx-step="1" aria-label="다음 공간 보기"><span>NEXT</span><b>' + cxZones[1].en + '</b><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>' +
         '</div>' +
       '</div>' +
     '</div>'
@@ -5676,7 +5668,6 @@
     cap.querySelector('.cx-zone-cap-num').textContent = String(i + 1).padStart(2, '0') + ' / ' + String(n).padStart(2, '0');
     cap.querySelector('.cx-zone-cap-name').innerHTML = z.en + ' <em>' + z.kr + '</em>';
     cap.querySelector('.cx-zone-cap-note').textContent = z.note;
-    var nb = cap.querySelector('.cx-zone-next b'); if (nb) nb.textContent = cxZones[(i + 1) % n].en;
     var pr = root.querySelector('.cx-zone-prog i'); if (pr) pr.style.width = ((i + 1) / n * 100) + '%';
     /* warm the next pair so arrowing forward is instant */
     var nz = cxZones[(i + 1) % n]; ['design','site'].forEach(function(kind){ (new Image()).src = CP + 'zone-' + nz.id + '-' + kind + '.jpg'; });
