@@ -2821,6 +2821,11 @@
     .cx-zone-nav:hover{ transform:scale(1.06); }
     .cx-zone-nav.is-prev{ order:9; justify-self:start; } .cx-zone-nav.is-next{ order:10; justify-self:end; }
     }
+
+  /* card category label: was thin pale-gold caps next to a number; now carries the
+     old FORMS label treatment (solid gold, semibold, wide tracking) on its own */
+  .card-meta .card-cat{ color:var(--accent); font-weight:600; letter-spacing:.2em; }
+  @media (max-width:767px){ .card-meta .card-cat{ letter-spacing:.07em; } }
 </style>
 </head>
 <body class="font-body">
@@ -4853,10 +4858,11 @@
         '</span>' +
       '</div>' +
       '<div class="mt-6">' +
-        '<p class="card-meta text-[10px] md:text-[11px] tracking-[0.1em] text-accent-soft mb-3 uppercase"><span class="card-no">' + String(slot + 1).padStart(2, '0') + '</span><span>' + cardLabel + '</span>' + (p.status ? '<span class="card-status"><i aria-hidden="true"></i>' + p.status + '</span>' : '') + '<span class="card-year"' + (p.status ? ' style="margin-left:.75rem"' : '') + '>' + p.year + '</span></p>' +
+        '<p class="card-meta text-[10px] md:text-[11px] tracking-[0.1em] text-accent-soft mb-3 uppercase"><span class="card-cat">' + cardLabel + '</span>' + (p.status ? '<span class="card-status"><i aria-hidden="true"></i>' + p.status + '</span>' : '') + '<span class="card-year"' + (p.status ? ' style="margin-left:.75rem"' : '') + '>' + p.year + '</span></p>' +
         '<h3 class="font-display font-bold text-lg md:text-2xl leading-snug tracking-tight m-0">' + cardName + '</h3>' +
         (p.idea ? '<p class="card-idea">' + p.idea + '</p>' : (p.blurb ? '<p class="card-blurb">' + p.blurb + '</p>' : '')) +
-        (p.forms ? '<p class="card-forms"><b>FORMS</b>' + p.forms.map(function(f, k){ return '<span class="nw">' + f + (k < p.forms.length - 1 ? ' ·' : '') + '</span>'; }).join(' ') + '</p>' : '') +
+        /* (2026-10) card numbers and the FORMS row removed — 4 cards don't need numbering,
+           and the forms list repeats what the category + modal already say */
       '</div>';
     (p.archive && archiveGrid ? archiveGrid : grid).appendChild(card);
   });
