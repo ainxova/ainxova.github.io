@@ -648,6 +648,13 @@
      other "live" moment on this site. Petal count/position/timing are
      generated once in JS (innoPetalsBlock) so each is slightly different —
      uniform spacing would read as a looping screensaver, not weather. */
+  .inno-process{ display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.1fr); gap:3rem; align-items:center; padding:4rem 6.25%; }
+  .inno-process-eyebrow{ font-size:.7rem; letter-spacing:.3em; color:var(--accent); font-weight:600; margin-bottom:1rem; }
+  .inno-process-title{ font-size:1.6rem; font-weight:600; color:#fff; letter-spacing:-.01em; line-height:1.3; margin-bottom:.9rem; }
+  .inno-process-text{ font-size:.95rem; line-height:1.8; color:rgba(255,255,255,.65); word-break:keep-all; max-width:26rem; }
+  .inno-process-vid{ aspect-ratio:1180/1060; overflow:hidden; border:1px solid rgba(255,255,255,.1); background:#111; }
+  .inno-process-vid video{ display:block; width:100%; height:100%; object-fit:cover; }
+  @media (max-width:767px){ .inno-process{ grid-template-columns:1fr; gap:1.5rem; padding:2.5rem 1.5rem; } .inno-process-title{ font-size:1.3rem; } }
   .inno-petals-wrap{ position:relative; line-height:0; overflow:hidden; }
   .inno-petals-wrap > img{ width:100%; display:block; }
   .inno-petals{ position:absolute; inset:0; overflow:hidden; pointer-events:none; }
@@ -3329,6 +3336,19 @@
     '</div>'
   };
 
+  /* inno.N '인호' drawing process — her own screen-recorded iPad drawing (sped up), looped with a
+     short hold on the finished sketch. */
+  var innoProcessBlock = {
+    custom: '<div class="inno-process">' +
+      '<div class="inno-process-copy">' +
+        '<p class="inno-process-eyebrow font-display">PROCESS</p>' +
+        '<h4 class="inno-process-title">직접 그리는 인호</h4>' +
+        '<p class="inno-process-text">아이패드로 인호를 그리는 과정을 녹화한 영상입니다. 표정의 디테일부터 크리스마스 장면 전체까지, 캐릭터를 손으로 직접 그려 완성합니다.</p>' +
+      '</div>' +
+      '<div class="inno-process-vid"><video poster="images/inno-process/inho-drawing-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-label="아이패드로 인호를 그리는 과정 영상"><source src="images/inno-process/inho-drawing.webm" type="video/webm"><source src="images/inno-process/inho-drawing.mp4" type="video/mp4"></video></div>' +
+    '</div>'
+  };
+
   /* HEARTBEAT BY DUDUDO's Sticker Pack mockup — a product mockup built from
      아인's own die-cut sticker artwork (no real photo exists yet), composited
      as a paper header stapled over a clear poly bag like a real sticker-pack
@@ -4705,7 +4725,7 @@
       tools:["Procreate", "Illustrator", "Photoshop", "Figma"],
       thumb:"images/thumbs/inno-thumb.jpg",
       links:[ { label:"inno-n.com", url:"https://www.inno-n.com/", icon:"globe" }, { label:"인호 플레이리스트", url:"https://youtube.com/playlist?list=PLf9UA9DEROpRYmYBTiREetWa-Ys0E7_JI", icon:"youtube" } ],
-      images:[innoPetalsBlock,"images/inno-02.jpg","images/inno-03.jpg","images/album-art.jpg"],
+      images:[innoPetalsBlock,innoProcessBlock,"images/inno-02.jpg","images/inno-03.jpg","images/album-art.jpg"],
       crossLink:{ label:"인호야 — 캐릭터 IP 기반 파티 게임 UX/UI 보러가기", key:"uxui", section:"ih", thumb:"images/thumbs/inhoya-crosslink-thumb.jpg" } },
     { group:"Illustration & Character", archive:{ order:3, name:"『요괴어사』 소설 시리즈", line:"시리즈 아트 디렉션 · 1·2권 표지와 내지 삽화 전부 직접 제작", fact:"Book Art · Illustration" }, category:"Book Art Direction · Cover · Illustration", title:"『요괴어사』 소설 시리즈 아트 디렉션 & 일러스트", idea:"1·2권의 표지와 내지 삽화를 모두 직접 그린 소설 시리즈", forms:["Art Direction", "Cover", "Illustration", "Publishing"], year:"2024",
       blurb:"소설 시리즈 『요괴어사』의 아트를 총괄했습니다. 1권과 2권의 표지, 내지 삽화, 시리즈 브랜딩까지 전부 직접 제작했습니다.",
