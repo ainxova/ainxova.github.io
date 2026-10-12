@@ -809,6 +809,15 @@
   .hbo-col p{ margin:0; font-size:.86rem; line-height:1.65; color:rgba(255,255,255,.72); }
   .hb-early-note{ max-width:44rem; margin:0 auto 2rem; padding:0 1.5rem; color:rgba(255,255,255,.7); font-size:.95rem; line-height:1.8; }
   .hb-early-note b{ color:var(--accent); font-weight:600; }
+  .hbsm{ display:grid; grid-template-columns:minmax(0,1fr) minmax(0,2fr); gap:1rem; margin-top:1.5rem; align-items:start; }
+  .hbsm figure{ margin:0; }
+  .hbsm img{ display:block; width:100%; height:auto; background:#111; }
+  .hbsm-pair{ position:relative; display:grid; grid-template-columns:1fr 1fr; }
+  .hbsm-seam{ position:absolute; top:0; bottom:0; left:50%; width:0; border-left:1px dashed rgba(242,219,134,.55); }
+  .hbsm-seam i{ position:absolute; top:.75rem; left:0; transform:translateX(-50%); padding:.2rem .5rem; background:rgba(10,10,10,.75); color:var(--accent); font-style:normal; font-size:.6rem; font-weight:600; letter-spacing:.2em; white-space:nowrap; }
+  .hbsm figcaption{ margin-top:.6rem; font-size:.75rem; color:rgba(255,255,255,.55); }
+  .hbsm figcaption b{ display:block; color:#fff; font-weight:600; font-size:.72rem; letter-spacing:.14em; margin-bottom:.15rem; }
+  @media(max-width:700px){ .hbsm{ grid-template-columns:1fr; gap:1.25rem; } .hbsm-cover{ max-width:66%; } }
   .hbe-wrap{ display:grid; grid-template-columns:auto minmax(0,1fr); gap:2rem; align-items:start; margin-top:1.5rem; }
   .hbe-grid{ display:grid; grid-template-columns:repeat(2,9.5rem); gap:.75rem; }
   .hbe-item{ margin:0; }
@@ -4423,6 +4432,23 @@
     '</div>'
   };
 
+  /* HEARTBEAT · venue site map, Instagram carousel (3 slides): slide 1 shows the whole map at a
+     glance; slides 2–3 are one wide map cut in two, so swiping reads as one continuous image. Shown
+     here as cover + the 2–3 pair joined edge to edge, with the swipe seam marked. */
+  var hbSiteMapBlock = {
+    custom: '<div class="cosmos-block">' +
+      '<div class="cosmos-head">' +
+        '<div class="cosmos-eyebrow">Promotion · Instagram Carousel</div>' +
+        '<h3 class="cosmos-title">SITE MAP</h3>' +
+        '<p class="cosmos-copy">관객이 행사장 안의 부스 위치를 미리 확인할 수 있도록 만든 인스타그램 캐러셀 게시물입니다. 표지에서는 전체 맵을 한눈에 보여주고, 2·3번 장은 한 장의 맵을 둘로 나눠 넘기면 그대로 이어지도록 구성했습니다. 물품보관소·티켓부스·초대석/현장판매, 셔틀버스·MD·아디다스 바이브·F&amp;B·워터바 위치를 컬러 포인트로 구분했습니다.</p>' +
+      '</div>' +
+      '<div class="hbsm">' +
+        '<figure class="hbsm-cover"><img src="' + HB + 'hb-sitemap-01.jpg" alt="HEARTBEAT SITE MAP 캐러셀 표지 — 전체 행사장 맵" loading="lazy" decoding="async"><figcaption><b>01 · COVER</b>전체 맵을 한눈에</figcaption></figure>' +
+        '<figure class="hbsm-pan"><div class="hbsm-pair"><img src="' + HB + 'hb-sitemap-02.jpg" alt="SITE MAP 2장 — 물품보관소·티켓부스·초대석/현장판매" loading="lazy" decoding="async"><img src="' + HB + 'hb-sitemap-03.jpg" alt="SITE MAP 3장 — 셔틀버스·MD·아디다스 바이브·F&amp;B·워터바" loading="lazy" decoding="async"><span class="hbsm-seam" aria-hidden="true"><i>SWIPE</i></span></div><figcaption><b>02 → 03 · SEAMLESS</b>넘기면 한 장으로 이어지는 상세 맵</figcaption></figure>' +
+      '</div>' +
+    '</div>'
+  };
+
   /* HEARTBEAT · Final on-sale MD (3 items) + the earlier full MD design sheet. */
   var hbMdFinalBlock = {
     custom: '<div class="cosmos-block">' +
@@ -4634,7 +4660,7 @@
         { id:"hb-kv", short:"Key Visual", eyebrow:"PART 02", title:"KEY VISUAL & MOTION", sum:"유리 심장 키 오브젝트, 양일간의 라인업을 한 화면에 담은 메인 포스터와 루프 모션 포스터", period:"", tools:"",
           cover:HB + "t-kv.jpg", coverPos:"35% 50%", show:[HB + "hb-keyvisual.jpg", dududoMotionBlock] },
         { id:"hb-pr", short:"Promotion", eyebrow:"PART 03", title:"PROMOTION", sum:"데이별 SNS 포스터, CD 티저와 유튜브 플레이리스트 썸네일, 예매처 상세페이지, 인스타그램 티켓 이벤트, 더현대 쇼룸 프로모션, 아티스트 사인용 포스터", period:"", tools:"",
-          cover:HB + "t-promo.jpg", coverPos:"40% 30%", show:[HB + "hb-sns.jpg", dududoCdYtBlock, hbTicketBlock, hbTicketEventBlock, dududoShowroomBlock, hbSignBlock] },
+          cover:HB + "t-promo.jpg", coverPos:"40% 30%", show:[HB + "hb-sns.jpg", dududoCdYtBlock, hbTicketBlock, hbTicketEventBlock, hbSiteMapBlock, dududoShowroomBlock, hbSignBlock] },
         { id:"hb-md", short:"Merchandise", eyebrow:"PART 04", title:"MERCHANDISE", sum:"최종 판매 MD로 확정된 블랙·레드 티셔츠와 자수 볼캡, 인스타그램·X배너 MD 안내, 그리고 최종안 이전의 전체 MD 디자인 구성안", period:"", tools:"",
           cover:HB + "t-md.jpg", coverPos:"50% 40%", show:[hbMdFinalBlock, hbMdGuideBlock, hbMdSheetBlock] },
         { id:"hb-os", short:"On-site", eyebrow:"PART 05", title:"ON-SITE DESIGN", sum:"홀로그램 존과 부스 태블릿 UI, 입장 게이트·포토월·프레스존 시안, 7개 구역 47종의 현장 출력물, 날짜×좌석 4종 컬러 시스템의 입장 팔찌", period:"", tools:"",
