@@ -673,6 +673,68 @@
     .inno-petal{ display:none; }
   }
 
+  /* ---------------- UX/UI series · quiet live layers over flattened slides ----------------
+     The UX/UI case-study slides are single flattened JPGs, so nothing inside them
+     can move. Like the inno.N sakura petals, these are separate layers laid ON
+     TOP of the untouched image, at percentages measured off each 1920x1080
+     slide: the memory-game keys lighting up in order, the "Gotcha!" ring
+     pulsing like a tap, falling maple leaves, a radar sweep and signal glitch
+     on Broken Archive, light running along HeartSync's heartbeat line, a
+     ringing call button, and a GPS ping on MAFIUS. They only animate while the
+     slide is on screen (.is-live, set by initUxFx) and are hidden entirely for
+     reduced-motion visitors. */
+  .uxfx{ position:relative; line-height:0; overflow:hidden; }
+  .uxfx > img{ width:100%; display:block; }
+  .uxfx-l{ position:absolute; pointer-events:none; display:block; }
+  .uxfx *{ animation-play-state:paused; }
+  .uxfx.is-live *{ animation-play-state:running; }
+  .uxfx-ripple, .uxfx-key, .uxfx-radar{ translate:-50% -50%; aspect-ratio:1; border-radius:50%; opacity:0; }
+  .uxfx-ripple{ border:2px solid rgba(255,250,235,.95); box-shadow:0 0 12px rgba(255,236,190,.6), inset 0 0 8px rgba(255,236,190,.35);
+    animation:uxRipple 2.8s cubic-bezier(.15,.6,.3,1) infinite; --s:2.4; }
+  .uxfx-ripple.is-late{ animation-delay:1.4s; }
+  .uxfx-ripple.is-pink{ border-color:rgba(255,95,135,.9); box-shadow:0 0 12px rgba(255,110,150,.55); animation-duration:1.7s; --s:2.1; }
+  .uxfx-ripple.is-pink.is-late{ animation-delay:.85s; }
+  .uxfx-ripple.is-gps{ border-color:rgba(120,120,255,.95); background:rgba(95,95,255,.22); box-shadow:0 0 14px rgba(110,110,255,.6); animation-duration:2.4s; --s:4.2; }
+  .uxfx-ripple.is-gps.is-late{ animation-delay:1.2s; }
+  @keyframes uxRipple{ 0%{ scale:1; opacity:0; } 8%{ opacity:.95; } 100%{ scale:var(--s); opacity:0; } }
+  .uxfx-key{ mix-blend-mode:screen; animation:uxKey 6s ease-out infinite;
+    background:radial-gradient(circle, rgba(255,255,255,1) 0 30%, rgba(255,232,170,.9) 46%, rgba(255,205,110,0) 70%); }
+  @keyframes uxKey{ 0%{ opacity:0; scale:.85; } 3%{ opacity:1; scale:1.08; } 9%{ opacity:.85; scale:1; } 16%,100%{ opacity:0; scale:1; } }
+  .uxfx-radar{ border:3px solid rgba(150,250,255,.95); box-shadow:0 0 18px rgba(80,240,255,.8), inset 0 0 12px rgba(80,240,255,.5);
+    animation:uxRipple 3.4s cubic-bezier(.2,.6,.3,1) infinite; --s:3.6; }
+  .uxfx-radar.is-late{ animation-delay:1.7s; }
+  .uxfx-glitch{ opacity:0; mix-blend-mode:screen; background-repeat:no-repeat; animation:uxGlitch 6s steps(1,end) infinite; }
+  /* contrast() first crushes the dark backdrop to pure black, so under screen blending only the
+     bright lettering shows as a colour fringe — not the whole crop box. */
+  .uxfx-glitch.is-c{ filter:grayscale(1) contrast(4) brightness(.95) sepia(1) saturate(6) hue-rotate(140deg); }
+  .uxfx-glitch.is-m{ filter:grayscale(1) contrast(4) brightness(.95) sepia(1) saturate(6) hue-rotate(-60deg); animation-name:uxGlitchM; }
+  @keyframes uxGlitch{ 0%,86%{ opacity:0; transform:none; clip-path:inset(0); }
+    87%{ opacity:.85; transform:translate(-5px,0); clip-path:inset(12% 0 55% 0); }
+    88.5%{ opacity:.85; transform:translate(4px,0); clip-path:inset(48% 0 18% 0); }
+    90%{ opacity:.7; transform:translate(-2px,1px); clip-path:inset(0 0 70% 0); }
+    91%,100%{ opacity:0; transform:none; clip-path:inset(0); } }
+  @keyframes uxGlitchM{ 0%,86%{ opacity:0; transform:none; clip-path:inset(0); }
+    87%{ opacity:.75; transform:translate(5px,0); clip-path:inset(30% 0 40% 0); }
+    88.5%{ opacity:.75; transform:translate(-4px,-1px); clip-path:inset(70% 0 5% 0); }
+    90%{ opacity:.6; transform:translate(3px,0); clip-path:inset(15% 0 60% 0); }
+    91%,100%{ opacity:0; transform:none; clip-path:inset(0); } }
+  .uxfx-mote{ border-radius:50%; background:#d6fdff; box-shadow:0 0 8px 3px rgba(60,230,255,.75); opacity:0; animation:uxMote 8s ease-in-out infinite; }
+  @keyframes uxMote{ 0%{ opacity:0; transform:translate(0,0); } 20%{ opacity:.9; } 80%{ opacity:.55; } 100%{ opacity:0; transform:translate(var(--dx,10px),-90px); } }
+  .uxfx-leaf{ top:-6%; aspect-ratio:1; background:center/contain no-repeat; filter:drop-shadow(0 2px 3px rgba(0,0,0,.25));
+    animation-name:uxLeafFall, uxLeafSway; animation-timing-function:linear, ease-in-out; animation-iteration-count:infinite, infinite; }
+  .uxfx-leaf.c0{ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath fill='%23f08a24' d='M50 4 58 26 72 18 68 38 90 34 78 50 94 60 70 62 74 78 56 68 52 96 48 96 44 68 26 78 30 62 6 60 22 50 10 34 32 38 28 18 42 26Z'/%3E%3C/svg%3E"); }
+  .uxfx-leaf.c1{ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath fill='%23e8661c' d='M50 4 58 26 72 18 68 38 90 34 78 50 94 60 70 62 74 78 56 68 52 96 48 96 44 68 26 78 30 62 6 60 22 50 10 34 32 38 28 18 42 26Z'/%3E%3C/svg%3E"); }
+  .uxfx-leaf.c2{ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath fill='%23f5a524' d='M50 4 58 26 72 18 68 38 90 34 78 50 94 60 70 62 74 78 56 68 52 96 48 96 44 68 26 78 30 62 6 60 22 50 10 34 32 38 28 18 42 26Z'/%3E%3C/svg%3E"); }
+  @keyframes uxLeafFall{ from{ top:-6%; } to{ top:106%; } }
+  @keyframes uxLeafSway{ 0%,100%{ transform:translateX(-18px) rotate(-25deg); } 50%{ transform:translateX(18px) rotate(35deg); } }
+  .uxfx-hsline{ filter:drop-shadow(0 0 3px rgba(255,80,125,.9)) drop-shadow(0 0 8px rgba(255,120,160,.55)); }
+  .uxfx-hsline i{ position:absolute; inset:0; display:block;
+    -webkit-mask:url(images/fx/hs3-line-mask.png) 0 0/100% 100% no-repeat; mask:url(images/fx/hs3-line-mask.png) 0 0/100% 100% no-repeat;
+    background:linear-gradient(90deg, rgba(255,60,110,0) 0%, rgba(255,60,110,0) 42%, rgba(255,70,120,1) 47.5%, #fff 50%, rgba(255,70,120,1) 52.5%, rgba(255,60,110,0) 58%, rgba(255,60,110,0) 100%);
+    background-size:300% 100%; background-position:100% 0; animation:uxHsBeat 3.6s cubic-bezier(.45,0,.55,1) infinite; }
+  @keyframes uxHsBeat{ 0%{ background-position:100% 0; } 70%,100%{ background-position:0% 0; } }
+  @media (prefers-reduced-motion: reduce){ .uxfx-l{ display:none; } }
+
   /* ---------------- HEARTBEAT BY DUDUDO · Sticker pack mockup ----------------
      A product mockup built from 아인's own die-cut sticker artwork (no photo
      exists yet — the pack hadn't shipped), composited as a paper header
@@ -3343,6 +3405,69 @@
       '<div class="inno-petals">' + innoPetalsHtml + '</div>' +
     '</div>'
   };
+
+  /* UX/UI series — live layers keyed by slide path (see the .uxfx CSS comment).
+     renderGalleryImages wraps any slide listed here in a .uxfx box and drops
+     these layers on top; positions are % of the slide, measured off the JPGs. */
+  var UX_FX = (function(){
+    function box(l, t, w, h){ return 'left:' + l + '%;top:' + t + '%;width:' + w + '%;' + (h != null ? 'height:' + h + '%;' : ''); }
+    function ring(x, y, d, cls){ return '<span class="uxfx-l uxfx-ripple ' + (cls || '') + '" style="' + box(x, y, d) + '"></span>' +
+      '<span class="uxfx-l uxfx-ripple is-late ' + (cls || '') + '" style="' + box(x, y, d) + '"></span>'; }
+    function glitch(src, l, t, w, h, dur){
+      var bg = 'background-image:url(' + src + ');background-size:' + (10000 / w).toFixed(3) + '% ' + (10000 / h).toFixed(3) + '%;' +
+        'background-position:' + (l / (100 - w) * 100).toFixed(3) + '% ' + (t / (100 - h) * 100).toFixed(3) + '%;animation-duration:' + dur + 's;';
+      return '<span class="uxfx-l uxfx-glitch is-c" style="' + box(l, t, w, h) + bg + '"></span>' +
+             '<span class="uxfx-l uxfx-glitch is-m" style="' + box(l, t, w, h) + bg + '"></span>';
+    }
+    function leaves(n){
+      var out = '';
+      for (var i = 0; i < n; i++){
+        var fall = (10 + Math.random() * 7).toFixed(1), sway = (3 + Math.random() * 2.4).toFixed(1);
+        out += '<span class="uxfx-l uxfx-leaf c' + (i % 3) + '" style="left:' + (Math.random() * 96).toFixed(1) + '%;width:' + (15 + Math.random() * 13).toFixed(0) + 'px;' +
+          'opacity:' + (0.75 + Math.random() * 0.25).toFixed(2) + ';' +
+          'animation-duration:' + fall + 's,' + sway + 's;animation-delay:' + (-(Math.random() * fall)).toFixed(1) + 's,-' + (Math.random() * sway).toFixed(1) + 's"></span>';
+      }
+      return out;
+    }
+    function petals(n){
+      var out = '';
+      for (var i = 0; i < n; i++){
+        var size = (9 + Math.random() * 10).toFixed(0), fall = (8 + Math.random() * 6).toFixed(1), sway = (2.4 + Math.random() * 2.2).toFixed(1);
+        out += '<span class="inno-petal" style="left:' + (Math.random() * 100).toFixed(1) + '%;width:' + size + 'px;height:' + size + 'px;' +
+          'opacity:' + (0.7 + Math.random() * 0.3).toFixed(2) + ';animation-duration:' + fall + 's,' + sway + 's;' +
+          'animation-delay:' + (-(Math.random() * fall)).toFixed(1) + 's,-' + (Math.random() * sway).toFixed(1) + 's;rotate:' + (Math.random() * 360).toFixed(0) + 'deg"></span>';
+      }
+      return '<span class="uxfx-l" style="inset:0;overflow:hidden">' + out + '</span>';
+    }
+    function motes(n, l, t, w, h){
+      var out = '';
+      for (var i = 0; i < n; i++){
+        var d = (3 + Math.random() * 3).toFixed(1), dur = (6 + Math.random() * 5).toFixed(1);
+        out += '<span class="uxfx-l uxfx-mote" style="left:' + (l + Math.random() * w).toFixed(1) + '%;top:' + (t + Math.random() * h).toFixed(1) + '%;' +
+          'width:' + d + 'px;height:' + d + 'px;--dx:' + (Math.random() * 40 - 20).toFixed(0) + 'px;' +
+          'animation-duration:' + dur + 's;animation-delay:' + (-(Math.random() * dur)).toFixed(1) + 's"></span>';
+      }
+      return out;
+    }
+    /* inhoya-07: the left phone's five keys light up in turn — the memory game's own rule, shown instead of told. */
+    var keys = [[40.6, 87.8], [36.18, 66.66], [30.04, 75.93], [31.82, 87.8], [42.57, 75.93]].map(function(k, i){
+      return '<span class="uxfx-l uxfx-key" style="' + box(k[0], k[1], 5) + 'animation-delay:' + i + 's"></span>';
+    }).join('');
+    return {
+      'images/inhoya-01.jpg': leaves(7) + ring(56.66, 73.9, 5.1),
+      'images/inhoya-04.jpg': ring(74.9, 45.6, 5.0),
+      'images/inhoya-07.jpg': keys,
+      'images/inhoya-08.jpg': petals(14) + ring(84.46, 37.5, 5.4),
+      'images/inhoya-09.jpg': leaves(8) + ring(51.45, 80.2, 5.5),
+      'images/ba/ba-01.jpg': glitch('images/ba/ba-01.jpg', 65, 69.5, 29, 22.5, 6.5),
+      'images/ba/ba-05.jpg': motes(18, 32, 14, 40, 70),
+      'images/ba/ba-06.jpg': glitch('images/ba/ba-06.jpg', 57.5, 24.5, 18, 7.5, 4.5),
+      'images/ba/ba-12.jpg': glitch('images/ba/ba-12.jpg', 5, 71, 24, 20.5, 7.5),
+      'images/heartsync-03.jpg': '<span class="uxfx-l uxfx-hsline" style="' + box(53.4896, 28.9815, 37.5, 17.5) + '"><i></i></span>',
+      'images/heartsync-04.jpg': ring(23.27, 69.2, 3.84, 'is-pink'),
+      'images/mafius-02.jpg': ring(74.3, 69.25, 1.5, 'is-gps')
+    };
+  })();
 
   /* inno.N '인호' drawing process — her own screen-recorded iPad drawing (sped up), looped with a
      short hold on the finished sketch. */
@@ -6105,6 +6230,9 @@
         if (item && typeof item === 'object' && item.custom){
           return item.custom;
         }
+        if (typeof item === 'string' && UX_FX[item]){
+          return '<div class="uxfx" data-uxfx><img class="modal-image" src="' + item + '" alt="' + altText + '" loading="lazy" decoding="async">' + UX_FX[item] + '</div>';
+        }
         return '<img class="modal-image" src="' + item + '" alt="' + altText + '" loading="lazy" decoding="async">';
       }).join('');
     }
@@ -6240,6 +6368,7 @@
 
     modalScroll.scrollTop = 0;
     if (window.initSpritePlayers) window.initSpritePlayers(modalImages);
+    if (window.initUxFx) window.initUxFx(modalImages);
 
     /* MUSE.D flip-book inside the modal: sticky stage + leaves, driven by #modal-scroll */
     if (modalBookHandler){ modalScroll.removeEventListener('scroll', modalBookHandler); window.removeEventListener('resize', bookResize); modalBookHandler = null; }
@@ -6920,6 +7049,17 @@
 
   /* Sprite-sheet player: plays frames from one image on a canvas while on screen.
      Used instead of <video> autoplay, which the public artifact link does not run. */
+  /* UX/UI live layers: run their CSS animations only while the slide is on screen. */
+  window.initUxFx = function(root){
+    var els = (root || document).querySelectorAll('.uxfx:not([data-ready])');
+    if (!els.length) return;
+    if (!('IntersectionObserver' in window)){ els.forEach(function(el){ el.setAttribute('data-ready', ''); el.classList.add('is-live'); }); return; }
+    if (!window.__uxFxIO) window.__uxFxIO = new IntersectionObserver(function(es){
+      es.forEach(function(e){ e.target.classList.toggle('is-live', e.isIntersecting); });
+    }, { threshold:0.15 });
+    els.forEach(function(el){ el.setAttribute('data-ready', ''); window.__uxFxIO.observe(el); });
+  };
+
   window.initSpritePlayers = function(root){
     (root || document).querySelectorAll('.sprite-player:not([data-ready])').forEach(function(el){
       el.setAttribute('data-ready', '1');
