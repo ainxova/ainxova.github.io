@@ -7217,14 +7217,14 @@
       ctx.globalAlpha = a; ctx.drawImage(sprite, sx, sy, CW, CH, (cw - dw) / 2, (ch - dh) / 2, dw, dh); }
     function frameAt(t){ var base = 0; for (var k = 0; k < SEG.length; k++){ var g = SEG[k]; if (t < g.d || k === SEG.length - 1) return base + Math.min(g.n - 1, Math.floor(t * g.fps)); t -= g.d; base += g.n; } return 0; }
     /* blur is applied while drawing into the tiny canvas (cheap: ~240×150 px), never as a CSS filter */
-    function draw(t){ ctx.globalAlpha = 1; ctx.filter = 'none'; ctx.fillStyle = '#0a0a0a'; ctx.fillRect(0, 0, canvas.width, canvas.height); ctx.filter = 'blur(' + Math.max(1.5, canvas.width / 140).toFixed(1) + 'px) brightness(.72) saturate(1.15)'; cell(frameAt(t), 1); ctx.filter = 'none'; }
+    function draw(t){ ctx.globalAlpha = 1; ctx.filter = 'none'; ctx.fillStyle = '#0a0a0a'; ctx.fillRect(0, 0, canvas.width, canvas.height); ctx.filter = 'blur(' + Math.max(2, canvas.width / 110).toFixed(1) + 'px) brightness(.66) ' + (lens ? 'saturate(0)' : 'saturate(1.15)'); cell(frameAt(t), 1); ctx.filter = 'none'; }
     /* ---- Focus lens (2026-10): around the pointer the footage comes back into focus — a soft sharp
        spot that follows the cursor with a short fading tail, like the CONTACT light. A second 1×
        canvas holds only the sharp frame inside feathered circles along the pointer path; it is
        drawn only while the pointer is over the hero or the tail is still fading. Mouse/trackpad only. */
     var lens = null, lctx = null, sharp = null, sctx = null, sharpFi = -1, lensOn = false;
     var px = 0, py = 0, hx = 0, hy = 0, inside = false, trail = [];
-    var TRAIL_LIFE = 560, R = 190, LS = 0.5, brush = null;
+    var TRAIL_LIFE = 600, R = 270, LS = 0.5, brush = null;
     if (window.matchMedia('(pointer: fine)').matches && !reduceMotion){
       lens = document.createElement('canvas'); lens.className = 'hero-reel-lens'; lens.setAttribute('aria-hidden', 'true');
       canvas.parentNode.insertBefore(lens, canvas.nextSibling); lctx = lens.getContext('2d');
@@ -7242,7 +7242,7 @@
     function sizeLens(){ if (!lens) return; var w = Math.round(lens.clientWidth * LS), h = Math.round(lens.clientHeight * LS);
       if (lens.width !== w || lens.height !== h){ lens.width = w; lens.height = h; sharp.width = w; sharp.height = h; sharpFi = -1; } }
     function drawSharp(fi){ var cw = sharp.width, ch = sharp.height, cover = Math.max(cw / CW, ch / CH), dw = CW * cover, dh = CH * cover;
-      sctx.filter = 'brightness(1.12) contrast(1.1) saturate(1.2)';
+      sctx.filter = 'brightness(1.08) contrast(1.08) saturate(1.25)';
       sctx.drawImage(sprite, (fi % COLS) * CW, Math.floor(fi / COLS) * CH, CW, CH, (cw - dw) / 2, (ch - dh) / 2, dw, dh); sctx.filter = 'none'; sharpFi = fi; }
     function drawLens(now){
       if (!lens || !ready) return false;
