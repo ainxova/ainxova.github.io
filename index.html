@@ -1323,7 +1323,7 @@
      It is set as large as the smaller of two limits —
        · its ink spans the full content column (the same edges as the nav: 1200px max, 40px gutters);
        · its cap height is 1/φ² (38.2%) of the hero's free height (viewport minus nav and client band).
-     The hero's free space is then split above : below = 1 : φ (see #top::before/::after). */
+     The block is then centred on its ink (equal space above the capitals and below the caption). */
   /* (glyph box = 3.012em incl. side bearings; hero inner column = 100vw − 96px desktop / − 64px phone) */
   header#top{ --allin: min(calc(1200px / 2.963), calc((100vw - 96px) / 3.012), calc((100svh - 121px) * .382 / .71)); }
   @media (max-width:767px){ header#top{ --allin: min(calc((100vw - 64px) / 3.012), calc((100svh - 121px) * .382 / .71)); } }
@@ -1332,7 +1332,7 @@
   header#top > .max-w-5xl{ max-width:none; }  /* the lockup sizes itself from --allin and centres */
   header#top{ padding-top:65px !important; padding-bottom:57px !important; justify-content:flex-start !important; }
   header#top::before{ content:''; flex:1 1 0; min-height:1rem; }
-  header#top::after{ content:''; flex:1.75 1 0; min-height:1rem; }  /* 1.75 here lands the measured ink gaps at ≈1 : 1.618 */
+  header#top::after{ content:''; flex:1.09 1 0; min-height:1rem; }  /* centred on the ink: equal space above the capitals and below the caption */
   .ain-entry{ display:flex; flex-wrap:wrap; align-items:baseline; justify-content:center; gap:.2rem .7rem; margin:0 0 1.6rem; font-size:.78rem; color:rgba(255,255,255,.62); letter-spacing:.04em; }
   .ain-entry b{ color:#fff; font-weight:700; letter-spacing:.18em; }
   .ain-pron{ color:rgba(255,255,255,.5); }
@@ -2920,9 +2920,12 @@
     border-top:1px solid rgba(255,255,255,.22); text-align:left; font-size:.9rem; line-height:1.65; letter-spacing:.01em; }
   .hero-meta p{ margin:0; }
   .hero-meta-l{ color:rgba(255,255,255,.66); word-break:keep-all; }
-  .hero-meta-r{ text-align:right; display:flex; flex-direction:column; color:rgba(255,255,255,.66); }
+  .hero-meta-r{ text-align:right; display:flex; align-items:baseline; gap:1.4em; color:rgba(255,255,255,.66); white-space:nowrap; }
+  .hero-meta-l{ white-space:nowrap; }
+  .hero-meta-l br.m-only{ display:none; }
+  .hero-meta{ align-items:baseline; }
   .hero-meta-name b{ color:#fff; font-weight:600; letter-spacing:.14em; margin-right:.35em; }
-  .hero-meta-role{ text-transform:uppercase; letter-spacing:.14em; font-size:.82em; line-height:2.01; }
+  .hero-meta-role{ text-transform:uppercase; letter-spacing:.14em; font-size:.82em; }
   .hero-meta-role i{ font-style:normal; color:var(--accent); margin:0 .35em; }
   .hero-meta-role{ white-space:nowrap; }
   /* optical edges: the hairline starts at the A's foot and ends at the full stop, not at the glyph boxes */
@@ -2930,7 +2933,8 @@
   @media (max-width:767px){
     .hero-meta{ flex-direction:column; align-items:stretch; gap:.85rem; font-size:.8rem; margin-top:1.2rem; padding-top:.9rem;
       margin-left:calc(var(--allin) * .022); margin-right:calc(var(--allin) * .03); }
-    .hero-meta-r{ text-align:left; }
+    .hero-meta-r{ text-align:left; flex-direction:column; gap:0; }
+    .hero-meta-l br.m-only{ display:inline; }
   }
   @media (max-width:767px){ .hero-role{ font-size:.72rem; letter-spacing:.18em; margin-top:1.3rem; } }
 
@@ -3092,7 +3096,7 @@
         </h1>
       </div>
       <div class="hero-meta" data-animate>
-        <p class="hero-meta-l">하나의 아이디어를 완성하기 위해,<br>필요한 것들을 넘나듭니다.</p>
+        <p class="hero-meta-l">하나의 아이디어를 완성하기 위해,<br class="m-only"> 필요한 것들을 넘나듭니다.</p>
         <p class="hero-meta-r font-display"><span class="hero-meta-name"><b>CHOI AIN</b> 최아인</span><span class="hero-meta-role">Art Director <i aria-hidden="true">·</i> Visual Designer</span></p>
       </div>
     </div>
@@ -7337,7 +7341,7 @@
       }
       if (introOn){ var e = (now - intro) / 1700;
         if (e > 0){ var env = e < 0.35 ? easeOut(e / 0.35) : e < 0.55 ? 1 : 1 - easeOut((e - 0.55) / 0.45);
-          stamp(lens.width / 2, lens.height * 0.4, R * (0.55 + 0.5 * easeOut(Math.min(1, e / 0.5))), env * 0.95, 0, 1, 1); } }
+          stamp(lens.width / 2, lens.height * 0.47, R * (0.55 + 0.5 * easeOut(Math.min(1, e / 0.5))), env * 0.95, 0, 1, 1); } }
       lctx.globalAlpha = 1;
       lctx.globalCompositeOperation = 'source-in'; lctx.drawImage(sharp, 0, 0);
       lctx.globalCompositeOperation = 'source-over';
