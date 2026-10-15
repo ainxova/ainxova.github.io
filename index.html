@@ -299,6 +299,27 @@
   .card-thumb.tone-out .card-blank{ display:none; }
   .card-thumb.tone-out .card-thumb-img{ animation:toneImgIn .9s var(--ease-out) both; }
   @keyframes toneImgIn{ from{ transform:scale(1.08); } to{ transform:scale(1); } }
+  /* Four reveals instead of one (2026-10) — all in the accent yellow, handed out in a fixed order so
+     neighbours differ: 0 block wipes up · 1 thin band sweeps left→right · 2 thin band sweeps up ·
+     3 ring opens from the centre. In 1–3 the dark cover lifts with the band, so only a sliver of
+     yellow is ever on screen. */
+  @property --r{ syntax:'<percentage>'; inherits:false; initial-value:0%; }
+  .card-thumb.tone-zoom .card-thumb-img{ animation:toneImgIn 1.1s var(--ease-out) both; }
+  .card-thumb.tv-1.tone-run .card-tone{ animation:tvBandX 1.05s cubic-bezier(.65,0,.35,1) both; }
+  .card-thumb.tv-1.tone-run .card-blank{ animation:tvRevX 1.05s cubic-bezier(.65,0,.35,1) both; }
+  .card-thumb.tv-2.tone-run .card-tone{ animation:tvBandY 1.05s cubic-bezier(.65,0,.35,1) both; }
+  .card-thumb.tv-2.tone-run .card-blank{ animation:tvRevY 1.05s cubic-bezier(.65,0,.35,1) both; }
+  .card-thumb.tv-3.tone-run .card-tone{ clip-path:inset(0); animation:tvIris 1.25s cubic-bezier(.65,0,.35,1) both;
+    -webkit-mask:radial-gradient(circle farthest-corner at 50% 50%, transparent calc(var(--r) - 16%), #000 calc(var(--r) - 16%), #000 var(--r), transparent var(--r));
+            mask:radial-gradient(circle farthest-corner at 50% 50%, transparent calc(var(--r) - 16%), #000 calc(var(--r) - 16%), #000 var(--r), transparent var(--r)); }
+  .card-thumb.tv-3.tone-run .card-blank{ animation:tvIris 1.25s cubic-bezier(.65,0,.35,1) both;
+    -webkit-mask:radial-gradient(circle farthest-corner at 50% 50%, transparent calc(var(--r) - 8%), #000 calc(var(--r) - 8%));
+            mask:radial-gradient(circle farthest-corner at 50% 50%, transparent calc(var(--r) - 8%), #000 calc(var(--r) - 8%)); }
+  @keyframes tvBandX{ from{ clip-path:inset(0 100% 0 -22%); } to{ clip-path:inset(0 -22% 0 100%); } }
+  @keyframes tvRevX{ from{ clip-path:inset(0 0 0 0); } to{ clip-path:inset(0 0 0 100%); } }
+  @keyframes tvBandY{ from{ clip-path:inset(100% 0 -14% 0); } to{ clip-path:inset(-14% 0 100% 0); } }
+  @keyframes tvRevY{ from{ clip-path:inset(0 0 0 0); } to{ clip-path:inset(0 0 100% 0); } }
+  @keyframes tvIris{ from{ --r:0%; } to{ --r:140%; } }
   .card-thumb.card-thumb-empty{
     background: radial-gradient(120% 140% at 20% 10%, rgba(242,219,134,.35), transparent 55%),
                 linear-gradient(150deg, #1a1a1d, #0a0a0a);
@@ -7625,14 +7646,20 @@
   (function(){
     if (reduceMotion || !('IntersectionObserver' in window)) return;
     var thumbs = document.querySelectorAll('.project-card .card-thumb');
-    thumbs.forEach(function(t){ if (t.querySelector('.card-tone')) t.classList.add('tone-wait'); });
+    var ORDER = [0, 2, 3, 1], DUR = [0, 1150, 1150, 1350], n = 0;
+    thumbs.forEach(function(t){ if (t.querySelector('.card-tone')){ t.classList.add('tone-wait', 'tv-' + ORDER[n++ % ORDER.length]); } });
     var io = new IntersectionObserver(function(es){
       es.forEach(function(e){
         if (!e.isIntersecting) return;
         var t = e.target; io.unobserve(t);
-        var d = Math.random() * 380;
+        var v = +(/tv-(\d)/.exec(t.className) || [0, 0])[1], d = Math.random() * 380;
         setTimeout(function(){
           t.classList.add('tone-run');
+          if (v){                                   /* band / ring: pure CSS animation */
+            t.classList.add('tone-zoom');
+            setTimeout(function(){ t.classList.remove('tone-wait', 'tone-run', 'tone-zoom'); }, DUR[v]);
+            return;
+          }
           requestAnimationFrame(function(){ t.classList.add('tone-in'); });
           setTimeout(function(){
             t.classList.add('tone-out'); t.classList.remove('tone-wait');
