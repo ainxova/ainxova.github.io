@@ -1623,8 +1623,8 @@
 
   /* ---- Work card meta (index · discipline · year) + one-line blurb ---- */
   .work-sub{ margin:1rem 0 0; font-size:clamp(1rem,1.6vw,1.3rem); color:rgba(255,255,255,.5); letter-spacing:-.01em; }
-  /* sized so the words span the card grid exactly (text = 6.80em wide; grid = min(100vw − 80px, 1280px), phones 100vw − 64px) */
-  .work-title{ margin:0 0 4.5rem; color:var(--accent); font-size:calc(min(100vw - 80px, 1280px) / 6.8); line-height:.95; letter-spacing:-.04em; white-space:nowrap; }
+  /* desktop: ~60% of the grid width (text = 6.80em wide); phones: the words span the grid (100vw − 64px) */
+  .work-title{ margin:0 0 4.5rem; color:#fff; font-size:clamp(3.4rem, calc(min(100vw - 80px, 1280px) / 11.4), 7.4rem); line-height:.95; letter-spacing:-.04em; white-space:nowrap; }
   @media (max-width:767px){ .work-title{ font-size:calc((100vw - 64px) / 6.8); margin-bottom:3rem; } }
   .work-title .wt-w{ display:inline-block; overflow:hidden; vertical-align:top; padding:.06em .02em .1em; margin:-.06em -.02em -.1em; }
   .work-title .wt-c{ display:inline-block; transform:translateY(112%) rotate(6deg); transform-origin:0 100%;
@@ -3128,7 +3128,7 @@
 <!-- WORK -->
 <section id="work" class="px-6 md:px-10 pt-32 md:pt-52 pb-32 md:pb-44 border-t border-white/10">
   <div class="max-w-7xl mx-auto">
-    <!-- 2026-10: one big accent-yellow title, nothing else; its letters rise out of a mask as it scrolls in -->
+    <!-- 2026-10: one big white title, nothing else; its letters rise out of a mask as it scrolls in -->
     <h2 class="work-title font-display font-semibold" aria-label="Selected Works">Selected Works</h2>
 
     <div id="work-grid" class="grid md:grid-cols-2 gap-x-8 gap-y-20"></div>
