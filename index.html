@@ -6127,10 +6127,45 @@
       if (getComputedStyle(el).whiteSpace.indexOf('nowrap') === 0) return;
       var W = el.clientWidth; if (!W) return;
       /* measure the natural (ragged) lines even where the copy is justified */
-      var justified = getComputedStyle(el).textAlign === 'justify', prevTA = el.style.textAlign;
+      if (el._forceLeft){ el.style.textAlign = ''; el._forceLeft = false; }
+      var justified = getComputedStyle(el).textAlign === 'justify';
       if (justified) el.style.textAlign = 'left';
-      try { tieOne(el, W, justified); } finally { if (justified) el.style.textAlign = prevTA; }
+      tieOne(el, W, justified);
+      if (justified){
+        /* Justify only where it stays even: if any full line would need its word gaps stretched by
+           more than ~0.3em (narrow columns, long unbreakable words), the paragraph is set ragged
+           instead — uneven 자간 looks worse than an uneven right edge. */
+        if (justifyLooksUneven(el, W)){
+          if (el._widowOrig){ el._widowOrig.forEach(function(o){ o.n.data = o.d; }); el._widowOrig = null; }
+          if (el._lsFixed){ el.style.letterSpacing = ''; el._lsFixed = false; }
+          tieOne(el, W, false);
+          el._forceLeft = true;              /* leaves text-align:left in place */
+        } else el.style.textAlign = '';
+      }
     });
+  }
+  function justifyLooksUneven(el, W){
+    /* el is currently set ragged (text-align:left): count the real breakable spaces on every line
+       and the room justify would have to spread over them */
+    var fs = parseFloat(getComputedStyle(el).fontSize) || 15;
+    var lines = [], w = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, null), t, rg = document.createRange();
+    function lineOf(top){ for (var k = 0; k < lines.length; k++) if (Math.abs(lines[k].t - top) < 4) return lines[k]; var L = { t: top, l: 1e9, r: -1e9, sp: 0 }; lines.push(L); return L; }
+    while ((t = w.nextNode())){
+      for (var i = 0; i < t.data.length; i++){
+        rg.setStart(t, i); rg.setEnd(t, i + 1);
+        var rc = rg.getClientRects()[0]; if (!rc) continue;
+        var L = lineOf(rc.top); L.l = Math.min(L.l, rc.left); L.r = Math.max(L.r, rc.right);
+        if (t.data[i] === ' ') L.sp++;
+      }
+    }
+    lines.sort(function(a, b){ return a.t - b.t; });
+    for (var j = 0; j < lines.length - 1; j++){
+      var Lj = lines[j], sp = Math.max(0, Lj.sp - (t && 0)), width = Lj.r - Lj.l;
+      if (Lj.sp < 1) return true;
+      /* a trailing space at the line end is not stretched */
+      if ((W - width) / Math.max(1, Lj.sp - 1) > fs * 0.2) return true;
+    }
+    return false;
   }
   function tieOne(el, W, justified){
       var L0 = lineBoxes(el), n = L0.length;
@@ -6169,7 +6204,7 @@
         var L = lineBoxes(el);
         if (L.length !== n) break;
         var prev = L[n - 2], okPrev;
-        if (justified){ var gaps = Math.max(1, prev / pxPerSpace); okPrev = (W - prev) / gaps <= fs * 0.6; }
+        if (justified){ var gaps = Math.max(1, prev / pxPerSpace); okPrev = (W - prev) / gaps <= fs * 0.2; }
         else okPrev = prev >= W * (n === 2 && /^(LI|DD|FIGCAPTION)$/.test(el.tagName) ? 0.45 : 0.72);
         if (!okPrev) break;
         best = nodes.map(function(x){ return x.data; });
