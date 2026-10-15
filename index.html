@@ -507,11 +507,19 @@
     #modal-close{ top:calc(.85rem + env(safe-area-inset-top,0px)); right:.85rem; }
   }
 
-  .modal-info-pad{ padding:1.75rem 1.5rem 2rem; }
+  .modal-info-pad{ padding:1.75rem 1.25rem 2rem; }
   /* detail text: a measured column and a slightly smaller size, so the wider sheet reads quiet and editorial */
   .modal-desc{ max-width:46rem; }
+  .modal-desc .desc-para{ display:block; }
+  /* short blocks (captions, list items, meta lines) split evenly instead of leaving one word on the last line */
+  #modal-panel li, #modal-panel figcaption, #modal-panel dd, #modal-panel .cosmos-content-desc, #modal-panel .cosmos-step-copy, #modal-panel .uxs-sum, #modal-panel .uxs-meta{ text-wrap:balance; }
+  /* phones: the category line ran under the round close button */
+  @media (max-width:767px){ #modal-category{ padding-right:3.4rem; } }
+  .modal-desc .desc-para + .desc-para{ margin-top:1em; }
   @media (min-width:768px){ .modal-desc{ font-size:.94rem; line-height:1.85; } }
-  @media (min-width:768px){ .modal-info-pad{ padding:3rem 3rem 2.5rem; } }
+  /* side inset = 6.25%, the same as every content block below, so the intro text, the status box and
+     each section's eyebrow/title start on one vertical line */
+  @media (min-width:768px){ .modal-info-pad{ padding:3rem 6.25% 2.5rem; } }
 
   .modal-images{ display:flex; flex-direction:column; gap:0; margin:0; padding:0; }
   .modal-image{
@@ -669,7 +677,7 @@
   .inno-process-text{ font-size:.95rem; line-height:1.8; color:rgba(255,255,255,.65); word-break:keep-all; max-width:26rem; }
   .inno-process-vid{ aspect-ratio:1180/1060; overflow:hidden; border:1px solid rgba(255,255,255,.1); background:#111; }
   .inno-process-vid video{ display:block; width:100%; height:100%; object-fit:cover; }
-  @media (max-width:767px){ .inno-process{ grid-template-columns:1fr; gap:1.5rem; padding:2.5rem 1.5rem; } .inno-process-title{ font-size:1.3rem; } }
+  @media (max-width:767px){ .inno-process{ grid-template-columns:1fr; gap:1.5rem; padding:2.5rem 1.25rem; } .inno-process-title{ font-size:1.3rem; } }
   .inno-petals-wrap{ position:relative; line-height:0; overflow:hidden; }
   .inno-petals-wrap > img{ width:100%; display:block; }
   .inno-petals{ position:absolute; inset:0; overflow:hidden; pointer-events:none; }
@@ -862,7 +870,7 @@
      them all on their first frame. */
   /* HEARTBEAT ticket detail page: the full-length page in a phone frame that scrolls itself
      (and can be scrolled by hand), with the page's own section list beside it. */
-  .hbt{ display:grid; grid-template-columns:minmax(0,1fr) minmax(0,26rem); gap:clamp(1.5rem,4vw,3.5rem); align-items:center; width:100%; max-width:62rem; margin:0 auto; }
+  .hbt{ display:grid; grid-template-columns:minmax(0,1fr) minmax(0,26rem); gap:clamp(1.5rem,4vw,3.5rem); align-items:center; width:100%; max-width:62rem; margin:0; }
   .hbt-list{ list-style:none; margin:1.75rem 0 0; padding:0; border-top:1px solid rgba(255,255,255,.1); counter-reset:hbt; }
   .hbt-list li{ display:flex; gap:1.4rem; padding:.95rem 0; border-bottom:1px solid rgba(255,255,255,.1); font-size:.9rem; color:rgba(255,255,255,.78); }
   .hbt-list li i{ font-style:normal; font-size:.68rem; letter-spacing:.14em; color:var(--accent); padding-top:.2rem; font-variant-numeric:tabular-nums; }
@@ -1602,8 +1610,8 @@
   .hb-status-text{ display:flex; flex-direction:column; gap:.3rem; }
   .hb-status-text b{ font-size:.9rem; color:#fff; font-weight:600; }
   .hb-status-text span{ font-size:.8rem; line-height:1.7; color:rgba(255,255,255,.62); word-break:keep-all; }
-  @media (min-width:768px){ .hb-status{ margin:0 3rem 1.5rem; } } /* same inset as .modal-info-pad so the box lines up with the text and chips above */
-  @media (max-width:767px){ .hb-status{ flex-direction:column; gap:.6rem; margin:0 1.5rem 1.25rem; } }
+  @media (min-width:768px){ .hb-status{ margin:0 6.25% 1.5rem; } } /* same inset as .modal-info-pad so the box lines up with the text and chips above */
+  @media (max-width:767px){ .hb-status{ flex-direction:column; gap:.6rem; margin:0 1.25rem 1.25rem; } }
   .card-year{ margin-left:auto; color:rgba(255,255,255,.35); letter-spacing:.04em; font-variant-numeric:tabular-nums; text-transform:none; }
   .card-blurb{ margin:.7rem 0 0; font-size:.86rem; line-height:1.6; color:rgba(255,255,255,.5); display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; max-width:36rem; }
   .project-card:hover .card-blurb{ color:rgba(255,255,255,.68); }
@@ -1847,7 +1855,8 @@
   .cx-acro-letters{ display:grid; grid-template-columns:repeat(6,minmax(0,1fr)); gap:.35rem; margin-top:1.6rem; }
   .cx-acro-letter{ display:flex; flex-direction:column; align-items:center; gap:.35rem; padding:.7rem .2rem .6rem; border:1px solid rgba(255,255,255,.1); transition:border-color var(--dur-short) var(--ease-std), background-color var(--dur-short) var(--ease-std); min-width:0; }
   .cx-acro-letter b{ font-size:clamp(1.5rem, 2.6vw, 2.1rem); font-weight:900; line-height:1; color:rgba(242,219,134,.35); transition:color var(--dur-short) var(--ease-std), transform var(--dur-med) var(--ease-out); }
-  .cx-acro-letter span{ font-size:.55rem; letter-spacing:.06em; color:rgba(255,255,255,.4); max-width:100%; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  /* labels may hyphenate at a soft hyphen (OVER-WHELMING) on narrow screens instead of being cut off with … */
+  .cx-acro-letter span{ font-size:.55rem; letter-spacing:.06em; color:rgba(255,255,255,.4); max-width:100%; text-align:center; line-height:1.3; hyphens:manual; -webkit-hyphens:manual; }
   .cx-acro-letter:hover{ border-color:rgba(255,255,255,.28); }
   .cx-acro-letter.is-on{ border-color:var(--accent); background:rgba(242,219,134,.08); }
   .cx-acro-letter.is-on b{ color:var(--accent); transform:translateY(-2px); }
@@ -1918,8 +1927,8 @@
      name, the hovered thumb widens while its neighbours dim, and a click
      still jumps to that project's section below. Touch: the row scrolls
      sideways and a tap jumps straight there. */
-  .uxs-hm{ padding:.5rem 1.5rem 2.75rem; }
-  @media (min-width:768px){ .uxs-hm{ padding:.75rem 3rem 3.25rem; } }
+  .uxs-hm{ padding:.5rem 1.25rem 2.75rem; }
+  @media (min-width:768px){ .uxs-hm{ padding:.75rem 6.25% 3.25rem; } }
   .uxs-hm-head{ border-top:1px solid rgba(255,255,255,.1); padding-top:1.5rem; margin-bottom:1.35rem; }
   .uxs-hm-mask{ position:relative; display:block; overflow:hidden; }
   .uxs-hm-line{ display:block; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
@@ -1949,13 +1958,13 @@
     .uxs-hm-row.is-hovering .uxs-hm-thumb{ opacity:1; filter:none; }
   }
   .uxs-sec{ position:relative; margin-top:3rem; }
-  .uxs-sticky{ position:sticky; top:0; z-index:5; display:flex; align-items:baseline; gap:.75rem; padding:.85rem 4.5rem .85rem 1.5rem; background:rgba(10,10,10,.88); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); border-bottom:1px solid rgba(255,255,255,.1); }
-  @media (min-width:768px){ .uxs-sticky{ padding:.95rem 5rem .95rem 3rem; } }
+  .uxs-sticky{ position:sticky; top:0; z-index:5; display:flex; align-items:baseline; gap:.75rem; padding:.85rem 4.5rem .85rem 1.25rem; background:rgba(10,10,10,.88); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); border-bottom:1px solid rgba(255,255,255,.1); }
+  @media (min-width:768px){ .uxs-sticky{ padding:.95rem 5rem .95rem 6.25%; } }
   .uxs-sticky-eyebrow{ font-size:10px; letter-spacing:.14em; color:var(--accent); flex-shrink:0; }
   .uxs-sticky-title{ font-size:.95rem; font-weight:600; color:#fff; }
   .uxs-sticky-period{ margin-left:auto; font-size:.72rem; color:rgba(255,255,255,.5); }
-  .uxs-head{ padding:1.25rem 1.5rem 1.5rem; }
-  @media (min-width:768px){ .uxs-head{ padding:1.5rem 3rem 1.75rem; } }
+  .uxs-head{ padding:1.25rem 1.25rem 1.5rem; }
+  @media (min-width:768px){ .uxs-head{ padding:1.5rem 6.25% 1.75rem; } }
   .uxs-sum{ font-size:.95rem; color:rgba(255,255,255,.85); line-height:1.55; margin:0; }
   .uxs-meta{ font-size:.75rem; color:rgba(255,255,255,.5); margin:.5rem 0 0; }
   .uxs-more{ display:flex; align-items:center; justify-content:center; gap:.5rem; width:calc(100% - 3rem); margin:1.25rem 1.5rem 0; padding:1rem; border:1px solid rgba(255,255,255,.2); font-size:.82rem; color:rgba(255,255,255,.75); transition:border-color .2s,color .2s; }
@@ -1972,10 +1981,10 @@
   }
   .modal-extra-toggle{
     display:flex; align-items:center; justify-content:space-between; gap:1.25rem;
-    width:100%; padding:1.75rem 1.5rem; text-align:left;
+    width:100%; padding:1.75rem 1.25rem; text-align:left;
     transition: background-color .2s ease;
   }
-  @media (min-width:768px){ .modal-extra-toggle{ padding:2rem 3rem; } }
+  @media (min-width:768px){ .modal-extra-toggle{ padding:2rem 6.25%; } }
   .modal-extra-toggle:hover{ background:rgba(255,255,255,.045); }
   /* Groups the (optional) preview thumbnail with the eyebrow/title text so
      the pair moves as one unit against the CTA pill on the other end —
@@ -4028,7 +4037,7 @@
     { img:'acro-2-o', l:'O', w:'ONLY', d:'한정 MD와 특별 포토카드 — COSMOS에서만 만날 수 있는 V.I.P 혜택.' },
     { img:'acro-3-s', l:'S', w:'SPECIAL', d:'VR·홀로그램으로 무대의 경계를 넘는, 국내 최초의 새로운 퍼포먼스.' },
     { img:'acro-4-m', l:'M', w:'MEMORY', d:'기억 속에만 있던 음악과 가사가 눈앞에서 살아나는 공간.' },
-    { img:'acro-5-o', l:'O', w:'OVERWHELMING', d:'서울 한가운데 숨은 공간, 압도적인 스케일로 펼쳐지는 BIGBANG의 20년.' },
+    { img:'acro-5-o', l:'O', w:'OVER\u00adWHELMING', d:'서울 한가운데 숨은 공간, 압도적인 스케일로 펼쳐지는 BIGBANG의 20년.' },
     { img:'acro-6-s', l:'S', w:'SPACE', d:'August 24 — 오픈 날짜를 공개하며 “A COSMOS of BIGBANG unfolds here.”' }
   ];
   var cxAcroBlock = {
@@ -4781,7 +4790,7 @@
   var projects = [
     { group:"Branding & Art Direction", key:"heartbeat", status:"In Progress", category:"Festival Art Direction · Key Visual · Spatial Graphics · On-site Build", title:"HEARTBEAT BY DUDUDO: 페스티벌 아트 디렉션 총괄", idea:"심전도 파형 하나로 묶은 양일간의 페스티벌", forms:["Identity", "Key Visual", "Motion", "MD", "On-site"], year:"2026",
       blurb:"키비주얼과 MD부터 행사장 전 구역의 공간 그래픽, 현장 설치까지. 10월 17–18일 개최를 앞둔 대형 음악 페스티벌의 아트 전 과정을 단독으로 기획하고 총괄하고 있습니다.",
-      desc:"2026년 10월 17–18일 고려대학교 화정체육관에서 열리는 대형 음악 페스티벌 'HEARTBEAT BY DUDUDO'의 아트 디렉션을 단독으로 맡아, 비주얼 방향 설정부터 현장 설치까지 전 과정을 이끌고 있습니다. 메인 키비주얼과 포스터 배리에이션, 모션 포스터 티저로 페스티벌의 시각 언어를 정립하고 로고·심볼 에셋 시스템을 개발했습니다. 블랙·레드 티셔츠와 자수 볼캡 등 최종 공식 MD와 가로등 배너·현수막·홀로그램 시트지 등 행사장 전 구역의 공간 그래픽 디자인을 마치고, 현재 제작과 인쇄 감리를 진행하고 있습니다. 디자이너가 1명인 환경에서 PM 3명이 SNS·상세페이지 콘텐츠를 직접 제작할 수 있도록 약 20종의 Figma 디자인 포맷을 설계하고 가이드와 교육을 제공했습니다. 관객이 가장 먼저 마주하는 입장 게이트 설치물은 행사 전날인 10월 16일 현장에 입장해 직접 시공·연출합니다. 아크릴 물감으로 녹슨 질감을 직접 칠해 연출하고, 게이트를 장식할 대형 구슬 목걸이도 직접 제작합니다.",
+      desc:"2026년 10월 17–18일 고려대학교 화정체육관에서 열리는 대형 음악 페스티벌 'HEARTBEAT BY DUDUDO'의 아트 디렉션을 단독으로 맡아, 비주얼 방향 설정부터 현장 설치까지 전 과정을 이끌고 있습니다.\n메인 키비주얼과 포스터 배리에이션, 모션 포스터 티저로 페스티벌의 시각 언어를 정립하고 로고·심볼 에셋 시스템을 개발했습니다. 블랙·레드 티셔츠와 자수 볼캡 등 최종 공식 MD와 가로등 배너·현수막·홀로그램 시트지 등 행사장 전 구역의 공간 그래픽 디자인을 마치고, 현재 제작과 인쇄 감리를 진행하고 있습니다.\n디자이너가 1명인 환경에서 PM 3명이 SNS·상세페이지 콘텐츠를 직접 제작할 수 있도록 약 20종의 Figma 디자인 포맷을 설계하고 가이드와 교육을 제공했습니다. 관객이 가장 먼저 마주하는 입장 게이트 설치물은 행사 전날인 10월 16일 현장에 입장해 직접 시공·연출합니다. 아크릴 물감으로 녹슨 질감을 직접 칠해 연출하고, 게이트를 장식할 대형 구슬 목걸이도 직접 제작합니다.",
       tools:["Illustrator", "Photoshop", "Art Direction", "현장 시공·연출"],
       thumb:"images/thumbs/heartbeat-thumb.jpg",
       links:[ { label:"티켓 예매", url:"https://tr.ee/Nwms6HjeAv", icon:"ticket" } ],
@@ -4813,7 +4822,7 @@
       tail:["images/dududo-case/dh-09-outro.jpg"] },
     { group:"Branding & Art Direction", key:"dddm", category:"Channel Creative Direction · Branding · Editorial · Photo Direction · Social", title:"DDDM × MUSE.D: 음악 채널 & 매거진 크리에이티브 총괄", idea:"유튜브, 인쇄 매거진, 인스타그램을 하나의 톤으로", forms:["Brand", "Program IP", "Editorial", "Photo Direction", "Motion"], year:"2026",
       blurb:"구독자 0명에서 시작한 유튜브 음악 채널 DDDM을 초기 기획부터 혼자 만들었습니다. 채널 브랜딩과 프로그램 IP, 같은 촬영으로 엮은 인쇄 매거진 MUSE.D와 인스타그램 피드까지 크리에이티브 전 과정을 총괄했습니다.",
-      desc:"아티스트와 음악을 보여주는 신규 유튜브 채널 DDDM을 구독자 0명, 초기 기획 단계부터 혼자 맡아 만들었습니다. 쇼츠 최고 조회수 143만 회, 인스타그램 팔로워 1.3만 명의 채널로 키웠습니다. 채널 브랜딩과 다섯 개의 프로그램 IP, 썸네일과 런칭 모션, 같은 촬영으로 엮은 인쇄 매거진 MUSE.D와 인스타그램 매거진 피드까지, 세 개의 매체를 하나의 화이트 톤으로 총괄했습니다.",
+      desc:"아티스트와 음악을 보여주는 신규 유튜브 채널 DDDM을 구독자 0명, 초기 기획 단계부터 혼자 맡아 만들었습니다. 쇼츠 최고 조회수 143만 회, 인스타그램 팔로워 1.3만 명의 채널로 키웠습니다.\n채널 브랜딩과 다섯 개의 프로그램 IP, 썸네일과 런칭 모션, 같은 촬영으로 엮은 인쇄 매거진 MUSE.D와 인스타그램 매거진 피드까지, 세 개의 매체를 하나의 화이트 톤으로 총괄했습니다.",
       tools:["Illustrator", "Photoshop", "InDesign", "After Effects", "Photo Direction", "Photo Retouching"],
       thumb:"images/thumbs/dddm-cycle-01.jpg",
       thumbCycle:["images/thumbs/dddm-cycle-01.jpg", "images/thumbs/dddm-cycle-02.jpg", "images/thumbs/dddm-cycle-03.jpg", "images/thumbs/dddm-cycle-04.jpg", "images/thumbs/dddm-cycle-05.jpg"],
@@ -4844,7 +4853,7 @@
       ] },
     { group:"Branding & Art Direction", key:"cosmos", category:"Exhibition Art Direction · Key Visual · Space Graphics · MD · Digital", title:"COSMOS: BIGBANG 20주년 기념 전시 아트 디렉션", idea:"무한(∞) 모티프로 이은 전시의 모든 접점", forms:["Key Visual", "Space", "VMD", "MD", "Digital"], year:"2026",
       blurb:"6종 이상의 콘셉트 시안으로 키비주얼을 도출하고, 공간 그래픽·VMD부터 30여 종의 MD와 디지털 콘텐츠까지 전시의 모든 접점을 디렉팅했습니다.",
-      desc:"BIGBANG 데뷔 20주년을 기념해 31일간 21,276명이 찾은 몰입형 미디어 전시 ‘COSMOS’의 아트 디렉션을 맡았습니다. 메인 포스터 기획 단계에서 6종 이상의 콘셉트 시안을 제안해 전시의 키비주얼 방향을 확립했고, 무한(∞) 모티프의 아이덴티티를 SNS·팬 플랫폼 공지 같은 디지털 채널부터 전시장 동선 그래픽과 VMD, 30여 종의 공식 MD까지 하나의 시각 언어로 확장했습니다. 전시는 티켓 매출 4.3억 원, MD 매출 24.4억 원을 기록했습니다.",
+      desc:"BIGBANG 데뷔 20주년을 기념해 31일간 21,276명이 찾은 몰입형 미디어 전시 ‘COSMOS’의 아트 디렉션을 맡았습니다.\n메인 포스터 기획 단계에서 6종 이상의 콘셉트 시안을 제안해 전시의 키비주얼 방향을 확립했고, 무한(∞) 모티프의 아이덴티티를 SNS·팬 플랫폼 공지 같은 디지털 채널부터 전시장 동선 그래픽과 VMD, 30여 종의 공식 MD까지 하나의 시각 언어로 확장했습니다. 전시는 티켓 매출 4.3억 원, MD 매출 24.4억 원을 기록했습니다.",
       tools:["Illustrator", "Photoshop", "Art Direction", "Campaign Planning", "VMD"],
       thumb:"images/thumbs/cosmos-bigbang-thumb.mp4",
       links:[ { label:"Instagram", url:"https://www.instagram.com/cosmos.exh", icon:"instagram" } ],
@@ -4866,7 +4875,7 @@
       ] },
     { group:"UX/UI", key:"uxui", category:"UX/UI Design · App · Game UI", title:"UX/UI 프로젝트 시리즈", idea:"콘셉트부터 UI 리소스까지, 네 개의 앱·게임", forms:["App", "Game UI", "UX Flow", "UI Resource"], year:"2024 – 2025",
       blurb:"인호야 · 브로큰 아카이브 · 하트싱크 · MAFIUS. 콘셉트부터 UI 리소스까지 단독으로 설계한 네 개의 앱·게임 프로젝트와 리디자인 스터디.",
-      desc:"캐릭터 IP 기반 파티 게임 '인호야', 기존 IP의 세계관을 전환한 '브로큰 아카이브', 감정일기 기반 AI 연애 시뮬레이션 '하트싱크', GPS 기반 소셜 게임 'MAFIUS'까지. 콘셉트 설계와 정보 구조, 와이어프레임, 전체 UI 화면과 그래픽 리소스를 단독으로 완성한 프로젝트들입니다. 여기에 유니클로·티머니 앱의 사용자 플로우를 분석해 재설계한 리디자인 스터디를 더했습니다. 아래 목차에서 프로젝트를 선택해 바로 이동할 수 있습니다.",
+      desc:"캐릭터 IP 기반 파티 게임 '인호야', 기존 IP의 세계관을 전환한 '브로큰 아카이브', 감정일기 기반 AI 연애 시뮬레이션 '하트싱크', GPS 기반 소셜 게임 'MAFIUS'까지. 콘셉트 설계와 정보 구조, 와이어프레임, 전체 UI 화면과 그래픽 리소스를 단독으로 완성한 프로젝트들입니다.\n여기에 유니클로·티머니 앱의 사용자 플로우를 분석해 재설계한 리디자인 스터디를 더했습니다. 아래 목차에서 프로젝트를 선택해 바로 이동할 수 있습니다.",
       tools:["Figma", "Photoshop", "Illustrator", "Unity"],
       thumb:"images/thumbs/broken-archive-thumb.mp4",
       images:[],
@@ -4885,7 +4894,7 @@
       ] },
     { group:"Illustration & Character", key:"inno", archive:{ order:2, name:"HK inno.N · 인호", line:"기업 공식 캐릭터를 리디자인해 공식 채택 · 앨범 커버 일러스트", fact:"Character · Illustration" }, category:"Character Design · Illustration · Commercial", title:"HK inno.N 공식 캐릭터 '인호' 리디자인 & 앨범 커버 일러스트", idea:"기업 공식 캐릭터를 다시 그려 공식 채택된 리디자인", forms:["Character", "Illustration", "Album Art"], year:"2022 – 2025",
       blurb:"HK이노엔의 공식 캐릭터 '인호'를 리디자인해 회사에 공식 채택되었습니다. 지금도 공식 채널에서 쓰이고 있으며, 아티스트 앨범 커버 일러스트도 함께 담았습니다.",
-      desc:"HK이노엔(inno.N)의 기존 공식 캐릭터 '인호'를 형태와 표정, 비율부터 새로 다듬어 리디자인했고, 이 디자인이 회사의 공식 캐릭터로 채택되었습니다. 현재까지 inno.N 공식 유튜브 채널에서 사용되고 있습니다. 같은 기간 다수 아티스트의 앨범 커버 일러스트를 작업하며 상업 일러스트레이션 영역을 넓혔습니다. 이 캐릭터를 활용해 기획한 파티 게임 UX/UI 프로젝트 '인호야'는 아래 링크에서 이어서 보실 수 있습니다.",
+      desc:"HK이노엔(inno.N)의 기존 공식 캐릭터 '인호'를 형태와 표정, 비율부터 새로 다듬어 리디자인했고, 이 디자인이 회사의 공식 캐릭터로 채택되었습니다. 현재까지 inno.N 공식 유튜브 채널에서 사용되고 있습니다.\n같은 기간 다수 아티스트의 앨범 커버 일러스트를 작업하며 상업 일러스트레이션 영역을 넓혔습니다. 이 캐릭터를 활용해 기획한 파티 게임 UX/UI 프로젝트 '인호야'는 아래 링크에서 이어서 보실 수 있습니다.",
       tools:["Procreate", "Illustrator", "Photoshop", "Figma"],
       thumb:"images/thumbs/inno-thumb.jpg",
       links:[ { label:"inno-n.com", url:"https://www.inno-n.com/", icon:"globe" }, { label:"인호 플레이리스트", url:"https://youtube.com/playlist?list=PLf9UA9DEROpRYmYBTiREetWa-Ys0E7_JI", icon:"youtube" } ],
@@ -4893,7 +4902,7 @@
       crossLink:{ label:"인호야 — 캐릭터 IP 기반 파티 게임 UX/UI 보러가기", key:"uxui", section:"ih", thumb:"images/thumbs/inhoya-crosslink-thumb.jpg" } },
     { group:"Illustration & Character", archive:{ order:3, name:"『요괴어사』 소설 시리즈", line:"시리즈 아트 디렉션 · 1·2권 표지와 내지 삽화 전부 직접 제작", fact:"Book Art · Illustration" }, category:"Book Art Direction · Cover · Illustration", title:"『요괴어사』 소설 시리즈 아트 디렉션 & 일러스트", idea:"1·2권의 표지와 내지 삽화를 모두 직접 그린 소설 시리즈", forms:["Art Direction", "Cover", "Illustration", "Publishing"], year:"2024",
       blurb:"소설 시리즈 『요괴어사』의 아트를 총괄했습니다. 1권과 2권의 표지, 내지 삽화, 시리즈 브랜딩까지 전부 직접 제작했습니다.",
-      desc:"소설 시리즈 『요괴어사』의 아트 디렉션과 일러스트를 맡아 1권과 2권의 표지와 내지 삽화를 전부 직접 그렸습니다. 권을 나란히 놓으면 한반도 지도가 이어지도록 설계한 표지 시스템과 권별 컬러 체계까지, 시리즈 비주얼의 전 과정을 혼자 담당했습니다. 현재 전국 온라인 서점에서 판매 중인 상업 출판 시리즈입니다.",
+      desc:"소설 시리즈 『요괴어사』의 아트 디렉션과 일러스트를 맡아 1권과 2권의 표지와 내지 삽화를 전부 직접 그렸습니다.\n권을 나란히 놓으면 한반도 지도가 이어지도록 설계한 표지 시스템과 권별 컬러 체계까지, 시리즈 비주얼의 전 과정을 혼자 담당했습니다. 현재 전국 온라인 서점에서 판매 중인 상업 출판 시리즈입니다.",
       tools:["Procreate", "Clip Studio Paint", "Photoshop"],
       thumb:"images/thumbs/yogoe-thumb.jpg",
       /* Embedded <video> playback isn't reliable once this page is opened via
@@ -4908,7 +4917,7 @@
         "images/yogoe-summary.jpg","images/yogoe-02b.jpg","images/yogoe-02.jpg","images/illustrations.jpg"] },
     { group:"Branding & Art Direction", archive:{ order:4, name:"MBN <span style=\"white-space:nowrap\">&lt;신들의 사생활&gt;</span> 시리즈", line:"시즌 1 <\u2060그리스로마신화\u2060>부터 두 시즌 아트 디렉터 — 신(神) 설정 아이디어 제안, 로고 · 포스터 · 삽화 단독 제작", fact:"Broadcast · Art Direction" }, category:"Broadcast Art Direction · Logo · Poster · Illustration", title:"MBN <\u2060그리스로마신화\u2060> · <\u2060신들의\u00a0사생활\u2060> 아트 디렉션", idea:"출연진을 신(神)으로 설정한 아이디어부터 두 시즌의 비주얼 전체까지", forms:["Logo", "Key Visual", "Poster", "Props"], year:"2022 – 2023",
       blurb:"시즌 1 <\u2060그리스로마신화\u2060>와 시즌 2 <\u2060신들의\u00a0사생활\u2060>의 아트 디렉터. 출연진을 신(神)으로 설정하는 아이디어를 직접 제안했고, 두 시즌의 공식 로고와 포스터, 프로그램 삽화를 단독으로 제작했습니다.",
-      desc:"MBN 예능 시즌 1 <\u2060그리스로마신화\u2060>와 시즌 2 <\u2060신들의\u00a0사생활\u2060>의 아트 디렉터로 참여했습니다. 출연진을 현대에 강림한 신(神)으로 설정하자는 아이디어를 직접 내, 각자의 성향을 신의 능력으로 치환한 캐릭터 브랜딩을 구축했습니다. 두 시즌에 걸쳐 공식 로고, 포스터 촬영·합성·편집, 프로그램 톤앤매너와 키비주얼, 프로그램 내 삽화, 촬영 소품과 굿즈 디자인까지 시리즈 비주얼 전반을 단독으로 제작했으며, 기획 단계부터 참여해 아트 디렉션을 총괄했습니다.",
+      desc:"MBN 예능 시즌 1 <\u2060그리스로마신화\u2060>와 시즌 2 <\u2060신들의\u00a0사생활\u2060>의 아트 디렉터로 참여했습니다. 출연진을 현대에 강림한 신(神)으로 설정하자는 아이디어를 직접 내, 각자의 성향을 신의 능력으로 치환한 캐릭터 브랜딩을 구축했습니다.\n두 시즌에 걸쳐 공식 로고, 포스터 촬영·합성·편집, 프로그램 톤앤매너와 키비주얼, 프로그램 내 삽화, 촬영 소품과 굿즈 디자인까지 시리즈 비주얼 전반을 단독으로 제작했으며, 기획 단계부터 참여해 아트 디렉션을 총괄했습니다.",
       tools:["Photoshop", "Illustrator", "Premiere Pro"],
       thumb:"images/thumbs/gods-thumb.mp4",
       link:{ label:"MBN 프로그램 사이트 바로가기", url:"https://www.mbn.co.kr/vod/programMain/916" },
@@ -4928,7 +4937,7 @@
       ] },
     { group:"Branding & Art Direction", key:"dankkumi", archive:{ order:5, name:"한가인 · 이창용", line:"도슨트 브랜드 '우아한 미담' 아트 브랜딩 — 단꿈아이 BX", fact:"Brand · Celebrity" }, category:"Brand Identity · BX · Motion", title:"단꿈아이 브랜드 아이덴티티 & BX", idea:"도슨트 브랜드 '우아한 미담'의 아이덴티티", forms:["Identity", "BX", "Motion"], year:"2021 – 2025",
       blurb:"도슨트 브랜드 '우아한 미담', 한국사 시리즈 '오픈아이', 공식 명함, <한국을 만든 101> 오프닝 타이틀까지. 단꿈아이 브랜드들의 첫인상을 설계했습니다.",
-      desc:"이창용·한가인 도슨트 브랜드 '우아한 미담'의 아이덴티티를 총괄하고, 초등 한국사 시리즈 '오픈아이'의 로고를 개발했으며, 단꿈아이 공식 명함을 디렉팅했습니다. <한국을 만든 101>의 오프닝 타이틀 시퀀스까지 제작하며 로고에서 모션 그래픽에 이르기까지 단꿈아이 브랜드 전반의 아이덴티티를 구축했습니다.",
+      desc:"이창용·한가인 도슨트 브랜드 '우아한 미담'의 아이덴티티를 총괄하고, 초등 한국사 시리즈 '오픈아이'의 로고를 개발했으며, 단꿈아이 공식 명함을 디렉팅했습니다.\n<한국을 만든 101>의 오프닝 타이틀 시퀀스까지 제작하며 로고에서 모션 그래픽에 이르기까지 단꿈아이 브랜드 전반의 아이덴티티를 구축했습니다.",
       tools:["Illustrator", "Photoshop", "After Effects"],
       thumb:"images/thumbs/uahan-midam-thumb.jpg",
       links:[ { label:"dankkumi.com", url:"https://www.dankkumi.com", icon:"globe" } ],
@@ -4939,7 +4948,7 @@
       tools:["Illustrator", "시공 디렉팅"], thumb:"images/thumbs/space-01-thumb.jpg", images:["images/space-01.jpg","images/space-02.jpg"] },
     { group:"Motion & Video", key:"diggle", archive:{ order:7, name:"CJ ENM · 디글", line:"구독자 0명이던 채널 초창기부터 — 영상 연출 & 모션 그래픽 누적 2,800편+", fact:"Motion · YouTube" }, category:"Video Direction · Motion Graphics · YouTube", title:"CJ ENM 디글(Diggle) 채널 영상 연출 & 모션 그래픽", idea:"편집·타이포·모션으로 만든 채널의 톤", forms:["Editing", "Motion", "OAP"], year:"2019 – 2020",
       blurb:"구독자 0명이던 디글 채널 초창기부터 참여해 누적 2,800편 이상의 영상을 제작하고, 오리지널 콘텐츠 5편과 포맷 10종 이상을 기획했습니다.",
-      desc:"CJ ENM 유튜브 채널 디글(Diggle)이 구독자 0명이던 초창기부터 합류해, 누적 2,800편 이상의 영상 제작에 참여하며 오리지널 콘텐츠 5편과 포맷 10종 이상을 기획·제작했습니다. After Effects로 채널 프로모 영상(OAP)과 드라마 연계 홍보 그래픽을 다수 제작했고, 편집·연출·그래픽·타이포그래피를 아우르며 채널 고유의 톤을 만들었습니다.",
+      desc:"CJ ENM 유튜브 채널 디글(Diggle)이 구독자 0명이던 초창기부터 합류해, 누적 2,800편 이상의 영상 제작에 참여하며 오리지널 콘텐츠 5편과 포맷 10종 이상을 기획·제작했습니다.\nAfter Effects로 채널 프로모 영상(OAP)과 드라마 연계 홍보 그래픽을 다수 제작했고, 편집·연출·그래픽·타이포그래피를 아우르며 채널 고유의 톤을 만들었습니다.",
       tools:["Premiere Pro", "After Effects"],
       thumb:"images/thumbs/video-design-thumb.jpg",
       links:[ { label:"cjenm.com", url:"https://www.cjenm.com/ko/", icon:"globe" }, { label:"디글(Diggle) 유튜브", url:"https://www.youtube.com/@Diggle", icon:"youtube" } ],
@@ -5988,8 +5997,9 @@
        - a dependent noun + the word before it            (아이디어 중, 할 수, 볼 수 있는)
      Chunks are capped at 16 characters so a long run can still wrap. */
   var KO_DET = ['이','그','저','각','총','약','더','또','및','첫','새','두','세','네','몇','온','전','모든','어떤','같은','다른','여러','매','본','단','해당','좀','잘','꼭','늘','곧','다','안','못'];
+  var BARE_END = /[을를이가은는에와과로의도고며서한된할던인적들께만요다게지면록데해여랑나든]$/;
   var KO_DEP = ['수','것','중','때','등','뿐','만큼','데','바','줄','듯','측','간','외'];
-  function GLUE_MAX(){ return window.innerWidth < 768 ? 9 : 16; }
+  function GLUE_MAX(){ return window.innerWidth < 768 ? 11 : 16; }
   function glueKoreanText(t){
     if (!/[가-힣]/.test(t)) return t;
     var parts = t.split(' ');
@@ -6003,14 +6013,24 @@
         else if (KO_DEP.indexOf(b.replace(/[.,!?)」』'"]+$/, '')) !== -1 && /[가-힣A-Za-z0-9]$/.test(a)) glue = true;
         else if ((a === '수' || a === '것') && /^(있|없|아니|같)/.test(b)) glue = true;      /* 할 수 있는 */
         else if (/[A-Za-z]$/.test(a) && /^\d/.test(b)) glue = true;                          /* PHASE 2, Season 1 */
+        /* a bare noun/adverb (no particle or verb ending) + the next word: compound terms and
+           adverb+verb pairs stay together — 아트 디렉션, 인쇄 감리, 입장 게이트, 직접 제작 */
+        else if (/^[가-힣]{2,}$/.test(a) && !BARE_END.test(a) && /^[가-힣A-Za-z0-9]/.test(b) &&
+                 (chunk === a.length || BARE_END.test(b.replace(/[.,!?)」』'"]+$/, '')))) glue = true;   /* pairs, so 소설 시리즈 | 아트 디렉션 */
+        else if (/\d[\d.,]*(만|천|억|여)?$/.test(a) && /^(명|회|개|종|편|권|곳|억|원|년|월|일|팀|장|부|건|위|만)/.test(b)) glue = true;  /* 1.3만 명, 20 팀 */
       }
       if (glue && chunk + 1 + b.length <= GLUE_MAX()){ out += ' ' + b; chunk += 1 + b.length; }
       else { out += ' ' + b; chunk = b.length; }
     }
     /* No break right after a middle dot joining two words (미디어아트·프로젝션):
        a word joiner keeps the pair on one line. */
-    if (window.innerWidth < 768) return out.replace(/\u2060/g, '');
-    return out.replace(/([가-힣A-Za-z0-9)])·(?=[가-힣A-Za-z0-9(])/g, '$1\u2060·\u2060');
+    /* (existing word joiners in titles — <\u2060신들의 사생활\u2060> — are kept on every screen) */
+    var narrow = window.innerWidth < 768;
+    return out.replace(/[^\s\u00a0]+/g, function(tok){
+      if (tok.indexOf('·') < 0 || tok.indexOf('\u2060·') >= 0) return tok;
+      if (narrow && tok.length > 12) return tok;
+      return tok.replace(/([가-힣A-Za-z0-9)])·(?=[가-힣A-Za-z0-9(])/g, '$1\u2060·\u2060');
+    });
   }
   var GLUE_SEL = 'p, dd, li, figcaption, h1, h2, h3, h4, .cosmos-step-copy, .cosmos-content-desc, .cosmos-content-name, .uxs-card-sum';
   function glueKorean(root){
@@ -6180,7 +6200,12 @@
     modalCategory.textContent = p.category;
     modalTitle.textContent = p.title;
     modalYear.textContent = p.year;
-    modalDesc.textContent = p.desc;
+    /* desc may hold paragraph breaks (\n): each becomes its own block so a long project
+       summary reads as 2–3 short paragraphs instead of one wall of text */
+    modalDesc.textContent = '';
+    String(p.desc || '').split('\n').forEach(function(para){
+      var sp = document.createElement('span'); sp.className = 'desc-para'; sp.textContent = para.trim(); modalDesc.appendChild(sp);
+    });
     modalTools.innerHTML = p.tools.map(function(t){
       return '<span class="px-3 py-1.5 rounded-full border border-white/15 text-xs text-white/60 whitespace-nowrap">' + t + '</span>';
     }).join('');
