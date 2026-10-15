@@ -1623,6 +1623,14 @@
 
   /* ---- Work card meta (index · discipline · year) + one-line blurb ---- */
   .work-sub{ margin:1rem 0 0; font-size:clamp(1rem,1.6vw,1.3rem); color:rgba(255,255,255,.5); letter-spacing:-.01em; }
+  /* sized so the words span the card grid exactly (text = 6.80em wide; grid = min(100vw − 80px, 1280px), phones 100vw − 64px) */
+  .work-title{ margin:0 0 4.5rem; color:var(--accent); font-size:calc(min(100vw - 80px, 1280px) / 6.8); line-height:.95; letter-spacing:-.04em; white-space:nowrap; }
+  @media (max-width:767px){ .work-title{ font-size:calc((100vw - 64px) / 6.8); margin-bottom:3rem; } }
+  .work-title .wt-w{ display:inline-block; overflow:hidden; vertical-align:top; padding:.06em .02em .1em; margin:-.06em -.02em -.1em; }
+  .work-title .wt-c{ display:inline-block; transform:translateY(112%) rotate(6deg); transform-origin:0 100%;
+    transition:transform 1s cubic-bezier(.16,1,.3,1); transition-delay:calc(var(--i) * 38ms); }
+  .work-title.is-in .wt-c{ transform:none; }
+  @media (prefers-reduced-motion: reduce){ .work-title .wt-c{ transform:none; transition:none; } }
   .card-idea{ margin:.75rem 0 0; font-size:1.02rem; line-height:1.5; color:rgba(255,255,255,.78); }
   @media (max-width:767px){ .card-idea{ display:none; } }
   .card-forms{ margin:.55rem 0 0; }
@@ -3120,14 +3128,8 @@
 <!-- WORK -->
 <section id="work" class="px-6 md:px-10 pt-32 md:pt-52 pb-32 md:pb-44 border-t border-white/10">
   <div class="max-w-7xl mx-auto">
-    <div class="flex items-end justify-between mb-16" data-animate>
-      <div>
-        <p class="text-xs tracking-[0.3em] text-white/40 font-display mb-3">WORK</p>
-        <h2 class="font-display font-semibold text-4xl md:text-6xl m-0">Selected Works</h2>
-        <p class="work-sub font-display">One idea, and the forms it took.</p>
-      </div>
-      <span id="work-count" class="hidden md:block text-xs text-white/40 tabular-nums"></span>
-    </div>
+    <!-- 2026-10: one big accent-yellow title, nothing else; its letters rise out of a mask as it scrolls in -->
+    <h2 class="work-title font-display font-semibold" aria-label="Selected Works">Selected Works</h2>
 
     <div id="work-grid" class="grid md:grid-cols-2 gap-x-8 gap-y-20"></div>
 
@@ -5359,6 +5361,18 @@
 /* Project count next to the "Selected Work" heading — was hardcoded
      ("12 Projects") and had already drifted from the real list. Updated
      again by applyFilter() to show how many match the active filter. */
+  /* Selected Works title: split into letters (words kept whole so they never break mid-word);
+     they rise out of a mask, 38ms apart, once the title is a third of the way up the screen */
+  (function(){
+    var t = document.querySelector('.work-title'); if (!t) return;
+    var i = 0;
+    t.innerHTML = t.textContent.split(' ').map(function(w){
+      return '<span class="wt-w" aria-hidden="true">' + w.split('').map(function(ch){ return '<span class="wt-c" style="--i:' + (i++) + '">' + ch + '</span>'; }).join('') + '</span>';
+    }).join(' ');
+    if (!('IntersectionObserver' in window)){ t.classList.add('is-in'); return; }
+    var io = new IntersectionObserver(function(es){ if (es[0].isIntersecting){ t.classList.add('is-in'); io.disconnect(); } }, { rootMargin:'0px 0px -30% 0px' });
+    io.observe(t);
+  })();
   var workCountEl = document.getElementById('work-count');
   function setWorkCount(n, filtered){
     if (!workCountEl) return;
