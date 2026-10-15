@@ -8283,7 +8283,7 @@
      wider instead, which gives the same wash without a filter or blend layer. */
   .contact-glow-halo{ position:absolute; left:0; top:0; z-index:0; pointer-events:none; width:760px; height:760px; margin:-380px 0 0 -380px;
     border-radius:50%; opacity:0; mix-blend-mode:screen; will-change:transform, opacity;
-    background:radial-gradient(circle, rgba(255,238,180,.11) 0%, rgba(245,212,120,.07) 18%, rgba(232,170,70,.035) 38%, rgba(200,130,40,.012) 55%, rgba(0,0,0,0) 70%);
+    background:radial-gradient(circle, rgba(255,238,180,.2) 0%, rgba(245,212,120,.13) 18%, rgba(232,170,70,.065) 38%, rgba(200,130,40,.022) 55%, rgba(0,0,0,0) 70%);
     transition:opacity .6s cubic-bezier(.4,0,.2,1); }
   .contact-glow-halo.is-on{ opacity:1; }
   .contact-glow-content{ position:relative; z-index:1; }
@@ -8294,7 +8294,6 @@
   var cv = document.getElementById('contact-glow-trail');
   var halo = document.getElementById('contact-glow-halo');
   if (!sec || !cv || !halo) return;
-  if (!window.matchMedia('(pointer: fine)').matches){ cv.remove(); halo.remove(); return; }
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var ctx = cv.getContext('2d');
   var dpr = 1, W = 0, H = 0, PAD = 80;
@@ -8352,7 +8351,7 @@
       dabs[keep++] = dd;
       var k = age <= HOLD ? 1 : 1 - (age - HOLD) / (LIFE - HOLD);
       k = k * k * (3 - 2 * k);                            /* smooth ease-out */
-      ctx.globalAlpha = 0.014 * k;
+      ctx.globalAlpha = 0.026 * k;
       var sz = (dd.s + 40) * (1.25 - 0.25 * k);           /* +40: stands in for the old CSS blur */
       ctx.drawImage(dab, dd.x - sz, dd.y - sz, sz * 2, sz * 2);
     }
@@ -8360,29 +8359,54 @@
     ctx.globalAlpha = 1;
     ctx.globalCompositeOperation = 'source-over';
   }
+  /* 2026-10: same motion language as the hero lens — the halo rides a soft spring (slight
+     overshoot), stretches along fast moves, breathes while resting, follows a finger on phones,
+     and blooms once in the middle the first time CONTACT scrolls into view. */
+  var vx = 0, vy = 0, lastT = 0, intro = -1, INTRO = 1700;
+  function easeOut(t){ return 1 - Math.pow(1 - t, 3); }
   function tick(now){
     raf = 0;
-    hx += (tx - hx) * 0.14; hy += (ty - hy) * 0.14;
-    halo.style.transform = 'translate3d(' + hx.toFixed(1) + 'px,' + hy.toFixed(1) + 'px,0)';
+    var dt = Math.min(0.05, lastT ? (now - lastT) / 1000 : 0.016); lastT = now;
+    var K = 140, D = 17;
+    vx += ((tx - hx) * K - vx * D) * dt; vy += ((ty - hy) * K - vy * D) * dt; hx += vx * dt; hy += vy * dt;
+    var spd = Math.sqrt(vx * vx + vy * vy), st = Math.min(1, spd / 2200);
+    var sc = (reduce ? 1 : 1 + 0.04 * Math.sin(now / 520)) * (1 + st * 0.1);
+    var introOn = intro >= 0 && now < intro + INTRO && !inside;
+    if (introOn){
+      var e = Math.max(0, (now - intro) / INTRO), env = e < 0.35 ? easeOut(e / 0.35) : e < 0.55 ? 1 : 1 - easeOut((e - 0.55) / 0.45);
+      hx = tx = sec.clientWidth / 2; hy = ty = sec.clientHeight * 0.42; vx = vy = 0;
+      sc *= 0.6 + 0.5 * easeOut(Math.min(1, e / 0.5)); halo.style.opacity = (env * 1.6).toFixed(3);
+    } else if (intro >= 0){ intro = -2; halo.style.opacity = ''; }
+    halo.style.transform = 'translate3d(' + hx.toFixed(1) + 'px,' + hy.toFixed(1) + 'px,0) rotate(' + Math.atan2(vy, vx).toFixed(3) + 'rad) scale(' + (sc * (1 + st * 0.45)).toFixed(3) + ',' + (sc * (1 - st * 0.18)).toFixed(3) + ')';
     if (!reduce){
-      /* the trail follows the real pointer (the halo is the eased one),
+      /* the trail follows the real pointer (the halo is the sprung one),
          so the light always starts right at the cursor */
       if (inside && lx !== null) stroke(lx, ly, tx, ty, now);
       lx = tx; ly = ty;
       paint(now);
     }
-    /* run while the cursor is in CONTACT or light is still fading out */
-    var moving = Math.abs(tx - hx) + Math.abs(ty - hy) > 0.3;
-    if (dabs.length || (inside && moving)) raf = requestAnimationFrame(tick);
+    /* run while the pointer is in CONTACT, the intro is playing, or light is still fading out */
+    var moving = Math.abs(tx - hx) + Math.abs(ty - hy) + spd > 0.3;
+    if (dabs.length || inside || introOn || moving) raf = requestAnimationFrame(tick);
+    else lastT = 0;
   }
   function kick(){ if (!raf) raf = requestAnimationFrame(tick); }
-  function local(e){ var r = sec.getBoundingClientRect(); return [e.clientX - r.left, e.clientY - r.top]; }
-  sec.addEventListener('mouseenter', function(e){
-    var p = local(e); tx = hx = p[0]; ty = hy = p[1]; lx = ly = null;
-    inside = true; halo.classList.add('is-on'); kick();
-  });
-  sec.addEventListener('mousemove', function(e){ var p = local(e); tx = p[0]; ty = p[1]; inside = true; kick(); });
-  sec.addEventListener('mouseleave', function(){ inside = false; halo.classList.remove('is-on'); lx = ly = null; });
+  function local(x, y){ var r = sec.getBoundingClientRect(); return [x - r.left, y - r.top]; }
+  function enter(x, y){ var p = local(x, y); tx = hx = p[0]; ty = hy = p[1]; vx = vy = 0; lx = ly = null;
+    if (intro >= 0){ intro = -2; halo.style.opacity = ''; }
+    inside = true; halo.classList.add('is-on'); kick(); }
+  function leave(){ inside = false; halo.classList.remove('is-on'); lx = ly = null; }
+  sec.addEventListener('mouseenter', function(e){ enter(e.clientX, e.clientY); });
+  sec.addEventListener('mousemove', function(e){ var p = local(e.clientX, e.clientY); tx = p[0]; ty = p[1]; inside = true; kick(); });
+  sec.addEventListener('mouseleave', leave);
+  /* touch: the light follows the finger (touchmove keeps firing while the page scrolls) */
+  sec.addEventListener('touchstart', function(e){ var t = e.touches[0]; if (t) enter(t.clientX, t.clientY); }, { passive:true });
+  sec.addEventListener('touchmove', function(e){ var t = e.touches[0]; if (!t) return; var p = local(t.clientX, t.clientY); tx = p[0]; ty = p[1]; inside = true; kick(); }, { passive:true });
+  sec.addEventListener('touchend', leave, { passive:true }); sec.addEventListener('touchcancel', leave, { passive:true });
+  if (!reduce && 'IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(es){ if (es[0].isIntersecting){ io.disconnect(); if (!inside){ intro = performance.now() + 250; kick(); } } }, { threshold:.35 });
+    io.observe(sec);
+  }
   new ResizeObserver(size).observe(sec);
   size();
 })();
