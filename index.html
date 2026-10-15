@@ -287,6 +287,18 @@
     aspect-ratio: 16/9;
     border:1px solid rgba(255,255,255,.08);
   }
+  /* Colour reveal (2026-10): when the WORK cards scroll in, each tile first wipes up as a solid block
+     of its own colour, then the colour wipes away to reveal the picture — staggered so the grid lights
+     up unevenly. Layers are only added by JS, so without JS the images simply show. */
+  .card-blank, .card-tone{ position:absolute; inset:0; z-index:2; pointer-events:none; display:none; }
+  .card-blank{ background:#0b0b0c; }
+  .card-tone{ background:var(--tone); clip-path:inset(100% 0 0 0); transition:clip-path .5s cubic-bezier(.65,0,.35,1); }
+  .card-thumb.tone-wait .card-blank, .card-thumb.tone-wait .card-tone, .card-thumb.tone-run .card-tone{ display:block; }
+  .card-thumb.tone-in .card-tone{ clip-path:inset(0 0 0 0); }
+  .card-thumb.tone-out .card-tone{ clip-path:inset(0 0 100% 0); transition-duration:.65s; }
+  .card-thumb.tone-out .card-blank{ display:none; }
+  .card-thumb.tone-out .card-thumb-img{ animation:toneImgIn .9s var(--ease-out) both; }
+  @keyframes toneImgIn{ from{ transform:scale(1.08); } to{ transform:scale(1); } }
   .card-thumb.card-thumb-empty{
     background: radial-gradient(120% 140% at 20% 10%, rgba(242,219,134,.35), transparent 55%),
                 linear-gradient(150deg, #1a1a1d, #0a0a0a);
@@ -428,7 +440,7 @@
      outside the scrolling area so it never travels with inner content. */
   #modal-panel{
     position:relative;
-    width:min(92vw, 1100px);
+    width:min(94vw, 1280px);
     height:min(90vh, calc(100dvh - 48px));
     max-height:90vh;
     background:var(--panel-bg, #111113);
@@ -496,6 +508,9 @@
   }
 
   .modal-info-pad{ padding:1.75rem 1.5rem 2rem; }
+  /* detail text: a measured column and a slightly smaller size, so the wider sheet reads quiet and editorial */
+  .modal-desc{ max-width:46rem; }
+  @media (min-width:768px){ .modal-desc{ font-size:.94rem; line-height:1.85; } }
   @media (min-width:768px){ .modal-info-pad{ padding:3rem 3rem 2.5rem; } }
 
   .modal-images{ display:flex; flex-direction:column; gap:0; margin:0; padding:0; }
@@ -3268,7 +3283,7 @@
         <p id="modal-category" class="text-xs tracking-[0.08em] text-accent-soft font-display mb-4 uppercase"></p>
         <h3 id="modal-title" class="font-display font-semibold text-3xl md:text-5xl leading-[1.08] tracking-tight mb-5 max-w-3xl"></h3>
         <p id="modal-year" class="text-xs text-white/40 mb-7"></p>
-        <p id="modal-desc" class="text-white/70 text-sm md:text-base leading-relaxed mb-8 max-w-5xl"></p>
+        <p id="modal-desc" class="modal-desc text-white/70 text-sm leading-relaxed mb-8"></p>
         <div id="modal-tools" class="flex flex-wrap gap-2"></div>
         <div id="modal-link-wrap"></div>
       </div>
@@ -5049,6 +5064,9 @@
        wrongly cut that in half instead of treating it as one group. */
     return cat.split(' · ')[0].trim();
   }
+  /* One vivid colour per card thumbnail (sampled from the image, saturation lifted) — the tile
+     flashes this colour before the picture appears, see the colour-reveal block below. */
+  var THUMB_TONE = {"images/thumbs/broken-archive-thumb.mp4":"#2c7aaa","images/thumbs/cosmos-bigbang-thumb.mp4":"#c9160d","images/thumbs/dddm-cycle-01.jpg":"#dea688","images/thumbs/gods-thumb.mp4":"#9e3845","images/thumbs/heartbeat-thumb.jpg":"#c9140d","images/thumbs/inhoya-crosslink-thumb.jpg":"#c9720d","images/thumbs/inno-thumb.jpg":"#f8a796","images/thumbs/space-01-thumb.jpg":"#74f6f4","images/thumbs/uahan-midam-thumb.jpg":"#c9300d","images/thumbs/video-design-thumb.jpg":"#cacac4","images/thumbs/yogoe-thumb.jpg":"#954190"};
   var archiveGrid = document.getElementById('archive-grid');
   var mainCount = 0, archiveCount = 0;
   projects.forEach(function(p, i){
@@ -5090,6 +5108,7 @@
     card.innerHTML =
       '<div class="card-thumb' + (hasImg ? '' : ' card-thumb-empty') + ' rounded-2xl flex items-end p-6">' +
         thumbInner +
+        (hasImg ? '<span class="card-blank" aria-hidden="true"></span><span class="card-tone" aria-hidden="true" style="--tone:' + (THUMB_TONE[thumbSrc] || '#F2DB86') + '"></span>' : '') +
         '<span class="card-glow" aria-hidden="true"></span><span class="card-glow-ring" aria-hidden="true"></span>' +
         '<span class="card-hover-chip" aria-hidden="true">자세히 보기' +
           '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M7 7h10v10"/></svg>' +
@@ -7286,6 +7305,29 @@
     }
   });
 
+
+  /* ---------------- WORK cards: colour reveal on scroll-in ---------------- */
+  (function(){
+    if (reduceMotion || !('IntersectionObserver' in window)) return;
+    var thumbs = document.querySelectorAll('.project-card .card-thumb');
+    thumbs.forEach(function(t){ if (t.querySelector('.card-tone')) t.classList.add('tone-wait'); });
+    var io = new IntersectionObserver(function(es){
+      es.forEach(function(e){
+        if (!e.isIntersecting) return;
+        var t = e.target; io.unobserve(t);
+        var d = Math.random() * 380;
+        setTimeout(function(){
+          t.classList.add('tone-run');
+          requestAnimationFrame(function(){ t.classList.add('tone-in'); });
+          setTimeout(function(){
+            t.classList.add('tone-out'); t.classList.remove('tone-wait');
+            setTimeout(function(){ t.classList.remove('tone-run','tone-in','tone-out'); }, 900);
+          }, 560 + Math.random() * 220);
+        }, d);
+      });
+    }, { threshold: 0.2 });
+    thumbs.forEach(function(t){ if (t.classList.contains('tone-wait')) io.observe(t); });
+  })();
 
   /* Card thumbnail videos: load + play only while on screen (replaces heavy GIFs). */
   (function(){
