@@ -511,6 +511,25 @@
   /* detail text: a measured column and a slightly smaller size, so the wider sheet reads quiet and editorial */
   .modal-desc{ max-width:none; }   /* full width between the two 6.25% side insets, so left and right margins match */
   .modal-desc .desc-para{ display:block; }
+  /* inside detail sheets, sentence-per-line spans flow as one paragraph — at sheet width the forced
+     breaks left half-empty lines */
+  /* Desktop body copy is set justified (양끝 맞춤, as in Korean editorial layouts): every full line
+     ends exactly on the right inset, so both margins of a paragraph match. The last line stays
+     left-aligned, and tieWidows() keeps it from being a two-word stub. Phones stay ragged-right —
+     justifying a ~22-character line opens visible gaps between words. */
+  @media (min-width:768px){
+    #modal-panel .modal-desc, #modal-panel .desc-para, #modal-panel .cosmos-copy, #modal-panel .jbs-note, #modal-panel .dd-ov-copy,
+    #modal-panel .dd-logos-copy, #modal-panel .inno-process-text, #modal-panel .hb-status-text span{ text-align:justify; text-wrap:wrap; }
+  }
+  #modal-panel .copy-line{ display:inline; }
+  /* desktop: the project summary reads as one justified block (one last line to manage instead of
+     three); phones keep the short paragraphs */
+  @media (min-width:768px){
+    .modal-desc .desc-para{ display:inline; }
+    .modal-desc .desc-para + .desc-para{ margin-top:0; }
+    .modal-desc .desc-para + .desc-para::before{ content:' '; }
+  }
+  #modal-panel .copy-line + .copy-line::before{ content:' '; }
   /* short blocks (captions, list items, meta lines) split evenly instead of leaving one word on the last line */
   #modal-panel li, #modal-panel figcaption, #modal-panel dd, #modal-panel .cosmos-content-desc, #modal-panel .cosmos-step-copy, #modal-panel .uxs-sum, #modal-panel .uxs-meta{ text-wrap:balance; }
   /* phones: the category line ran under the round close button */
@@ -870,7 +889,7 @@
      them all on their first frame. */
   /* HEARTBEAT ticket detail page: the full-length page in a phone frame that scrolls itself
      (and can be scrolled by hand), with the page's own section list beside it. */
-  .hbt{ display:grid; grid-template-columns:minmax(0,1fr) minmax(0,26rem); gap:clamp(1.5rem,4vw,3.5rem); align-items:center; width:100%; max-width:62rem; margin:0; }
+  .hbt{ display:grid; grid-template-columns:minmax(0,1fr) minmax(0,26rem); gap:clamp(1.5rem,4vw,3.5rem); align-items:center; width:100%; max-width:none; margin:0; }
   .hbt-list{ list-style:none; margin:1.75rem 0 0; padding:0; border-top:1px solid rgba(255,255,255,.1); counter-reset:hbt; }
   .hbt-list li{ display:flex; gap:1.4rem; padding:.95rem 0; border-bottom:1px solid rgba(255,255,255,.1); font-size:.9rem; color:rgba(255,255,255,.78); }
   .hbt-list li i{ font-style:normal; font-size:.68rem; letter-spacing:.14em; color:var(--accent); padding-top:.2rem; font-variant-numeric:tabular-nums; }
@@ -883,12 +902,12 @@
   .hbt-bar i{ position:absolute; left:0; top:0; width:100%; height:18%; background:var(--accent); border-radius:2px; }
   @media (max-width:820px){ .hbt{ grid-template-columns:1fr; } .hbt-screen{ height:68vh; } }
   /* HEARTBEAT · Design Ops (Figma format system for the PM team) */
-  .hbo-stats{ display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:1px; background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.08); width:100%; max-width:62rem; margin:1.75rem 0 0; }
+  .hbo-stats{ display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:1px; background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.08); width:100%; max-width:none; margin:1.75rem 0 0; }
   .hbo-stat{ background:#0b0b0b; padding:1.25rem 1.4rem; }
   .hbo-stat b{ display:block; font-size:2rem; font-weight:700; color:#fff; letter-spacing:-.01em; line-height:1.1; }
   .hbo-stat b small{ font-size:.9rem; font-weight:600; color:var(--accent); margin-left:.25rem; }
   .hbo-stat span{ display:block; margin-top:.5rem; font-size:.78rem; line-height:1.5; color:rgba(255,255,255,.55); }
-  .hbo-split{ display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:1rem; width:100%; max-width:62rem; margin-top:1rem; }
+  .hbo-split{ display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:1rem; width:100%; max-width:none; margin-top:1rem; }
   .hbo-col{ border:1px solid rgba(255,255,255,.1); padding:1.25rem 1.4rem; }
   .hbo-col h4{ margin:0 0 .6rem; font-size:.68rem; letter-spacing:.16em; color:var(--accent); font-weight:600; }
   .hbo-col p{ margin:0; font-size:.86rem; line-height:1.65; color:rgba(255,255,255,.72); }
@@ -903,13 +922,13 @@
   .hbsm figcaption{ margin-top:.6rem; font-size:.75rem; color:rgba(255,255,255,.55); }
   .hbsm figcaption b{ display:block; color:#fff; font-weight:600; font-size:.72rem; letter-spacing:.14em; margin-bottom:.15rem; }
   @media(max-width:700px){ .hbsm{ grid-template-columns:1fr; gap:1.25rem; } .hbsm-cover{ max-width:66%; } }
-  .hbe-wrap{ display:grid; grid-template-columns:auto minmax(0,1fr); gap:2rem; align-items:start; margin-top:1.5rem; }
-  .hbe-grid{ display:grid; grid-template-columns:repeat(2,9.5rem); gap:.75rem; }
+  .hbe-wrap{ display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:2.5rem; align-items:start; margin-top:1.5rem; }
+  .hbe-grid{ display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:.75rem; }
   .hbe-item{ margin:0; }
   .hbe-item img{ display:block; width:100%; height:auto; border:1px solid rgba(255,255,255,.1); }
   .hbe-item figcaption{ margin-top:.45rem; font-size:.66rem; line-height:1.4; color:rgba(255,255,255,.5); }
   .hbe-item figcaption b{ display:block; color:rgba(255,255,255,.85); font-weight:600; letter-spacing:.06em; }
-  .hbe-info{ min-width:0; max-width:34rem; font-size:.8rem; }
+  .hbe-info{ min-width:0; max-width:none; font-size:.8rem; }
   .hbe-info .hbt-list{ margin:0; }
   .hbe-info .hbt-list li{ padding:.55rem 0; gap:1rem; font-size:.8rem; }
   .hbe-facts{ margin:1rem 0 0; display:grid; gap:.4rem; }
@@ -964,7 +983,9 @@
   .hbr-item figcaption b{ display:block; color:rgba(255,255,255,.85); font-weight:600; letter-spacing:.08em; margin-bottom:.15rem; }
   @media(max-width:700px){ .hbr-grid{ gap:.7rem; } }
   .hbk-grid{ display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:.8rem; margin-top:1.75rem; }
-  .hbk-demo{ margin:1.75rem 0 0; max-width:26rem; }
+  /* demo video + its caption side by side, so the row uses the full width */
+  .hbk-demo{ margin:1.75rem 0 0; display:grid; grid-template-columns:minmax(0,26rem) minmax(0,1fr); gap:1.75rem; align-items:end; }
+  .hbk-demo figcaption{ margin-top:0 !important; font-size:.85rem !important; }
   .hbk-demo video{ display:block; width:100%; height:auto; border:1px solid rgba(255,255,255,.1); background:#111; }
   .hbk-demo figcaption{ margin-top:.6rem; font-size:.74rem; line-height:1.55; color:rgba(255,255,255,.5); }
   .hbk-demo figcaption b{ display:block; color:rgba(255,255,255,.85); font-weight:600; letter-spacing:.08em; margin-bottom:.15rem; }
@@ -974,7 +995,7 @@
   .hbk-item figcaption i{ font-style:normal; color:var(--accent); margin-right:.55rem; letter-spacing:.1em; }
   .hbk-item figcaption b{ display:block; color:rgba(255,255,255,.85); font-weight:600; letter-spacing:.08em; margin:.1rem 0 .2rem; }
   @media(max-width:900px){ .hbk-grid{ grid-template-columns:repeat(3,minmax(0,1fr)); } }
-  @media(max-width:700px){ .hbk-grid{ grid-template-columns:repeat(2,minmax(0,1fr)); gap:.7rem; } .hbk-demo{ max-width:none; } }
+  @media(max-width:700px){ .hbk-grid{ grid-template-columns:repeat(2,minmax(0,1fr)); gap:.7rem; } .hbk-demo{ display:block; } .hbk-demo figcaption{ margin-top:.6rem !important; font-size:.74rem !important; } }
   .hbo-figs{ display:grid; grid-template-columns:minmax(0,1fr) minmax(0,.42fr); gap:1.25rem; align-items:start; margin-top:.5rem; }
   .hbd-ops{ margin-top:1.75rem; width:100%; max-width:none; }
   .hbo-figs .hbo-fig{ margin:0; }
@@ -1009,7 +1030,7 @@
   .jbs-signed b{ display:block; font-size:.68rem; letter-spacing:.14em; color:var(--accent); margin-bottom:.4rem; }
   .jbs-signed p{ margin:0; font-size:.9rem; line-height:1.6; color:rgba(255,255,255,.7); }
   @media(max-width:700px){ .jbs-grid{ grid-template-columns:1fr; } .jbs-signed{ flex-direction:column; align-items:flex-start; } .jbs-signed img{ width:70%; } }
-  .hbo-fig{ margin:1.75rem 0 0; width:100%; max-width:62rem; }
+  .hbo-fig{ margin:1.75rem 0 0; width:100%; max-width:none; }
   .hbo-fig img{ display:block; width:100%; height:auto; border:1px solid rgba(255,255,255,.1); }
   .hbo-fig figcaption{ margin-top:.8rem; font-size:.75rem; color:rgba(255,255,255,.5); }
   @media (max-width:640px){ .hbo-stats{ grid-template-columns:1fr; } .hbo-split{ grid-template-columns:1fr; } }
@@ -1021,7 +1042,7 @@
   /* Text runs the full block width (was a 640px column that left the right
      half of every wide block empty); 62rem keeps lines from getting too long
      on very wide screens. */
-  .cosmos-head{ width:100%; max-width:62rem; }
+  .cosmos-head{ width:100%; max-width:none; }
   .cosmos-eyebrow{
     font-size:11px; letter-spacing:.15em; color:var(--accent); font-weight:700;
     margin-bottom:.9rem; text-transform:uppercase;
@@ -1032,7 +1053,7 @@
   }
   @media (min-width:768px){ .cosmos-title{ font-size:2.75rem; } }
   .cosmos-meta{ font-size:.8rem; color:rgba(255,255,255,.4); margin-bottom:1.1rem; }
-  .cosmos-copy{ font-size:.95rem; line-height:1.8; color:rgba(255,255,255,.66); margin:0; max-width:62rem; }
+  .cosmos-copy{ font-size:.95rem; line-height:1.8; color:rgba(255,255,255,.66); margin:0; max-width:none; }
   .cosmos-copy + .cosmos-copy{ margin-top:.8rem; }
   /* One sentence per line. A sentence that still has to wrap keeps a
      full-width first line, and fixOrphans() trims just that sentence if its
@@ -1244,7 +1265,7 @@
   .cosmos-phase2 img{ width:100%; display:block; }
 
   /* 01b · Content list (11 zones) */
-  .cosmos-content-list{ display:flex; flex-direction:column; width:100%; max-width:640px; }
+  .cosmos-content-list{ display:flex; flex-direction:column; width:100%; max-width:none; }
   .cosmos-content-row{ display:grid; grid-template-columns:2.4rem 1fr; gap:1rem; padding:1rem 0; border-top:1px solid rgba(255,255,255,.08); }
   .cosmos-content-row:first-child{ border-top:none; padding-top:0; }
   .cosmos-content-num{ font-size:.75rem; font-weight:700; color:rgba(255,255,255,.3); padding-top:.2rem; font-variant-numeric:tabular-nums; }
@@ -1762,7 +1783,7 @@
   .cx-sns-stats b{ font-size:clamp(1.4rem, 2.6vw, 2rem); font-weight:800; letter-spacing:-.02em; color:#fff; font-variant-numeric:tabular-nums; }
   .cx-sns-stats span{ font-size:.72rem; color:rgba(255,255,255,.5); }
   .cx-top3-label{ font-size:.72rem; font-weight:700; letter-spacing:.14em; color:rgba(255,255,255,.45); margin-top:.5rem; }
-  .cx-top3{ display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:1rem; width:100%; max-width:760px; }
+  .cx-top3{ display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:1rem; width:100%; max-width:none; }
   .cx-top3 figure{ margin:0; }
   .cx-top3 img{ width:100%; aspect-ratio:4/5; object-fit:cover; display:block; }
   .cx-top3 figcaption{ display:flex; flex-direction:column; gap:.2rem; margin-top:.7rem; font-size:.75rem; color:rgba(255,255,255,.55); }
@@ -1938,7 +1959,7 @@
   .uxs-hm-title{ margin-top:.45rem; font-weight:700; letter-spacing:-.025em; color:#fff;
     font-size:clamp(1.55rem, 6.4vw, 3.4rem); line-height:1.22; height:1.22em; }
   .uxs-hm-title .uxs-hm-line{ text-overflow:clip; }
-  .uxs-hm-sum{ margin:.75rem 0 0; font-size:.85rem; line-height:1.55; color:rgba(255,255,255,.6); min-height:3.1em; max-width:40rem; transition:opacity .3s var(--ease-std); }
+  .uxs-hm-sum{ margin:.75rem 0 0; font-size:.85rem; line-height:1.55; color:rgba(255,255,255,.6); min-height:3.1em; max-width:none; transition:opacity .3s var(--ease-std); }
   .uxs-hm-sum.is-swapping{ opacity:0; }
   .uxs-hm-row{ display:flex; gap:.5rem; height:clamp(84px, 12vw, 136px); }
   .uxs-hm-thumb{ position:relative; flex:1 1 0; min-width:0; overflow:hidden; padding:0; background:#111;
@@ -3389,7 +3410,7 @@
         '<div class="cosmos-head">' +
           '<div class="cosmos-eyebrow">Promotion · SNS Card News</div>' +
           '<h3 class="cosmos-title">SHOWROOM<br>PROMOTION</h3>' +
-          '<p class="cosmos-copy">공연에 앞서 더현대 서울 dududo showroom에 라인업 월, 모션 포스터 존, 무드 존을 마련하고 공식 인스타그램 카드뉴스로 소개했습니다.</p>' +
+          '<p class="cosmos-copy">공연에 앞서 더현대 서울 dududo showroom에 라인업 월·모션 포스터 존·무드 존을 마련하고 카드뉴스로 소개했습니다.</p>' +
           '<dl class="hbe-facts">' +
             '<div><dt>장소</dt><dd>더현대 서울 6F dududo showroom</dd></div>' +
             '<div><dt>기간</dt><dd>2026.09.22 – 09.30</dd></div>' +
@@ -3650,7 +3671,7 @@
       '<div class="cosmos-head">' +
         '<div class="cosmos-eyebrow">Spatial Planning</div>' +
         '<h3 class="cosmos-title">EXHIBITION FLOOR PLAN</h3>' +
-        '<p class="cosmos-copy"><span class="copy-line">시청역 유휴 지하공간을 전시장으로 어떻게 활용할지, 기획 초기 단계부터 깊이 참여해 다수의 공간 구성 시안을 제안했습니다.</span><span class="copy-line">11개 콘텐츠 공간을 하나의 동선으로 잇는 구성 역시 이 과정에서 제안한 아이디어 중 하나입니다.</span></p>' +
+        '<p class="cosmos-copy">시청역 유휴 지하공간의 활용 방안을 기획 초기부터 함께 고민해 다수의 공간 구성 시안을 제안했고, 11개 콘텐츠 공간을 하나의 동선으로 잇는 구성도 이때 제안했습니다.</p>' +
       '</div>' +
       '<div class="cosmos-floorplan"><img src="images/cosmos-add/cosmos-floorplan.jpg" alt="COSMOS 전시 평면도" loading="lazy" decoding="async"></div>' +
     '</div>'
@@ -3772,7 +3793,7 @@
         '<div class="cosmos-eyebrow">On-site · Print</div>' +
         '<h3 class="cosmos-title">X-BANNER &amp; MD ORDER SHEET</h3>' +
         '<p class="cosmos-copy">현장 MD 존에 세운 X배너(MD 안내)와 오더시트입니다. 라이트스틱·홀로그램 한정 티셔츠 등 스페셜 MD부터 의류·생활굿즈까지 30여 종 라인업의 셀렉과 디자인에 참여했고, 번호·가격·컬러 옵션을 한눈에 비교할 수 있는 그리드로 정리했습니다.</p>' +
-        '<p class="cosmos-copy">같은 번호 체계로 현장 구매용 MD 오더시트와 전시장 안내 표지판까지 제작해, 배너를 보고 → 번호를 체크하고 → 구매하는 동선이 끊기지 않도록 했습니다. 레이저 커팅 키링과 포토카드 등 일부 품목은 직접 제작했습니다.</p>' +
+        '<p class="cosmos-copy">같은 번호 체계로 MD 오더시트와 안내 표지판까지 제작해 배너 → 번호 체크 → 구매 동선이 끊기지 않게 했고, 레이저 커팅 키링·포토카드 등 일부 품목은 직접 제작했습니다.</p>' +
       '</div>' +
       '<div class="cx-print">' +
         '<figure class="cx-print-item"><div class="cx-print-img"><img src="' + CX + 'cosmos-xbanner-mockup.jpg" alt="MD 안내 X배너 목업" loading="lazy" decoding="async"></div><figcaption><b>X-BANNER</b>현장 MD 존 안내 배너</figcaption></figure>' +
@@ -3953,7 +3974,7 @@
       '<div class="cosmos-head">' +
         '<div class="cosmos-eyebrow">Space · Design Proposal to Site</div>' +
         '<h3 class="cosmos-title">FROM PROPOSAL TO SITE</h3>' +
-        '<p class="cosmos-copy"><span class="copy-line">기획 단계의 공간 디자인 시안이 실제 전시장으로 구현된 모습을 존별로 비교했습니다.</span><span class="copy-line">공간 기획에 참여하며 관람 동선에 맞춘 사인월·안내 사이니지 그래픽을 맡았고, MD존은 현장에서 VMD를 직접 디렉팅했습니다.</span></p>' +
+        '<p class="cosmos-copy">기획 단계의 공간 시안이 실제 전시장으로 구현된 모습을 존별로 비교했습니다. 동선에 맞춘 사인월·사이니지 그래픽을 맡았고, MD존 VMD는 현장에서 직접 디렉팅했습니다.</p>' +
       '</div>' +
       '<div class="cx-zones" data-cx-zones>' +
         '<div class="cx-zone-tabs" role="tablist" aria-label="전시 공간">' +
@@ -3982,7 +4003,7 @@
       '<div class="cosmos-head">' +
         '<div class="cosmos-eyebrow">On-site · Entrance Kit</div>' +
         '<h3 class="cosmos-title">ENTRANCE KIT &amp; PASS</h3>' +
-        '<p class="cosmos-copy"><span class="copy-line">관람객이 입장과 함께 받는 구성품을 하나의 그래픽 톤으로 정리했습니다.</span><span class="copy-line">위의 12컬러 입장 팔찌와 오더시트에 더해, 입장 특전 포토카드(4종 중 1종 랜덤)·리플렛, 그리고 현장 운영용 비표 4종까지 같은 톤으로 이어집니다.</span></p>' +
+        '<p class="cosmos-copy">입장 구성품을 하나의 그래픽 톤으로 정리했습니다. 12컬러 입장 팔찌와 오더시트, 특전 포토카드(4종 중 1종 랜덤)·리플렛, 운영용 비표 4종까지 같은 톤으로 이어집니다.</p>' +
       '</div>' +
       '<div class="cx-kit">' +
         '<figure class="cx-kit-item"><img src="' + CP + 'photocards.jpg" alt="입장 특전 포토카드" loading="lazy" decoding="async"><figcaption><b>PHOTOCARD</b>입장 특전 4종(GD · TY · DS · BIGBANG) 중\u00a01종\u00a0랜덤</figcaption></figure>' +
@@ -4008,7 +4029,7 @@
       '<div class="cosmos-head">' +
         '<div class="cosmos-eyebrow">Merchandise · Lineup &amp; Sales</div>' +
         '<h3 class="cosmos-title">OFFICIAL MD — 30+ ITEMS</h3>' +
-        '<p class="cosmos-copy"><span class="copy-line">30여 종에 달하는 공식 MD의 라인업 기획과 디자인, 퀄리티 및 색상 감리를 리드했습니다.</span><span class="copy-line">LED 키링과 포토카드 등 메인 굿즈는 직접 디자인했고, 전시 MD는 총 24.4억 원의 매출을 기록했습니다.</span></p>' +
+        '<p class="cosmos-copy">30여 종 공식 MD의 라인업 기획·디자인과 퀄리티·색상 감리를 리드했습니다. LED 키링·포토카드 등 메인 굿즈는 직접 디자인했고, 전시 MD 매출은 24.4억 원입니다.</p>' +
       '</div>' +
       '<div class="cx-md">' +
         '<div class="cx-md-lists">' +
@@ -4478,7 +4499,7 @@
           '<div>' +
             '<div class="cosmos-eyebrow">Project Overview</div>' +
             '<h3 class="cosmos-title">처음 두근거린 그 순간,<br><em>심장박동</em>을 브랜딩하다</h3>' +
-            '<p class="cosmos-copy"><span class="copy-line">밴드와 힙합, 두 장르의 이틀이 하나의 심박으로 이어지는</span><span class="copy-line">페스티벌형 콘서트의 아트 디렉션을 단독으로 맡았습니다.</span><span class="copy-line">브랜드 아이덴티티부터 키비주얼, 모션·SNS 프로모션,</span><span class="copy-line">공식 MD, 현장 그래픽과 입장 팔찌까지</span><span class="copy-line">관객이 만나는 모든 접점을 하나의 언어로 설계했습니다.</span></p>' +
+            '<p class="cosmos-copy">밴드와 힙합, 두 장르의 이틀이 하나의 심박으로 이어지는 페스티벌형 콘서트의 아트 디렉션을 단독으로 맡았습니다. 브랜드 아이덴티티부터 키비주얼, 모션·SNS 프로모션, 공식 MD, 현장 그래픽과 입장 팔찌까지 관객이 만나는 모든 접점을 하나의 시각 언어로 설계했습니다.</p>' +
           '</div>' +
           '<div>' +
             '<dl class="cosmos-facts cx-facts">' +
@@ -4521,7 +4542,7 @@
       '<div class="cosmos-head">' +
         '<div class="cosmos-eyebrow">On-site · Hologram Zone</div>' +
         '<h3 class="cosmos-title">HOLOGRAM ZONE</h3>' +
-        '<p class="cosmos-copy">홀로그램 부스의 외부 시트지를 디자인하고, 기기 안에서 송출될 영상 이미지도 제작했습니다. 행사 전에 실제 홀로그램 기기에 넣어 송출 화면을 미리 테스트했고, 부스 시트지는 현재 제작 단계입니다.</p>' +
+        '<p class="cosmos-copy">홀로그램 부스의 외부 시트지와 기기 안에서 송출될 영상을 제작하고, 행사 전 실제 기기에 넣어 송출 화면을 미리 테스트했습니다.</p>' +
       '</div>' +
       '<div class="cx-print hbh-3">' +
         '<figure class="cx-print-item"><div class="cx-print-img"><img src="' + HB + 'hb-holo-test.jpg" alt="홀로그램 기기에 내부 송출 영상을 넣어 테스트한 사진" loading="lazy" decoding="async"></div><figcaption><b>HOLOGRAM UNIT · TEST</b>기기 내부 송출 영상 이미지를 미리 넣어 확인한 테스트 사진</figcaption></figure>' +
@@ -4556,7 +4577,7 @@
       '<div class="cosmos-head">' +
         '<div class="cosmos-eyebrow">Promotion · dddm Instagram</div>' +
         '<h3 class="cosmos-title">TICKET EVENT</h3>' +
-        '<p class="cosmos-copy">콘서트 홍보로 dddm 채널에서 가볍게 진행한 티켓 이벤트입니다. ‘HEARTBEAT BY DUDUDO’ 플레이리스트에 감상평을 남기면 추첨으로 티켓을 드렸고, 10.17 BAND·10.18 HIP-HOP 회차를 각각의 게시물로 운영했습니다.</p>' +
+        '<p class="cosmos-copy">dddm 채널에서 진행한 티켓 이벤트로, 플레이리스트에 감상평을 남기면 추첨으로 티켓을 드렸습니다. 10.17 BAND·10.18 HIP-HOP 회차별로 게시물을 운영했습니다.</p>' +
       '</div>' +
       '<div class="hbe-wrap">' +
         '<div class="hbe-grid">' +
@@ -4616,7 +4637,7 @@
       '<div class="cosmos-head">' +
         '<div class="cosmos-eyebrow">Merchandise · Guide</div>' +
         '<h3 class="cosmos-title">MD INFO — INSTAGRAM & X-BANNER</h3>' +
-        '<p class="cosmos-copy">MD 판매 정보를 안내하는 인스타그램 카드 4종(전체 리스트·티셔츠·볼캡·스티커 세트)과, 현장 입장 게이트에 세우는 X배너입니다. 같은 구성으로 온라인과 현장에서 가격과 라인업을 안내합니다.</p>' +
+        '<p class="cosmos-copy">MD 판매 정보를 담은 인스타그램 카드 4종과 입장 게이트 X배너입니다. 온라인과 현장에서 같은 구성으로 가격과 라인업을 안내합니다.</p>' +
       '</div>' +
       '<div class="hbm-guide">' +
         '<figure class="hbm-xb"><div class="hbm-xbimg"><img src="images/hb-site/p55.jpg" alt="MD 물품 안내 X배너" loading="lazy" decoding="async"></div><figcaption><b>X-BANNER</b>입장 게이트 · 600×1800</figcaption></figure>' +
@@ -4713,7 +4734,7 @@
       '<div class="cosmos-head">' +
         '<div class="cosmos-eyebrow">Space · Design Proposal to Site</div>' +
         '<h3 class="cosmos-title">ENTRANCE GATE PROPOSAL</h3>' +
-        '<p class="cosmos-copy"><span class="copy-line">실제 입구 계단 사진 위에 대형 현수막과 계단 시트지, 도시 방향 사인 구조물을 합성해 현장 분위기를 미리 잡은 시안입니다.</span><span class="copy-line">10/16 현장 시공 후, 완성된 모습과 나란히 비교해 보여드릴 예정입니다.</span></p>' +
+        '<p class="cosmos-copy">실제 입구 계단 사진에 대형 현수막·계단 시트지·사인 구조물을 합성해 현장 분위기를 미리 잡은 시안입니다. 10/16 시공 후 실제 모습과 비교해 보여드릴 예정입니다.</p>' +
       '</div>' +
       '<figure class="hbo-fig"><div class="hbg-badge">DESIGN PROPOSAL</div><img src="' + HB + 'hb-gate-proposal.jpg" alt="입장 게이트·계단·대형 현수막 디자인 시안" loading="lazy" decoding="async"><figcaption>입장 게이트 · 계단 시트지 · 대형 현수막 시안 (현장 시공 전)</figcaption></figure>' +
     '</div>'
@@ -4723,7 +4744,7 @@
       '<div class="cosmos-head">' +
         '<div class="cosmos-eyebrow">Space · Design Proposal to Site</div>' +
         '<h3 class="cosmos-title">PHOTO WALL PROPOSAL</h3>' +
-        '<p class="cosmos-copy"><span class="copy-line">키비주얼을 대형 배너로 확장하고, 전면에 입체 레드 로고 조형물을 세워 관객이 브랜드 안으로 들어와 사진을 남기는 포토존으로 설계했습니다.</span><span class="copy-line">현장 제작 후, 완성된 모습과 나란히 비교해 보여드릴 예정입니다.</span></p>' +
+        '<p class="cosmos-copy">키비주얼 대형 배너 앞에 입체 레드 로고 조형물을 세워, 관객이 브랜드 안에서 사진을 남기는 포토존으로 설계했습니다. 제작 후 실제 모습과 비교해 보여드릴 예정입니다.</p>' +
       '</div>' +
       '<figure class="hbo-fig"><div class="hbg-badge">DESIGN PROPOSAL</div><img src="' + HB + 'hb-wall-proposal.jpg" alt="현장 포토월 · 입체 로고 조형물 디자인 시안" loading="lazy" decoding="async"><figcaption>현장 포토월 · 입체 로고 조형물 시안 (현장 제작 전)</figcaption></figure>' +
     '</div>'
@@ -4764,7 +4785,7 @@
       '<div class="cosmos-head">' +
         '<div class="cosmos-eyebrow">On-site Production</div>' +
         '<h3 class="cosmos-title">ALL ON-SITE GRAPHICS</h3>' +
-        '<p class="cosmos-copy"><span class="copy-line">주차장 안내판부터 입장 게이트, 티켓존 텐트 현수막, 공연장 내부 동선 배너, 비표까지.</span><span class="copy-line">관객이 행사장에서 마주칠 모든 출력물을 하나의 톤으로 직접 디자인했습니다. 지금 보이는 것은 제작에 들어간 확정 시안이에요.</span></p>' +
+        '<p class="cosmos-copy">주차장 안내판부터 입장 게이트, 티켓존 현수막, 공연장 동선 배너, 비표까지 관객이 마주칠 모든 출력물을 하나의 톤으로 디자인했습니다. 지금 보이는 것은 확정 시안입니다.</p>' +
       '</div>' +
       '<div class="hbs-stats"><div><b>10</b><span>현수막</span></div><div><b>18</b><span>X배너</span></div><div><b>8</b><span>A보드</span></div><div><b>6</b><span>텐트 현수막</span></div><div><b>5</b><span>시트지 · 구조물 · 비표 · POP</span></div></div>' +
       '<div class="hbs-chips" role="tablist">' + chips + '</div>' +
@@ -5999,8 +6020,8 @@
   var KO_DET = ['이','그','저','각','총','약','더','또','및','첫','새','두','세','네','몇','온','전','모든','어떤','같은','다른','여러','매','본','단','해당','좀','잘','꼭','늘','곧','다','안','못'];
   var BARE_END = /[을를이가은는에와과로의도고며서한된할던인적들께만요다게지면록데해여랑나든]$/;
   var KO_DEP = ['수','것','중','때','등','뿐','만큼','데','바','줄','듯','측','간','외'];
-  function GLUE_MAX(){ return window.innerWidth < 768 ? 11 : 16; }
-  function glueKoreanText(t){
+  function GLUE_MAX(){ return window.innerWidth < 768 ? 11 : 13; }
+  function glueKoreanText(t, light){
     if (!/[가-힣]/.test(t)) return t;
     var parts = t.split(' ');
     var out = parts[0], chunk = parts[0].length;
@@ -6008,14 +6029,16 @@
       var a = parts[i - 1], b = parts[i];
       var glue = false;
       if (a && b){
-        if (KO_DET.indexOf(a) !== -1 && /^[가-힣A-Za-z0-9]/.test(b)) glue = true;
-        else if (/[가-힣A-Za-z0-9)]의$/.test(a) && a.length >= 2 && /^[가-힣A-Za-z0-9]/.test(b)) glue = true;
+        /* light = justified copy: keep break chances (and stretchable spaces) — only units and dependent nouns stay tied */
+        if (!light && KO_DET.indexOf(a) !== -1 && /^[가-힣A-Za-z0-9]/.test(b)) glue = true;
+        else if (!light && /[가-힣A-Za-z0-9)]의$/.test(a) && a.length >= 2 && /^[가-힣A-Za-z0-9]/.test(b)) glue = true;
         else if (KO_DEP.indexOf(b.replace(/[.,!?)」』'"]+$/, '')) !== -1 && /[가-힣A-Za-z0-9]$/.test(a)) glue = true;
         else if ((a === '수' || a === '것') && /^(있|없|아니|같)/.test(b)) glue = true;      /* 할 수 있는 */
         else if (/[A-Za-z]$/.test(a) && /^\d/.test(b)) glue = true;                          /* PHASE 2, Season 1 */
+        else if (/^\d{1,2}\.\d{1,2}$/.test(a) && /^[A-Z가-힣]/.test(b)) glue = true;          /* 10.17 BAND */
         /* a bare noun/adverb (no particle or verb ending) + the next word: compound terms and
            adverb+verb pairs stay together — 아트 디렉션, 인쇄 감리, 입장 게이트, 직접 제작 */
-        else if (/^[가-힣]{2,}$/.test(a) && !BARE_END.test(a) && /^[가-힣A-Za-z0-9]/.test(b) &&
+        else if (!light && /^[가-힣]{2,}$/.test(a) && !BARE_END.test(a) && /^[가-힣A-Za-z0-9]/.test(b) &&
                  (chunk === a.length || BARE_END.test(b.replace(/[.,!?)」』'"]+$/, '')))) glue = true;   /* pairs, so 소설 시리즈 | 아트 디렉션 */
         else if (/\d[\d.,]*(만|천|억|여)?$/.test(a) && /^(명|회|개|종|편|권|곳|억|원|년|월|일|팀|장|부|건|위|만)/.test(b)) glue = true;  /* 1.3만 명, 20 팀 */
       }
@@ -6037,9 +6060,11 @@
     if (!root) return;
     root.querySelectorAll(GLUE_SEL).forEach(function(el){
       if (el.closest('.uxs-hm, svg')) return;
+      var light = getComputedStyle(el).textAlign === 'justify';
       var w = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, null), n;
       while ((n = w.nextNode())){
-        var g = glueKoreanText(n.data);
+        if (n._koOrig === undefined) n._koOrig = n.data;
+        var g = glueKoreanText(n._koOrig, light);
         if (g !== n.data) n.data = g;
       }
     });
@@ -6055,7 +6080,7 @@
      first width where the line count stays the same and the last line is
      long enough — i.e. the same paragraph, just evenly set. Re-run on
      modal open, font load and resize. */
-  var ORPHAN_SEL = 'p, dd, figcaption, .cosmos-step-copy, .cosmos-content-desc, .copy-line';
+  var ORPHAN_SEL = 'p, dd, li, figcaption, .cosmos-step-copy, .cosmos-content-desc, .copy-line, .desc-para';
   function measureLines(el){
     var r = document.createRange(); r.selectNodeContents(el);
     var lines = [];
@@ -6075,10 +6100,89 @@
      desktop test) and put line breaks in odd places. text-wrap:pretty/balance
      in CSS handles it without shrinking the measure. */
   var ORPHAN_FIX_ENABLED = false;
+  /* Widow ties (2026-10): a paragraph must not end on a stub ("…전 과정을 / 이끌고 있습니다.").
+     Instead of narrowing the column (which left a ragged right gap), the last few words are tied
+     with non-breaking spaces, one more at a time, until the last line is at least ~35% of the
+     longest line — the measure stays full width and the stub simply takes a few words with it.
+     Measured live, so it re-runs on open/resize and works at any screen width. */
+  function lineBoxes(el){
+    var r = document.createRange(); r.selectNodeContents(el);
+    var lines = [];
+    Array.prototype.forEach.call(r.getClientRects(), function(x){
+      if (x.width < 1) return;
+      for (var k = 0; k < lines.length; k++){ if (Math.abs(lines[k].t - x.top) < 4){ lines[k].l = Math.min(lines[k].l, x.left); lines[k].r = Math.max(lines[k].r, x.right); return; } }
+      lines.push({ t: x.top, l: x.left, r: x.right });
+    });
+    lines.sort(function(a, b){ return a.t - b.t; });
+    return lines.map(function(l){ return l.r - l.l; });
+  }
+  function tieWidows(root){
+    root.querySelectorAll(ORPHAN_SEL).forEach(function(el){
+      if (el._widowOrig){ el._widowOrig.forEach(function(o){ o.n.data = o.d; }); el._widowOrig = null; }
+      if (el._lsFixed){ el.style.letterSpacing = ''; el.style.wordSpacing = ''; el._lsFixed = false; }
+      if (!el.offsetParent || el.closest('.uxs-hm, svg')) return;
+      if (el.querySelector('p, div, dd, ul, ol, img, br')) return;
+      if (getComputedStyle(el).display === 'inline') return;                       /* inline pieces: handled by their block */
+      var cl = el.querySelector('.copy-line, .desc-para'); if (cl && getComputedStyle(cl).display === 'block') return;
+      if (getComputedStyle(el).whiteSpace.indexOf('nowrap') === 0) return;
+      var W = el.clientWidth; if (!W) return;
+      /* measure the natural (ragged) lines even where the copy is justified */
+      var justified = getComputedStyle(el).textAlign === 'justify', prevTA = el.style.textAlign;
+      if (justified) el.style.textAlign = 'left';
+      try { tieOne(el, W, justified); } finally { if (justified) el.style.textAlign = prevTA; }
+    });
+  }
+  function tieOne(el, W, justified){
+      var L0 = lineBoxes(el), n = L0.length;
+      if (n < 2) return;
+      var ok = function(L){ return L[L.length - 1] >= W * 0.3; };
+      if (ok(L0)) return;
+      var fs = parseFloat(getComputedStyle(el).fontSize) || 15;
+      var text = el.textContent, spaces = (text.match(/ /g) || []).length;
+      var pxPerSpace = spaces ? L0.reduce(function(a, b){ return a + b; }, 0) / spaces : 1e9;
+      /* 1) justified copy: tighten word- and letter-spacing a little and see whether the stub pulls
+            up into the line above. In justified text the full lines are re-stretched to the column, so
+            the tighter word-spacing is invisible there — only the letters get a hair (≤0.024em) closer; word gaps lose at most 0.12em. */
+      if (justified){
+        for (var st = 1; st <= 6; st++){
+          el.style.letterSpacing = (-0.004 * st) + 'em';
+          var Lt = lineBoxes(el);
+          if (Lt.length < n){ if (ok(Lt) || Lt.length < 2){ el._lsFixed = true; return; } break; }
+        }
+        el.style.wordSpacing = ''; el.style.letterSpacing = '';
+      }
+      /* 2) tie the last words together so the stub takes company; the line above may give up
+            words only while the extra space per word gap stays small (justified) or the line stays
+            long (ragged) */
+      var nodes = [], w = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, null), t;
+      while ((t = w.nextNode())) if (t.data.trim()) nodes.push(t);
+      if (!nodes.length) return;
+      var orig = nodes.map(function(x){ return { n: x, d: x.data }; });
+      var best = null;
+      for (var k = 0; k < 6; k++){
+        var done = false;
+        for (var j = nodes.length - 1; j >= 0 && !done; j--){
+          var d = nodes[j].data.replace(/\s+$/, ''), idx = d.lastIndexOf(' ');
+          if (idx > 0){ nodes[j].data = d.slice(0, idx) + '\u00a0' + nodes[j].data.slice(idx + 1); done = true; }
+        }
+        if (!done) break;
+        var L = lineBoxes(el);
+        if (L.length !== n) break;
+        var prev = L[n - 2], okPrev;
+        if (justified){ var gaps = Math.max(1, prev / pxPerSpace); okPrev = (W - prev) / gaps <= fs * 0.6; }
+        else okPrev = prev >= W * (n === 2 && /^(LI|DD|FIGCAPTION)$/.test(el.tagName) ? 0.45 : 0.72);
+        if (!okPrev) break;
+        best = nodes.map(function(x){ return x.data; });
+        if (ok(L)) break;
+      }
+      if (best){ nodes.forEach(function(x, i){ x.data = best[i]; }); el._widowOrig = orig; }
+      else orig.forEach(function(o){ o.n.data = o.d; });
+  }
   function fixOrphans(root){
     if (!root) return;
     if (!ORPHAN_FIX_ENABLED){
       root.querySelectorAll(ORPHAN_SEL).forEach(function(el){ if (el._orphanFixed){ el.style.maxWidth = ''; el._orphanFixed = false; } });
+      tieWidows(root);
       return;
     }
     root.querySelectorAll(ORPHAN_SEL).forEach(function(el){
