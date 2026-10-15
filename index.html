@@ -1319,8 +1319,20 @@
 
 
   /* ---- AIN identity (hero) ---- */
-  header#top h1.hero-allin{ font-size: clamp(3.6rem, 25vw, 17rem) !important; letter-spacing:-0.035em !important; margin:0 !important; padding:.04em 0 .06em; }
-  @media (max-width:767px){ header#top h1.hero-allin{ font-size:27vw !important; } }
+  /* ALL IN. sizing (2026-10, golden ratio): the word's ink is 2.963em wide and its cap height 0.71em.
+     It is set as large as the smaller of two limits —
+       · its ink spans the full content column (the same edges as the nav: 1200px max, 40px gutters);
+       · its cap height is 1/φ² (38.2%) of the hero's free height (viewport minus nav and client band).
+     The hero's free space is then split above : below = 1 : φ (see #top::before/::after). */
+  /* (glyph box = 3.012em incl. side bearings; hero inner column = 100vw − 96px desktop / − 64px phone) */
+  header#top{ --allin: min(calc(1200px / 2.963), calc((100vw - 96px) / 3.012), calc((100svh - 121px) * .382 / .71)); }
+  @media (max-width:767px){ header#top{ --allin: min(calc((100vw - 64px) / 3.012), calc((100svh - 121px) * .382 / .71)); } }
+  header#top h1.hero-allin{ font-size: var(--allin) !important; letter-spacing:-0.035em !important; margin:0 !important; padding:.04em 0 .06em; white-space:nowrap; }
+  header#top h1.hero-allin .line-mask, header#top h1.hero-allin .line-inner{ white-space:nowrap !important; }
+  header#top > .max-w-5xl{ max-width:none; }  /* the lockup sizes itself from --allin and centres */
+  header#top{ padding-top:65px !important; padding-bottom:57px !important; justify-content:flex-start !important; }
+  header#top::before{ content:''; flex:1 1 0; min-height:1rem; }
+  header#top::after{ content:''; flex:1.75 1 0; min-height:1rem; }  /* 1.75 here lands the measured ink gaps at ≈1 : 1.618 */
   .ain-entry{ display:flex; flex-wrap:wrap; align-items:baseline; justify-content:center; gap:.2rem .7rem; margin:0 0 1.6rem; font-size:.78rem; color:rgba(255,255,255,.62); letter-spacing:.04em; }
   .ain-entry b{ color:#fff; font-weight:700; letter-spacing:.18em; }
   .ain-pron{ color:rgba(255,255,255,.5); }
@@ -2902,6 +2914,8 @@
   /* hero caption row (2026-10): as wide as ALL IN., hairline above, two columns of equal type */
   .hero-lockup{ display:inline-grid; grid-template-columns:auto; justify-items:stretch; max-width:100%; }
   .hero-lockup .hero-title-wrap{ justify-self:center; }
+  /* pull the box up by the space above the capitals (.148em) so the 1 : φ split is measured from the ink */
+  header#top .hero-lockup{ margin-top:calc(var(--allin) * -.148); }
   .hero-meta{ display:flex; justify-content:space-between; align-items:flex-start; gap:2rem; margin-top:1.6rem; padding-top:1.1rem;
     border-top:1px solid rgba(255,255,255,.22); text-align:left; font-size:.9rem; line-height:1.65; letter-spacing:.01em; }
   .hero-meta p{ margin:0; }
@@ -2912,10 +2926,10 @@
   .hero-meta-role i{ font-style:normal; color:var(--accent); margin:0 .35em; }
   .hero-meta-role{ white-space:nowrap; }
   /* optical edges: the hairline starts at the A's foot and ends at the full stop, not at the glyph boxes */
-  .hero-meta{ margin-left:calc(clamp(3.6rem, 25vw, 17rem) * .022); margin-right:calc(clamp(3.6rem, 25vw, 17rem) * .03); }
+  .hero-meta{ margin-left:calc(var(--allin) * .022); margin-right:calc(var(--allin) * .03); }
   @media (max-width:767px){
     .hero-meta{ flex-direction:column; align-items:stretch; gap:.85rem; font-size:.8rem; margin-top:1.2rem; padding-top:.9rem;
-      margin-left:calc(27vw * .022); margin-right:calc(27vw * .03); }
+      margin-left:calc(var(--allin) * .022); margin-right:calc(var(--allin) * .03); }
     .hero-meta-r{ text-align:left; }
   }
   @media (max-width:767px){ .hero-role{ font-size:.72rem; letter-spacing:.18em; margin-top:1.3rem; } }
@@ -7323,7 +7337,7 @@
       }
       if (introOn){ var e = (now - intro) / 1700;
         if (e > 0){ var env = e < 0.35 ? easeOut(e / 0.35) : e < 0.55 ? 1 : 1 - easeOut((e - 0.55) / 0.45);
-          stamp(lens.width / 2, lens.height * 0.47, R * (0.55 + 0.5 * easeOut(Math.min(1, e / 0.5))), env * 0.95, 0, 1, 1); } }
+          stamp(lens.width / 2, lens.height * 0.4, R * (0.55 + 0.5 * easeOut(Math.min(1, e / 0.5))), env * 0.95, 0, 1, 1); } }
       lctx.globalAlpha = 1;
       lctx.globalCompositeOperation = 'source-in'; lctx.drawImage(sharp, 0, 0);
       lctx.globalCompositeOperation = 'source-over';
