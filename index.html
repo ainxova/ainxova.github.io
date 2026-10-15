@@ -517,10 +517,8 @@
      ends exactly on the right inset, so both margins of a paragraph match. The last line stays
      left-aligned, and tieWidows() keeps it from being a two-word stub. Phones stay ragged-right —
      justifying a ~22-character line opens visible gaps between words. */
-  @media (min-width:768px){
-    #modal-panel .modal-desc, #modal-panel .desc-para, #modal-panel .cosmos-copy, #modal-panel .jbs-note, #modal-panel .dd-ov-copy,
-    #modal-panel .dd-logos-copy, #modal-panel .inno-process-text, #modal-panel .hb-status-text span{ text-align:justify; text-wrap:wrap; }
-  }
+  /* (justified setting removed 2026-10-15: on real screens it opened uneven word gaps. Body copy is
+     ragged-right at full width; tieWidows() keeps paragraphs from ending on a one- or two-word stub.) */
   #modal-panel .copy-line{ display:inline; }
   /* desktop: the project summary reads as one justified block (one last line to manage instead of
      three); phones keep the short paragraphs */
@@ -4066,7 +4064,7 @@
       '<div>' +
         '<div class="cosmos-eyebrow">Instagram · Acrostic Carousel</div>' +
         '<h3 class="cosmos-title">C·O·S·M·O·S</h3>' +
-        '<p class="cosmos-copy"><span class="copy-line">전시명 COSMOS의 여섯 알파벳마다, 그 글자로 시작하면서 BIGBANG 팬(V.I.P)의 마음에 닿는 단어를 하나씩 붙여 기획한 7장짜리 캐러셀입니다.</span><span class="copy-line">한 장을 넘길 때마다 붉은 글자가 한 칸씩 옮겨 가며 전시의 혜택·공연·추억·공간을 차례로 보여 주고, 마지막 장에서 오픈 날짜로 방문을 이끌도록 설계했습니다.</span></p>' +
+        '<p class="cosmos-copy"><span class="copy-line">전시명 COSMOS의 여섯 알파벳마다, 그 글자로 시작하면서 BIGBANG 팬(V.I.P)\u2060의 마음에 닿는 단어를 하나씩 붙여 기획한 7장짜리 캐러셀입니다.</span><span class="copy-line">한 장을 넘길 때마다 붉은 글자가 한 칸씩 옮겨 가며 전시의 혜택·공연·추억·공간을 차례로 보여 주고, 마지막 장에서 오픈 날짜로 방문을 이끌도록 설계했습니다.</span></p>' +
         '<div class="cx-acro-letters" role="tablist" aria-label="COSMOS 알파벳">' +
           cxAcro.slice(1).map(function(a, i){
             return '<button type="button" class="cx-acro-letter" data-acro-go="' + (i + 1) + '" aria-label="' + a.l + ' — ' + a.w + '"><b>' + a.l + '</b><span>' + a.w + '</span></button>';
@@ -6049,6 +6047,8 @@
        a word joiner keeps the pair on one line. */
     /* (existing word joiners in titles — <\u2060신들의 사생활\u2060> — are kept on every screen) */
     var narrow = window.innerWidth < 768;
+    /* no break between a closing bracket/quote and the particle after it: 팬(V.I.P)의, 'COSMOS'의 */
+    out = out.replace(/([)\]』」’”'"])(?=[가-힣])/g, '$1\u2060');
     return out.replace(/[^\s\u00a0]+/g, function(tok){
       if (tok.indexOf('·') < 0 || tok.indexOf('\u2060·') >= 0) return tok;
       if (narrow && tok.length > 12) return tok;
