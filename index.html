@@ -1319,8 +1319,8 @@
 
 
   /* ---- AIN identity (hero) ---- */
-  header#top h1.hero-allin{ font-size: clamp(3.6rem, 21vw, 12.5rem) !important; letter-spacing:-0.035em !important; margin:0 !important; padding:.04em 0 .06em; }
-  @media (max-width:767px){ header#top h1.hero-allin{ font-size:23vw !important; } }
+  header#top h1.hero-allin{ font-size: clamp(3.6rem, 25vw, 17rem) !important; letter-spacing:-0.035em !important; margin:0 !important; padding:.04em 0 .06em; }
+  @media (max-width:767px){ header#top h1.hero-allin{ font-size:27vw !important; } }
   .ain-entry{ display:flex; flex-wrap:wrap; align-items:baseline; justify-content:center; gap:.2rem .7rem; margin:0 0 1.6rem; font-size:.78rem; color:rgba(255,255,255,.62); letter-spacing:.04em; }
   .ain-entry b{ color:#fff; font-weight:700; letter-spacing:.18em; }
   .ain-pron{ color:rgba(255,255,255,.5); }
@@ -3210,7 +3210,6 @@
         <h2 class="font-display font-semibold leading-[0.9] text-[11vw] md:text-[6.4vw]" data-animate>
           LET'S MAKE<br>SOMETHING.
         </h2>
-        <p class="contact-sub" data-animate><span class="copy-line">새로운 프로젝트, 협업, 채용 제안 등</span><span class="copy-line">편하게 연락 주세요.</span></p>
         <!-- audit 2026-10: contact actions live right under the copy (were below the 420–460px badge,
              ~890px down on phones). Primary = open a mail draft; copy buttons + QR stay as secondary. -->
         <div class="contact-actions" data-animate>
@@ -7185,7 +7184,10 @@
     var off = null, offCtx = null;
     /* perf 2026-10: 1× backing store — the frames are 480px wide and sit under a dark overlay, so a
        Retina-sized canvas only multiplied the pixels redrawn per frame (~4×) with no visible gain. */
-    function resize(){ var d = 1;
+    /* 2026-10: the 480px footage looked low-res behind ALL IN, so it is now deliberately out of
+       focus — drawn at 1/6 size and upscaled (smooth, costs less than 1×), then softened a bit more
+       by a static CSS blur. The type carries the screen; the footage is just colour and motion. */
+    function resize(){ var d = 1/6;
       canvas.width = Math.round(canvas.clientWidth * d); canvas.height = Math.round(canvas.clientHeight * d); lastFi = -1; if (ready) draw(head); }
     /* Portrait screens: a plain cover-fit zooms the 16:9 frame ~5x, so faces
        fill the phone and outrank the type. There we lay a blurred cover-fit
@@ -7213,7 +7215,8 @@
       var dw = CW * cover, dh = CH * cover;
       ctx.globalAlpha = a; ctx.drawImage(sprite, sx, sy, CW, CH, (cw - dw) / 2, (ch - dh) / 2, dw, dh); }
     function frameAt(t){ var base = 0; for (var k = 0; k < SEG.length; k++){ var g = SEG[k]; if (t < g.d || k === SEG.length - 1) return base + Math.min(g.n - 1, Math.floor(t * g.fps)); t -= g.d; base += g.n; } return 0; }
-    function draw(t){ ctx.globalAlpha = 1; ctx.fillStyle = '#0a0a0a'; ctx.fillRect(0, 0, canvas.width, canvas.height); cell(frameAt(t), 1); }
+    /* blur is applied while drawing into the tiny canvas (cheap: ~240×150 px), never as a CSS filter */
+    function draw(t){ ctx.globalAlpha = 1; ctx.filter = 'none'; ctx.fillStyle = '#0a0a0a'; ctx.fillRect(0, 0, canvas.width, canvas.height); ctx.filter = 'blur(' + Math.max(1.5, canvas.width / 140).toFixed(1) + 'px) brightness(.72) saturate(1.15)'; cell(frameAt(t), 1); ctx.filter = 'none'; }
     function tick(ts){ if (!inView){ raf = 0; return; } if (!last) last = ts;
       var dt = Math.min(0.1, (ts - last) / 1000); last = ts; head = (head + dt) % TOTAL; var fi = frameAt(head); if (fi !== lastFi){ lastFi = fi; draw(head); } raf = requestAnimationFrame(tick); }
     function start(){ if (!raf && ready && inView && !reduceMotion){ last = 0; raf = requestAnimationFrame(tick); } }
