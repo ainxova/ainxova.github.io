@@ -3207,7 +3207,6 @@
 
 <!-- CONTACT / FOOTER -->
 <section id="contact" class="relative px-6 md:px-10 pt-32 md:pt-44 pb-10 border-t border-white/10 overflow-hidden">
-  <canvas id="contact-glow-trail" class="contact-glow-trail" aria-hidden="true"></canvas>
   <div id="contact-glow-halo" class="contact-glow-halo" aria-hidden="true"></div>
   <div class="max-w-7xl mx-auto contact-glow-content">
     <div class="contact-top-row">
@@ -8265,22 +8264,11 @@
 </script>
 
 <!-- ===================================================================
-     CONTACT: cursor light + lingering trail
-     Two layers behind the contact content, mouse/trackpad only:
-       - #contact-glow-halo: a soft warm-gold glow that follows the cursor
-         (eased, so it floats rather than sticks);
-       - #contact-glow-trail: a canvas the cursor "paints" light onto as it
-         moves: wide gaussian dabs under a 34px blur, so it reads as a soft
-         wash of light rather than a brush stroke. Very faint and very short:
-         it trails the cursor for only ~0.5s.
-     Strokes are drawn with additive blending, so overlapping passes build up
-     brighter, like light rather than paint. Reduced motion: halo only.
+     CONTACT: cursor light
+     A soft warm-gold glow behind the contact content that follows the pointer (or a finger) on a
+     spring, stretching along fast moves — the same motion as the hero lens. No painted trail.
      =================================================================== -->
 <style>
-  .contact-glow-trail{ position:absolute; inset:-80px; width:calc(100% + 160px); height:calc(100% + 160px); z-index:0; pointer-events:none; display:block; max-width:none; }
-  /* perf 2026-10: the 34px CSS blur on a full-section canvas was re-blurred by the GPU on every
-     frame of mouse movement (≈5× fewer frames in CONTACT). The dabs are now drawn pre-softened and
-     wider instead, which gives the same wash without a filter or blend layer. */
   .contact-glow-halo{ position:absolute; left:0; top:0; z-index:0; pointer-events:none; width:760px; height:760px; margin:-380px 0 0 -380px;
     border-radius:50%; opacity:0; mix-blend-mode:screen; will-change:transform, opacity;
     background:radial-gradient(circle, rgba(255,238,180,.2) 0%, rgba(245,212,120,.13) 18%, rgba(232,170,70,.065) 38%, rgba(200,130,40,.022) 55%, rgba(0,0,0,0) 70%);
@@ -8291,74 +8279,10 @@
 <script>
 (function(){
   var sec = document.getElementById('contact');
-  var cv = document.getElementById('contact-glow-trail');
   var halo = document.getElementById('contact-glow-halo');
-  if (!sec || !cv || !halo) return;
+  if (!sec || !halo) return;
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var ctx = cv.getContext('2d');
-  var dpr = 1, W = 0, H = 0, PAD = 80;
-  var tx = 0, ty = 0, hx = 0, hy = 0, lx = null, ly = null, inside = false, raf = 0, idle = 0;
-
-  function size(){
-    /* Canvas overhangs the section by PAD on every side (so the blur has
-       room and never shows a hard edge) and renders at half resolution —
-       the 34px gaussian blur hides any pixel detail anyway. */
-    dpr = 0.5;
-    W = sec.clientWidth + PAD * 2; H = sec.clientHeight + PAD * 2;
-    cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
-    ctx.setTransform(dpr, 0, 0, dpr, PAD * dpr, PAD * dpr);
-  }
-  /* One soft dab of light; strokes are a chain of these. */
-  var dab = document.createElement('canvas');
-  (function(){
-    var R = 64; dab.width = dab.height = R * 2;
-    var g = dab.getContext('2d').createRadialGradient(R, R, 0, R, R, R);
-    /* sampled gaussian: exp(-4.5 r^2), warm white core → amber edge */
-    for (var k = 0; k <= 10; k++){
-      var r = k / 10, a = Math.exp(-4.5 * r * r) * (1 - r);
-      var cr = 255, cg = Math.round(236 - 70 * r), cb = Math.round(185 - 135 * r);
-      g.addColorStop(r, 'rgba(' + cr + ',' + cg + ',' + cb + ',' + a.toFixed(3) + ')');
-    }
-    var c = dab.getContext('2d'); c.fillStyle = g; c.fillRect(0, 0, R * 2, R * 2);
-  })();
-  /* Trail = a list of light dabs laid along the cursor path, each stamped
-     with its birth time and redrawn every frame by age: full strength for
-     HOLD ms (so the streak visibly lingers), then easing out to nothing by
-     LIFE ms. Redrawing from the list (instead of fading the canvas a bit
-     each frame) means old light really disappears — no faint smudges left
-     behind. */
-  var HOLD = 60, LIFE = 520, MAX_DABS = 160;
-  var dabs = [];
-  function stroke(x0, y0, x1, y1, now){
-    var d = Math.hypot(x1 - x0, y1 - y0);
-    if (d < 0.5) return;
-    var steps = Math.max(1, Math.ceil(d / 12));
-    var s = Math.max(90, Math.min(140, 90 + d * 0.8));  /* faster moves = slightly wider wash */
-    for (var i = 1; i <= steps; i++){
-      var t = i / steps;
-      dabs.push({ x: x0 + (x1 - x0) * t, y: y0 + (y1 - y0) * t, s: s, t: now });
-    }
-    if (dabs.length > MAX_DABS) dabs.splice(0, dabs.length - MAX_DABS);
-  }
-  function paint(now){
-    ctx.globalCompositeOperation = 'source-over';
-    ctx.clearRect(-PAD, -PAD, W, H);
-    ctx.globalCompositeOperation = 'lighter';
-    var keep = 0;
-    for (var i = 0; i < dabs.length; i++){
-      var dd = dabs[i], age = now - dd.t;
-      if (age >= LIFE) continue;
-      dabs[keep++] = dd;
-      var k = age <= HOLD ? 1 : 1 - (age - HOLD) / (LIFE - HOLD);
-      k = k * k * (3 - 2 * k);                            /* smooth ease-out */
-      ctx.globalAlpha = 0.026 * k;
-      var sz = (dd.s + 40) * (1.25 - 0.25 * k);           /* +40: stands in for the old CSS blur */
-      ctx.drawImage(dab, dd.x - sz, dd.y - sz, sz * 2, sz * 2);
-    }
-    dabs.length = keep;
-    ctx.globalAlpha = 1;
-    ctx.globalCompositeOperation = 'source-over';
-  }
+  var tx = 0, ty = 0, hx = 0, hy = 0, inside = false, raf = 0;
   /* 2026-10: same motion language as the hero lens — the halo rides a soft spring (slight
      overshoot), stretches along fast moves, breathes while resting, follows a finger on phones,
      and blooms once in the middle the first time CONTACT scrolls into view. */
@@ -8378,24 +8302,19 @@
       sc *= 0.6 + 0.5 * easeOut(Math.min(1, e / 0.5)); halo.style.opacity = (env * 1.6).toFixed(3);
     } else if (intro >= 0){ intro = -2; halo.style.opacity = ''; }
     halo.style.transform = 'translate3d(' + hx.toFixed(1) + 'px,' + hy.toFixed(1) + 'px,0) rotate(' + Math.atan2(vy, vx).toFixed(3) + 'rad) scale(' + (sc * (1 + st * 0.45)).toFixed(3) + ',' + (sc * (1 - st * 0.18)).toFixed(3) + ')';
-    if (!reduce){
-      /* the trail follows the real pointer (the halo is the sprung one),
-         so the light always starts right at the cursor */
-      if (inside && lx !== null) stroke(lx, ly, tx, ty, now);
-      lx = tx; ly = ty;
-      paint(now);
-    }
+    /* 2026-10: the painted trail read as a cheap smear behind the light — removed; the sprung,
+       stretching halo alone carries the motion now */
     /* run while the pointer is in CONTACT, the intro is playing, or light is still fading out */
     var moving = Math.abs(tx - hx) + Math.abs(ty - hy) + spd > 0.3;
-    if (dabs.length || inside || introOn || moving) raf = requestAnimationFrame(tick);
+    if (inside || introOn || moving) raf = requestAnimationFrame(tick);
     else lastT = 0;
   }
   function kick(){ if (!raf) raf = requestAnimationFrame(tick); }
   function local(x, y){ var r = sec.getBoundingClientRect(); return [x - r.left, y - r.top]; }
-  function enter(x, y){ var p = local(x, y); tx = hx = p[0]; ty = hy = p[1]; vx = vy = 0; lx = ly = null;
+  function enter(x, y){ var p = local(x, y); tx = hx = p[0]; ty = hy = p[1]; vx = vy = 0;
     if (intro >= 0){ intro = -2; halo.style.opacity = ''; }
     inside = true; halo.classList.add('is-on'); kick(); }
-  function leave(){ inside = false; halo.classList.remove('is-on'); lx = ly = null; }
+  function leave(){ inside = false; halo.classList.remove('is-on'); }
   sec.addEventListener('mouseenter', function(e){ enter(e.clientX, e.clientY); });
   sec.addEventListener('mousemove', function(e){ var p = local(e.clientX, e.clientY); tx = p[0]; ty = p[1]; inside = true; kick(); });
   sec.addEventListener('mouseleave', leave);
@@ -8407,8 +8326,6 @@
     var io = new IntersectionObserver(function(es){ if (es[0].isIntersecting){ io.disconnect(); if (!inside){ intro = performance.now() + 250; kick(); } } }, { threshold:.35 });
     io.observe(sec);
   }
-  new ResizeObserver(size).observe(sec);
-  size();
 })();
 </script>
 
