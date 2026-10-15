@@ -5119,7 +5119,8 @@
   }
   /* One vivid colour per card thumbnail (sampled from the image, saturation lifted) — the tile
      flashes this colour before the picture appears, see the colour-reveal block below. */
-  var THUMB_TONE = {"images/thumbs/broken-archive-thumb.mp4":"#2c7aaa","images/thumbs/cosmos-bigbang-thumb.mp4":"#c9160d","images/thumbs/dddm-cycle-01.jpg":"#dea688","images/thumbs/gods-thumb.mp4":"#9e3845","images/thumbs/heartbeat-thumb.jpg":"#c9140d","images/thumbs/inhoya-crosslink-thumb.jpg":"#c9720d","images/thumbs/inno-thumb.jpg":"#f8a796","images/thumbs/space-01-thumb.jpg":"#74f6f4","images/thumbs/uahan-midam-thumb.jpg":"#c9300d","images/thumbs/video-design-thumb.jpg":"#cacac4","images/thumbs/yogoe-thumb.jpg":"#954190"};
+  /* 2026-10: the per-project colour sweep is now one colour, the accent yellow — the site's palette is
+     black / white / grey plus that one key colour (A·IN in the hero), so the cards don't break it */
   var archiveGrid = document.getElementById('archive-grid');
   var mainCount = 0, archiveCount = 0;
   projects.forEach(function(p, i){
@@ -5161,7 +5162,7 @@
     card.innerHTML =
       '<div class="card-thumb' + (hasImg ? '' : ' card-thumb-empty') + ' rounded-2xl flex items-end p-6">' +
         thumbInner +
-        (hasImg ? '<span class="card-blank" aria-hidden="true"></span><span class="card-tone" aria-hidden="true" style="--tone:' + (THUMB_TONE[thumbSrc] || '#F2DB86') + '"></span>' : '') +
+        (hasImg ? '<span class="card-blank" aria-hidden="true"></span><span class="card-tone" aria-hidden="true" style="--tone:var(--accent)"></span>' : '') +
         '<span class="card-glow" aria-hidden="true"></span><span class="card-glow-ring" aria-hidden="true"></span>' +
         '<span class="card-hover-chip" aria-hidden="true">자세히 보기' +
           '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M7 7h10v10"/></svg>' +
