@@ -2821,6 +2821,7 @@
   .hero-reel{ position:absolute; inset:0; z-index:0; pointer-events:none; overflow:hidden; background:#0a0a0a; }
   .hero-reel{ background:#0a0a0a url(images/hero/hero-reel3-poster.jpg) center/cover no-repeat; }
   .hero-reel canvas{ position:absolute; inset:0; width:100%; height:100%; display:block; }
+  .hero-reel canvas.hero-reel-lens{ pointer-events:none; }
   .hero-reel::after{ content:''; position:absolute; inset:0;
     background:
       radial-gradient(ellipse 70% 60% at 50% 45%, rgba(10,10,10,.55) 0%, rgba(10,10,10,.72) 60%, rgba(10,10,10,.88) 100%),
@@ -7217,8 +7218,57 @@
     function frameAt(t){ var base = 0; for (var k = 0; k < SEG.length; k++){ var g = SEG[k]; if (t < g.d || k === SEG.length - 1) return base + Math.min(g.n - 1, Math.floor(t * g.fps)); t -= g.d; base += g.n; } return 0; }
     /* blur is applied while drawing into the tiny canvas (cheap: ~240×150 px), never as a CSS filter */
     function draw(t){ ctx.globalAlpha = 1; ctx.filter = 'none'; ctx.fillStyle = '#0a0a0a'; ctx.fillRect(0, 0, canvas.width, canvas.height); ctx.filter = 'blur(' + Math.max(1.5, canvas.width / 140).toFixed(1) + 'px) brightness(.72) saturate(1.15)'; cell(frameAt(t), 1); ctx.filter = 'none'; }
+    /* ---- Focus lens (2026-10): around the pointer the footage comes back into focus — a soft sharp
+       spot that follows the cursor with a short fading tail, like the CONTACT light. A second 1×
+       canvas holds only the sharp frame inside feathered circles along the pointer path; it is
+       drawn only while the pointer is over the hero or the tail is still fading. Mouse/trackpad only. */
+    var lens = null, lctx = null, sharp = null, sctx = null, sharpFi = -1, lensOn = false;
+    var px = 0, py = 0, hx = 0, hy = 0, inside = false, trail = [];
+    var TRAIL_LIFE = 560, R = 190, LS = 0.5, brush = null;
+    if (window.matchMedia('(pointer: fine)').matches && !reduceMotion){
+      lens = document.createElement('canvas'); lens.className = 'hero-reel-lens'; lens.setAttribute('aria-hidden', 'true');
+      canvas.parentNode.insertBefore(lens, canvas.nextSibling); lctx = lens.getContext('2d');
+      sharp = document.createElement('canvas'); sctx = sharp.getContext('2d');
+      /* one pre-rendered feathered dot, stamped along the path (cheaper than a gradient per point) */
+      brush = document.createElement('canvas'); brush.width = brush.height = 128;
+      var bc = brush.getContext('2d'), bg = bc.createRadialGradient(64, 64, 0, 64, 64, 64);
+      bg.addColorStop(0, 'rgba(0,0,0,1)'); bg.addColorStop(0.45, 'rgba(0,0,0,.85)'); bg.addColorStop(0.75, 'rgba(0,0,0,.35)'); bg.addColorStop(1, 'rgba(0,0,0,0)');
+      bc.fillStyle = bg; bc.fillRect(0, 0, 128, 128);
+      var hero = canvas.closest('header') || canvas.parentNode;
+      hero.addEventListener('pointermove', function(e){ var r = lens.getBoundingClientRect(); px = (e.clientX - r.left) * LS; py = (e.clientY - r.top) * LS; if (!inside){ hx = px; hy = py; } inside = true; lensOn = true; start(); });
+      hero.addEventListener('pointerleave', function(){ inside = false; });
+    }
+    /* half-res is plenty: the source frames are only 480px wide */
+    function sizeLens(){ if (!lens) return; var w = Math.round(lens.clientWidth * LS), h = Math.round(lens.clientHeight * LS);
+      if (lens.width !== w || lens.height !== h){ lens.width = w; lens.height = h; sharp.width = w; sharp.height = h; sharpFi = -1; } }
+    function drawSharp(fi){ var cw = sharp.width, ch = sharp.height, cover = Math.max(cw / CW, ch / CH), dw = CW * cover, dh = CH * cover;
+      sctx.filter = 'brightness(1.12) contrast(1.1) saturate(1.2)';
+      sctx.drawImage(sprite, (fi % COLS) * CW, Math.floor(fi / COLS) * CH, CW, CH, (cw - dw) / 2, (ch - dh) / 2, dw, dh); sctx.filter = 'none'; sharpFi = fi; }
+    function drawLens(now){
+      if (!lens || !ready) return false;
+      sizeLens();
+      hx += (px - hx) * 0.22; hy += (py - hy) * 0.22;
+      if (inside) trail.push({ x: hx, y: hy, t: now });
+      while (trail.length && now - trail[0].t > TRAIL_LIFE) trail.shift();
+      lctx.globalCompositeOperation = 'source-over'; lctx.clearRect(0, 0, lens.width, lens.height);
+      if (!trail.length) return false;
+      var fi = frameAt(head); if (fi !== sharpFi) drawSharp(fi);
+      var r0 = R * LS, n = trail.length;
+      for (var i = 0; i < n; i++){
+        var p = trail[i], k = 1 - (now - p.t) / TRAIL_LIFE, rr = r0 * (0.4 + 0.6 * k);
+        /* tail stamps are faint; the newest few build the solid core */
+        lctx.globalAlpha = i >= n - 4 ? 1 : 0.22 * k * k;
+        lctx.drawImage(brush, p.x - rr, p.y - rr, rr * 2, rr * 2);
+      }
+      lctx.globalAlpha = 1;
+      lctx.globalCompositeOperation = 'source-in'; lctx.drawImage(sharp, 0, 0);
+      lctx.globalCompositeOperation = 'source-over';
+      return true;
+    }
     function tick(ts){ if (!inView){ raf = 0; return; } if (!last) last = ts;
-      var dt = Math.min(0.1, (ts - last) / 1000); last = ts; head = (head + dt) % TOTAL; var fi = frameAt(head); if (fi !== lastFi){ lastFi = fi; draw(head); } raf = requestAnimationFrame(tick); }
+      var dt = Math.min(0.1, (ts - last) / 1000); last = ts; head = (head + dt) % TOTAL; var fi = frameAt(head); if (fi !== lastFi){ lastFi = fi; draw(head); }
+      if (lensOn) lensOn = drawLens(performance.now()) || inside;
+      raf = requestAnimationFrame(tick); }
     function start(){ if (!raf && ready && inView && !reduceMotion){ last = 0; raf = requestAnimationFrame(tick); } }
     /* decode the large sheet off the main thread first, so the first frame doesn't stall the page on entry */
     sprite.onload = function(){ var go = function(){ ready = true; resize(); draw(0); start(); }; if (sprite.decode) sprite.decode().then(go, go); else go(); };
