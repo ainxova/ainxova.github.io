@@ -1872,9 +1872,9 @@
   .ed-day .g-a{ grid-column:1 / 7; grid-row:1 / 3; }
   .ed-day .g-q{ grid-column:8 / -1; grid-row:1; align-self:start; padding-top:2rem; }
   .ed-day .g-b{ grid-column:8 / 12; grid-row:2; align-self:end; }
-  .ed-day .g-c{ grid-column:2 / 6; grid-row:3; }
-  .ed-day .g-d{ grid-column:7 / 11; grid-row:3; margin-top:5rem; }
-  .ed-voice .g-b{ grid-column:7 / -1; }
+  .ed-day .g-e{ grid-column:3 / 11; grid-row:3; }
+  .ed-day .g-c{ grid-column:1 / 5; grid-row:4; }
+  .ed-day .g-d{ grid-column:7 / 11; grid-row:4; margin-top:5rem; }
   @media (max-width:1023px){
     .ed-intro{ padding:4.5rem 1.25rem 3rem; }
     .ed-display{ grid-column:1 / -1; }
@@ -4891,13 +4891,6 @@
           { src:'hb-ph-gate-done.jpg', w:1200, h:1600, cap:'DONE · 완성된 입구', alt:'밤에 붉은 조명이 켜진 완성된 입구' },
           { src:'hb-ph-signs.jpg', w:1200, h:1600, cap:'DETAIL · 비즈 목걸이와 테이프로 직접 꾸민 방향 사인', alt:'입구 방향 사인에 비즈 목걸이를 걸어 꾸민 모습' },
           { src:'hb-ph-setup.jpg', w:1600, h:1200, cap:'SETUP · 설치 중', alt:'설치 중인 화정체육관 입구 게이트와 계단' } ] },
-    { en:'LAMP-POST BANNERS', kr:'가로등 배너', labelD:'PRINT DESIGN', fit:'contain', note:'입구 동선을 따라 세운 가로등 배너 28장의 인쇄 디자인(680×1550)과 설치된 모습',
-      d:{ src:'images/hb-site/p13.jpg', alt:'가로등 배너 디자인 인쇄 파일' },
-      s:[ { src:'hb-ph-lamp-banner.jpg', w:1600, h:1200, cap:'BANNERS · 가로등 배너와 입구 현수막', alt:'가로등에 설치한 HEARTBEAT 배너와 입구 현수막' } ] },
-    { en:'WAYFINDING TRUSS', kr:'길안내 트러스', labelD:'PRINT DESIGN', fit:'contain', note:'공연장·F&B 존 길안내와 타임테이블을 담은 현수막(900×1900)을 사각 트러스에 걸어 구현',
-      d:{ src:'images/hb-site/p17.jpg', alt:'사각 트러스 길안내·타임테이블 현수막 인쇄 파일' },
-      s:[ { src:'hb-ph-truss-way.jpg', w:1200, h:1600, cap:'WAY TO THE CONCERT · 공연장 가는 길', alt:'공연장 가는 길 안내를 붙인 사각 트러스' },
-          { src:'hb-ph-truss-fb.jpg', w:1200, h:1600, cap:'F&B ZONE · 타임테이블', alt:'F&B 존 안내와 타임테이블을 붙인 사각 트러스' } ] },
     { en:'PHOTO WALL', kr:'포토월', labelD:'DESIGN PROPOSAL', note:'키 비주얼과 라인업을 담은 월, 그 앞에 세운 입체 로고 조형물',
       d:{ src:HB + 'hb-wall-proposal.jpg', alt:'현장 포토월·입체 로고 조형물 디자인 시안' },
       s:[ { src:'hb-ph-lineup.jpg', w:1600, h:1200, cap:'KEY VISUAL WALL · 키 비주얼 라인업 월과 입체 로고', alt:'키 비주얼과 라인업을 담은 포토월과 입체 로고' },
@@ -4907,17 +4900,24 @@
       s:[ { src:'hb-ph-holo-use.jpg', w:1600, h:900, cap:'IN USE · 촬영 중인 부스', alt:'홀로그램 포토 부스에서 촬영하는 관객' },
           { src:'hb-ph-holo-person.jpg', w:1200, h:1600, cap:'BOOTH · 홀로그램 부스', alt:'홀로그램 부스 화면' },
           { src:'hb-ph-holo.jpg', w:1200, h:1600, cap:'STANDBY · 대기 화면', alt:'홀로그램 포토 부스' } ] },
+    { en:'OFFICIAL MD', kr:'공식 MD', labelD:'DESIGN · MD SHEET', fit:'contain', note:'티셔츠·볼캡·스티커 구성안, 그리고 현장 MD 부스',
+      d:{ src:HB + 'hb-merch.jpg', alt:'HEARTBEAT 전체 MD 디자인 구성안' },
+      s:[ { src:'hb-ph-md-booth.jpg', w:1600, h:1200, cap:'OFFICIAL MD · 공식 MD 부스', alt:'공식 MD 부스 전경' },
+          { src:'hb-ph-md-wall.jpg', w:1600, h:1200, cap:'DISPLAY · 레드 테이프 진열 벽', alt:'레드 테이프로 꾸민 MD 진열 벽' } ] },
+    { en:'LAMP-POST BANNERS', kr:'가로등 배너', labelD:'PRINT DESIGN', fit:'contain', note:'입구 동선을 따라 세운 가로등 배너 28장의 인쇄 디자인(680×1550)과 설치된 모습',
+      d:{ src:'images/hb-site/p13.jpg', alt:'가로등 배너 디자인 인쇄 파일' },
+      s:[ { src:'hb-ph-lamp-banner.jpg', w:1600, h:1200, cap:'BANNERS · 가로등 배너와 입구 현수막', alt:'가로등에 설치한 HEARTBEAT 배너와 입구 현수막' } ] },
+    { en:'WAYFINDING TRUSS', kr:'길안내 트러스', labelD:'PRINT DESIGN', fit:'contain', note:'공연장·F&B 존 길안내와 타임테이블을 담은 현수막(900×1900)을 사각 트러스에 걸어 구현',
+      d:{ src:'images/hb-site/p17.jpg', alt:'사각 트러스 길안내·타임테이블 현수막 인쇄 파일' },
+      s:[ { src:'hb-ph-truss-way.jpg', w:1200, h:1600, cap:'WAY TO THE CONCERT · 공연장 가는 길', alt:'공연장 가는 길 안내를 붙인 사각 트러스' },
+          { src:'hb-ph-truss-fb.jpg', w:1200, h:1600, cap:'F&B ZONE · 타임테이블', alt:'F&B 존 안내와 타임테이블을 붙인 사각 트러스' } ] },
     { en:'ADMISSION BANDS', kr:'입장 팔찌', labelD:'DESIGN PROPOSAL', labelS:'PRODUCED', fit:'contain', note:'날짜와 좌석 구분을 색으로 나눈 팔찌 시안, 그리고 제작되어 도착한 실물',
       d:{ src:HB + 'hb-wristband.jpg', alt:'날짜와 좌석 구분별 입장 팔찌 디자인' },
       s:[ { src:'hb-real-bands.jpg', w:1500, h:1240, cap:'ADMISSION BANDS · 날짜·좌석별 팔찌와 19+ 종이팔찌', alt:'날짜와 좌석 구분별 입장 밴드와 19+ 종이팔찌 실물' },
           { src:'hb-real-vip.jpg', w:1400, h:1689, cap:'VIP PASS · 비표와 랜야드', alt:'VIP 비표와 랜야드 실물' } ] },
     { en:'PRESS ZONE', kr:'프레스존', labelD:'DESIGN PROPOSAL', note:'벽 크기에 맞춰 제작한 프레스월 현수막. 사진은 설치 직후 모습이며, 행사 때는 조명을 더해 연출했습니다',
       d:{ src:HB + 'hb-press-proposal.jpg', alt:'프레스존 벽면 현수막 디자인 시안 (가상 공간 합성)' },
-      s:[ { src:'hb-ph-press.jpg', w:1600, h:1200, cap:'PRESS WALL · 설치 직후 (조명 연출 전)', alt:'설치를 마친 프레스존 벽면 현수막' } ] },
-    { en:'OFFICIAL MD', kr:'공식 MD', labelD:'DESIGN · MD SHEET', fit:'contain', note:'티셔츠·볼캡·스티커 구성안, 그리고 현장 MD 부스',
-      d:{ src:HB + 'hb-merch.jpg', alt:'HEARTBEAT 전체 MD 디자인 구성안' },
-      s:[ { src:'hb-ph-md-booth.jpg', w:1600, h:1200, cap:'OFFICIAL MD · 공식 MD 부스', alt:'공식 MD 부스 전경' },
-          { src:'hb-ph-md-wall.jpg', w:1600, h:1200, cap:'DISPLAY · 레드 테이프 진열 벽', alt:'레드 테이프로 꾸민 MD 진열 벽' } ] }
+      s:[ { src:'hb-ph-press.jpg', w:1600, h:1200, cap:'PRESS WALL · 설치 직후 (조명 연출 전)', alt:'설치를 마친 프레스존 벽면 현수막' } ] }
   ];
   function slide(p, cls){ return '<figure class="hbz-slide' + cls + '" style="aspect-ratio:' + p.w + '/' + p.h + '"' + (cls ? ' aria-hidden="true"' : '') + '><img src="' + HB + p.src + '" alt="' + (cls ? '' : p.alt) + '" loading="lazy" decoding="async" draggable="false"><figcaption>' + p.cap + '</figcaption></figure>'; }
   var hbPairBlock = {
@@ -5143,21 +5143,14 @@
   };
   var edDayBlock = {
     custom: '<div class="cosmos-block ed-blk">' +
-      edHead('On-site · The Day', '10.17 — 10.18', '행사 당일 현장 사진입니다. 직접 만든 하트 컨페티와 팔찌, 비즈 목걸이 이벤트, 현장에서 직접 시연한 태블릿 키오스크까지 설계한 굿즈와 공간이 실제로 쓰인 모습입니다.') +
+      edHead('On-site · The Day', '10.17 — 10.18', '행사 당일 현장 사진입니다. 직접 만든 하트 컨페티와 팔찌, 관객이 들어 올린 하트 라이트, 비즈 목걸이 이벤트, 현장에서 직접 시연한 태블릿 키오스크까지 설계한 굿즈와 공간이 실제로 쓰인 모습입니다.') +
       '<div class="ed-grid ed-day">' +
         edFig(HB + 'hb-ph-heart.jpg', 'g-a', '<b>WE BEAT AS ONE</b>직접 제작해 뿌린 하트 컨페티', '직접 제작해 현장에 뿌린 WE BEAT AS ONE 하트 컨페티', '3/4') +
         '<blockquote class="ed-quote ed-quote-xl g-q">WE BEAT<br><em>AS ONE</em><cite>공연장에 뿌린 하트 컨페티의 문구</cite></blockquote>' +
         edFig(HB + 'hb-ph-band.jpg', 'g-b', '<b>LIGHT BAND</b>하트 팔찌 라이트', '붉게 빛나는 하트 팔찌를 찬 손', '3/4') +
         edFig(HB + 'hb-ph-beads.jpg', 'g-c', '<b>BEADS EVENT</b>비즈 목걸이 이벤트 코너', '비즈 목걸이 이벤트 배너와 나무 상자', '3/4') +
+        edFig(HB + 'hb-site-lights.jpg', 'g-e', '<b>HEART LIGHT</b>관객이 들어 올린 하트 라이트 · 관객 후기 사진', '공연장 안에서 관객이 들어 올린 HEARTBEAT BY DUDUDO 하트 라이트와 붉은 무대 조명', '1600/1088') +
         '<figure class="ed-fig g-d"><div class="ed-img" style="aspect-ratio:9/16"><video poster="' + HB + 'hb-ph-kiosk-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-label="현장 태블릿 키오스크 터치 시연"><source src="' + HB + 'hb-ph-kiosk.mp4" type="video/mp4"></video></div><figcaption><b>TOUCH KIOSK</b>현장에서 직접 시연한 태블릿 촬영 키오스크</figcaption></figure>' +
-      '</div>' +
-    '</div>'
-  };
-  var edVoiceBlock = {
-    custom: '<div class="cosmos-block ed-blk">' +
-      edHead('On-site · Audience Photos', 'FROM<br>THE VENUE', '행사 당일 관객이 SNS에 직접 올린 후기 사진입니다. 공연장 안의 하트 라이트와 무대 조명까지 현장의 분위기를 볼 수 있습니다.') +
-      '<div class="ed-grid ed-voice">' +
-        edFig(HB + 'hb-site-lights.jpg', 'g-b', '<b>INSIDE</b>하트 라이트와 무대 조명 · 관객 후기 사진', '공연장 안에서 관객이 들어 올린 HEARTBEAT BY DUDUDO 하트 라이트와 붉은 무대 조명', '1600/1088') +
       '</div>' +
     '</div>'
   };
@@ -5187,7 +5180,7 @@
         { id:"hb-os", edTitle:"시안이<br>현장이 되기까지", short:"On-site", eyebrow:"PART 05", title:"ON-SITE DESIGN", sum:"입구 게이트·가로등 배너·길안내 트러스·포토월·홀로그램 부스·입장 팔찌·프레스존·MD를 시안과 현장 사진으로 비교, 부스 태블릿 UI, 7개 구역 47종의 현장 출력물", period:"", tools:"",
           cover:HB + "t-onsite.jpg", coverPos:"50% 50%", show:[hbPairBlock, hbHoloBlock, hbKioskBlock, hbSiteBlock] },
         { id:"hb-prod", edTitle:"행사 전날,<br>비어 있던 체육관에서", short:"Production", eyebrow:"PART 06", title:"PRODUCTION & SITE", sum:"행사 전날부터 직접 시공한 과정, 설치 전후의 공연장, 행사 당일 현장 기록, 실물로 제작된 비표와 입장 밴드", period:"", tools:"",
-          cover:HB + "hb-ph-after.jpg", coverPos:"50% 50%", show:[edBuildBlock, edBaBlock, edDayBlock, edVoiceBlock, hbTaggedBlock] },
+          cover:HB + "hb-ph-after.jpg", coverPos:"50% 50%", show:[edBuildBlock, edBaBlock, edDayBlock, hbTaggedBlock] },
         { id:"hb-ops", edTitle:"디자이너 1명으로<br>굴러가는 시스템", short:"Design Ops", eyebrow:"PART 07", title:"DESIGN OPS", sum:"디자이너 1명으로 운영되도록 설계한 약 20종의 Figma 포맷, PM 3명 교육, PM이 직접 만드는 인스타그램 콘텐츠", period:"", tools:"Figma",
           cover:HB + "hb-figma-ops.jpg", coverPos:"40% 30%", show:[hbOpsBlock] },
         { id:"hb-early", edTitle:"페스티벌 이전의<br>첫 제안", short:"Early Work", eyebrow:"PART 08", title:"EARLY PROPOSAL", sum:"페스티벌로 개편되기 전, DUDUDO CONCERT 시절 제안한 초기 브랜드 아이덴티티와 “DON’T DO THAT” 픽토그램", period:"", tools:"Illustrator · Photoshop",
