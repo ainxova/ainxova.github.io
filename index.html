@@ -1948,6 +1948,19 @@
     .cxr-vids{ gap:.6rem; }
     .cxr-v.is-off{ margin-top:2rem; }
   }
+  /* DDDM · opening film + small POSE.D reel */
+  .dd-hero-wrap{ background:#0b0908; }
+  .hb-preview.dd-hero{ margin:0; aspect-ratio:16/9; max-height:86vh; width:100%; border:0; background:#eceaea; }
+  .dd-hero-cap{ display:flex; flex-wrap:wrap; align-items:baseline; gap:.4rem 1.1rem; padding:1.1rem 6.25% 1.4rem; border-bottom:1px solid rgba(255,255,255,.08); }
+  .dd-hero-k{ font-size:1.05rem; font-weight:800; letter-spacing:.02em; color:#fff; }
+  .dd-hero-t{ font-size:.8rem; color:rgba(255,255,255,.55); }
+  .dd-hero-a{ margin-left:auto; font-size:.66rem; font-weight:700; letter-spacing:.22em; color:var(--accent); text-transform:uppercase; }
+  .dd-small-reel{ align-items:center; padding-top:3rem; padding-bottom:3.5rem; background:#fff !important; }
+  .dd-sr{ margin:0; width:min(520px, 100%); }
+  .dd-sr .modal-image{ border:0; }
+  .dd-sr figcaption{ margin-top:.65rem; font-size:.72rem; color:rgba(0,0,0,.5); }
+  .dd-sr figcaption b{ display:inline-block; margin-right:.6rem; font-size:.64rem; letter-spacing:.18em; color:#6c3bff; }
+  @media (max-width:767px){ .dd-hero-cap{ padding:1rem 1.25rem 1.2rem; } .dd-hero-a{ margin-left:0; } .dd-sr{ width:78%; } }
   .cx-zones{ width:100%; }
   .cx-zone-tabs{ display:flex; gap:.4rem; overflow-x:auto; scrollbar-width:none; padding-bottom:.25rem; margin-bottom:1rem; }
   .cx-zone-tabs::-webkit-scrollbar{ display:none; }
@@ -5152,6 +5165,23 @@
       '</div>' +
     '</div>'
   };
+  /* DDDM · opening film: POSE.D with KiiiKiii, full-bleed muted loop (play button if autoplay is blocked; same
+     behaviour as the HEARTBEAT highlight via .hb-preview). The older 640px POSE.D reveal moved into PART 04, small. */
+  var dddmHeroBlock = {
+    custom: '<section class="dd-hero-wrap">' +
+      '<figure class="hb-preview dd-hero is-paused">' +
+        '<video poster="images/dddm-video/dddm-kiiikiii-poster.jpg" autoplay muted loop playsinline preload="auto" aria-label="DDDM 오리지널 프로그램 POSE.D — KiiiKiii 편 영상"><source src="images/dddm-video/dddm-kiiikiii.mp4" type="video/mp4"></video>' +
+        '<span class="hb-preview-play" aria-hidden="true"><i></i></span>' +
+      '</figure>' +
+      '<div class="dd-hero-cap"><span class="dd-hero-k">POSE.D</span><span class="dd-hero-t">DDDM 오리지널 프로그램</span><span class="dd-hero-a">KiiiKiii</span></div>' +
+    '</section>'
+  };
+  var dddmPosedReelBlock = {
+    custom: '<div class="cosmos-block dd-small-reel">' +
+      '<figure class="dd-sr"><div class="modal-image sprite-player" style="aspect-ratio:640/360;background:#000 url(images/dddm-video/dddm-reveal-poster.jpg) center/cover no-repeat;line-height:0" data-sprite="images/dddm-video/dddm-reveal-sprite.jpg" data-cols="10" data-n="75" data-w="640" data-h="360" data-fps="12"><canvas></canvas></div>' +
+        '<figcaption><b>POSE.D</b>프로그램 영상</figcaption></figure>' +
+    '</div>'
+  };
   var projects = [
     { group:"Branding & Art Direction", key:"heartbeat", status:"", category:"Festival Art Direction · Key Visual · Spatial Graphics · On-site Build", title:"HEARTBEAT BY DUDUDO: 페스티벌 아트 디렉션 총괄", idea:"심전도 파형 하나로 묶은 양일간의 페스티벌", forms:["Identity", "Key Visual", "Motion", "MD", "On-site"], year:"2026",
       blurb:"키비주얼과 MD부터 행사장 전 구역의 공간 그래픽, 현장 설치까지. 2026년 10월 17–18일 이틀간 열린 대형 음악 페스티벌의 아트 전 과정을 단독으로 기획하고 총괄했습니다.",
@@ -5203,7 +5233,7 @@
          right after the divider (the part's logo page), framed on the logo
          via coverPos. The reveal clip sits above the index as `lead`; the
          guide's own cover page was dropped. */
-      lead:[{custom:'<div class="modal-image sprite-player" style="aspect-ratio:640/360;background:#000 url(images/dddm-video/dddm-reveal-poster.jpg) center/cover no-repeat;line-height:0" data-sprite="images/dddm-video/dddm-reveal-sprite.jpg" data-cols="10" data-n="75" data-w="640" data-h="360" data-fps="12"><canvas></canvas></div>'}, dddmJumpBlock, dddmStoryBlock, dddmYtBlock, mzShelfBlock, mzDistBlock, dddmFeedBlock, dddmRetouchBlock],
+      lead:[dddmHeroBlock, dddmJumpBlock, dddmStoryBlock, dddmYtBlock, mzShelfBlock, mzDistBlock, dddmFeedBlock, dddmRetouchBlock],
       index:{ title:"DDDM BRAND GUIDE", unit:"PARTS", label:"파트" },
       pdfFlow:true, pdfFile:"images/dddm-guide/DDDM-Brand-Guide.pdf", pdfCover:"images/dddm-guide/dddm-guide-01.jpg",
       images:[],
@@ -5211,7 +5241,7 @@
         { id:"dd", eyebrow:"PART 01", title:"DDDM", sum:"심볼형·워드마크형 채널 로고와 ddd.MUSIC · ddd.STORE 서브 브랜드 체계", period:"", tools:"", cover:"images/dddm-guide/dddm-guide-03.jpg", coverPos:"66% 32%", show:["images/dddm-guide/dddm-guide-02.jpg","images/dddm-guide/dddm-guide-03.jpg"], more:["images/dddm-guide/dddm-guide-04.jpg"] },
         { id:"ca", eyebrow:"PART 02", title:"CHANNEL ART", sum:"유튜브 배너와 유튜브·인스타그램·틱톡 프로필 이미지", period:"", tools:"", cover:"images/dddm-guide/dddm-guide-06.jpg", coverPos:"30% 55%", show:["images/dddm-guide/dddm-guide-05.jpg","images/dddm-guide/dddm-guide-06.jpg"], more:["images/dddm-guide/dddm-guide-07.jpg"] },
         { id:"hk", eyebrow:"PART 03", title:"H60K", sum:"프로그램 로고, 컬러 베리에이션, 썸네일 시스템", period:"", tools:"", cover:"images/dddm-guide/dddm-guide-09.jpg", coverPos:"53% 42%", show:["images/dddm-guide/dddm-guide-08.jpg","images/dddm-guide/dddm-guide-09.jpg"], more:["images/dddm-guide/dddm-guide-10.jpg","images/dddm-guide/dddm-guide-11.jpg","images/dddm-guide/dddm-guide-12.jpg"] },
-        { id:"pd", eyebrow:"PART 04", title:"POSE.D", sum:"프로그램 로고, 컬러 베리에이션, 썸네일 시스템", period:"", tools:"", cover:"images/dddm-guide/dddm-guide-14.jpg", coverPos:"51% 43%", show:["images/dddm-guide/dddm-guide-13.jpg","images/dddm-guide/dddm-guide-14.jpg"], more:["images/dddm-guide/dddm-guide-15.jpg","images/dddm-guide/dddm-guide-16.jpg","images/dddm-guide/dddm-guide-17.jpg"] },
+        { id:"pd", eyebrow:"PART 04", title:"POSE.D", sum:"프로그램 로고, 컬러 베리에이션, 썸네일 시스템", period:"", tools:"", cover:"images/dddm-guide/dddm-guide-14.jpg", coverPos:"51% 43%", show:["images/dddm-guide/dddm-guide-13.jpg","images/dddm-guide/dddm-guide-14.jpg", dddmPosedReelBlock], more:["images/dddm-guide/dddm-guide-15.jpg","images/dddm-guide/dddm-guide-16.jpg","images/dddm-guide/dddm-guide-17.jpg"] },
         { id:"ds", eyebrow:"PART 05", title:"D.STAGE", sum:"프로그램 로고, 컬러 베리에이션, D.Stage · D.Stage VR 썸네일 시스템", period:"", tools:"", cover:"images/dddm-guide/dddm-guide-19.jpg", coverPos:"51% 44%", show:["images/dddm-guide/dddm-guide-18.jpg","images/dddm-guide/dddm-guide-19.jpg"], more:["images/dddm-guide/dddm-guide-20.jpg","images/dddm-guide/dddm-guide-21.jpg","images/dddm-guide/dddm-guide-22.jpg","images/dddm-guide/dddm-guide-23.jpg","images/dddm-guide/dddm-guide-24.jpg"] },
         { id:"ai", eyebrow:"PART 06", title:"COMING SOON", sum:"프로그램 로고와 컬러 베리에이션", period:"", tools:"", cover:"images/dddm-guide/dddm-guide-26.jpg", coverPos:"46% 43%", show:["images/dddm-guide/dddm-guide-25.jpg","images/dddm-guide/dddm-guide-26.jpg"], more:["images/dddm-guide/dddm-guide-27.jpg"] },
         { id:"sf", eyebrow:"PART 07", title:"S-FORM", sum:"숏폼 인터뷰 MUSE INTERVIEW 프로그램 로고", period:"", tools:"", cover:"images/dddm-guide/dddm-guide-29.jpg", coverPos:"17% 77%", show:["images/dddm-guide/dddm-guide-28.jpg","images/dddm-guide/dddm-guide-29.jpg"] },
@@ -7564,7 +7594,9 @@
     /* Safari has no CanvasRenderingContext2D.filter, so the blur / grey / dim set on ctx.filter is silently ignored
        there. Detect it once and, where missing, put the same look on the canvas element as a CSS filter instead
        (scaled up a touch so the blurred edge never shows the poster underneath). */
-    var CF = (function(){ try{ ctx.filter = 'blur(2px)'; var ok = ctx.filter === 'blur(2px)'; ctx.filter = 'none'; return ok; }catch(e){ return false; } })();
+    /* Detecting support proved unreliable (Safari can expose ctx.filter without applying it), so the CSS route is
+       used everywhere; the canvas is tiny (1/4–1/6 size), so the composited blur is cheap. */
+    var CF = false;
     function cssLook(){ if (CF) return;
       canvas.style.filter = 'blur(' + Math.max(4, canvas.clientWidth / 110).toFixed(1) + 'px) brightness(.66) ' + (lens ? 'saturate(0)' : 'saturate(1.15)');
       canvas.style.transform = 'scale(1.06)'; }
@@ -7597,7 +7629,7 @@
       ctx.globalAlpha = a; ctx.drawImage(Q[0], Q[1], Q[2], Q[3], Q[4], (cw - dw) / 2, (ch - dh) / 2, dw, dh); }
     function frameAt(t){ var base = 0; for (var k = 0; k < SEG.length; k++){ var g = SEG[k]; if (t < g.d || k === SEG.length - 1) return base + Math.min(g.n - 1, Math.floor(t * g.fps)); t -= g.d; base += g.n; } return 0; }
     /* blur is applied while drawing into the tiny canvas (cheap: ~240×150 px), never as a CSS filter */
-    function draw(t){ ctx.globalAlpha = 1; ctx.filter = 'none'; ctx.fillStyle = '#0a0a0a'; ctx.fillRect(0, 0, canvas.width, canvas.height); ctx.filter = 'blur(' + Math.max(2, canvas.width / 110).toFixed(1) + 'px) brightness(.66) ' + (lens ? 'saturate(0)' : 'saturate(1.15)'); cell(curFi(), 1); ctx.filter = 'none'; }
+    function draw(t){ ctx.globalAlpha = 1; ctx.filter = 'none'; ctx.fillStyle = '#0a0a0a'; ctx.fillRect(0, 0, canvas.width, canvas.height); if (CF) ctx.filter = 'blur(' + Math.max(2, canvas.width / 110).toFixed(1) + 'px) brightness(.66) ' + (lens ? 'saturate(0)' : 'saturate(1.15)'); cell(curFi(), 1); ctx.filter = 'none'; }
     /* ---- Focus lens (2026-10): outside the lens the reel is grey and out of focus; around the pointer
        (or finger) it comes back in colour and in focus. The spot rides a soft spring (slight overshoot),
        stretches along fast moves and leaves a short fading tail, like the CONTACT light. On load it
