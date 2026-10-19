@@ -1972,7 +1972,7 @@
   .vf-jump{ position:sticky; }
   .vf-prog{ position:absolute; left:0; right:0; bottom:-1px; height:2px; background:var(--accent); transform:scaleX(0); transform-origin:0 50%; }
   .vf-crop{ position:relative; display:block; overflow:hidden; width:100%; }
-  .vf-crop img{ position:absolute; max-width:none; height:auto; display:block; }
+  .vf-crop img{ position:absolute; max-width:none; display:block; }
   .vf-poster .vf-crop{ background:#0a0a0a; }
   .vf-cd{ display:grid; grid-template-columns:minmax(0,.75fr) minmax(0,1.6fr); gap:1.2rem; align-items:center; padding:5rem var(--ed-g) 1rem; }
   .vf-cd-teaser{ margin:0; }
@@ -5291,7 +5291,7 @@
   function vfMark(n, t){ return { custom:'<div class="vf-mark" id="vf-' + n + '"><span>' + n + '</span>' + t + '</div>' }; }
   /* crop a region (x,y,w,h in source px) out of a larger image with CSS only — no extra files */
   function vfCrop(src, W, H, b, cls, alt){
-    return '<span class="vf-crop ' + (cls || '') + '" style="aspect-ratio:' + b[2] + '/' + b[3] + '"><img src="' + src + '" alt="' + (alt || '') + '" loading="lazy" decoding="async" style="width:' + (W / b[2] * 100).toFixed(3) + '%;left:' + (-b[0] / b[2] * 100).toFixed(3) + '%;top:' + (-b[1] / b[3] * 100).toFixed(3) + '%"></span>';
+    return '<span class="vf-crop ' + (cls || '') + '" style="aspect-ratio:' + b[2] + '/' + b[3] + '"><img src="' + src + '" alt="' + (alt || '') + '" loading="lazy" decoding="async" style="width:' + (W / b[2] * 100).toFixed(3) + '%;height:' + (H / b[3] * 100).toFixed(3) + '%;left:' + (-b[0] / b[2] * 100).toFixed(3) + '%;top:' + (-b[1] / b[3] * 100).toFixed(3) + '%"></span>';
   }
   var VF_PARTS = [['01','IDENTITY'],['02','KEY VISUAL'],['03','PROMOTION'],['04','MERCHANDISE'],['05','ON-SITE'],['06','PRODUCTION'],['07','DESIGN OPS'],['08','EARLY']];
   var vfJumpBlock = { custom:'<nav class="dd-jump vf-jump" data-dd-jump aria-label="HEARTBEAT 바로가기"><div class="dd-jump-in"><span class="dd-jump-label">바로가기</span>' +
