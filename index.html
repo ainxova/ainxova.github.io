@@ -7549,7 +7549,7 @@
     var ctx = canvas.getContext('2d');
     var COLS = 12, CW = 480, CH = 270;
     /* hard-cut edit, no blending: COSMOS (2 takes, 10fps source) -> DDDM x MUSE.D (12fps) -> HEARTBEAT main stage (12fps, added 2026-10-19) */
-    var SEG = [{ n:154, fps:10 }], TOTAL = 0; SEG.forEach(function(g){ g.d = g.n / g.fps; TOTAL += g.d; });
+    var SEG = [{ n:170, fps:10 }], TOTAL = 0; SEG.forEach(function(g){ g.d = g.n / g.fps; TOTAL += g.d; });
     /* 2026-10-19: high-res source = a muted 1280×720 <video> drawn into the same canvas; the 480px sprite is only the
        fallback for when autoplay is blocked (e.g. the artifact viewer). Same edit in both. */
     var vid = null, useVid = false;
@@ -7686,7 +7686,7 @@
     /* decode the large sheet off the main thread first, so the first frame doesn't stall the page on entry */
     sprite.onload = function(){ var go = function(){ if (useVid) return; ready = true; resize(); draw(0); start(); if (lens){ intro = performance.now() + 350; lensOn = true; } }; if (sprite.decode) sprite.decode().then(go, go); else go(); };
     /* audit 2026-10: WebP sprite (~40% lighter) fetched after window load; the CSS poster covers the gap. */
-    var spriteSrc = 'images/hero/hero-reel6-sprite.webp?v=7';
+    var spriteSrc = 'images/hero/hero-reel6-sprite.webp?v=8';
     function useSprite(){ if (!sprite.src) sprite.src = spriteSrc; }
     function boot(){
       if (reduceMotion){ useSprite(); return; }
@@ -7699,7 +7699,7 @@
       vid.addEventListener('playing', function(){ if (useVid) return; clearTimeout(fell); useVid = true; ready = true; lastFi = -1; resize(); start();
         if (lens){ intro = performance.now() + 350; lensOn = true; } });
       vid.addEventListener('error', function(){ clearTimeout(fell); useSprite(); });
-      vid.src = 'images/hero/hero-reel.mp4';
+      vid.src = 'images/hero/hero-reel.mp4?v=2';
       var pr = vid.play(); if (pr && pr.catch) pr.catch(function(){ clearTimeout(fell); useSprite(); });
     }
     if (document.readyState === 'complete') boot();
