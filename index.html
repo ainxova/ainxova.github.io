@@ -7561,8 +7561,15 @@
     /* 2026-10: the 480px footage looked low-res behind ALL IN, so it is now deliberately out of
        focus — drawn at 1/6 size and upscaled (smooth, costs less than 1×), then softened a bit more
        by a static CSS blur. The type carries the screen; the footage is just colour and motion. */
+    /* Safari has no CanvasRenderingContext2D.filter, so the blur / grey / dim set on ctx.filter is silently ignored
+       there. Detect it once and, where missing, put the same look on the canvas element as a CSS filter instead
+       (scaled up a touch so the blurred edge never shows the poster underneath). */
+    var CF = (function(){ try{ ctx.filter = 'blur(2px)'; var ok = ctx.filter === 'blur(2px)'; ctx.filter = 'none'; return ok; }catch(e){ return false; } })();
+    function cssLook(){ if (CF) return;
+      canvas.style.filter = 'blur(' + Math.max(4, canvas.clientWidth / 110).toFixed(1) + 'px) brightness(.66) ' + (lens ? 'saturate(0)' : 'saturate(1.15)');
+      canvas.style.transform = 'scale(1.06)'; }
     function resize(){ var d = useVid ? 1/4 : 1/6;
-      canvas.width = Math.round(canvas.clientWidth * d); canvas.height = Math.round(canvas.clientHeight * d); lastFi = -1; if (ready) draw(head); }
+      canvas.width = Math.round(canvas.clientWidth * d); canvas.height = Math.round(canvas.clientHeight * d); lastFi = -1; cssLook(); if (ready) draw(head); }
     /* Portrait screens: a plain cover-fit zooms the 16:9 frame ~5x, so faces
        fill the phone and outrank the type. There we lay a blurred cover-fit
        copy down as the mood layer and draw the frame itself at a gentler
