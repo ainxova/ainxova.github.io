@@ -1992,6 +1992,14 @@
   .vf-pair figcaption{ margin-top:.55rem; font-size:.62rem; font-weight:600; letter-spacing:.16em; color:rgba(255,255,255,.45); }
   .vf-pair figcaption span{ margin-left:.6rem; color:var(--accent); }
   @media (max-width:767px){ .vf-pair{ grid-template-columns:1fr; padding:4rem 1.25rem 0; } .vf-pair-a{ width:72%; } .vf-drag img{ height:300px; } }
+  .is-vf .vf-feature{ padding-top:1rem !important; padding-bottom:2rem !important; }
+  .is-vf .vf-feature .cosmos-title{ font-size:clamp(2.4rem, 4.6vw, 4.2rem); line-height:1; letter-spacing:-.035em; }
+  .vf-subhead{ display:flex; flex-wrap:wrap; align-items:baseline; gap:.4rem 1rem; margin:8rem var(--ed-g) 0; padding-top:1.4rem; border-top:1px solid rgba(255,255,255,.14); }
+  .vf-subhead b{ font-size:.78rem; font-weight:800; letter-spacing:.2em; color:#fff; }
+  .vf-subhead span{ font-size:.78rem; color:rgba(255,255,255,.5); }
+  .vf-subhead + .vf-row.is-inset{ margin-top:1.4rem; }
+  .vf-subhead + .cosmos-block{ padding-top:1.2rem !important; }
+  @media (max-width:767px){ .vf-subhead{ margin:5rem 1.25rem 0; } }
   .vf-crop{ position:relative; display:block; overflow:hidden; width:100%; }
   .vf-crop img{ position:absolute; max-width:none; display:block; }
   .vf-poster .vf-crop{ background:#0a0a0a; }
@@ -5343,6 +5351,10 @@
     '<figure class="vf-pair-a"><img src="images/dududo-ig-showroom.gif" alt="dududo showroom 인스타그램 카드뉴스" loading="lazy"><figcaption>SHOWROOM PROMOTION · 더현대 서울</figcaption></figure>' +
     '<figure class="vf-pair-b"><div class="vf-drag" tabindex="0" aria-label="아티스트 사인용 포스터 18종 (좌우로 드래그)"><img src="' + HB + 'hb-artist-posters.jpg" alt="아티스트 사인용 포스터 18종" loading="lazy" decoding="async" draggable="false"></div><span class="vf-drag-bar" aria-hidden="true"><i></i></span><figcaption>ARTIST SIGNING POSTERS · 18종 <span>DRAG →</span></figcaption></figure>' +
   '</div>' };
+  /* the proposal-vs-site viewer is the centrepiece: keep a large title, short line, and give it room */
+  function vfFeature(b){ return { custom: b.custom.replace('<div class="cosmos-block">', '<div class="cosmos-block vf-feature">')
+    .replace(/<p class="cosmos-copy">[\s\S]*?<\/p>/, '<p class="cosmos-copy">기획 단계의 시안과 실제로 구현된 현장을 8개 공간·제작물별로 나란히 비교합니다.</p>') }; }
+  function vfSub(t, d){ return { custom:'<div class="vf-subhead"><b>' + t + '</b><span>' + d + '</span></div>' }; }
   function vfStrip(b){ return { custom: b.custom.replace(/<div class="cosmos-head">[\s\S]*?<\/p><\/div>/, '') }; }
   function vfRow(items, cols, ar, inset){
     return { custom:'<div class="vf-row' + (inset ? ' is-inset' : '') + '" style="--c:' + cols + '">' + items.map(function(it){
@@ -5410,10 +5422,12 @@
     vfMark('04', 'MERCHANDISE'),
     vfRow([{ src:HB + 'hb-md-tee-black.jpg', alt:'공식 티셔츠 블랙', cap:'OFFICIAL TEE · BLACK' }, { src:HB + 'hb-md-tee-red.jpg', alt:'공식 티셔츠 레드', cap:'OFFICIAL TEE · RED' }, { src:HB + 'hb-md-cap.jpg', alt:'자수 볼캡', cap:'BALL CAP' }], 3, '960/1200'),
     vfRow([{ src:HB + 'hb-md-ig-list.jpg', alt:'MD LIST 카드' }, { src:HB + 'hb-md-ig-tee.jpg', alt:'티셔츠 카드' }, { src:HB + 'hb-md-ig-cap.jpg', alt:'볼캡 카드' }, { src:HB + 'hb-md-ig-sticker.jpg', alt:'스티커 세트 카드' }], 4, '900/1125', true),
-    vfMark('05', 'ON-SITE'), vfStrip(hbPairBlock),
+    vfMark('05', 'ON-SITE'), vfFeature(hbPairBlock),
+    vfSub('HOLOGRAM BOOTH', '부스 시트지 · 기기 송출 영상 · 태블릿 UI'),
     vfRow([{ src:HB + 'hb-holo-test.jpg', alt:'홀로그램 기기 테스트', cap:'HOLOGRAM UNIT · TEST' }, { src:HB + 'hb-holo-sheet.jpg', alt:'홀로그램 부스 시트지 디자인', cap:'BOOTH SHEET · DESIGN', ar:'1400/1672' }, { video:HB + 'hb-holo-motion.mp4', poster:HB + 'hb-holo-motion-poster.jpg', alt:'홀로그램 송출 영상 테스트', cap:'INSIDE MOTION' }], 3, '3/4', true),
     vfRow([1,2,3,4,5].map(function(k){ return { src:HB + 'hb-kiosk-0' + k + '.jpg', alt:'부스 태블릿 화면 ' + k }; }), 5, '1200/703', true),
     vfRow([{ video:HB + 'hb-kiosk-demo.mp4', poster:HB + 'hb-kiosk-demo-poster.jpg', alt:'태블릿 터치 시연', cap:'BOOTH TABLET UI · 시작 → 모드 선택 → 촬영' }], 1, '1000/586', true),
+    vfSub('ON-SITE GRAPHICS', '7개 구역 47종 현장 출력물'),
     vfStrip(hbSiteBlock),
     vfMark('06', 'PRODUCTION'), vfStrip(edBuildBlock), vfStrip(edBaBlock), vfStrip(edDayBlock), vfStrip(hbTaggedBlock),
     vfMark('07', 'DESIGN OPS'), vfOpsBlock,
