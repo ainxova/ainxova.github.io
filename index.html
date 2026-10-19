@@ -1675,6 +1675,14 @@
   .hb-status-text{ display:flex; flex-direction:column; gap:.3rem; }
   .hb-status-text b{ font-size:.9rem; color:#fff; font-weight:600; }
   .hb-status-text span{ font-size:.8rem; line-height:1.7; color:rgba(255,255,255,.62); word-break:keep-all; }
+  .hb-preview{ position:relative; margin:0 1.25rem 1.25rem; aspect-ratio:16/9; background:#0a0a0a; border:1px solid rgba(255,255,255,.08); overflow:hidden; cursor:pointer; }
+  .hb-preview video{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block; }
+  .hb-preview-tag{ position:absolute; left:0; right:0; bottom:0; padding:2.2rem 1.1rem .9rem; font-size:.78rem; color:rgba(255,255,255,.78); background:linear-gradient(0deg, rgba(0,0,0,.66), rgba(0,0,0,0)); pointer-events:none; }
+  .hb-preview-tag b{ margin-right:.7rem; font-weight:600; letter-spacing:.14em; color:var(--accent); }
+  .hb-preview-play{ position:absolute; left:50%; top:50%; width:4.2rem; height:4.2rem; margin:-2.1rem 0 0 -2.1rem; border-radius:50%; background:rgba(0,0,0,.5); border:1px solid rgba(255,255,255,.5); display:none; align-items:center; justify-content:center; pointer-events:none; }
+  .hb-preview-play i{ margin-left:.25rem; border-style:solid; border-width:.55rem 0 .55rem .9rem; border-color:transparent transparent transparent #fff; }
+  .hb-preview.is-paused .hb-preview-play{ display:flex; }
+  @media (min-width:768px){ .hb-preview{ margin:0 6.25% 1.5rem; } }
   @media (min-width:768px){ .hb-status{ margin:0 6.25% 1.5rem; } } /* same inset as .modal-info-pad so the box lines up with the text and chips above */
   @media (max-width:767px){ .hb-status{ flex-direction:column; gap:.6rem; margin:0 1.25rem 1.25rem; } }
   .card-year{ margin-left:auto; color:rgba(255,255,255,.35); letter-spacing:.04em; font-variant-numeric:tabular-nums; text-transform:none; }
@@ -4553,6 +4561,15 @@
      the hover index. The design slices are the client PDF's own sections
      with their baked-in nav bars cropped off (images/hb/). */
   var HB = 'images/hb/';
+  /* HEARTBEAT · short highlight reel at the very top of the detail page (stage + build + kiosk + venue, muted loop). */
+  var hbPreviewBlock = {
+    custom: '<figure class="hb-preview is-paused">' +
+      '<video poster="' + HB + 'hb-preview-poster.jpg" autoplay muted loop playsinline preload="auto" aria-label="HEARTBEAT BY DUDUDO 하이라이트 영상: 메인 무대, 현장 설치 과정, 키오스크, 공연장"><source src="' + HB + 'hb-preview.mp4" type="video/mp4"></video>' +
+      '<span class="hb-preview-play" aria-hidden="true"><i></i></span>' +
+      '<figcaption class="hb-preview-tag"><b>HIGHLIGHT</b>메인 무대 · 현장 설치 · 키오스크 · 공연장</figcaption>' +
+    '</figure>'
+  };
+
   var hbCoverBlock = {
     custom: '<div class="cx-cover hb-cover">' +
         '<img class="cx-cover-img" src="' + HB + 'hb-cover.jpg" alt="HEARTBEAT BY DUDUDO 포토월 · 입체 로고 조형물" decoding="async">' +
@@ -4791,7 +4808,7 @@
       '<div class="cosmos-head">' +
         '<div class="cosmos-eyebrow">On-site · Venue Photos</div>' +
         '<h3 class="cosmos-title">THE VENUE<br>ON THE DAY</h3>' +
-        '<p class="cosmos-copy">행사 당일 현장 사진입니다. 입구와 포토월, MD 부스, 홀로그램 부스, 하트 팔찌까지 설계한 공간과 굿즈가 실제로 쓰인 모습입니다.</p>' +
+        '<p class="cosmos-copy">행사 당일 현장 사진입니다. 입구와 포토월, MD 부스, 홀로그램 부스, 하트 컨페티와 팔찌까지 설계한 공간과 굿즈가 실제로 쓰인 모습입니다.</p>' +
       '</div>' +
       '<div class="hbr-grid hbph-grid">' +
         '<figure class="hbr-item hbr-wide"><img src="' + HB + 'hb-ph-gate-night.jpg" alt="밤의 화정체육관 입구 게이트와 풍선 장식" loading="lazy" decoding="async"><figcaption><b>ENTRANCE</b>붉은 조명이 켜진 입구 게이트</figcaption></figure>' +
@@ -4802,7 +4819,7 @@
         '<figure class="hbr-item hbr-wide"><img src="' + HB + 'hb-ph-md-booth.jpg" alt="공식 MD 부스 전경" loading="lazy" decoding="async"><figcaption><b>OFFICIAL MD</b>공식 MD 부스</figcaption></figure>' +
         '<figure class="hbr-item"><img src="' + HB + 'hb-ph-md-wall.jpg" alt="레드 테이프로 꾸민 MD 진열 벽" loading="lazy" decoding="async"><figcaption><b>MD DISPLAY</b>레드 테이프 진열 벽</figcaption></figure>' +
         '<figure class="hbr-item"><img src="' + HB + 'hb-ph-md-inside.jpg" alt="MD 부스 내부와 계산대" loading="lazy" decoding="async"><figcaption><b>MD BOOTH</b>부스 내부</figcaption></figure>' +
-        '<figure class="hbr-item"><img src="' + HB + 'hb-ph-heart.jpg" alt="관객이 들어 올린 WE BEAT AS ONE 하트 라이트" loading="lazy" decoding="async"><figcaption><b>WE BEAT AS ONE</b>하트 라이트</figcaption></figure>' +
+        '<figure class="hbr-item"><img src="' + HB + 'hb-ph-heart.jpg" alt="직접 제작해 현장에 뿌린 WE BEAT AS ONE 하트 컨페티" loading="lazy" decoding="async"><figcaption><b>WE BEAT AS ONE</b>직접 제작해 뿌린 하트 컨페티</figcaption></figure>' +
         '<figure class="hbr-item"><img src="' + HB + 'hb-ph-band.jpg" alt="붉게 빛나는 하트 팔찌를 찬 손" loading="lazy" decoding="async"><figcaption><b>LIGHT BAND</b>하트 팔찌 라이트</figcaption></figure>' +
         '<figure class="hbr-item hbr-wide"><img src="' + HB + 'hb-ph-drums.jpg" alt="로고 시트지를 붙인 취식존 드럼통 테이블" loading="lazy" decoding="async"><figcaption><b>FOOD ZONE</b>시트지를 직접 붙인 취식존 드럼통</figcaption></figure>' +
         '<figure class="hbr-item"><img src="' + HB + 'hb-ph-beads.jpg" alt="비즈 목걸이 이벤트 배너와 나무 상자" loading="lazy" decoding="async"><figcaption><b>BEADS EVENT</b>비즈 목걸이 이벤트 코너</figcaption></figure>' +
@@ -4957,13 +4974,13 @@
       blurb:"키비주얼과 MD부터 행사장 전 구역의 공간 그래픽, 현장 설치까지. 2026년 10월 17–18일 이틀간 열린 대형 음악 페스티벌의 아트 전 과정을 단독으로 기획하고 총괄했습니다.",
       desc:"2026년 10월 17–18일 고려대학교 화정체육관에서 열린 대형 음악 페스티벌 'HEARTBEAT BY DUDUDO'의 아트 디렉션을 단독으로 맡아, 비주얼 방향 설정부터 현장 설치까지 전 과정을 이끌었습니다.\n메인 키비주얼과 포스터 배리에이션, 모션 포스터 티저로 페스티벌의 시각 언어를 정립하고 로고·심볼 에셋 시스템을 개발했습니다. 블랙·레드 티셔츠와 자수 볼캡 등 공식 MD, 가로등 배너·현수막·홀로그램 시트지 등 행사장 전 구역의 공간 그래픽을 디자인하고 제작과 인쇄 감리까지 마쳤습니다.\n디자이너가 1명인 환경에서 PM 3명이 SNS·상세페이지 콘텐츠를 직접 제작할 수 있도록 약 20종의 Figma 디자인 포맷을 설계하고 가이드와 교육을 제공했습니다. 관객이 가장 먼저 마주하는 입장 게이트 설치물은 행사 전날인 10월 16일 현장에 입장해 직접 시공·연출했습니다. 아크릴 물감으로 녹슨 질감을 직접 칠하고, 게이트를 장식할 대형 구슬 목걸이도 직접 제작했습니다.\n행사는 이틀간 진행되었고, 행사 홍보사 집계 기준 4개 매체에서 34건의 현장 보도 콘텐츠가 나왔습니다.",
       tools:["Illustrator", "Photoshop", "Art Direction", "현장 시공·연출"],
-      thumb:"images/thumbs/heartbeat-thumb.jpg",
+      thumb:"images/thumbs/heartbeat-thumb.mp4",
       links:[ { label:"티켓 예매", url:"https://tr.ee/Nwms6HjeAv", icon:"ticket" } ],
       /* Rebuilt (Oct 2026) to the same structure as COSMOS: cover + overview
          lead, a 5-part hover index, and the client PDF's own sections (nav
          bars cropped off, images/hb/) inside each part. Future on-site concert
          photos go into PART 05's show list, after hb-wristband.jpg. */
-      lead:[{ custom:'<div class="hb-status is-done" role="note"><span class="hb-status-pill"><i aria-hidden="true"></i>COMPLETED</span><div class="hb-status-text"><b>2026.10.17 — 10.18 개최 완료 · 현장 보도 콘텐츠 34건</b><span>뉴소스매거진 · 딥매거진 · 뉴스컬처 · 디지털데일리 엔츠 등 4개 매체에서 현장 스케치와 라이브 스테이지 콘텐츠가 소개되었습니다(행사 홍보사 집계 기준). 이 페이지의 디자인은 실제 제작·설치된 확정안입니다.</span></div></div>' }, hbCoverBlock],
+      lead:[hbPreviewBlock, { custom:'<div class="hb-status is-done" role="note"><span class="hb-status-pill"><i aria-hidden="true"></i>COMPLETED</span><div class="hb-status-text"><b>2026.10.17 — 10.18 개최 완료 · 현장 보도 콘텐츠 34건</b><span>뉴소스매거진 · 딥매거진 · 뉴스컬처 · 디지털데일리 엔츠 등 4개 매체에서 현장 스케치와 라이브 스테이지 콘텐츠가 소개되었습니다(행사 홍보사 집계 기준). 이 페이지의 디자인은 실제 제작·설치된 확정안입니다.</span></div></div>' }, hbCoverBlock],
       index:{ title:"HEARTBEAT BY DUDUDO", unit:"PARTS", label:"파트" },
       images:[],
       sections:[
@@ -7340,8 +7357,8 @@
     var canvas = document.getElementById('hero-reel-canvas'); if (!canvas) return;
     var ctx = canvas.getContext('2d');
     var COLS = 12, CW = 480, CH = 270;
-    /* hard-cut edit, no blending: COSMOS (2 takes, 10fps source) -> DDDM x MUSE.D (12fps) */
-    var SEG = [{ n:48, fps:10 }, { n:32, fps:10 }, { n:41, fps:12 }], TOTAL = 0; SEG.forEach(function(g){ g.d = g.n / g.fps; TOTAL += g.d; });
+    /* hard-cut edit, no blending: COSMOS (2 takes, 10fps source) -> DDDM x MUSE.D (12fps) -> HEARTBEAT main stage (12fps, added 2026-10-19) */
+    var SEG = [{ n:48, fps:10 }, { n:32, fps:10 }, { n:41, fps:12 }, { n:40, fps:12 }], TOTAL = 0; SEG.forEach(function(g){ g.d = g.n / g.fps; TOTAL += g.d; });
     var sprite = new Image(), ready = false, head = 0, raf = 0, last = 0, lastFi = -1, inView = true;
     var off = null, offCtx = null;
     /* perf 2026-10: 1× backing store — the frames are 480px wide and sit under a dark overlay, so a
@@ -7472,7 +7489,7 @@
     /* decode the large sheet off the main thread first, so the first frame doesn't stall the page on entry */
     sprite.onload = function(){ var go = function(){ ready = true; resize(); draw(0); start(); if (lens){ intro = performance.now() + 350; lensOn = true; } }; if (sprite.decode) sprite.decode().then(go, go); else go(); };
     /* audit 2026-10: WebP sprite (~40% lighter) fetched after window load; the CSS poster covers the gap. */
-    var spriteSrc = 'images/hero/hero-reel5-sprite.webp';
+    var spriteSrc = 'images/hero/hero-reel6-sprite.webp';
     if (document.readyState === 'complete') sprite.src = spriteSrc;
     else window.addEventListener('load', function(){ sprite.src = spriteSrc; }, { once:true });
     window.addEventListener('resize', resize); resize();
@@ -7493,6 +7510,19 @@
     }, { threshold:0.15 });
     els.forEach(function(el){ el.setAttribute('data-ready', ''); window.__uxFxIO.observe(el); });
   };
+
+
+  /* HEARTBEAT highlight reel: show a play button whenever the clip is not running (e.g. autoplay blocked), tap to play/pause. */
+  (function(){
+    function fig(e){ var t = e.target; return t && t.tagName === 'VIDEO' ? t.closest('.hb-preview') : null; }
+    document.addEventListener('playing', function(e){ var f = fig(e); if (f) f.classList.remove('is-paused'); }, true);
+    document.addEventListener('pause', function(e){ var f = fig(e); if (f) f.classList.add('is-paused'); }, true);
+    document.addEventListener('click', function(e){
+      var f = e.target.closest && e.target.closest('.hb-preview'); if (!f) return;
+      var v = f.querySelector('video'); if (!v) return;
+      if (v.paused){ var pr = v.play(); if (pr && pr.catch) pr.catch(function(){}); } else v.pause();
+    });
+  })();
 
   window.initSpritePlayers = function(root){
     (root || document).querySelectorAll('.sprite-player:not([data-ready])').forEach(function(el){
