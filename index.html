@@ -1829,12 +1829,12 @@
   .ed-plate figcaption span{ font-size:.66rem; letter-spacing:.1em; color:rgba(255,255,255,.6); border:1px solid rgba(255,255,255,.18); padding:.3rem .6rem; }
   /* chapter openers */
   .is-ed .uxs-sec{ margin-top:0; }
-  .ed-ch{ display:grid; grid-template-columns:repeat(12, minmax(0,1fr)); column-gap:2rem; align-items:end; padding:8rem var(--ed-g) 4rem; background:#0b0908; }
-  .ed-ch-num{ grid-column:1 / 5; font-size:clamp(7rem, 15vw, 13.5rem); font-weight:800; line-height:.78; letter-spacing:-.06em; color:transparent; background:linear-gradient(180deg, rgba(242,219,134,.42) 0%, rgba(242,219,134,.04) 92%); -webkit-background-clip:text; background-clip:text; font-variant-numeric:tabular-nums; user-select:none; }
-  .ed-ch-body{ grid-column:5 / -1; }
-  .ed-ch-kicker{ display:block; font-size:.66rem; font-weight:700; letter-spacing:.22em; color:var(--accent); margin-bottom:1.1rem; }
+  .ed-ch{ display:grid; grid-template-columns:minmax(0,38.2fr) minmax(0,61.8fr); align-items:end; padding:8rem var(--ed-g) 4.5rem; background:#0b0908; }
+  .ed-ch-num{ grid-column:1; font-size:clamp(8rem, 16.5vw, 15.5rem); font-weight:800; line-height:.74; letter-spacing:-.065em; margin-left:-.06em; color:transparent; background:linear-gradient(180deg, rgba(242,219,134,.5) 0%, rgba(242,219,134,.05) 95%); -webkit-background-clip:text; background-clip:text; font-variant-numeric:tabular-nums; user-select:none; }
+  .ed-ch-body{ grid-column:2; padding-bottom:.35rem; }
+  .ed-ch-kicker{ display:block; font-size:.66rem; font-weight:600; letter-spacing:.24em; color:rgba(255,255,255,.42); margin-bottom:1.2rem; }
   .ed-ch-title{ margin:0 0 1.4rem; font-size:clamp(2.2rem, 4.4vw, 4.2rem); font-weight:800; line-height:1.06; letter-spacing:-.035em; color:#fff; word-break:keep-all; }
-  .ed-ch-lede{ max-width:38rem; margin:0; font-size:.95rem; line-height:1.8; color:rgba(255,255,255,.62); word-break:keep-all; }
+  .ed-ch-lede{ max-width:34rem; margin:0; font-size:.92rem; line-height:1.8; color:rgba(255,255,255,.58); word-break:keep-all; }
   .is-ed .ed-ch .uxs-meta{ margin-top:.8rem; }
   /* every content block: asymmetric head, more air, no rules between blocks */
   .is-ed .cosmos-block{ padding:6.5rem var(--ed-g); gap:3rem; }
@@ -1895,9 +1895,9 @@
     .ed-plate{ margin-top:3rem; }
     .ed-plate figcaption{ padding:1rem 1.25rem 0; }
     .ed-hero-cap{ left:1.25rem; right:1.25rem; bottom:1rem; font-size:.7rem; }
-    .ed-ch{ padding:5rem 1.25rem 2.5rem; row-gap:1rem; }
-    .ed-ch-num{ grid-column:1 / -1; font-size:5.5rem; }
-    .ed-ch-body{ grid-column:1 / -1; }
+    .ed-ch{ grid-template-columns:1fr; padding:5rem 1.25rem 2.5rem; row-gap:1.4rem; }
+    .ed-ch-num{ grid-column:1; font-size:6.5rem; }
+    .ed-ch-body{ grid-column:1; padding-bottom:0; }
     .is-ed .cosmos-block{ padding:4rem 1.25rem; gap:2rem; }
     .is-ed .cosmos-head > .cosmos-title, .is-ed .cosmos-head > .cosmos-title + .cosmos-copy, .is-ed .cosmos-head > .cosmos-copy:only-child{ grid-column:1 / -1; }
     .is-ed .cosmos-head > .cosmos-title + .cosmos-copy{ margin-top:1.2rem; }
@@ -4142,7 +4142,7 @@
         '<p class="cosmos-copy">BIGBANG 20주년 미디어 전시 ‘COSMOS’ 현장을 담은 스케치 영상입니다. 왼쪽은 전시 현장 스케치, 오른쪽은 PHASE 2 스케치입니다.</p>' +
       '</div>' +
       '<div class="cxr-vids">' +
-        '<figure class="cxr-v"><div class="cxr-frame"><video poster="images/cosmos-video/sketch-01-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-label="COSMOS 전시 현장 스케치 영상"><source src="images/cosmos-video/sketch-01.mp4" type="video/mp4"></video></div><figcaption><b>EXHIBITION SKETCH</b>전시 현장 스케치</figcaption></figure>' +
+        '<figure class="cxr-v"><div class="cxr-frame"><video poster="images/thumbs/cosmos-bigbang-thumb-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-label="COSMOS 전시 현장 스케치 영상"><source src="images/cosmos-video/sketch-01.mp4" type="video/mp4"></video></div><figcaption><b>EXHIBITION SKETCH</b>전시 현장 스케치</figcaption></figure>' +
         '<figure class="cxr-v is-off"><div class="cxr-frame"><video poster="images/cosmos-video/sketch-phase2-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-label="COSMOS PHASE 2 스케치 영상"><source src="images/cosmos-video/sketch-phase2.mp4" type="video/mp4"></video></div><figcaption><b>PHASE 2 SKETCH</b>PHASE 2 현장 스케치</figcaption></figure>' +
       '</div>' +
     '</div>'
@@ -5007,6 +5007,9 @@
       d:{ src:HB + 'hb-wristband.jpg', alt:'날짜와 좌석 구분별 입장 팔찌 디자인' },
       s:[ { src:'hb-real-bands.jpg', w:1500, h:1240, cap:'ADMISSION BANDS · 날짜·좌석별 팔찌와 19+ 종이팔찌', alt:'날짜와 좌석 구분별 입장 밴드와 19+ 종이팔찌 실물' },
           { src:'hb-real-vip.jpg', w:1400, h:1689, cap:'VIP PASS · 비표와 랜야드', alt:'VIP 비표와 랜야드 실물' } ] },
+    { en:'PRESS ZONE', kr:'프레스존', labelD:'DESIGN PROPOSAL', note:'벽 크기에 맞춰 제작한 프레스월 현수막. 사진은 설치 직후 모습이며, 행사 때는 조명을 더해 연출했습니다',
+      d:{ src:HB + 'hb-press-proposal.jpg', alt:'프레스존 벽면 현수막 디자인 시안 (가상 공간 합성)' },
+      s:[ { src:'hb-ph-press.jpg', w:1600, h:1200, cap:'PRESS WALL · 설치 직후 (조명 연출 전)', alt:'설치를 마친 프레스존 벽면 현수막' } ] },
     { en:'OFFICIAL MD', kr:'공식 MD', labelD:'DESIGN · MD SHEET', fit:'contain', note:'티셔츠·볼캡·스티커 구성안, 그리고 현장 MD 부스',
       d:{ src:HB + 'hb-merch.jpg', alt:'HEARTBEAT 전체 MD 디자인 구성안' },
       s:[ { src:'hb-ph-md-booth.jpg', w:1600, h:1200, cap:'OFFICIAL MD · 공식 MD 부스', alt:'공식 MD 부스 전경' },
@@ -6996,7 +6999,7 @@
           return '<section class="uxs-sec" id="uxs-' + sec.id + '">' +
             '<div class="uxs-sticky"><span class="uxs-sticky-eyebrow">' + sec.eyebrow + '</span><span class="uxs-sticky-title">' + sec.title + '</span>' +
               (sec.period ? '<span class="uxs-sticky-period">' + sec.period + '</span>' : '') + '</div>' +
-            (p._ed ? '<header class="ed-ch"><span class="ed-ch-num" aria-hidden="true">' + sec.eyebrow.replace('PART ', '') + '</span><div class="ed-ch-body"><span class="ed-ch-kicker">' + sec.eyebrow + ' — ' + sec.title + '</span>' + (sec.edTitle ? '<h2 class="ed-ch-title">' + sec.edTitle + '</h2>' : '') + '<p class="ed-ch-lede">' + sec.sum + '</p>' + (sec.tools ? '<p class="uxs-meta">' + sec.tools + '</p>' : '') + '</div></header>' :
+            (p._ed ? '<header class="ed-ch"><span class="ed-ch-num" aria-hidden="true">' + sec.eyebrow.replace('PART ', '') + '</span><div class="ed-ch-body"><span class="ed-ch-kicker">' + sec.title + '</span>' + (sec.edTitle ? '<h2 class="ed-ch-title">' + sec.edTitle + '</h2>' : '') + '<p class="ed-ch-lede">' + sec.sum + '</p>' + (sec.tools ? '<p class="uxs-meta">' + sec.tools + '</p>' : '') + '</div></header>' :
             '<div class="uxs-head"><p class="uxs-sum">' + sec.sum + '</p>' +
               ((sec.period || sec.tools) ? '<p class="uxs-meta">' + (sec.period ? sec.period + (sec.tools ? ' · ' : '') : '') + sec.tools + '</p>' : '') + '</div>') +
             renderGalleryImages(sec.show, sec.title) +
