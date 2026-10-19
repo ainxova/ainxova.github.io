@@ -2037,7 +2037,7 @@
   .hbz-slide{ position:relative; flex:0 0 auto; height:100%; margin:0; background:#0d0d0d; }
   .hbz-slide img{ display:block; height:100%; width:auto; max-width:none; user-select:none; -webkit-user-drag:none; }
   .hbz-slide figcaption{ position:absolute; left:0; right:0; bottom:0; padding:2rem .9rem .75rem; font-size:.7rem; letter-spacing:.04em; color:rgba(255,255,255,.88); background:linear-gradient(0deg, rgba(0,0,0,.72), rgba(0,0,0,0)); pointer-events:none; }
-  .hbz-hint{ position:absolute; right:.8rem; bottom:.8rem; z-index:3; font-size:.6rem; font-weight:700; letter-spacing:.2em; color:var(--accent); pointer-events:none; transition:opacity .4s ease; }
+  .hbz-hint{ position:absolute; right:.8rem; top:3rem; z-index:3; font-size:.6rem; font-weight:700; letter-spacing:.2em; color:var(--accent); pointer-events:none; transition:opacity .4s ease; }
   .hbz-hint::after{ content:' →'; }
   .hbz-s.is-moved .hbz-hint{ opacity:0; }
   .hbz-cap{ display:flex; flex-wrap:wrap; align-items:center; gap:.4rem 1rem; margin-top:1rem; }
@@ -5049,9 +5049,10 @@
       d:{ src:HB + 'hb-wristband.jpg', alt:'날짜와 좌석 구분별 입장 팔찌 디자인' },
       s:[ { src:'hb-real-bands.jpg', w:1500, h:1240, cap:'ADMISSION BANDS · 날짜·좌석별 팔찌와 19+ 종이팔찌', alt:'날짜와 좌석 구분별 입장 밴드와 19+ 종이팔찌 실물' },
           { src:'hb-real-vip.jpg', w:1400, h:1689, cap:'VIP PASS · 비표와 랜야드', alt:'VIP 비표와 랜야드 실물' } ] },
-    { en:'PRESS ZONE', kr:'프레스존', labelD:'DESIGN PROPOSAL', note:'벽 크기에 맞춰 제작한 프레스월 현수막. 사진은 설치 직후 모습이며, 행사 때는 조명을 더해 연출했습니다',
+    { en:'PRESS ZONE', kr:'프레스존', labelD:'DESIGN PROPOSAL', note:'벽 크기에 맞춰 제작한 프레스월 현수막. 행사 당일 조명을 더해 아티스트 포토타임 배경으로 쓰였습니다',
       d:{ src:HB + 'hb-press-proposal.jpg', alt:'프레스존 벽면 현수막 디자인 시안 (가상 공간 합성)' },
-      s:[ { src:'hb-ph-press.jpg', w:1600, h:1200, cap:'PRESS WALL · 설치 직후 (조명 연출 전)', alt:'설치를 마친 프레스존 벽면 현수막' } ] }
+      s:[ { src:'hb-ph-press-day.jpg', w:1178, h:1293, cap:'PRESS WALL · 행사 당일 아티스트 포토타임', alt:'행사 당일 프레스월 앞에 선 출연 아티스트' },
+          { src:'hb-ph-press.jpg', w:1600, h:1200, cap:'PRESS WALL · 설치 직후 (조명 연출 전)', alt:'설치를 마친 프레스존 벽면 현수막' } ] }
   ];
   function slide(p, cls){ return '<figure class="hbz-slide' + cls + '" style="aspect-ratio:' + p.w + '/' + p.h + '"' + (cls ? ' aria-hidden="true"' : '') + '><img src="' + HB + p.src + '" alt="' + (cls ? '' : p.alt) + '" loading="lazy" decoding="async" draggable="false"><figcaption>' + p.cap + '</figcaption></figure>'; }
   var hbPairBlock = {
