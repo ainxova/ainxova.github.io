@@ -2940,7 +2940,7 @@
   .hero-reel canvas.hero-reel-lens{ pointer-events:none; }
   .hero-reel::after{ content:''; position:absolute; inset:0;
     background:
-      radial-gradient(ellipse 70% 60% at 50% 45%, rgba(10,10,10,.55) 0%, rgba(10,10,10,.72) 60%, rgba(10,10,10,.88) 100%),
+      radial-gradient(ellipse 70% 60% at 50% 45%, rgba(10,10,10,.42) 0%, rgba(10,10,10,.62) 60%, rgba(10,10,10,.84) 100%),
       linear-gradient(180deg, rgba(10,10,10,.35) 0%, rgba(10,10,10,0) 30%, rgba(10,10,10,0) 70%, #0a0a0a 100%); }
 
   /* Category jump: brief highlight on the cards of the chosen category */
@@ -7485,7 +7485,12 @@
     var ctx = canvas.getContext('2d');
     var COLS = 12, CW = 480, CH = 270;
     /* hard-cut edit, no blending: COSMOS (2 takes, 10fps source) -> DDDM x MUSE.D (12fps) -> HEARTBEAT main stage (12fps, added 2026-10-19) */
-    var SEG = [{ n:48, fps:10 }, { n:32, fps:10 }, { n:41, fps:12 }, { n:40, fps:12 }], TOTAL = 0; SEG.forEach(function(g){ g.d = g.n / g.fps; TOTAL += g.d; });
+    var SEG = [{ n:154, fps:10 }], TOTAL = 0; SEG.forEach(function(g){ g.d = g.n / g.fps; TOTAL += g.d; });
+    /* 2026-10-19: high-res source = a muted 1280×720 <video> drawn into the same canvas; the 480px sprite is only the
+       fallback for when autoplay is blocked (e.g. the artifact viewer). Same edit in both. */
+    var vid = null, useVid = false;
+    function SRC(fi){ return useVid ? [vid, 0, 0, vid.videoWidth || 1280, vid.videoHeight || 720] : [sprite, (fi % COLS) * CW, Math.floor(fi / COLS) * CH, CW, CH]; }
+    function curFi(){ return useVid ? Math.floor(vid.currentTime * 30) : frameAt(head); }
     var sprite = new Image(), ready = false, head = 0, raf = 0, last = 0, lastFi = -1, inView = true;
     var off = null, offCtx = null;
     /* perf 2026-10: 1× backing store — the frames are 480px wide and sit under a dark overlay, so a
@@ -7493,25 +7498,25 @@
     /* 2026-10: the 480px footage looked low-res behind ALL IN, so it is now deliberately out of
        focus — drawn at 1/6 size and upscaled (smooth, costs less than 1×), then softened a bit more
        by a static CSS blur. The type carries the screen; the footage is just colour and motion. */
-    function resize(){ var d = 1/6;
+    function resize(){ var d = useVid ? 1/4 : 1/6;
       canvas.width = Math.round(canvas.clientWidth * d); canvas.height = Math.round(canvas.clientHeight * d); lastFi = -1; if (ready) draw(head); }
     /* Portrait screens: a plain cover-fit zooms the 16:9 frame ~5x, so faces
        fill the phone and outrank the type. There we lay a blurred cover-fit
        copy down as the mood layer and draw the frame itself at a gentler
        scale on top, so the footage reads as atmosphere behind ALL IN. */
-    function cell(i, a){ var sx = (i % COLS) * CW, sy = Math.floor(i / COLS) * CH, cw = canvas.width, ch = canvas.height;
+    function cell(i, a){ var Q = SRC(i), cw = canvas.width, ch = canvas.height;
       var cover = Math.max(cw / CW, ch / CH);
       if (ch > cw * 1.15){
         var dwC = CW * cover, dhC = CH * cover;
         ctx.save(); ctx.globalAlpha = a * 0.7; ctx.filter = 'blur(' + Math.round(cw / 40) + 'px)';
-        ctx.drawImage(sprite, sx, sy, CW, CH, (cw - dwC) / 2, (ch - dhC) / 2, dwC, dhC); ctx.restore();
+        ctx.drawImage(Q[0], Q[1], Q[2], Q[3], Q[4], (cw - dwC) / 2, (ch - dhC) / 2, dwC, dhC); ctx.restore();
         var sc = Math.min(cover, Math.max(cw / CW * 1.75, ch / CH * 0.5)), dw = CW * sc, dh = CH * sc;
         /* feather the top/bottom edges so the sharper frame melts into the blur */
         if (!off){ off = document.createElement('canvas'); offCtx = off.getContext('2d'); }
         var ow = Math.round(dw), oh = Math.round(dh);
         if (off.width !== ow || off.height !== oh){ off.width = ow; off.height = oh; }
         offCtx.globalCompositeOperation = 'source-over'; offCtx.clearRect(0, 0, ow, oh);
-        offCtx.drawImage(sprite, sx, sy, CW, CH, 0, 0, ow, oh);
+        offCtx.drawImage(Q[0], Q[1], Q[2], Q[3], Q[4], 0, 0, ow, oh);
         var g = offCtx.createLinearGradient(0, 0, 0, oh);
         g.addColorStop(0, 'rgba(0,0,0,0)'); g.addColorStop(0.28, 'rgba(0,0,0,1)'); g.addColorStop(0.72, 'rgba(0,0,0,1)'); g.addColorStop(1, 'rgba(0,0,0,0)');
         offCtx.globalCompositeOperation = 'destination-in'; offCtx.fillStyle = g; offCtx.fillRect(0, 0, ow, oh);
@@ -7519,10 +7524,10 @@
         return;
       }
       var dw = CW * cover, dh = CH * cover;
-      ctx.globalAlpha = a; ctx.drawImage(sprite, sx, sy, CW, CH, (cw - dw) / 2, (ch - dh) / 2, dw, dh); }
+      ctx.globalAlpha = a; ctx.drawImage(Q[0], Q[1], Q[2], Q[3], Q[4], (cw - dw) / 2, (ch - dh) / 2, dw, dh); }
     function frameAt(t){ var base = 0; for (var k = 0; k < SEG.length; k++){ var g = SEG[k]; if (t < g.d || k === SEG.length - 1) return base + Math.min(g.n - 1, Math.floor(t * g.fps)); t -= g.d; base += g.n; } return 0; }
     /* blur is applied while drawing into the tiny canvas (cheap: ~240×150 px), never as a CSS filter */
-    function draw(t){ ctx.globalAlpha = 1; ctx.filter = 'none'; ctx.fillStyle = '#0a0a0a'; ctx.fillRect(0, 0, canvas.width, canvas.height); ctx.filter = 'blur(' + Math.max(2, canvas.width / 110).toFixed(1) + 'px) brightness(.66) ' + (lens ? 'saturate(0)' : 'saturate(1.15)'); cell(frameAt(t), 1); ctx.filter = 'none'; }
+    function draw(t){ ctx.globalAlpha = 1; ctx.filter = 'none'; ctx.fillStyle = '#0a0a0a'; ctx.fillRect(0, 0, canvas.width, canvas.height); ctx.filter = 'blur(' + Math.max(2, canvas.width / 110).toFixed(1) + 'px) brightness(.66) ' + (lens ? 'saturate(0)' : 'saturate(1.15)'); cell(curFi(), 1); ctx.filter = 'none'; }
     /* ---- Focus lens (2026-10): outside the lens the reel is grey and out of focus; around the pointer
        (or finger) it comes back in colour and in focus. The spot rides a soft spring (slight overshoot),
        stretches along fast moves and leaves a short fading tail, like the CONTACT light. On load it
@@ -7530,7 +7535,7 @@
        only while the spot or its tail is alive. */
     var lens = null, lctx = null, sharp = null, sctx = null, sharpFi = -1, lensOn = false, brush = null, ftmp = null;
     var px = 0, py = 0, hx = 0, hy = 0, vx = 0, vy = 0, inside = false, trail = [], lastNow = 0, intro = -1;
-    var TRAIL_LIFE = 650, LS = 0.5;
+    var TRAIL_LIFE = 650, LS = 0.75;
     if (!reduceMotion){
       lens = document.createElement('canvas'); lens.className = 'hero-reel-lens'; lens.setAttribute('aria-hidden', 'true');
       canvas.parentNode.insertBefore(lens, canvas.nextSibling); lctx = lens.getContext('2d');
@@ -7555,19 +7560,19 @@
     /* spot radius scales with the screen: ~42% of the short side (desktop ≈ 760px across) */
     function lensR(){ return Math.max(150, Math.min(440, Math.min(lens.clientWidth, lens.clientHeight) * 0.42)) * LS; }
     /* same geometry as cell(), so the sharp layer lines up with the soft one (incl. the portrait layout) */
-    function drawSharp(fi){ var cw = sharp.width, ch = sharp.height, sx = (fi % COLS) * CW, sy = Math.floor(fi / COLS) * CH, cover = Math.max(cw / CW, ch / CH);
+    function drawSharp(fi){ var Q = SRC(fi), cw = sharp.width, ch = sharp.height, cover = Math.max(cw / CW, ch / CH);
       var F = 'brightness(1.08) contrast(1.08) saturate(1.25)';
       sctx.clearRect(0, 0, cw, ch); sctx.filter = F;
       var dwC = CW * cover, dhC = CH * cover;
       if (ch > cw * 1.15){
-        sctx.globalAlpha = 0.7; sctx.drawImage(sprite, sx, sy, CW, CH, (cw - dwC) / 2, (ch - dhC) / 2, dwC, dhC); sctx.globalAlpha = 1;
+        sctx.globalAlpha = 0.7; sctx.drawImage(Q[0], Q[1], Q[2], Q[3], Q[4], (cw - dwC) / 2, (ch - dhC) / 2, dwC, dhC); sctx.globalAlpha = 1;
         var sc = Math.min(cover, Math.max(cw / CW * 1.75, ch / CH * 0.5)), ow = Math.round(CW * sc), oh = Math.round(CH * sc);
         if (!ftmp) ftmp = document.createElement('canvas'); ftmp.width = ow; ftmp.height = oh; var fc = ftmp.getContext('2d');
-        fc.drawImage(sprite, sx, sy, CW, CH, 0, 0, ow, oh);
+        fc.drawImage(Q[0], Q[1], Q[2], Q[3], Q[4], 0, 0, ow, oh);
         var g = fc.createLinearGradient(0, 0, 0, oh); g.addColorStop(0, 'rgba(0,0,0,0)'); g.addColorStop(0.28, 'rgba(0,0,0,1)'); g.addColorStop(0.72, 'rgba(0,0,0,1)'); g.addColorStop(1, 'rgba(0,0,0,0)');
         fc.globalCompositeOperation = 'destination-in'; fc.fillStyle = g; fc.fillRect(0, 0, ow, oh);
         sctx.drawImage(ftmp, (cw - ow) / 2, (ch - oh) / 2);
-      } else sctx.drawImage(sprite, sx, sy, CW, CH, (cw - dwC) / 2, (ch - dhC) / 2, dwC, dhC);
+      } else sctx.drawImage(Q[0], Q[1], Q[2], Q[3], Q[4], (cw - dwC) / 2, (ch - dhC) / 2, dwC, dhC);
       sctx.filter = 'none'; sharpFi = fi; }
     function stamp(x, y, r, a, rot, sx, sy){ lctx.globalAlpha = a;
       if (!rot && sx === 1){ lctx.drawImage(brush, x - r, y - r, r * 2, r * 2); return; }
@@ -7589,7 +7594,7 @@
       var introOn = intro >= 0 && now < intro + 1700;
       lctx.globalCompositeOperation = 'source-over'; lctx.clearRect(0, 0, lens.width, lens.height);
       if (!trail.length && !introOn && !inside){ intro = -1; return false; }
-      var fi = frameAt(head); if (fi !== sharpFi) drawSharp(fi);
+      var fi = curFi(); if (fi !== sharpFi) drawSharp(fi);
       var breathe = 1 + 0.035 * Math.sin(now / 520);
       for (var i = 0; i < trail.length - 1; i++){
         var p = trail[i], k = 1 - (now - p.t) / TRAIL_LIFE;
@@ -7608,17 +7613,33 @@
       lctx.globalCompositeOperation = 'source-over';
       return true;
     }
-    function tick(ts){ if (!inView){ raf = 0; return; } if (!last) last = ts;
-      var dt = Math.min(0.1, (ts - last) / 1000); last = ts; head = (head + dt) % TOTAL; var fi = frameAt(head); if (fi !== lastFi){ lastFi = fi; draw(head); }
+    function tick(ts){ if (!inView){ raf = 0; if (useVid) vid.pause(); return; } if (!last) last = ts;
+      var dt = Math.min(0.1, (ts - last) / 1000); last = ts; head = (head + dt) % TOTAL; var fi = curFi(); if (fi !== lastFi){ lastFi = fi; draw(head); }
       if (lensOn) lensOn = drawLens(performance.now()) || inside;
       raf = requestAnimationFrame(tick); }
-    function start(){ if (!raf && ready && inView && !reduceMotion){ last = 0; raf = requestAnimationFrame(tick); } }
+    function start(){ if (useVid && inView && vid.paused){ var pp = vid.play(); if (pp && pp.catch) pp.catch(function(){}); }
+      if (!raf && ready && inView && !reduceMotion){ last = 0; raf = requestAnimationFrame(tick); } }
     /* decode the large sheet off the main thread first, so the first frame doesn't stall the page on entry */
-    sprite.onload = function(){ var go = function(){ ready = true; resize(); draw(0); start(); if (lens){ intro = performance.now() + 350; lensOn = true; } }; if (sprite.decode) sprite.decode().then(go, go); else go(); };
+    sprite.onload = function(){ var go = function(){ if (useVid) return; ready = true; resize(); draw(0); start(); if (lens){ intro = performance.now() + 350; lensOn = true; } }; if (sprite.decode) sprite.decode().then(go, go); else go(); };
     /* audit 2026-10: WebP sprite (~40% lighter) fetched after window load; the CSS poster covers the gap. */
-    var spriteSrc = 'images/hero/hero-reel6-sprite.webp';
-    if (document.readyState === 'complete') sprite.src = spriteSrc;
-    else window.addEventListener('load', function(){ sprite.src = spriteSrc; }, { once:true });
+    var spriteSrc = 'images/hero/hero-reel6-sprite.webp?v=7';
+    function useSprite(){ if (!sprite.src) sprite.src = spriteSrc; }
+    function boot(){
+      if (reduceMotion){ useSprite(); return; }
+      vid = document.createElement('video');
+      vid.muted = true; vid.defaultMuted = true; vid.loop = true; vid.playsInline = true; vid.preload = 'auto';
+      vid.setAttribute('muted', ''); vid.setAttribute('playsinline', ''); vid.setAttribute('aria-hidden', 'true');
+      vid.style.cssText = 'position:absolute;width:2px;height:2px;opacity:0;pointer-events:none;left:0;top:0';
+      canvas.parentNode.appendChild(vid);
+      var fell = setTimeout(function(){ if (!useVid) useSprite(); }, 3500);
+      vid.addEventListener('playing', function(){ if (useVid) return; clearTimeout(fell); useVid = true; ready = true; lastFi = -1; resize(); start();
+        if (lens){ intro = performance.now() + 350; lensOn = true; } });
+      vid.addEventListener('error', function(){ clearTimeout(fell); useSprite(); });
+      vid.src = 'images/hero/hero-reel.mp4';
+      var pr = vid.play(); if (pr && pr.catch) pr.catch(function(){ clearTimeout(fell); useSprite(); });
+    }
+    if (document.readyState === 'complete') boot();
+    else window.addEventListener('load', boot, { once:true });
     window.addEventListener('resize', resize); resize();
     if ('IntersectionObserver' in window){ new IntersectionObserver(function(es){ inView = es[0].isIntersecting; if (inView) start(); }).observe(canvas); }
     document.addEventListener('visibilitychange', function(){ inView = !document.hidden; start(); });
