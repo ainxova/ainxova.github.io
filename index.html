@@ -1938,9 +1938,6 @@
   .vf-one.is-narrow{ width:min(560px, calc(100% - 2 * var(--ed-g))); margin:2.5rem auto 0; }
   .is-vf .cosmos-block{ padding-top:1.2rem; padding-bottom:1.2rem; }
   .is-vf .ed-ba-blk{ padding-top:1rem; }
-  .is-vf .hbt > div:first-child{ display:none; }
-  .is-vf .hbt{ display:flex; justify-content:center; }
-  .is-vf .hbt > div:last-child{ width:min(360px, 100%); }
   .vf-about{ margin-top:8rem; padding-bottom:5rem; border-top:1px solid rgba(255,255,255,.1); }
   .vf-about .vf-mark{ padding-top:3rem; }
   .vf-about-grid{ display:grid; grid-template-columns:minmax(0,1.25fr) minmax(0,1fr); gap:3.5rem; padding:0 var(--ed-g); }
@@ -1968,6 +1965,44 @@
     .vf-one.is-inset{ padding:.6rem 1.25rem 0; }
     .vf-about-grid{ grid-template-columns:1fr; gap:2.2rem; padding:0 1.25rem; }
     .vf-parts li{ grid-template-columns:1.6rem 5.2rem 1fr; }
+  }
+  .vf-hero.hb-preview{ margin:0; aspect-ratio:16/9; max-height:92vh; width:100%; border:0; }
+  .vf-intro{ display:block; padding:3.2rem var(--ed-g) 4rem; }
+  .vf-kick{ margin:0 0 .9rem; font-size:.66rem; font-weight:700; letter-spacing:.22em; color:var(--accent); }
+  .vf-intro .vf-title{ font-size:clamp(2rem, 4.2vw, 3.6rem); line-height:1; margin:0 0 1.1rem; }
+  .vf-lede{ max-width:40rem; margin:0 0 1.6rem; font-size:.94rem; line-height:1.8; color:rgba(255,255,255,.66); word-break:keep-all; }
+  .vf-tags{ display:flex; flex-wrap:wrap; gap:.45rem; }
+  .vf-tags span{ font-size:.74rem; color:rgba(255,255,255,.75); border:1px solid rgba(255,255,255,.18); padding:.45rem .8rem; }
+  .vf-jump{ position:sticky; }
+  .vf-prog{ position:absolute; left:0; right:0; bottom:-1px; height:2px; background:var(--accent); transform:scaleX(0); transform-origin:0 50%; }
+  .vf-crop{ position:relative; display:block; overflow:hidden; width:100%; }
+  .vf-crop img{ position:absolute; max-width:none; height:auto; display:block; }
+  .vf-poster .vf-crop{ background:#0a0a0a; }
+  .vf-cd{ display:grid; grid-template-columns:minmax(0,.75fr) minmax(0,1.6fr); gap:1.2rem; align-items:center; padding:5rem var(--ed-g) 1rem; }
+  .vf-cd-teaser{ margin:0; }
+  .vf-cd-teaser img{ display:block; width:100%; height:auto; }
+  .vf-cd-teaser figcaption, .vf-cd-cap, .vf-sub{ margin:.6rem 0 0; font-size:.62rem; font-weight:600; letter-spacing:.16em; color:rgba(255,255,255,.45); }
+  .vf-cd-thumbs{ display:grid; grid-template-columns:repeat(6, minmax(0,1fr)); gap:.6rem; }
+  .vf-cd-thumbs .vf-crop{ border-radius:8px; }
+  .vf-cd-thumbs .is-sm{ grid-column:span 2; }
+  .vf-cd-thumbs .is-lg{ grid-column:span 3; }
+  .vf-cd-thumbs .vf-cd-cap{ grid-column:1 / -1; }
+  .vf-mdsheet{ padding:4rem var(--ed-g) 0; }
+  .vf-mdsheet .vf-sub{ margin:0 0 1rem; }
+  .vf-mdgrid{ display:grid; grid-template-columns:repeat(9, minmax(0,1fr)); gap:.7rem; }
+  .vf-mdgrid figure{ margin:0; }
+  .vf-crop.is-tile{ border-radius:12px; background:#fff; }
+  .vf-mdgrid{ align-items:end; }
+  .vf-mdgrid figcaption{ margin-top:.45rem; font-size:.54rem; letter-spacing:.1em; color:rgba(255,255,255,.45); line-height:1.4; }
+  .vf-ops{ padding-top:0 !important; }
+  .vf-about .vf-kpi{ margin:0 var(--ed-g) 3rem; grid-template-columns:repeat(5, minmax(0,1fr)); }
+  @media (max-width:767px){
+    .vf-intro{ padding:2.2rem 1.25rem 3rem; }
+    .vf-cd{ grid-template-columns:1fr; padding:3rem 1.25rem 0; }
+    .vf-cd-teaser{ width:62%; }
+    .vf-mdsheet{ padding:3rem 1.25rem 0; }
+    .vf-mdgrid{ grid-template-columns:repeat(3, minmax(0,1fr)); }
+    .vf-about .vf-kpi{ margin:0 1.25rem 2.2rem; grid-template-columns:repeat(2, minmax(0,1fr)); gap:0 1rem; }
   }
   /* HEARTBEAT · proposal vs site comparison (data-hbz): proposal on the left, draggable site-photo filmstrip on the right */
   .hbz{ width:100%; }
@@ -4672,6 +4707,8 @@
     }
     function onScroll(){ if (!ticking){ ticking = true; requestAnimationFrame(spy); } }
     sc.addEventListener('scroll', onScroll, { passive:true }); spy();
+    var prog = bar.querySelector('.vf-prog');
+    if (prog){ var pu = function(){ if (!prog.isConnected){ sc.removeEventListener('scroll', pu); return; } var m = sc.scrollHeight - sc.clientHeight; prog.style.transform = 'scaleX(' + (m > 0 ? Math.min(1, sc.scrollTop / m) : 0) + ')'; }; sc.addEventListener('scroll', pu, { passive:true }); pu(); }
   }
   function initMzShelf(root){
     if (!root || root._mzs) return; root._mzs = 1;
@@ -5255,7 +5292,30 @@
      Ordinary-People-style: one continuous image flow with a one-line marker per part and one-line
      captions; the reading (overview, facts, process, design ops, credits) is gathered at the bottom.
      Switch with the A/B pill; scoped by #modalImages.is-vf. Same images and facts as the editorial page. */
-  function vfMark(n, t){ return { custom:'<div class="vf-mark"><span>' + n + '</span>' + t + '</div>' }; }
+  function vfMark(n, t){ return { custom:'<div class="vf-mark" id="vf-' + n + '"><span>' + n + '</span>' + t + '</div>' }; }
+  /* crop a region (x,y,w,h in source px) out of a larger image with CSS only — no extra files */
+  function vfCrop(src, W, H, b, cls, alt){
+    return '<span class="vf-crop ' + (cls || '') + '" style="aspect-ratio:' + b[2] + '/' + b[3] + '"><img src="' + src + '" alt="' + (alt || '') + '" loading="lazy" decoding="async" style="width:' + (W / b[2] * 100).toFixed(3) + '%;left:' + (-b[0] / b[2] * 100).toFixed(3) + '%;top:' + (-b[1] / b[3] * 100).toFixed(3) + '%"></span>';
+  }
+  var VF_PARTS = [['01','IDENTITY'],['02','KEY VISUAL'],['03','PROMOTION'],['04','MERCHANDISE'],['05','ON-SITE'],['06','PRODUCTION'],['07','DESIGN OPS'],['08','EARLY']];
+  var vfJumpBlock = { custom:'<nav class="dd-jump vf-jump" data-dd-jump aria-label="HEARTBEAT 바로가기"><div class="dd-jump-in"><span class="dd-jump-label">바로가기</span>' +
+    VF_PARTS.map(function(x){ return '<button type="button" class="dd-jump-btn" data-dd-go="vf-' + x[0] + '">' + x[0] + ' ' + x[1].charAt(0) + x[1].slice(1).toLowerCase() + '</button>'; }).join('') +
+    '<button type="button" class="dd-jump-btn" data-dd-go="vf-about">About</button></div><i class="vf-prog" aria-hidden="true"></i></nav>' };
+  var vfPosterBlock = { custom:'<figure class="vf-one vf-poster">' + vfCrop(HB + 'hb-keyvisual.jpg', 1800, 2383, [0, 1072, 1800, 1311], '', 'HEARTBEAT BY DUDUDO 메인 포스터') + '</figure>' };
+  var vfCdBlock = { custom:'<div class="vf-cd">' +
+    '<figure class="vf-cd-teaser"><img src="images/dududo-cd-teaser.gif" alt="CD 패키지 모션 티저" loading="lazy"><figcaption>CD TEASER</figcaption></figure>' +
+    '<div class="vf-cd-thumbs">' +
+      [[740,352,214,120],[963,352,215,120],[1186,352,215,120]].map(function(b){ return vfCrop('images/dududo-case/dh-cdyt-full.jpg', 1800, 1093, b, 'is-sm', '유튜브 플레이리스트 썸네일'); }).join('') +
+      [[740,642,434,242],[1192,642,434,242]].map(function(b){ return vfCrop('images/dududo-case/dh-cdyt-full.jpg', 1800, 1093, b, 'is-lg', '유튜브 플레이리스트 썸네일'); }).join('') +
+      '<p class="vf-cd-cap">YOUTUBE PLAYLIST · dddm / HEARTBEAT 채널</p>' +
+    '</div></div>' };
+  var VF_MD = [[114,366,496,434,'OFFICIAL TEE · BLACK'],[646,366,508,434,'OFFICIAL TEE · RED'],[1178,366,508,434,'GLASS GRADIENT'],[114,914,466,396,'PULSE TEE'],[606,914,582,396,'REUSABLE BAG'],[1212,914,474,396,'BALL CAP'],[114,1424,496,396,'STAFF TEE · FRONT'],[646,1424,508,396,'STAFF TEE · BACK'],[1178,1424,508,396,'STICKER PACK']];
+  var vfMdSheetBlock = { custom:'<div class="vf-mdsheet"><p class="vf-sub">MD DESIGN SHEET — 최종안 이전 구성안</p><div class="vf-mdgrid">' +
+    VF_MD.map(function(m){ return '<figure>' + vfCrop(HB + 'hb-merch.jpg', 1800, 1976, m, 'is-tile', m[4]) + '<figcaption>' + m[4] + '</figcaption></figure>'; }).join('') + '</div></div>' };
+  var vfOpsBlock = { custom:'<div class="cosmos-block vf-ops"><details class="hbd">' +
+    '<summary><span class="hbd-t"><span class="cosmos-eyebrow">Design Ops · Figma</span><b>PM이 직접 운영하는 디자인 포맷 시스템</b><em>디자이너 1명 환경에서 Figma 포맷 약 20종을 설계하고 PM 3명에게 가이드·교육 — 반복 콘텐츠는 PM이, 디자이너는 키비주얼·현장 제작에 집중</em></span><span class="hbd-btn"><i>+</i><span class="hbd-closed">펼쳐보기</span><span class="hbd-open">접기</span></span></summary>' +
+    '<div class="hbd-body"><div class="hbo-figs"><figure class="hbo-fig"><img src="' + HB + 'hb-figma-ops.jpg" alt="PM용 Figma 디자인 포맷 보드" loading="lazy" decoding="async"><figcaption>PM에게 배포한 Figma 포맷 보드</figcaption></figure>' +
+    '<figure class="hbo-fig hbo-fig-tall"><img src="' + HB + 'hb-figma-all.jpg" alt="Figma 디자인방 전체 보드" loading="lazy" decoding="async"><figcaption>디자인방 전체 보드</figcaption></figure></div></div></details></div>' };
   function vfStrip(b){ return { custom: b.custom.replace(/<div class="cosmos-head">[\s\S]*?<\/p><\/div>/, '') }; }
   function vfRow(items, cols, ar, inset){
     return { custom:'<div class="vf-row' + (inset ? ' is-inset' : '') + '" style="--c:' + cols + '">' + items.map(function(it){
@@ -5267,19 +5327,22 @@
   function vfOne(src, alt, cap, cls){ return { custom:'<figure class="vf-one ' + (cls || '') + '"><img src="' + src + '" alt="' + alt + '" loading="lazy" decoding="async">' + (cap ? '<figcaption>' + cap + '</figcaption>' : '') + '</figure>' }; }
   var vfOpenBlock = {
     custom: '<section class="vf-open">' +
-      '<figure class="hb-preview ed-hero is-paused">' +
+      '<figure class="hb-preview vf-hero is-paused">' +
         '<video poster="' + HB + 'hb-preview-poster.jpg" autoplay muted loop playsinline preload="auto" aria-label="HEARTBEAT BY DUDUDO 하이라이트 영상"><source src="' + HB + 'hb-preview.mp4" type="video/mp4"></video>' +
         '<span class="hb-preview-play" aria-hidden="true"><i></i></span>' +
       '</figure>' +
       '<div class="vf-intro">' +
-        '<div class="vf-intro-l"><h2 class="vf-title">HEARTBEAT<br>BY DUDUDO</h2><p class="vf-role">Festival Art Direction — 단독 아트 디렉터<br>2026.10.17 — 10.18 · 고려대학교 화정체육관</p></div>' +
-        '<dl class="vf-kpi"><div><dt>47<small>종</small></dt><dd>현장 출력물 디자인</dd></div><div><dt>약 20<small>종</small></dt><dd>PM용 Figma 포맷</dd></div><div><dt>34<small>건</small></dt><dd>현장 보도 · 4개 매체</dd></div></dl>' +
+        '<p class="vf-kick">FESTIVAL ART DIRECTION · 2026</p>' +
+        '<h2 class="vf-title">HEARTBEAT BY DUDUDO</h2>' +
+        '<p class="vf-lede">2026.10.17—18, 고려대 화정체육관에서 열린 음악 페스티벌의 아트 디렉션을 단독으로 맡았습니다. 키비주얼과 MD부터 행사장 전 구역의 공간 그래픽, 현장 시공까지.</p>' +
+        '<div class="vf-tags"><span>Illustrator</span><span>Photoshop</span><span>Art Direction</span><span>현장 시공·연출</span></div>' +
       '</div>' +
     '</section>'
   };
   var vfAboutBlock = {
-    custom: '<section class="vf-about">' +
+    custom: '<section class="vf-about" id="vf-about">' +
       '<div class="vf-mark"><span>—</span>ABOUT THE PROJECT</div>' +
+      '<dl class="vf-kpi"><div><dt>2<small>DAYS</small></dt><dd>BAND · HIP-HOP DAY</dd></div><div><dt>20<small>팀</small></dt><dd>라인업 아티스트</dd></div><div><dt>47<small>종</small></dt><dd>현장 출력물 · 7개 구역</dd></div><div><dt>약 20<small>종</small></dt><dd>PM용 Figma 포맷</dd></div><div><dt>34<small>건</small></dt><dd>현장 보도 · 4개 매체</dd></div></dl>' +
       '<div class="vf-about-grid">' +
         '<div class="vf-about-text">' +
           '<h3>처음 두근거린 그 순간,<br><em>심장박동</em>을 브랜딩하다</h3>' +
@@ -5311,27 +5374,24 @@
     '</section>'
   };
   var hbVisualFlow = [
-    vfOpenBlock,
-    vfMark('01', 'IDENTITY'), HB + 'hb-concept.jpg', HB + 'hb-identity.jpg',
-    vfMark('02', 'KEY VISUAL'), HB + 'hb-keyvisual.jpg', dududoMotionBlock,
-    vfMark('03', 'PROMOTION'), HB + 'hb-sns.jpg', dududoCdYtBlock,
-    vfRow([{ src:HB + 'hb-ticket-event-01.jpg', alt:'티켓 이벤트 게시물 10.17', cap:'TICKET EVENT · 10.17 BAND' }, { src:HB + 'hb-ticket-event-02.jpg', alt:'티켓 이벤트 게시물 10.18', cap:'TICKET EVENT · 10.18 HIP-HOP' }, { src:HB + 'hb-sitemap-01.jpg?v=4', alt:'사이트맵 캐러셀 표지', cap:'SITE MAP · INSTAGRAM' }], 3, '1080/1350', true),
-    hbTicketBlock,
+    vfOpenBlock, vfJumpBlock,
+    vfMark('01', 'IDENTITY'), HB + 'hb-identity.jpg',
+    vfMark('02', 'KEY VISUAL'), vfPosterBlock, dududoMotionBlock,
+    vfMark('03', 'PROMOTION'), HB + 'hb-sns.jpg', vfCdBlock,
+    hbTicketBlock, hbTicketEventBlock, hbSiteMapBlock,
     vfOne('images/dududo-ig-showroom.gif', 'dududo showroom 인스타그램 카드뉴스', 'SHOWROOM PROMOTION · 더현대 서울', 'is-narrow'),
     vfOne(HB + 'hb-artist-posters.jpg', '아티스트 사인용 포스터 18종', 'ARTIST SIGNING POSTERS · 18종', 'is-inset'),
     vfMark('04', 'MERCHANDISE'),
     vfRow([{ src:HB + 'hb-md-tee-black.jpg', alt:'공식 티셔츠 블랙', cap:'OFFICIAL TEE · BLACK' }, { src:HB + 'hb-md-tee-red.jpg', alt:'공식 티셔츠 레드', cap:'OFFICIAL TEE · RED' }, { src:HB + 'hb-md-cap.jpg', alt:'자수 볼캡', cap:'BALL CAP' }], 3, '960/1200'),
     vfRow([{ src:HB + 'hb-md-ig-list.jpg', alt:'MD LIST 카드' }, { src:HB + 'hb-md-ig-tee.jpg', alt:'티셔츠 카드' }, { src:HB + 'hb-md-ig-cap.jpg', alt:'볼캡 카드' }, { src:HB + 'hb-md-ig-sticker.jpg', alt:'스티커 세트 카드' }], 4, '900/1125', true),
-    vfOne(HB + 'hb-merch.jpg', '전체 MD 디자인 구성안', 'MD DESIGN SHEET · 최종안 이전 구성안', 'is-narrow'),
+    vfMdSheetBlock,
     vfMark('05', 'ON-SITE'), vfStrip(hbPairBlock),
     vfRow([{ src:HB + 'hb-holo-test.jpg', alt:'홀로그램 기기 테스트', cap:'HOLOGRAM UNIT · TEST' }, { src:HB + 'hb-holo-sheet.jpg', alt:'홀로그램 부스 시트지 디자인', cap:'BOOTH SHEET · DESIGN', ar:'1400/1672' }, { video:HB + 'hb-holo-motion.mp4', poster:HB + 'hb-holo-motion-poster.jpg', alt:'홀로그램 송출 영상 테스트', cap:'INSIDE MOTION' }], 3, '3/4', true),
     vfRow([1,2,3,4,5].map(function(k){ return { src:HB + 'hb-kiosk-0' + k + '.jpg', alt:'부스 태블릿 화면 ' + k }; }), 5, '1200/703', true),
     vfRow([{ video:HB + 'hb-kiosk-demo.mp4', poster:HB + 'hb-kiosk-demo-poster.jpg', alt:'태블릿 터치 시연', cap:'BOOTH TABLET UI · 시작 → 모드 선택 → 촬영' }], 1, '1000/586', true),
     vfStrip(hbSiteBlock),
     vfMark('06', 'PRODUCTION'), vfStrip(edBuildBlock), vfStrip(edBaBlock), vfStrip(edDayBlock), vfStrip(hbTaggedBlock),
-    vfMark('07', 'DESIGN OPS'),
-    vfOne(HB + 'hb-figma-ops.jpg', 'PM에게 배포한 Figma 포맷 보드', 'FIGMA FORMAT BOARD · PM 3명에게 배포', 'is-inset'),
-    vfOne(HB + 'hb-figma-all.jpg', 'Figma 디자인방 전체 보드', 'DESIGN ROOM · 전체 보드', 'is-narrow'),
+    vfMark('07', 'DESIGN OPS'), vfOpsBlock,
     vfMark('08', 'EARLY PROPOSAL'),
     vfRow([1,2,3,4,5,6,7,8].map(function(k){ return { src:'images/dududo-concert-0' + k + '.jpg', alt:'dududo concert 초기 제안 ' + k }; }), 2, '1800/1012', true),
     vfAboutBlock
@@ -7065,6 +7125,7 @@
       if (p._vf){ modalImages.classList.add('is-ed'); if (p.tail && p.tail.length) modalImages.insertAdjacentHTML('beforeend', renderGalleryImages(p.tail, p.title)); }
     }
     modalImages.classList.toggle('is-vf', !!p._vf);
+    var infoPad = modalImages.parentNode.querySelector('.modal-info-pad'); if (infoPad) infoPad.style.display = p._vf ? 'none' : '';
     if (projects[i].visual){
       modalImages.insertAdjacentHTML('afterbegin', '<div class="ed-switch" role="group" aria-label="상세페이지 버전 비교"><span>VERSION</span>' +
         '<button type="button" data-ed-set="A" class="' + (p._vf ? '' : 'is-on') + '">A · 에디토리얼</button>' +
