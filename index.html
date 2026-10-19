@@ -1276,7 +1276,7 @@
   .cosmos-bands-tilt{ position:absolute; left:50%; top:50%; width:1500px; transform:translate(-50%,-50%) rotate(-11deg); display:flex; flex-direction:column; gap:12px; }
   .cosmos-band-row{ overflow:visible; }
   .cosmos-band-track{ display:flex; width:max-content; animation:cosmos-band-slide 36s linear infinite; }
-  .cosmos-band-track img{ height:30px; width:auto; display:block; flex-shrink:0; margin-right:14px; box-shadow:0 6px 16px -6px rgba(0,0,0,.9); }
+  .cosmos-band-track .cb{ height:30px; aspect-ratio:992/43; display:block; flex-shrink:0; margin-right:14px; box-shadow:0 6px 16px -6px rgba(0,0,0,.9); background-image:url(images/cosmos-case/bands/bands-sprite.jpg); background-size:100% 1200%; background-repeat:no-repeat; }
   .cosmos-band-row:nth-child(even) .cosmos-band-track{ animation-direction:reverse; }
   .cosmos-band-row:nth-child(3n) .cosmos-band-track{ animation-duration:44s; }
   .cosmos-band-row:nth-child(3n+1) .cosmos-band-track{ animation-duration:30s; }
@@ -1339,7 +1339,7 @@
     .cosmos-browser-view{ height:70vh; }
     .cosmos-browser-url span{ display:none; }
     .cosmos-bands{ height:300px; }
-    .cosmos-band-track img{ height:22px; }
+    .cosmos-band-track .cb{ height:22px; }
     .cosmos-phone{ width:270px; }
   }
 
@@ -4225,7 +4225,8 @@
       '</div>' +
       '<div class="cosmos-bands"><div class="cosmos-bands-tilt">' +
         cosmosBands.concat(cosmosBands.slice(0, 4)).map(function(b){
-          var img = '<img src="' + CX + 'bands/band-' + b + '.jpg" alt="" decoding="async">';
+          /* all 12 strips live in one sprite (bands-sprite.jpg, 992×43 each, stacked) */
+          var img = '<span class="cb" style="background-position:0 ' + (cosmosBands.indexOf(b) / 11 * 100).toFixed(4) + '%"></span>';
           return '<div class="cosmos-band-row"><div class="cosmos-band-track">' + img + img + img + img + img + img + '</div></div>';
         }).join('') +
       '</div></div>' +
@@ -5420,6 +5421,21 @@
     vfRow([1,2,3,4,5,6,7,8].map(function(k){ return { src:'images/dududo-concert-0' + k + '.jpg', alt:'dududo concert 초기 제안 ' + k }; }), 2, '1800/1012', true),
     vfAboutBlock
   ];
+  /* UX/UI series · opening: the Broken Archive film full-bleed, then a short intro (same pattern as HEARTBEAT / DDDM / COSMOS). */
+  var uxOpenBlock = {
+    custom: '<section class="vf-open ux-open" style="--ed-g:6.25%">' +
+      '<figure class="hb-preview vf-hero is-paused">' +
+        '<video poster="images/thumbs/broken-archive-thumb-poster.jpg" autoplay muted loop playsinline preload="auto" aria-label="브로큰 아카이브 UI 영상"><source src="images/thumbs/broken-archive-thumb.mp4" type="video/mp4"></video>' +
+        '<span class="hb-preview-play" aria-hidden="true"><i></i></span>' +
+      '</figure>' +
+      '<div class="vf-intro">' +
+        '<p class="vf-kick">UX/UI DESIGN · APP · GAME UI · 2024 – 2025</p>' +
+        '<h2 class="vf-title">UX/UI PROJECTS</h2>' +
+        '<p class="vf-lede">인호야 · 브로큰 아카이브 · 하트싱크 · MAFIUS. 콘셉트 설계와 정보 구조, 와이어프레임, 전체 UI와 그래픽 리소스까지 단독으로 완성한 네 개의 앱·게임 프로젝트와 앱 리디자인 스터디입니다.</p>' +
+        '<div class="vf-tags"><span>Figma</span><span>Photoshop</span><span>Illustrator</span><span>Unity</span><span>After Effects</span></div>' +
+      '</div>' +
+    '</section>'
+  };
   var projects = [
     { group:"Branding & Art Direction", key:"heartbeat", status:"", category:"Festival Art Direction · Key Visual · Spatial Graphics · On-site Build", title:"HEARTBEAT BY DUDUDO: 페스티벌 아트 디렉션 총괄", idea:"심전도 파형 하나로 묶은 양일간의 페스티벌", forms:["Identity", "Key Visual", "Motion", "MD", "On-site"], year:"2026",
       blurb:"키비주얼과 MD부터 행사장 전 구역의 공간 그래픽, 현장 설치까지. 2026년 10월 17–18일 이틀간 열린 대형 음악 페스티벌의 아트 전 과정을 단독으로 기획하고 총괄했습니다.",
@@ -5517,6 +5533,8 @@
       thumb:"images/thumbs/broken-archive-thumb.mp4",
       images:[],
       noFold:true,
+      bare:true,
+      lead:[uxOpenBlock],
       sections:[
         { id:"ih", short:"파티 게임 · 인호야", eyebrow:"PROJECT 03", title:"인호야", sum:"inno.N 인호 캐릭터 기반 술자리 파티 게임 UX·UI", period:"2025.09.11 – 09.30", tools:"Procreate · Photoshop · Figma · Illustrator · After Effects", cover:"images/inhoya-01.jpg",
           show:["images/inhoya-01.jpg"], more:["images/inhoya-02.jpg","images/inhoya-03.jpg","images/inhoya-04.jpg","images/inhoya-05.jpg","images/inhoya-06.jpg","images/inhoya-07.jpg","images/inhoya-08.jpg","images/inhoya-09.jpg","images/inhoya-10.jpg","images/inhoya-11.jpg"] },
