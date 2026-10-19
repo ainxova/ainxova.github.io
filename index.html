@@ -1667,6 +1667,9 @@
   @media (prefers-reduced-motion: reduce){ .card-status i, .hb-status-pill i{ animation:none; } }
   .hb-status{ display:flex; align-items:flex-start; gap:1rem; margin:0 1.5rem 1.5rem; padding:1rem 1.2rem; border:1px solid rgba(242,219,134,.35); background:linear-gradient(90deg, rgba(242,219,134,.08), rgba(242,219,134,0) 70%); }
   .hb-status-pill{ flex:none; display:inline-flex; align-items:center; gap:.45rem; padding:.3rem .7rem; border-radius:999px; background:rgba(242,219,134,.12); color:var(--accent); font-size:.64rem; font-weight:700; letter-spacing:.14em; }
+  .hb-status.is-done .hb-status-pill i{ animation:none; box-shadow:none; }
+  .hb-overview .cx-kpis{ grid-template-columns:repeat(5,minmax(0,1fr)); }
+  @media (max-width:1023px){ .hb-overview .cx-kpis{ grid-template-columns:1fr 1fr; } .hb-overview .cx-kpis .cx-kpi:last-child{ grid-column:1 / -1; } }
   .hb-status-text{ display:flex; flex-direction:column; gap:.3rem; }
   .hb-status-text b{ font-size:.9rem; color:#fff; font-weight:600; }
   .hb-status-text span{ font-size:.8rem; line-height:1.7; color:rgba(255,255,255,.62); word-break:keep-all; }
@@ -4585,6 +4588,7 @@
           '<div class="cx-kpi"><div class="cx-kpi-num">20<small>팀</small></div><div class="cx-kpi-label">라인업 아티스트</div></div>' +
           '<div class="cx-kpi is-hi"><div class="cx-kpi-num">47<small>종</small></div><div class="cx-kpi-label">현장 출력물 디자인 · 7개 구역</div></div>' +
           '<div class="cx-kpi"><div class="cx-kpi-num">80<small>+</small></div><div class="cx-kpi-label">현수막·X배너·A보드 등 제작 수량</div></div>' +
+          '<div class="cx-kpi"><div class="cx-kpi-num">34<small>건</small></div><div class="cx-kpi-label">현장 보도 콘텐츠 · 4개 매체</div></div>' +
         '</div>' +
       '</div>'
   };
@@ -4796,7 +4800,7 @@
       '<div class="cosmos-head">' +
         '<div class="cosmos-eyebrow">Space · Design Proposal to Site</div>' +
         '<h3 class="cosmos-title">ENTRANCE GATE PROPOSAL</h3>' +
-        '<p class="cosmos-copy">실제 입구 계단 사진에 대형 현수막·계단 시트지·사인 구조물을 합성해 현장 분위기를 미리 잡은 시안입니다. 10/16 시공 후 실제 모습과 비교해 보여드릴 예정입니다.</p>' +
+        '<p class="cosmos-copy">실제 입구 계단 사진에 대형 현수막·계단 시트지·사인 구조물을 합성해 현장 분위기를 미리 잡은 시안입니다.</p>' +
       '</div>' +
       '<figure class="hbo-fig"><div class="hbg-badge">DESIGN PROPOSAL</div><img src="' + HB + 'hb-gate-proposal.jpg" alt="입장 게이트·계단·대형 현수막 디자인 시안" loading="lazy" decoding="async"><figcaption>입장 게이트 · 계단 시트지 · 대형 현수막 시안 (현장 시공 전)</figcaption></figure>' +
     '</div>'
@@ -4806,7 +4810,7 @@
       '<div class="cosmos-head">' +
         '<div class="cosmos-eyebrow">Space · Design Proposal to Site</div>' +
         '<h3 class="cosmos-title">PHOTO WALL PROPOSAL</h3>' +
-        '<p class="cosmos-copy">키비주얼 대형 배너 앞에 입체 레드 로고 조형물을 세워, 관객이 브랜드 안에서 사진을 남기는 포토존으로 설계했습니다. 제작 후 실제 모습과 비교해 보여드릴 예정입니다.</p>' +
+        '<p class="cosmos-copy">키비주얼 대형 배너 앞에 입체 레드 로고 조형물을 세워, 관객이 브랜드 안에서 사진을 남기는 포토존으로 설계했습니다.</p>' +
       '</div>' +
       '<figure class="hbo-fig"><div class="hbg-badge">DESIGN PROPOSAL</div><img src="' + HB + 'hb-wall-proposal.jpg" alt="현장 포토월 · 입체 로고 조형물 디자인 시안" loading="lazy" decoding="async"><figcaption>현장 포토월 · 입체 로고 조형물 시안 (현장 제작 전)</figcaption></figure>' +
     '</div>'
@@ -4826,7 +4830,7 @@
       '<div class="cosmos-head">' +
         '<div class="cosmos-eyebrow">Space · Design Proposal to Site</div>' +
         '<h3 class="cosmos-title">PRESS ZONE PROPOSAL</h3>' +
-        '<p class="cosmos-copy"><span class="copy-line">프레스존이 들어설 벽면(셔터)에 맞춰, 벽 크기에 딱 맞는 현수막으로 제작했습니다. 공식 로고와 참여사 로고를 반복 배치해 어디서 촬영해도 브랜드가 함께 담기도록 했습니다.</span><span class="copy-line">현장 설치 후, 완성된 모습과 나란히 비교해 보여드릴 예정입니다.</span></p>' +
+        '<p class="cosmos-copy"><span class="copy-line">프레스존이 들어설 벽면(셔터)에 맞춰, 벽 크기에 딱 맞는 현수막으로 제작했습니다. 공식 로고와 참여사 로고를 반복 배치해 어디서 촬영해도 브랜드가 함께 담기도록 했습니다.</span></p>' +
       '</div>' +
       '<figure class="hbo-fig"><div class="hbg-badge">DESIGN PROPOSAL</div><img src="' + HB + 'hb-press-proposal.jpg" alt="프레스존 벽면 현수막 디자인 시안 (가상 공간 합성)" loading="lazy" decoding="async"><figcaption>프레스존 벽면 시안 (가상 공간에 합성한 이미지 · 설치 전)</figcaption></figure>' +
       '<figure class="hbo-fig"><img src="' + HB + 'hb-press-banner.jpg" alt="프레스존 현수막 디자인 원본" loading="lazy" decoding="async"><figcaption>현수막 디자인 (벽 크기에 맞춰 제작)</figcaption></figure>' +
@@ -4871,9 +4875,9 @@
     });
   }
   var projects = [
-    { group:"Branding & Art Direction", key:"heartbeat", status:"In Progress", category:"Festival Art Direction · Key Visual · Spatial Graphics · On-site Build", title:"HEARTBEAT BY DUDUDO: 페스티벌 아트 디렉션 총괄", idea:"심전도 파형 하나로 묶은 양일간의 페스티벌", forms:["Identity", "Key Visual", "Motion", "MD", "On-site"], year:"2026",
-      blurb:"키비주얼과 MD부터 행사장 전 구역의 공간 그래픽, 현장 설치까지. 10월 17–18일 개최를 앞둔 대형 음악 페스티벌의 아트 전 과정을 단독으로 기획하고 총괄하고 있습니다.",
-      desc:"2026년 10월 17–18일 고려대학교 화정체육관에서 열리는 대형 음악 페스티벌 'HEARTBEAT BY DUDUDO'의 아트 디렉션을 단독으로 맡아, 비주얼 방향 설정부터 현장 설치까지 전 과정을 이끌고 있습니다.\n메인 키비주얼과 포스터 배리에이션, 모션 포스터 티저로 페스티벌의 시각 언어를 정립하고 로고·심볼 에셋 시스템을 개발했습니다. 블랙·레드 티셔츠와 자수 볼캡 등 최종 공식 MD와 가로등 배너·현수막·홀로그램 시트지 등 행사장 전 구역의 공간 그래픽 디자인을 마치고, 현재 제작과 인쇄 감리를 진행하고 있습니다.\n디자이너가 1명인 환경에서 PM 3명이 SNS·상세페이지 콘텐츠를 직접 제작할 수 있도록 약 20종의 Figma 디자인 포맷을 설계하고 가이드와 교육을 제공했습니다. 관객이 가장 먼저 마주하는 입장 게이트 설치물은 행사 전날인 10월 16일 현장에 입장해 직접 시공·연출합니다. 아크릴 물감으로 녹슨 질감을 직접 칠해 연출하고, 게이트를 장식할 대형 구슬 목걸이도 직접 제작합니다.",
+    { group:"Branding & Art Direction", key:"heartbeat", status:"", category:"Festival Art Direction · Key Visual · Spatial Graphics · On-site Build", title:"HEARTBEAT BY DUDUDO: 페스티벌 아트 디렉션 총괄", idea:"심전도 파형 하나로 묶은 양일간의 페스티벌", forms:["Identity", "Key Visual", "Motion", "MD", "On-site"], year:"2026",
+      blurb:"키비주얼과 MD부터 행사장 전 구역의 공간 그래픽, 현장 설치까지. 2026년 10월 17–18일 이틀간 열린 대형 음악 페스티벌의 아트 전 과정을 단독으로 기획하고 총괄했습니다.",
+      desc:"2026년 10월 17–18일 고려대학교 화정체육관에서 열린 대형 음악 페스티벌 'HEARTBEAT BY DUDUDO'의 아트 디렉션을 단독으로 맡아, 비주얼 방향 설정부터 현장 설치까지 전 과정을 이끌었습니다.\n메인 키비주얼과 포스터 배리에이션, 모션 포스터 티저로 페스티벌의 시각 언어를 정립하고 로고·심볼 에셋 시스템을 개발했습니다. 블랙·레드 티셔츠와 자수 볼캡 등 공식 MD, 가로등 배너·현수막·홀로그램 시트지 등 행사장 전 구역의 공간 그래픽을 디자인하고 제작과 인쇄 감리까지 마쳤습니다.\n디자이너가 1명인 환경에서 PM 3명이 SNS·상세페이지 콘텐츠를 직접 제작할 수 있도록 약 20종의 Figma 디자인 포맷을 설계하고 가이드와 교육을 제공했습니다. 관객이 가장 먼저 마주하는 입장 게이트 설치물은 행사 전날인 10월 16일 현장에 입장해 직접 시공·연출했습니다. 아크릴 물감으로 녹슨 질감을 직접 칠하고, 게이트를 장식할 대형 구슬 목걸이도 직접 제작했습니다.\n행사는 이틀간 진행되었고, 행사 홍보사 집계 기준 4개 매체에서 34건의 현장 보도 콘텐츠가 나왔습니다.",
       tools:["Illustrator", "Photoshop", "Art Direction", "현장 시공·연출"],
       thumb:"images/thumbs/heartbeat-thumb.jpg",
       links:[ { label:"티켓 예매", url:"https://tr.ee/Nwms6HjeAv", icon:"ticket" } ],
@@ -4881,7 +4885,7 @@
          lead, a 5-part hover index, and the client PDF's own sections (nav
          bars cropped off, images/hb/) inside each part. Future on-site concert
          photos go into PART 05's show list, after hb-wristband.jpg. */
-      lead:[{ custom:'<div class="hb-status" role="note"><span class="hb-status-pill"><i aria-hidden="true"></i>IN PROGRESS</span><div class="hb-status-text"><b>2026.10.17 — 10.18 개최 예정 · 현재 제작 진행 중</b><span>이 페이지의 디자인은 제작에 들어간 확정 시안입니다. 입장 게이트 등 현장 설치·연출은 10월 16일 현장에 입장해 직접 진행하며(아크릴 물감으로 녹슨 질감 연출, 대형 구슬 목걸이 직접 제작), 페스티벌이 끝나는 대로 실제 현장 사진과 영상으로 업데이트할 예정입니다.</span></div></div>' }, hbCoverBlock],
+      lead:[{ custom:'<div class="hb-status is-done" role="note"><span class="hb-status-pill"><i aria-hidden="true"></i>COMPLETED</span><div class="hb-status-text"><b>2026.10.17 — 10.18 개최 완료 · 현장 보도 콘텐츠 34건</b><span>뉴소스매거진 · 딥매거진 · 뉴스컬처 · 디지털데일리 엔츠 등 4개 매체에서 현장 스케치와 라이브 스테이지 콘텐츠가 소개되었습니다(행사 홍보사 집계 기준). 이 페이지의 디자인은 실제 제작·설치된 확정안입니다.</span></div></div>' }, hbCoverBlock],
       index:{ title:"HEARTBEAT BY DUDUDO", unit:"PARTS", label:"파트" },
       images:[],
       sections:[
