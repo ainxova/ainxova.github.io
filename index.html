@@ -1780,6 +1780,11 @@
   .cx-result-note{ font-size:.75rem; color:rgba(255,255,255,.5); }
 
 
+  .hbig{ margin:0; width:100%; }
+  .hbig-frame{ position:relative; aspect-ratio:1280/764; overflow:hidden; background:#000; border:1px solid rgba(255,255,255,.08); }
+  .hbig-frame video{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block; }
+  .hbig figcaption{ margin-top:.7rem; font-size:.74rem; color:rgba(255,255,255,.5); }
+  .hbig figcaption b{ display:block; color:rgba(255,255,255,.85); font-weight:600; letter-spacing:.08em; margin-bottom:.15rem; }
   /* HEARTBEAT · proposal vs site comparison (data-hbz): proposal on the left, draggable site-photo filmstrip on the right */
   .hbz{ width:100%; }
   .hbz-stage{ display:grid; grid-template-columns:1fr 1fr; gap:.6rem; }
@@ -5077,6 +5082,15 @@
       });
     });
   }
+  /* HEARTBEAT · screen recording of the official account's "tagged" grid: posts by attendees and media outlets. */
+  var hbTaggedBlock = {
+    custom: '<div class="cosmos-block">' +
+      '<div class="cosmos-head"><div class="cosmos-eyebrow">On-site · Instagram Tagged</div><h3 class="cosmos-title">TAGGED<br>ON INSTAGRAM</h3>' +
+        '<p class="cosmos-copy">행사 후 공식 인스타그램 계정을 태그해 관객과 매체가 올린 게시물입니다. 양일간의 무대 사진과 라이브 영상, 매체의 현장 콘텐츠가 이어서 올라왔습니다.</p></div>' +
+      '<figure class="hbig"><div class="hbig-frame"><video poster="' + HB + 'hb-ig-tagged-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-label="공식 인스타그램 태그된 게시물 그리드를 스크롤하는 화면 녹화"><source src="' + HB + 'hb-ig-tagged.mp4" type="video/mp4"></video></div>' +
+        '<figcaption><b>TAGGED POSTS</b>공식 계정 ‘태그됨’ 탭 화면 녹화 · 관객·매체 게시물</figcaption></figure>' +
+    '</div>'
+  };
   var projects = [
     { group:"Branding & Art Direction", key:"heartbeat", status:"", category:"Festival Art Direction · Key Visual · Spatial Graphics · On-site Build", title:"HEARTBEAT BY DUDUDO: 페스티벌 아트 디렉션 총괄", idea:"심전도 파형 하나로 묶은 양일간의 페스티벌", forms:["Identity", "Key Visual", "Motion", "MD", "On-site"], year:"2026",
       blurb:"키비주얼과 MD부터 행사장 전 구역의 공간 그래픽, 현장 설치까지. 2026년 10월 17–18일 이틀간 열린 대형 음악 페스티벌의 아트 전 과정을 단독으로 기획하고 총괄했습니다.",
@@ -5103,7 +5117,7 @@
         { id:"hb-os", short:"On-site", eyebrow:"PART 05", title:"ON-SITE DESIGN", sum:"입구 게이트·가로등 배너·길안내 트러스·포토월·홀로그램 부스·입장 팔찌·MD를 시안과 현장 사진으로 비교, 부스 태블릿 UI, 프레스존, 7개 구역 47종의 현장 출력물", period:"", tools:"",
           cover:HB + "t-onsite.jpg", coverPos:"50% 50%", show:[hbPairBlock, hbHoloBlock, hbKioskBlock, hbPressBlock, hbSiteBlock] },
         { id:"hb-prod", short:"Production", eyebrow:"PART 06", title:"PRODUCTION & SITE", sum:"행사 전날부터 직접 시공한 과정, 설치 전후의 공연장, 행사 당일 현장 기록, 실물로 제작된 비표와 입장 밴드", period:"", tools:"",
-          cover:HB + "hb-real-bands.jpg", coverPos:"50% 50%", show:[hbBuildBlock, hbBaBlock, hbDayBlock, hbRealBlock, hbVoiceBlock] },
+          cover:HB + "hb-real-bands.jpg", coverPos:"50% 50%", show:[hbBuildBlock, hbBaBlock, hbDayBlock, hbRealBlock, hbVoiceBlock, hbTaggedBlock] },
         { id:"hb-ops", short:"Design Ops", eyebrow:"PART 07", title:"DESIGN OPS", sum:"디자이너 1명으로 운영되도록 설계한 약 20종의 Figma 포맷, PM 3명 교육, PM이 직접 만드는 인스타그램 콘텐츠", period:"", tools:"Figma",
           cover:HB + "hb-figma-ops.jpg", coverPos:"40% 30%", show:[hbOpsBlock] },
         { id:"hb-early", short:"Early Work", eyebrow:"PART 08", title:"EARLY PROPOSAL", sum:"페스티벌로 개편되기 전, DUDUDO CONCERT 시절 제안한 초기 브랜드 아이덴티티와 “DON’T DO THAT” 픽토그램", period:"", tools:"Illustrator · Photoshop",
