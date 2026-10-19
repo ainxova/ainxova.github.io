@@ -1812,6 +1812,23 @@
     .hbz-stage{ grid-template-columns:1fr; }
     .hbz-next{ margin-left:0; }
   }
+  /* COSMOS · top eye-catch reels */
+  .cxr{ display:grid; grid-template-columns:repeat(12, minmax(0,1fr)); column-gap:2rem; align-items:center; padding:4.5rem 6.25% 5rem; background:#0b0908; }
+  .cxr-text{ grid-column:1 / 6; }
+  .cxr-title{ margin:0 0 1.4rem; font-size:clamp(2.6rem, 5vw, 4.8rem); font-weight:800; line-height:.98; letter-spacing:-.04em; color:#fff; }
+  .cxr-vids{ grid-column:6 / -1; display:grid; grid-template-columns:1fr 1fr; gap:1rem; align-items:start; }
+  .cxr-v{ margin:0; }
+  .cxr-v.is-off{ margin-top:3.5rem; }
+  .cxr-frame{ position:relative; aspect-ratio:9/16; overflow:hidden; background:#000; border:1px solid rgba(255,255,255,.1); }
+  .cxr-frame video{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block; }
+  .cxr-v figcaption{ margin-top:.65rem; font-size:.72rem; color:rgba(255,255,255,.5); }
+  .cxr-v figcaption b{ display:block; font-size:.62rem; letter-spacing:.18em; color:rgba(255,255,255,.88); margin-bottom:.15rem; }
+  @media (max-width:1023px){
+    .cxr{ padding:3rem 1.25rem 3.5rem; row-gap:2rem; }
+    .cxr-text, .cxr-vids{ grid-column:1 / -1; }
+    .cxr-vids{ gap:.6rem; }
+    .cxr-v.is-off{ margin-top:2rem; }
+  }
   .cx-zones{ width:100%; }
   .cx-zone-tabs{ display:flex; gap:.4rem; overflow-x:auto; scrollbar-width:none; padding-bottom:.25rem; margin-bottom:1rem; }
   .cx-zone-tabs::-webkit-scrollbar{ display:none; }
@@ -3984,6 +4001,20 @@
   var CP = 'images/cosmos-pdf/';
 
   /* Lead: cover photo of the real entrance + overview, role and results */
+  /* COSMOS · eye-catch at the very top of the detail page: the two official exhibition sketch reels (vertical), muted loops. */
+  var cxReelBlock = {
+    custom: '<div class="cxr">' +
+      '<div class="cxr-text">' +
+        '<div class="cosmos-eyebrow">Exhibition Sketch · 2026</div>' +
+        '<h3 class="cxr-title">COSMOS<br>ON SITE</h3>' +
+        '<p class="cosmos-copy">BIGBANG 20주년 미디어 전시 ‘COSMOS’ 현장을 담은 스케치 영상입니다. 왼쪽은 전시 현장 스케치, 오른쪽은 PHASE 2 스케치입니다.</p>' +
+      '</div>' +
+      '<div class="cxr-vids">' +
+        '<figure class="cxr-v"><div class="cxr-frame"><video poster="images/cosmos-video/sketch-01-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-label="COSMOS 전시 현장 스케치 영상"><source src="images/cosmos-video/sketch-01.mp4" type="video/mp4"></video></div><figcaption><b>EXHIBITION SKETCH</b>전시 현장 스케치</figcaption></figure>' +
+        '<figure class="cxr-v is-off"><div class="cxr-frame"><video poster="images/cosmos-video/sketch-phase2-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-label="COSMOS PHASE 2 스케치 영상"><source src="images/cosmos-video/sketch-phase2.mp4" type="video/mp4"></video></div><figcaption><b>PHASE 2 SKETCH</b>PHASE 2 현장 스케치</figcaption></figure>' +
+      '</div>' +
+    '</div>'
+  };
   var cxCoverBlock = {
     custom: '<div class="cx-cover">' +
         '<img class="cx-cover-img" src="' + CP + 'cover-entrance.jpg" alt="COSMOS 전시장 입구 현장" decoding="async">' +
@@ -5119,7 +5150,7 @@
       /* Rebuilt from the project PDFs (display / marketing / operation /
          result report). Cover + overview + results lead the page; the 4
          parts follow 아인's own role breakdown. */
-      lead:[cxCoverBlock],
+      lead:[cxReelBlock, cxCoverBlock],
       index:{ title:"COSMOS EXHIBITION", unit:"PARTS", label:"파트" },
       images:[],
       sections:[
