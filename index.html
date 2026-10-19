@@ -2130,8 +2130,10 @@
   .cx-acro-track{ display:flex; height:100%; transition:transform .55s var(--ease-out); will-change:transform; }
   .cx-acro-view.is-dragging .cx-acro-track{ transition:none; }
   .cx-acro-track img{ flex:0 0 100%; width:100%; height:100%; object-fit:cover; display:block; pointer-events:none; }
-  .cx-acro-nav{ position:absolute; top:50%; margin-top:-15px; width:30px; height:30px; border-radius:50%; display:flex; align-items:center; justify-content:center; background:rgba(255,255,255,.85); color:#111; box-shadow:0 2px 8px rgba(0,0,0,.35); transition:opacity var(--dur-short) var(--ease-std); }
-  .cx-acro-nav svg{ width:15px; height:15px; }
+  .cx-acro-nav{ position:absolute; top:50%; margin-top:-19px; width:38px; height:38px; border-radius:50%; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,.55); color:#fff; border:1px solid rgba(255,255,255,.45); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px); transition:opacity .2s ease, transform .2s ease, background-color .2s ease; z-index:2; }
+  .cx-acro-nav.is-next{ background:var(--accent); color:#0a0a0a; border-color:var(--accent); animation:cxNavGlow 2.6s ease-in-out infinite; }
+  .cx-acro-nav:hover{ transform:scale(1.08); }
+  .cx-acro-nav svg{ width:18px; height:18px; }
   .cx-acro-nav.is-prev{ left:.6rem; } .cx-acro-nav.is-next{ right:.6rem; }
   .cx-acro-nav[disabled]{ opacity:0; pointer-events:none; }
   .cx-acro-foot{ position:relative; display:flex; align-items:center; gap:.8rem; padding:.7rem .8rem .3rem; color:#fff; }
@@ -2139,7 +2141,11 @@
   .cx-acro-foot svg{ width:20px; height:20px; display:block; }
   .cx-acro-dots{ position:absolute; left:50%; transform:translateX(-50%); display:flex; gap:4px; }
   .cx-acro-dots i{ width:6px; height:6px; border-radius:50%; background:rgba(255,255,255,.3); transition:background-color var(--dur-short) var(--ease-std); }
-  .cx-acro-dots i.is-on{ background:#4a8cff; }
+  .cx-acro-dots i.is-on{ width:18px; border-radius:3px; background:rgba(74,140,255,.3); position:relative; overflow:hidden; transition:width .3s ease; }
+  .cx-acro-dots i.is-on::after{ content:''; position:absolute; inset:0; background:#4a8cff; transform-origin:left center; animation:acroFill 3.4s linear forwards; }
+  .cx-acro.is-paused .cx-acro-dots i.is-on::after{ animation:none; transform:none; }
+  @keyframes acroFill{ from{ transform:scaleX(0); } to{ transform:scaleX(1); } }
+  @media (prefers-reduced-motion: reduce){ .cx-acro-dots i.is-on::after{ animation:none; } .cx-acro-nav.is-next{ animation:none; } }
   .cx-acro-save{ margin-left:auto; }
   .cx-acro-cap{ padding:.25rem .8rem .9rem; font-size:.78rem; color:rgba(255,255,255,.8); }
   .cx-acro-cap b{ color:#fff; margin-right:.25rem; }
@@ -4363,7 +4369,7 @@
             '<span class="cx-acro-save">' + cosmosIco.save + '</span></div>' +
           '<div class="cx-acro-cap"><b>cosmos.exh</b> C·O·S·M·O·S — 20년의 V.I.P를 위한 여섯 개의 단어 ∞</div>' +
         '</div>' +
-        '<div class="cosmos-note">드래그하거나 화살표·알파벳을 눌러 넘겨 보세요.</div>' +
+        '<div class="cosmos-note">자동으로 넘어가요 · 드래그하거나 화살표·알파벳으로 직접 넘겨 볼 수도 있어요.</div>' +
       '</div>' +
     '</div></div>'
   };
@@ -6270,7 +6276,7 @@
   /* COSMOS acrostic carousel (cxAcroBlock) */
   function cxAcroGo(root, i, instant){
     var n = cxAcro.length; i = Math.max(0, Math.min(n - 1, i));
-    root._i = i;
+    root._i = i; root._t = performance.now();
     var track = root.querySelector('.cx-acro-track');
     track.style.transform = 'translate3d(' + (-100 * i) + '%,0,0)';
     root.querySelector('.cx-acro-count').textContent = (i + 1) + ' / ' + n;
@@ -6290,13 +6296,14 @@
     var root = block && block.querySelector('[data-acro]');
     if (!root) return;
     var go = e.target.closest('[data-acro-go]'), step = e.target.closest('[data-acro-step]');
+    if (go || step) root._hold = performance.now() + 7000;
     if (go) cxAcroGo(root, +go.getAttribute('data-acro-go'));
     else if (step) cxAcroGo(root, (root._i || 0) + (+step.getAttribute('data-acro-step')));
   });
   modalScroll.addEventListener('keydown', function(e){
     var root = e.target.closest && e.target.closest('[data-acro]');
     if (!root || (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight')) return;
-    e.preventDefault(); cxAcroGo(root, (root._i || 0) + (e.key === 'ArrowRight' ? 1 : -1));
+    e.preventDefault(); root._hold = performance.now() + 7000; cxAcroGo(root, (root._i || 0) + (e.key === 'ArrowRight' ? 1 : -1));
   });
   (function(){
     var drag = null;
@@ -6326,10 +6333,31 @@
       d.view.classList.remove('is-dragging');
       var i = d.root._i || 0;
       if (Math.abs(d.dx) > d.w * 0.18) i += d.dx < 0 ? 1 : -1;
-      cxAcroGo(d.root, i);
+      d.root._hold = performance.now() + 7000; cxAcroGo(d.root, i);
     }
     modalScroll.addEventListener('pointerup', end);
     modalScroll.addEventListener('pointercancel', end);
+  })();
+
+  /* Autoplay: advance every 3.4s while the carousel is on screen; the active dot fills as a progress bar.
+     Paused while hovered and for 7s after any manual move; loops back to the cover after the last slide. */
+  (function(){
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var DUR = 3400;
+    function restartDot(root){ var d = root.querySelector('.cx-acro-dots i.is-on'); if (!d) return; d.classList.remove('is-on'); void d.offsetWidth; d.classList.add('is-on'); }
+    modalScroll.addEventListener('pointerover', function(e){ var r = e.target.closest && e.target.closest('[data-acro]'); if (r && e.pointerType === 'mouse') r._hover = true; });
+    modalScroll.addEventListener('pointerout', function(e){ var r = e.target.closest && e.target.closest('[data-acro]'); if (r && !(e.relatedTarget && r.contains(e.relatedTarget))) r._hover = false; });
+    setInterval(function(){
+      var now = performance.now();
+      document.querySelectorAll('[data-acro]').forEach(function(root){
+        var rc = root.getBoundingClientRect(), vis = rc.width > 0 && rc.bottom > 80 && rc.top < window.innerHeight - 80;
+        var paused = !vis || root._hover || (root._hold && now < root._hold);
+        if (paused){ if (!root.classList.contains('is-paused')) root.classList.add('is-paused'); return; }
+        if (root.classList.contains('is-paused')){ root.classList.remove('is-paused'); root._t = now; restartDot(root); return; }
+        if (root._t == null){ root._t = now; restartDot(root); return; }
+        if (now - root._t >= DUR){ var n = cxAcro.length; cxAcroGo(root, ((root._i || 0) + 1) % n); }
+      });
+    }, 200);
   })();
 
   /* COSMOS zone viewer (cxZonesBlock): tabs / arrows / ←→ keys swap the
