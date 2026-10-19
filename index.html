@@ -1907,10 +1907,6 @@
   @media (max-width:1023px){ .ed-day .g-d{ grid-column:1 / -1 !important; width:62%; justify-self:center; } }
   @media (min-width:768px) and (max-width:1023px){ .ed-intro, .ed-ch, .is-ed .cosmos-block{ padding-left:6.25%; padding-right:6.25%; } }
   /* ===== HEARTBEAT · VISUAL EDITION (test) ===== */
-  .ed-switch{ position:fixed; right:1.1rem; bottom:1.1rem; z-index:60; display:flex; align-items:center; gap:.25rem; padding:.3rem; background:rgba(12,10,9,.9); border:1px solid rgba(242,219,134,.35); border-radius:999px; backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); box-shadow:0 12px 30px -12px rgba(0,0,0,.8); }
-  .ed-switch span{ font-size:.58rem; letter-spacing:.2em; color:rgba(255,255,255,.45); padding:0 .55rem 0 .7rem; }
-  .ed-switch button{ font-size:.72rem; font-weight:700; color:rgba(255,255,255,.7); padding:.5rem .85rem; border-radius:999px; }
-  .ed-switch button.is-on{ background:var(--accent); color:#0a0a0a; }
   .is-vf{ background:#0b0908; }
   .is-vf .modal-image{ display:block; width:100%; margin:0; }
   .is-vf .modal-image + .modal-image{ margin-top:4px; }
@@ -5328,7 +5324,7 @@
   var vfOpenBlock = {
     custom: '<section class="vf-open">' +
       '<figure class="hb-preview vf-hero is-paused">' +
-        '<video poster="' + HB + 'hb-preview-poster.jpg" autoplay muted loop playsinline preload="auto" aria-label="HEARTBEAT BY DUDUDO 하이라이트 영상"><source src="' + HB + 'hb-preview.mp4" type="video/mp4"></video>' +
+        '<video poster="' + HB + 'hb-preview-poster.jpg" autoplay muted loop playsinline preload="auto" aria-label="HEARTBEAT BY DUDUDO 공연장 영상"><source src="' + HB + 'hb-preview.mp4" type="video/mp4"></video>' +
         '<span class="hb-preview-play" aria-hidden="true"><i></i></span>' +
       '</figure>' +
       '<div class="vf-intro">' +
@@ -6963,11 +6959,10 @@
     row.addEventListener('focusout', function(e){ if (!row.contains(e.relatedTarget)) show(-1); });
   }
 
-  function hbVfOn(){ try{ return localStorage.getItem('hbEdition') === 'V'; }catch(e){ return false; } }
   function openModal(i){
     var p = projects[i];
-    /* test switch: A = editorial (default), B = visual flow */
-    if (p.visual && hbVfOn()) p = Object.assign({}, p, { sections:null, lead:null, images:p.visual, editorial:false, _vf:true });
+    /* photo-led page (HEARTBEAT): one continuous flow, reading gathered at the bottom */
+    if (p.visual) p = Object.assign({}, p, { sections:null, lead:null, images:p.visual, editorial:false, _vf:true });
     modalCategory.textContent = p.category;
     modalTitle.textContent = p.title;
     modalYear.textContent = p.year;
@@ -7126,14 +7121,7 @@
     }
     modalImages.classList.toggle('is-vf', !!p._vf);
     var infoPad = modalImages.parentNode.querySelector('.modal-info-pad'); if (infoPad) infoPad.style.display = p._vf ? 'none' : '';
-    if (projects[i].visual){
-      modalImages.insertAdjacentHTML('afterbegin', '<div class="ed-switch" role="group" aria-label="상세페이지 버전 비교"><span>VERSION</span>' +
-        '<button type="button" data-ed-set="A" class="' + (p._vf ? '' : 'is-on') + '">A · 에디토리얼</button>' +
-        '<button type="button" data-ed-set="V" class="' + (p._vf ? 'is-on' : '') + '">B · 사진 중심</button></div>');
-      modalImages.querySelectorAll('[data-ed-set]').forEach(function(b){ b.addEventListener('click', function(){
-        try{ localStorage.setItem('hbEdition', b.getAttribute('data-ed-set')); }catch(e){}
-        openModal(i); if (modalImages.scrollIntoView) modalImages.scrollIntoView({ block:'start' });
-      }); });
+    if (p._vf){
       if (window.initSpritePlayers) window.initSpritePlayers(modalImages);
     }
 
