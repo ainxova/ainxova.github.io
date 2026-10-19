@@ -1787,10 +1787,6 @@
   .hbig figcaption{ margin-top:.7rem; font-size:.74rem; color:rgba(255,255,255,.5); }
   .hbig figcaption b{ display:block; color:rgba(255,255,255,.85); font-weight:600; letter-spacing:.08em; margin-bottom:.15rem; }
   /* ===== HEARTBEAT · EDITORIAL EDITION (B) — scoped to #modalImages.is-ed ===== */
-  .ed-switch{ position:fixed; right:1.1rem; bottom:1.1rem; z-index:60; display:flex; align-items:center; gap:.25rem; padding:.3rem; background:rgba(12,10,9,.9); border:1px solid rgba(242,219,134,.35); border-radius:999px; backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); box-shadow:0 12px 30px -12px rgba(0,0,0,.8); }
-  .ed-switch span{ font-size:.58rem; letter-spacing:.2em; color:rgba(255,255,255,.45); padding:0 .55rem 0 .7rem; }
-  .ed-switch button{ font-size:.72rem; font-weight:700; letter-spacing:.04em; color:rgba(255,255,255,.7); padding:.5rem .85rem; border-radius:999px; transition:background-color .2s ease, color .2s ease; }
-  .ed-switch button.is-on{ background:var(--accent); color:#0a0a0a; }
   .is-ed{ --ed-g:6.25%; }
   /* opening spread */
   .is-ed .ed-open{ background:#0b0908; }
@@ -4758,56 +4754,7 @@
      the hover index. The design slices are the client PDF's own sections
      with their baked-in nav bars cropped off (images/hb/). */
   var HB = 'images/hb/';
-  /* HEARTBEAT · short highlight reel at the very top of the detail page (stage + build + kiosk + venue, muted loop). */
-  var hbPreviewBlock = {
-    custom: '<figure class="hb-preview is-paused">' +
-      '<video poster="' + HB + 'hb-preview-poster.jpg" autoplay muted loop playsinline preload="auto" aria-label="HEARTBEAT BY DUDUDO 하이라이트 영상: 메인 무대, 현장 설치 과정, 키오스크, 공연장"><source src="' + HB + 'hb-preview.mp4" type="video/mp4"></video>' +
-      '<span class="hb-preview-play" aria-hidden="true"><i></i></span>' +
-      '<figcaption class="hb-preview-tag"><b>HIGHLIGHT</b>메인 무대 · 현장 설치 · 키오스크 · 공연장</figcaption>' +
-    '</figure>'
-  };
 
-  var hbCoverBlock = {
-    custom: '<div class="cx-cover hb-cover">' +
-        '<img class="cx-cover-img" src="' + HB + 'hb-cover.jpg" alt="HEARTBEAT BY DUDUDO 포토월 · 입체 로고 조형물" decoding="async">' +
-        '<div class="cx-cover-inner">' +
-          '<div class="hb-cover-kicker">FESTIVAL CONCERT BRANDING · 2026</div>' +
-          '<div class="cx-cover-tags"><span>Art Direction</span><span>Brand Identity</span><span>Key Visual · Motion</span><span>Promotion</span><span>Merchandise</span><span>On-site Build</span><span>Design Ops</span></div>' +
-        '</div>' +
-      '</div>' +
-      '<div class="cosmos-block cx-overview hb-overview">' +
-        '<div class="cx-overview-grid">' +
-          '<div>' +
-            '<div class="cosmos-eyebrow">Project Overview</div>' +
-            '<h3 class="cosmos-title">처음 두근거린 그 순간,<br><em>심장박동</em>을 브랜딩하다</h3>' +
-            '<p class="cosmos-copy">밴드와 힙합, 두 장르의 이틀이 하나의 심박으로 이어지는 페스티벌형 콘서트의 아트 디렉션을 단독으로 맡았습니다. 브랜드 아이덴티티부터 키비주얼, 모션·SNS 프로모션, 공식 MD, 현장 그래픽과 입장 팔찌까지 관객이 만나는 모든 접점을 하나의 시각 언어로 설계했습니다.</p>' +
-          '</div>' +
-          '<div>' +
-            '<dl class="cosmos-facts cx-facts">' +
-              '<dt>Date</dt><dd>2026.10.17(토) — 10.18(일) · 2일간</dd>' +
-              '<dt>Production</dt><dd>2026.09.14 — 10.14 · 1개월</dd>' +
-              '<dt>Venue</dt><dd>고려대학교 화정체육관</dd>' +
-              '<dt>Scope</dt><dd>BI · Key Visual · Motion · SNS · MD · On-site</dd>' +
-              '<dt>Tools</dt><dd>Photoshop · Illustrator · After Effects · Figma</dd>' +
-              '<dt>Role</dt><dd>Art Director (단독)</dd>' +
-            '</dl>' +
-            '<ul class="cx-points">' +
-              '<li><b>Direction</b>비주얼 방향 설정부터 현장 설치까지 단독 총괄</li>' +
-              '<li><b>Identity</b>심전도 파형 워드마크 · 유리 심장 키 오브젝트</li>' +
-              '<li><b>Production</b>MD 생산 관리 · 공간 그래픽 제작과 인쇄 감리</li>' +
-              '<li><b>On-site</b>입장 게이트 설치물 현장 시공·연출 (10.16 현장 입장 후 직접 진행)</li>' +
-            '</ul>' +
-          '</div>' +
-        '</div>' +
-        '<div class="cx-kpis">' +
-          '<div class="cx-kpi"><div class="cx-kpi-num">2<small>DAYS</small></div><div class="cx-kpi-label">10.17 BAND DAY · 10.18 HIP-HOP DAY</div></div>' +
-          '<div class="cx-kpi"><div class="cx-kpi-num">20<small>팀</small></div><div class="cx-kpi-label">라인업 아티스트</div></div>' +
-          '<div class="cx-kpi is-hi"><div class="cx-kpi-num">47<small>종</small></div><div class="cx-kpi-label">현장 출력물 디자인 · 7개 구역</div></div>' +
-          '<div class="cx-kpi"><div class="cx-kpi-num">80<small>+</small></div><div class="cx-kpi-label">현수막·X배너·A보드 등 제작 수량</div></div>' +
-          '<div class="cx-kpi"><div class="cx-kpi-num">34<small>건</small></div><div class="cx-kpi-label">현장 보도 콘텐츠 · 4개 매체</div></div>' +
-        '</div>' +
-      '</div>'
-  };
 
 
   /* HEARTBEAT · every on-site print piece from the production deck (46 designs,
@@ -4940,42 +4887,7 @@
       '</details>' +
     '</div>'
   };
-  /* HEARTBEAT · Admission goods, produced pieces (photos retouched onto a clean studio backdrop). */
-  var hbRealBlock = {
-    custom: '<div class="cosmos-block">' +
-      '<div class="cosmos-head">' +
-        '<div class="cosmos-eyebrow">Production · Admission Goods</div>' +
-        '<h3 class="cosmos-title">PRODUCED<br>ADMISSION GOODS</h3>' +
-        '<p class="cosmos-copy">시안으로 설계한 VIP 비표, 입장 밴드, 19세 이상 성인 종이팔찌가 실물로 제작되어 도착하고 있습니다. 완성된 실물의 질감과 인쇄 상태를 확인했습니다.</p>' +
-      '</div>' +
-      '<div class="hbr-grid">' +
-        '<figure class="hbr-item"><img src="' + HB + 'hb-real-vip.jpg" alt="HEARTBEAT BY DUDUDO VIP 비표와 랜야드 실물" loading="lazy" decoding="async"><figcaption><b>VIP PASS</b>VIP 비표 · 랜야드</figcaption></figure>' +
-        '<figure class="hbr-item"><img src="' + HB + 'hb-real-bands.jpg" alt="날짜와 좌석 구분별 입장 밴드와 19+ 종이팔찌 실물" loading="lazy" decoding="async"><figcaption><b>ADMISSION BANDS</b>날짜 · 좌석별 입장 밴드와 19+ 종이팔찌</figcaption></figure>' +
-      '</div>' +
-    '</div>'
-  };
 
-  var hbBuildBlock = {
-    custom: '<div class="cosmos-block">' +
-      '<div class="cosmos-head">' +
-        '<div class="cosmos-eyebrow">Production · Build & Direction</div>' +
-        '<h3 class="cosmos-title">BUILDING<br>THE SITE</h3>' +
-        '<p class="cosmos-copy">행사 전날부터 현장에서 직접 만들고 설치한 과정입니다. 입구 구조물과 사인을 세우고 손으로 마감하며 완성해 갔습니다.</p>' +
-      '</div>' +
-      '<div class="hbr-grid hbph-grid">' +
-        '<figure class="hbr-item hbr-wide"><img src="' + HB + 'hb-ph-setup.jpg" alt="설치 중인 화정체육관 입구 게이트와 계단" loading="lazy" decoding="async"><figcaption><b>SETUP</b>입구 게이트 설치 중</figcaption></figure>' +
-        '<figure class="hbr-item"><img src="' + HB + 'hb-ph-ladder-a.jpg" alt="사다리에 올라 현수막과 방향 사인을 설치하는 현장" loading="lazy" decoding="async"><figcaption><b>INSTALL</b>현수막 · 방향 사인 설치</figcaption></figure>' +
-        '<figure class="hbr-item"><img src="' + HB + 'hb-ph-ladder-b.jpg" alt="사다리에서 입구 사인을 설치하는 모습" loading="lazy" decoding="async"><figcaption><b>DIRECTING</b>현장 설치 진행</figcaption></figure>' +
-        '<figure class="hbr-item"><img src="' + HB + 'hb-ph-signs.jpg" alt="입구 방향 사인에 비즈 목걸이를 걸어 꾸민 모습" loading="lazy" decoding="async"><figcaption><b>GATE DETAIL</b>비즈 목걸이와 테이프로 직접 꾸민 입구 게이트</figcaption></figure>' +
-        '<figure class="hbr-item"><img src="' + HB + 'hb-ph-paint.jpg" alt="나무 소품에 붓으로 도장 작업을 하는 모습" loading="lazy" decoding="async"><figcaption><b>HAND FINISH</b>붓으로 직접 도장 작업</figcaption></figure>' +
-        '<figure class="hbr-item"><img src="' + HB + 'hb-ph-drum-sheet.jpg" alt="취식존 드럼통에 붙일 시트지 로고" loading="lazy" decoding="async"><figcaption><b>FOOD ZONE</b>드럼통 시트지 작업</figcaption></figure>' +
-        '<figure class="hbr-item"><img src="' + HB + 'hb-ph-gate-done.jpg" alt="밤에 붉은 조명이 켜진 완성된 입구" loading="lazy" decoding="async"><figcaption><b>DONE</b>완성된 입구</figcaption></figure>' +
-        '<figure class="hbr-item hbr-wide"><img src="' + HB + 'hb-ph-lamp-banner.jpg" alt="가로등에 설치한 HEARTBEAT 배너와 입구 현수막" loading="lazy" decoding="async"><figcaption><b>BANNERS</b>가로등 배너와 입구 현수막</figcaption></figure>' +
-        '<figure class="hbr-item"><img src="' + HB + 'hb-ph-truss-way.jpg" alt="공연장 가는 길 안내를 붙인 사각 트러스" loading="lazy" decoding="async"><figcaption><b>WAYFINDING</b>공연장 가는 길 사인 트러스</figcaption></figure>' +
-        '<figure class="hbr-item"><img src="' + HB + 'hb-ph-truss-fb.jpg" alt="F&B 존 안내와 타임테이블을 붙인 사각 트러스" loading="lazy" decoding="async"><figcaption><b>WAYFINDING</b>F&B 존 · 타임테이블 트러스</figcaption></figure>' +
-      '</div>' +
-    '</div>'
-  };
 
   /* HEARTBEAT · design proposal vs what stood on site. Left: the proposal / print file. Right: a draggable
      filmstrip of real photos of the same zone (swipe, drag or arrows). w/h = intrinsic size, so the strip lays
@@ -5055,56 +4967,8 @@
     '</div>'
   };
 
-  var hbBaBlock = {
-    custom: '<div class="cosmos-block">' +
-      '<div class="cosmos-head">' +
-        '<div class="cosmos-eyebrow">On-site · Before &amp; After</div>' +
-        '<h3 class="cosmos-title">BEFORE<br>&amp; AFTER</h3>' +
-        '<p class="cosmos-copy">아무것도 없던 체육관이 공연장이 되기까지, 같은 공간의 설치 전과 공연 중 모습입니다.</p>' +
-      '</div>' +
-      '<div class="hbr-grid hbph-grid">' +
-        '<figure class="hbr-item"><img src="' + HB + 'hb-ph-before.jpg" alt="무대 설치 전의 비어 있는 체육관 내부" loading="lazy" decoding="async"><figcaption><b>BEFORE</b>설치 전 체육관</figcaption></figure>' +
-        '<figure class="hbr-item"><img src="' + HB + 'hb-ph-after.jpg" alt="붉은 조명과 레이저가 가득한 공연 중 무대" loading="lazy" decoding="async"><figcaption><b>AFTER</b>공연 중 무대</figcaption></figure>' +
-      '</div>' +
-    '</div>'
-  };
 
-  var hbDayBlock = {
-    custom: '<div class="cosmos-block">' +
-      '<div class="cosmos-head">' +
-        '<div class="cosmos-eyebrow">On-site · Venue Photos</div>' +
-        '<h3 class="cosmos-title">THE VENUE<br>ON THE DAY</h3>' +
-        '<p class="cosmos-copy">행사 당일 현장 사진입니다. 홀로그램 부스와 터치 키오스크, 비즈 목걸이 이벤트, 직접 만든 하트 컨페티와 메인 무대까지 설계한 공간과 굿즈가 실제로 쓰인 모습입니다.</p>' +
-      '</div>' +
-      '<div class="hbr-grid hbph-grid">' +
-        '<figure class="hbr-item"><img src="' + HB + 'hb-ph-holo-person.jpg" alt="홀로그램 부스 화면" loading="lazy" decoding="async"><figcaption><b>HOLOGRAM BOOTH</b>홀로그램 부스</figcaption></figure>' +
-        '<figure class="hbr-item"><img src="' + HB + 'hb-ph-holo.jpg" alt="홀로그램 포토 부스" loading="lazy" decoding="async"><figcaption><b>HOLOGRAM BOOTH</b>대기 화면</figcaption></figure>' +
-        '<figure class="hbr-item hbr-wide"><img src="' + HB + 'hb-ph-wall.jpg" alt="아티스트 컷아웃 라인업 포토월" loading="lazy" decoding="async"><figcaption><b>LINEUP WALL</b>아티스트 컷아웃 포토월</figcaption></figure>' +
-        '<figure class="hbr-item"><video class="hbph-vid" poster="' + HB + 'hb-ph-kiosk-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-label="현장 태블릿 키오스크 터치 시연"><source src="' + HB + 'hb-ph-kiosk.mp4" type="video/mp4"></video><figcaption><b>TOUCH KIOSK</b>현장에서 직접 시연한 태블릿 촬영 키오스크</figcaption></figure>' +
-        '<figure class="hbr-item"><img src="' + HB + 'hb-ph-beads.jpg" alt="비즈 목걸이 이벤트 배너와 나무 상자" loading="lazy" decoding="async"><figcaption><b>BEADS EVENT</b>비즈 목걸이 이벤트 코너</figcaption></figure>' +
-        '<figure class="hbr-item hbr-wide"><img src="' + HB + 'hb-ph-md-wall.jpg" alt="레드 테이프로 꾸민 MD 진열 벽" loading="lazy" decoding="async"><figcaption><b>MD DISPLAY</b>레드 테이프 진열 벽</figcaption></figure>' +
-        '<figure class="hbr-item"><img src="' + HB + 'hb-ph-heart.jpg" alt="직접 제작해 현장에 뿌린 WE BEAT AS ONE 하트 컨페티" loading="lazy" decoding="async"><figcaption><b>WE BEAT AS ONE</b>직접 제작해 뿌린 하트 컨페티</figcaption></figure>' +
-        '<figure class="hbr-item"><img src="' + HB + 'hb-ph-band.jpg" alt="붉게 빛나는 하트 팔찌를 찬 손" loading="lazy" decoding="async"><figcaption><b>LIGHT BAND</b>하트 팔찌 라이트</figcaption></figure>' +
-        '<figure class="hbr-item hbr-wide"><img src="' + HB + 'hb-ph-stage.jpg" alt="공연 중 메인 무대와 객석" loading="lazy" decoding="async"><figcaption><b>MAIN STAGE</b>공연 중 메인 무대</figcaption></figure>' +
-        '<figure class="hbr-item hbr-wide"><img src="' + HB + 'hb-ph-drums.jpg" alt="로고 시트지를 붙인 취식존 드럼통 테이블" loading="lazy" decoding="async"><figcaption><b>FOOD ZONE</b>시트지를 직접 붙인 취식존 드럼통</figcaption></figure>' +
-      '</div>' +
-    '</div>'
-  };
 
-  /* HEARTBEAT · Audience photos from the event days (posted publicly by attendees; faces cropped out). */
-  var hbVoiceBlock = {
-    custom: '<div class="cosmos-block">' +
-      '<div class="cosmos-head">' +
-        '<div class="cosmos-eyebrow">On-site · Audience Photos</div>' +
-        '<h3 class="cosmos-title">FROM<br>THE VENUE</h3>' +
-        '<p class="cosmos-copy">행사 당일 관객들이 SNS에 직접 올린 후기 사진입니다. 입구의 대형 현수막과 레드카펫 계단, 공연장 안의 하트 라이트와 무대 조명까지 현장에서 구현된 분위기를 볼 수 있습니다.</p>' +
-      '</div>' +
-      '<div class="hbr-grid">' +
-        '<figure class="hbr-item hbr-wide"><img src="' + HB + 'hb-site-entrance.jpg" alt="화정체육관 입구의 HEARTBEAT BY DUDUDO 대형 현수막과 레드카펫 계단" loading="lazy" decoding="async"><figcaption><b>ENTRANCE</b>입구 외벽 현수막과 레드카펫 계단 · 관객 후기 사진</figcaption></figure>' +
-        '<figure class="hbr-item hbr-wide"><img src="' + HB + 'hb-site-lights.jpg" alt="공연장 안에서 관객이 들어 올린 HEARTBEAT BY DUDUDO 하트 라이트와 붉은 무대 조명" loading="lazy" decoding="async"><figcaption><b>INSIDE</b>하트 라이트와 무대 조명 · 관객 후기 사진</figcaption></figure>' +
-      '</div>' +
-    '</div>'
-  };
 
   /* HEARTBEAT · Ticket detail page (Melon Ticket): full-length page, auto-scrolling phone frame. */
   var hbTicketBlock = {
@@ -5239,7 +5103,7 @@
       '<figure class="hb-preview ed-hero is-paused">' +
         '<video poster="' + HB + 'hb-preview-poster.jpg" autoplay muted loop playsinline preload="auto" aria-label="HEARTBEAT BY DUDUDO 하이라이트 영상: 메인 무대, 현장 설치 과정, 키오스크, 공연장"><source src="' + HB + 'hb-preview.mp4" type="video/mp4"></video>' +
         '<span class="hb-preview-play" aria-hidden="true"><i></i></span>' +
-        '<figcaption class="ed-hero-cap"><span class="ed-pill"><i aria-hidden="true"></i>COMPLETED</span><span>2026.10.17 — 10.18 · 고려대학교 화정체육관</span></figcaption>' +
+        '<figcaption class="ed-hero-cap"><span>2026.10.17 — 10.18 · 고려대학교 화정체육관</span></figcaption>' +
       '</figure>' +
       '<div class="ed-intro">' +
         '<div class="ed-intro-kicker">FESTIVAL CONCERT BRANDING · 2026</div>' +
@@ -5329,31 +5193,30 @@
          lead, a 5-part hover index, and the client PDF's own sections (nav
          bars cropped off, images/hb/) inside each part. Future on-site concert
          photos go into PART 05's show list, after hb-wristband.jpg. */
-      lead:[hbPreviewBlock, { custom:'<div class="hb-status is-done" role="note"><span class="hb-status-pill"><i aria-hidden="true"></i>COMPLETED</span><div class="hb-status-text"><b>2026.10.17 — 10.18 개최 완료 · 현장 보도 콘텐츠 34건</b><span>뉴소스매거진 · 딥매거진 · 뉴스컬처 · 디지털데일리 엔츠 등 4개 매체에서 현장 스케치와 라이브 스테이지 콘텐츠가 소개되었습니다(행사 홍보사 집계 기준). 이 페이지의 디자인은 실제 제작·설치된 확정안입니다.</span></div></div>' }, hbCoverBlock],
+      lead:[edOpenBlock],
       index:{ title:"HEARTBEAT BY DUDUDO", unit:"PARTS", label:"파트" },
       images:[],
       sections:[
-        { id:"hb-id", short:"Identity", eyebrow:"PART 01", title:"BRAND CONCEPT & IDENTITY", sum:"심박·유리·잔상, 세 개의 시각 언어로 정리한 브랜드 메시지와 심전도 파형 워드마크·컬러·타이포 시스템", period:"", tools:"",
+        { id:"hb-id", edTitle:"심박 하나로<br>시작한 브랜드", short:"Identity", eyebrow:"PART 01", title:"BRAND CONCEPT & IDENTITY", sum:"심박·유리·잔상, 세 개의 시각 언어로 정리한 브랜드 메시지와 심전도 파형 워드마크·컬러·타이포 시스템", period:"", tools:"",
           cover:HB + "t-identity.jpg", coverPos:"30% 50%", show:[HB + "hb-concept.jpg", HB + "hb-identity.jpg"] },
-        { id:"hb-kv", short:"Key Visual", eyebrow:"PART 02", title:"KEY VISUAL & MOTION", sum:"유리 심장 키 오브젝트, 양일간의 라인업을 한 화면에 담은 메인 포스터와 루프 모션 포스터", period:"", tools:"",
+        { id:"hb-kv", edTitle:"유리 심장과<br>잔상의 키비주얼", short:"Key Visual", eyebrow:"PART 02", title:"KEY VISUAL & MOTION", sum:"유리 심장 키 오브젝트, 양일간의 라인업을 한 화면에 담은 메인 포스터와 루프 모션 포스터", period:"", tools:"",
           cover:HB + "t-kv.jpg", coverPos:"35% 50%", show:[HB + "hb-keyvisual.jpg", dududoMotionBlock] },
-        { id:"hb-pr", short:"Promotion", eyebrow:"PART 03", title:"PROMOTION", sum:"데이별 SNS 포스터, CD 티저와 유튜브 플레이리스트 썸네일, 예매처 상세페이지, 인스타그램 티켓 이벤트, 더현대 쇼룸 프로모션, 아티스트 사인용 포스터", period:"", tools:"",
+        { id:"hb-pr", edTitle:"티켓이<br>열리기까지", short:"Promotion", eyebrow:"PART 03", title:"PROMOTION", sum:"데이별 SNS 포스터, CD 티저와 유튜브 플레이리스트 썸네일, 예매처 상세페이지, 인스타그램 티켓 이벤트, 더현대 쇼룸 프로모션, 아티스트 사인용 포스터", period:"", tools:"",
           cover:HB + "t-promo.jpg", coverPos:"40% 30%", show:[HB + "hb-sns.jpg", dududoCdYtBlock, hbTicketBlock, hbTicketEventBlock, hbSiteMapBlock, dududoShowroomBlock, hbSignBlock] },
-        { id:"hb-md", short:"Merchandise", eyebrow:"PART 04", title:"MERCHANDISE", sum:"최종 판매 MD로 확정된 블랙·레드 티셔츠와 자수 볼캡, 인스타그램·X배너 MD 안내, 그리고 최종안 이전의 전체 MD 디자인 구성안", period:"", tools:"",
+        { id:"hb-md", edTitle:"현장에서<br>입는 브랜드", short:"Merchandise", eyebrow:"PART 04", title:"MERCHANDISE", sum:"최종 판매 MD로 확정된 블랙·레드 티셔츠와 자수 볼캡, 인스타그램·X배너 MD 안내, 그리고 최종안 이전의 전체 MD 디자인 구성안", period:"", tools:"",
           cover:HB + "t-md.jpg", coverPos:"50% 40%", show:[hbMdFinalBlock, hbMdGuideBlock, hbMdSheetBlock] },
-        { id:"hb-os", short:"On-site", eyebrow:"PART 05", title:"ON-SITE DESIGN", sum:"입구 게이트·가로등 배너·길안내 트러스·포토월·홀로그램 부스·입장 팔찌·MD를 시안과 현장 사진으로 비교, 부스 태블릿 UI, 프레스존, 7개 구역 47종의 현장 출력물", period:"", tools:"",
+        { id:"hb-os", edTitle:"시안이<br>현장이 되기까지", short:"On-site", eyebrow:"PART 05", title:"ON-SITE DESIGN", sum:"입구 게이트·가로등 배너·길안내 트러스·포토월·홀로그램 부스·입장 팔찌·MD를 시안과 현장 사진으로 비교, 부스 태블릿 UI, 프레스존, 7개 구역 47종의 현장 출력물", period:"", tools:"",
           cover:HB + "t-onsite.jpg", coverPos:"50% 50%", show:[hbPairBlock, hbHoloBlock, hbKioskBlock, hbPressBlock, hbSiteBlock] },
-        { id:"hb-prod", short:"Production", eyebrow:"PART 06", title:"PRODUCTION & SITE", sum:"행사 전날부터 직접 시공한 과정, 설치 전후의 공연장, 행사 당일 현장 기록, 실물로 제작된 비표와 입장 밴드", period:"", tools:"",
-          cover:HB + "hb-real-bands.jpg", coverPos:"50% 50%", show:[hbBuildBlock, hbBaBlock, hbDayBlock, hbRealBlock, hbVoiceBlock, hbTaggedBlock] },
-        { id:"hb-ops", short:"Design Ops", eyebrow:"PART 07", title:"DESIGN OPS", sum:"디자이너 1명으로 운영되도록 설계한 약 20종의 Figma 포맷, PM 3명 교육, PM이 직접 만드는 인스타그램 콘텐츠", period:"", tools:"Figma",
+        { id:"hb-prod", edTitle:"행사 전날,<br>비어 있던 체육관에서", short:"Production", eyebrow:"PART 06", title:"PRODUCTION & SITE", sum:"행사 전날부터 직접 시공한 과정, 설치 전후의 공연장, 행사 당일 현장 기록, 실물로 제작된 비표와 입장 밴드", period:"", tools:"",
+          cover:HB + "hb-ph-after.jpg", coverPos:"50% 50%", show:[edBuildBlock, edBaBlock, edDayBlock, edVoiceBlock, hbTaggedBlock] },
+        { id:"hb-ops", edTitle:"디자이너 1명으로<br>굴러가는 시스템", short:"Design Ops", eyebrow:"PART 07", title:"DESIGN OPS", sum:"디자이너 1명으로 운영되도록 설계한 약 20종의 Figma 포맷, PM 3명 교육, PM이 직접 만드는 인스타그램 콘텐츠", period:"", tools:"Figma",
           cover:HB + "hb-figma-ops.jpg", coverPos:"40% 30%", show:[hbOpsBlock] },
-        { id:"hb-early", short:"Early Work", eyebrow:"PART 08", title:"EARLY PROPOSAL", sum:"페스티벌로 개편되기 전, DUDUDO CONCERT 시절 제안한 초기 브랜드 아이덴티티와 “DON’T DO THAT” 픽토그램", period:"", tools:"Illustrator · Photoshop",
+        { id:"hb-early", edTitle:"페스티벌 이전의<br>첫 제안", short:"Early Work", eyebrow:"PART 08", title:"EARLY PROPOSAL", sum:"페스티벌로 개편되기 전, DUDUDO CONCERT 시절 제안한 초기 브랜드 아이덴티티와 “DON’T DO THAT” 픽토그램", period:"", tools:"Illustrator · Photoshop",
           cover:"images/dududo-concert-01.jpg", coverPos:"50% 50%", show:[{ custom:'<div class="cosmos-block"><div class="cosmos-head"><p class="cosmos-copy">페스티벌로 개편되기 전, <b>dududo concert</b>라는 이름으로 기획되던 초기 단계에 제안한 브랜드 아이덴티티입니다. 로고와 와이드 그리드 시스템, “DON’T DO THAT” 촬영 금지 픽토그램 세트, 컬러 팔레트, 포스터 배리에이션과 실사 목업까지 하나의 완결된 시스템으로 구축했고, 이후 행사가 페스티벌 형식으로 전면 개편되며 HEARTBEAT BY DUDUDO로 이어졌습니다.</p></div></div>' }, "images/dududo-concert-01.jpg","images/dududo-concert-02.jpg","images/dududo-concert-03.jpg","images/dududo-concert-04.jpg","images/dududo-concert-05.jpg","images/dududo-concert-06.jpg","images/dududo-concert-07.jpg","images/dududo-concert-08.jpg"] }
       ],
       tail:["images/dududo-case/dh-09-outro.jpg"],
-      /* Edition B (editorial). Same sections, chapter headlines added; PART 06 rebuilt as editorial spreads. */
-      ed:{ lead:[edOpenBlock], edTitles:{ "hb-id":"심박 하나로<br>시작한 브랜드", "hb-kv":"유리 심장과<br>잔상의 키비주얼", "hb-pr":"티켓이<br>열리기까지", "hb-md":"현장에서<br>입는 브랜드", "hb-os":"시안이<br>현장이 되기까지", "hb-prod":"행사 전날,<br>비어 있던 체육관에서", "hb-ops":"디자이너 1명으로<br>굴러가는 시스템", "hb-early":"페스티벌 이전의<br>첫 제안" },
-        show:{ "hb-prod":[edBuildBlock, edBaBlock, edDayBlock, edVoiceBlock, hbTaggedBlock] }, cover:{ "hb-prod":[HB + "hb-ph-after.jpg", "50% 50%"] } } },
+      /* Editorial layout (chapter openers + asymmetric spreads), scoped by .is-ed */
+      editorial:true },
     { group:"Branding & Art Direction", key:"dddm", category:"Channel Creative Direction · Branding · Editorial · Photo Direction · Social", title:"DDDM × MUSE.D: 음악 채널 & 매거진 크리에이티브 총괄", idea:"유튜브, 인쇄 매거진, 인스타그램을 하나의 톤으로", forms:["Brand", "Program IP", "Editorial", "Photo Direction", "Motion"], year:"2026",
       blurb:"구독자 0명에서 시작한 유튜브 음악 채널 DDDM을 초기 기획부터 혼자 만들었습니다. 채널 브랜딩과 프로그램 IP, 같은 촬영으로 엮은 인쇄 매거진 MUSE.D와 인스타그램 피드까지 크리에이티브 전 과정을 총괄했습니다.",
       desc:"아티스트와 음악을 보여주는 신규 유튜브 채널 DDDM을 구독자 0명, 초기 기획 단계부터 혼자 맡아 만들었습니다. 쇼츠 최고 조회수 143만 회, 인스타그램 팔로워 1.3만 명의 채널로 키웠습니다.\n채널 브랜딩과 다섯 개의 프로그램 IP, 썸네일과 런칭 모션, 같은 촬영으로 엮은 인쇄 매거진 MUSE.D와 인스타그램 매거진 피드까지, 세 개의 매체를 하나의 화이트 톤으로 총괄했습니다.",
@@ -6864,18 +6727,8 @@
     row.addEventListener('focusout', function(e){ if (!row.contains(e.relatedTarget)) show(-1); });
   }
 
-  function hbEdOn(){ try{ return localStorage.getItem('hbEdition') !== 'A'; }catch(e){ return true; } }
   function openModal(i){
     var p = projects[i];
-    /* Edition B (editorial) for projects that ship one; A/B pill switches and re-renders. */
-    if (p.ed && hbEdOn()){
-      var E = p.ed;
-      p = Object.assign({}, p, { _ed:true, lead:E.lead || p.lead, sections:p.sections.map(function(sec){
-        var o = Object.assign({}, sec, { edTitle:(E.edTitles || {})[sec.id] || '' });
-        if (E.show && E.show[sec.id]) o.show = E.show[sec.id];
-        if (E.cover && E.cover[sec.id]){ o.cover = E.cover[sec.id][0]; o.coverPos = E.cover[sec.id][1]; }
-        return o; }) });
-    }
     modalCategory.textContent = p.category;
     modalTitle.textContent = p.title;
     modalYear.textContent = p.year;
@@ -6999,7 +6852,7 @@
           return '<section class="uxs-sec" id="uxs-' + sec.id + '">' +
             '<div class="uxs-sticky"><span class="uxs-sticky-eyebrow">' + sec.eyebrow + '</span><span class="uxs-sticky-title">' + sec.title + '</span>' +
               (sec.period ? '<span class="uxs-sticky-period">' + sec.period + '</span>' : '') + '</div>' +
-            (p._ed ? '<header class="ed-ch"><span class="ed-ch-num" aria-hidden="true">' + sec.eyebrow.replace('PART ', '') + '</span><div class="ed-ch-body"><span class="ed-ch-kicker">' + sec.title + '</span>' + (sec.edTitle ? '<h2 class="ed-ch-title">' + sec.edTitle + '</h2>' : '') + '<p class="ed-ch-lede">' + sec.sum + '</p>' + (sec.tools ? '<p class="uxs-meta">' + sec.tools + '</p>' : '') + '</div></header>' :
+            (p.editorial ? '<header class="ed-ch"><span class="ed-ch-num" aria-hidden="true">' + sec.eyebrow.replace('PART ', '') + '</span><div class="ed-ch-body"><span class="ed-ch-kicker">' + sec.title + '</span>' + (sec.edTitle ? '<h2 class="ed-ch-title">' + sec.edTitle + '</h2>' : '') + '<p class="ed-ch-lede">' + sec.sum + '</p>' + (sec.tools ? '<p class="uxs-meta">' + sec.tools + '</p>' : '') + '</div></header>' :
             '<div class="uxs-head"><p class="uxs-sum">' + sec.sum + '</p>' +
               ((sec.period || sec.tools) ? '<p class="uxs-meta">' + (sec.period ? sec.period + (sec.tools ? ' · ' : '') : '') + sec.tools + '</p>' : '') + '</div>') +
             renderGalleryImages(sec.show, sec.title) +
@@ -7009,16 +6862,7 @@
           '</section>';
         }).join('')) +
         (p.tail && p.tail.length ? renderGalleryImages(p.tail, p.title) : '');
-      modalImages.classList.toggle('is-ed', !!p._ed);
-      if (projects[i].ed){
-        modalImages.insertAdjacentHTML('afterbegin', '<div class="ed-switch" role="group" aria-label="상세페이지 버전"><span>VERSION</span>' +
-          '<button type="button" data-ed-set="A" class="' + (p._ed ? '' : 'is-on') + '">A · 기존</button>' +
-          '<button type="button" data-ed-set="B" class="' + (p._ed ? 'is-on' : '') + '">B · 에디토리얼</button></div>');
-        modalImages.querySelectorAll('[data-ed-set]').forEach(function(b){ b.addEventListener('click', function(){
-          try{ localStorage.setItem('hbEdition', b.getAttribute('data-ed-set')); }catch(e){}
-          openModal(i); var sc = modalImages.closest('[class*="modal"]'); if (modalImages.scrollIntoView) modalImages.scrollIntoView({ block:'start' });
-        }); });
-      }
+      modalImages.classList.toggle('is-ed', !!p.editorial);
       modalImages.querySelectorAll('.uxs-hm-thumb').forEach(function(btn){
         btn.addEventListener('click', function(){
           var t = document.getElementById('uxs-' + btn.getAttribute('data-uxs'));
