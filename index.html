@@ -1160,6 +1160,12 @@
   .ba-tag{ position:absolute; top:12px; font-size:10px; font-weight:800; letter-spacing:.18em; color:#fff; background:rgba(0,0,0,.45); padding:5px 9px; border-radius:20px; pointer-events:none; transition:opacity .3s; }
   .ba-tag.before{ left:12px; } .ba-tag.after{ right:12px; }
   .ba-wrap.is-full .ba-tag.before{ opacity:0; }
+  .ba-wrap.is-none .ba-tag.after{ opacity:0; }
+  .ba-wrap.ed-ba-slider{ max-width:none; aspect-ratio:16/10; border-radius:0; }
+  .ba-wrap.ed-ba-slider .ba-tag{ top:auto; bottom:16px; font-size:11px; }
+  .ba-wrap.ed-ba-slider .ba-tag.after{ background:var(--accent); color:#0a0a0a; }
+  .ed-ba-hint{ padding:0 var(--ed-g); }
+  @media (max-width:767px){ .ba-wrap.ed-ba-slider{ aspect-ratio:1/1; } .ed-ba-hint{ padding:0 1.25rem; } }
   .ba-hint{ display:flex; align-items:center; gap:.4rem; margin-top:.8rem; font-size:.75rem; color:rgba(255,255,255,.45); }
 
   /* 03 · Shopping bags + campaign */
@@ -1981,6 +1987,8 @@
   .vf-drag::-webkit-scrollbar{ display:none; }
   .vf-drag.is-drag{ cursor:grabbing; }
   .vf-drag img{ display:block; height:calc(var(--sw) * 651 / 420); width:auto; max-width:none; user-select:none; -webkit-user-drag:none; }
+  .vf-drag-bar{ position:relative; display:block; height:3px; margin-top:.7rem; background:rgba(255,255,255,.12); border-radius:2px; overflow:hidden; }
+  .vf-drag-bar i{ position:absolute; top:0; bottom:0; left:0; width:20%; background:var(--accent); border-radius:2px; transition:left .08s linear; }
   .vf-pair figcaption{ margin-top:.55rem; font-size:.62rem; font-weight:600; letter-spacing:.16em; color:rgba(255,255,255,.45); }
   .vf-pair figcaption span{ margin-left:.6rem; color:var(--accent); }
   @media (max-width:767px){ .vf-pair{ grid-template-columns:1fr; padding:4rem 1.25rem 0; } .vf-pair-a{ width:72%; } .vf-drag img{ height:300px; } }
@@ -5261,10 +5269,13 @@
   var edBaBlock = {
     custom: '<div class="cosmos-block ed-blk ed-ba-blk">' +
       edHead('On-site · Before &amp; After', '비어 있던 체육관이<br>공연장이 되기까지', '아무것도 없던 체육관이 공연장이 되기까지, 같은 공간의 설치 전과 공연 중 모습입니다.') +
-      '<div class="ed-ba">' +
-        '<figure class="ed-ba-fig"><img src="' + HB + 'hb-ph-before.jpg" alt="무대 설치 전의 비어 있는 체육관 내부" loading="lazy" decoding="async"><figcaption><span class="ed-ba-word">BEFORE</span><span>설치 전 체육관</span></figcaption></figure>' +
-        '<figure class="ed-ba-fig is-after"><img src="' + HB + 'hb-ph-after.jpg" alt="붉은 조명과 레이저가 가득한 공연 중 무대" loading="lazy" decoding="async"><figcaption><span class="ed-ba-word">AFTER</span><span>공연 중 무대</span></figcaption></figure>' +
+      '<div class="ba-wrap ed-ba-slider" data-ba data-ba-full>' +
+        '<img src="' + HB + 'hb-ph-after.jpg" alt="붉은 조명과 레이저가 가득한 공연 중 무대" loading="lazy" decoding="async">' +
+        '<img class="ba-before" src="' + HB + 'hb-ph-before.jpg" alt="무대 설치 전의 비어 있는 체육관 내부" loading="lazy" decoding="async">' +
+        '<span class="ba-tag before">BEFORE · 설치 전</span><span class="ba-tag after">AFTER · 공연 중</span>' +
+        '<div class="ba-handle"><div class="ba-knob"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l-6 6 6 6M15 6l6 6-6 6"/></svg></div></div>' +
       '</div>' +
+      '<div class="ba-hint ed-ba-hint">손잡이를 좌우로 밀어 설치 전과 공연 중을 비교해 보세요</div>' +
     '</div>'
   };
   var edDayBlock = {
@@ -5329,7 +5340,7 @@
   function vfNoCopy(b){ return { custom: b.custom.replace(/<p class="cosmos-copy">[\s\S]*?<\/p>/, '') }; }
   var vfPairBlock = { custom:'<div class="vf-pair">' +
     '<figure class="vf-pair-a"><img src="images/dududo-ig-showroom.gif" alt="dududo showroom 인스타그램 카드뉴스" loading="lazy"><figcaption>SHOWROOM PROMOTION · 더현대 서울</figcaption></figure>' +
-    '<figure class="vf-pair-b"><div class="vf-drag" tabindex="0" aria-label="아티스트 사인용 포스터 18종 (좌우로 드래그)"><img src="' + HB + 'hb-artist-posters.jpg" alt="아티스트 사인용 포스터 18종" loading="lazy" decoding="async" draggable="false"></div><figcaption>ARTIST SIGNING POSTERS · 18종 <span>DRAG →</span></figcaption></figure>' +
+    '<figure class="vf-pair-b"><div class="vf-drag" tabindex="0" aria-label="아티스트 사인용 포스터 18종 (좌우로 드래그)"><img src="' + HB + 'hb-artist-posters.jpg" alt="아티스트 사인용 포스터 18종" loading="lazy" decoding="async" draggable="false"></div><span class="vf-drag-bar" aria-hidden="true"><i></i></span><figcaption>ARTIST SIGNING POSTERS · 18종 <span>DRAG →</span></figcaption></figure>' +
   '</div>' };
   function vfStrip(b){ return { custom: b.custom.replace(/<div class="cosmos-head">[\s\S]*?<\/p><\/div>/, '') }; }
   function vfRow(items, cols, ar, inset){
@@ -5390,7 +5401,7 @@
   };
   var hbVisualFlow = [
     vfOpenBlock, vfJumpBlock,
-    vfMark('01', 'IDENTITY'), HB + 'hb-identity.jpg',
+    vfMark('01', 'IDENTITY'), HB + 'hb-identity.jpg?v=2',
     vfMark('02', 'KEY VISUAL'), vfPosterBlock, dududoMotionBlock,
     vfMark('03', 'PROMOTION'), HB + 'hb-sns.jpg', vfCdBlock,
     hbTicketBlock, vfNoCopy(hbTicketEventBlock), vfNoCopy(hbSiteMapBlock),
@@ -6138,10 +6149,10 @@
     var active = null;
     function setP(el, clientX){
       var r = el.getBoundingClientRect();
-      var p = Math.max(0, Math.min(0.5, (clientX - r.left) / r.width));
+      var p = Math.max(0, Math.min(el.hasAttribute('data-ba-full') ? 1 : 0.5, (clientX - r.left) / r.width));
       el.querySelector('.ba-before').style.clipPath = 'inset(0 ' + ((1 - p) * 100).toFixed(2) + '% 0 0)';
       el.querySelector('.ba-handle').style.left = (p * 100).toFixed(2) + '%';
-      el.classList.toggle('is-full', p < 0.04);
+      el.classList.toggle('is-full', p < 0.04); el.classList.toggle('is-none', p > 0.96);
     }
     document.addEventListener('pointerdown', function(e){
       var el = e.target.closest && e.target.closest('[data-ba]');
@@ -8025,6 +8036,11 @@
     document.addEventListener('pointerdown', function(e){ if (e.pointerType !== 'mouse' || e.button !== 0) return; var el = e.target.closest && e.target.closest('.vf-drag'); if (el) d = { el:el, x:e.clientX, l:el.scrollLeft, m:false }; });
     document.addEventListener('pointermove', function(e){ if (!d) return; var dx = e.clientX - d.x; if (!d.m && Math.abs(dx) > 4){ d.m = true; d.el.classList.add('is-drag'); } if (d.m) d.el.scrollLeft = d.l - dx; });
     function up(){ if (d){ d.el.classList.remove('is-drag'); d = null; } }
+    function bar(el){ var b = el.parentNode.querySelector('.vf-drag-bar i'); if (!b || !el.scrollWidth) return;
+      b.style.width = (el.clientWidth / el.scrollWidth * 100) + '%'; b.style.left = (el.scrollLeft / el.scrollWidth * 100) + '%'; }
+    document.addEventListener('scroll', function(e){ var t = e.target; if (t && t.classList && t.classList.contains('vf-drag')) bar(t); }, true);
+    document.addEventListener('load', function(e){ var t = e.target; if (t && t.tagName === 'IMG' && t.parentNode && t.parentNode.classList && t.parentNode.classList.contains('vf-drag')) bar(t.parentNode); }, true);
+    setInterval(function(){ document.querySelectorAll('.vf-drag').forEach(bar); }, 1500);
     document.addEventListener('pointerup', up); document.addEventListener('pointercancel', up);
   })();
   /* HEARTBEAT · proposal-vs-site comparison (data-hbz): zone tabs + side arrows like the COSMOS viewer; the on-site
