@@ -4748,6 +4748,21 @@
     '</div>'
   };
 
+  /* HEARTBEAT · Audience photos from the event days (posted publicly by attendees; faces cropped out). */
+  var hbVoiceBlock = {
+    custom: '<div class="cosmos-block">' +
+      '<div class="cosmos-head">' +
+        '<div class="cosmos-eyebrow">On-site · Audience Photos</div>' +
+        '<h3 class="cosmos-title">FROM<br>THE VENUE</h3>' +
+        '<p class="cosmos-copy">행사 당일 관객들이 SNS에 직접 올린 후기 사진입니다. 입구의 대형 현수막과 레드카펫 계단, 공연장 안의 하트 라이트와 무대 조명까지 현장에서 구현된 분위기를 볼 수 있습니다.</p>' +
+      '</div>' +
+      '<div class="hbr-grid">' +
+        '<figure class="hbr-item hbr-wide"><img src="' + HB + 'hb-site-entrance.jpg" alt="화정체육관 입구의 HEARTBEAT BY DUDUDO 대형 현수막과 레드카펫 계단" loading="lazy" decoding="async"><figcaption><b>ENTRANCE</b>입구 외벽 현수막과 레드카펫 계단 · 관객 후기 사진</figcaption></figure>' +
+        '<figure class="hbr-item hbr-wide"><img src="' + HB + 'hb-site-lights.jpg" alt="공연장 안에서 관객이 들어 올린 HEARTBEAT BY DUDUDO 하트 라이트와 붉은 무대 조명" loading="lazy" decoding="async"><figcaption><b>INSIDE</b>하트 라이트와 무대 조명 · 관객 후기 사진</figcaption></figure>' +
+      '</div>' +
+    '</div>'
+  };
+
   /* HEARTBEAT · Ticket detail page (Melon Ticket): full-length page, auto-scrolling phone frame. */
   var hbTicketBlock = {
     custom: '<div class="cosmos-block">' +
@@ -4900,7 +4915,7 @@
         { id:"hb-os", short:"On-site", eyebrow:"PART 05", title:"ON-SITE DESIGN", sum:"홀로그램 존과 부스 태블릿 UI, 입장 게이트·포토월·프레스존 시안, 7개 구역 47종의 현장 출력물, 날짜×좌석 4종 컬러 시스템의 입장 팔찌", period:"", tools:"",
           cover:HB + "t-onsite.jpg", coverPos:"50% 50%", show:[hbHoloBlock, hbKioskBlock, hbGateBlock, hbWallBlock, hbPressBlock, hbSiteBlock, hbWristbandBlock] },
         { id:"hb-prod", short:"Production", eyebrow:"PART 06", title:"PRODUCTION & SITE", sum:"시안으로 설계한 VIP 비표와 입장 밴드의 실물 제작물, 현장 시공과 행사 기록", period:"", tools:"",
-          cover:HB + "hb-real-bands.jpg", coverPos:"50% 50%", show:[hbRealBlock] },
+          cover:HB + "hb-real-bands.jpg", coverPos:"50% 50%", show:[hbRealBlock, hbVoiceBlock] },
         { id:"hb-ops", short:"Design Ops", eyebrow:"PART 07", title:"DESIGN OPS", sum:"디자이너 1명으로 운영되도록 설계한 약 20종의 Figma 포맷, PM 3명 교육, PM이 직접 만드는 인스타그램 콘텐츠", period:"", tools:"Figma",
           cover:HB + "hb-figma-ops.jpg", coverPos:"40% 30%", show:[hbOpsBlock] },
         { id:"hb-early", short:"Early Work", eyebrow:"PART 08", title:"EARLY PROPOSAL", sum:"페스티벌로 개편되기 전, DUDUDO CONCERT 시절 제안한 초기 브랜드 아이덴티티와 “DON’T DO THAT” 픽토그램", period:"", tools:"Illustrator · Photoshop",
