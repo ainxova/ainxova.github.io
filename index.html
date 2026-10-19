@@ -1780,6 +1780,138 @@
   .cx-result-note{ font-size:.75rem; color:rgba(255,255,255,.5); }
 
 
+
+  .hbig{ margin:0; width:100%; }
+  .hbig-frame{ position:relative; aspect-ratio:1280/764; overflow:hidden; background:#000; border:1px solid rgba(255,255,255,.08); }
+  .hbig-frame video{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block; }
+  .hbig figcaption{ margin-top:.7rem; font-size:.74rem; color:rgba(255,255,255,.5); }
+  .hbig figcaption b{ display:block; color:rgba(255,255,255,.85); font-weight:600; letter-spacing:.08em; margin-bottom:.15rem; }
+  /* ===== HEARTBEAT · EDITORIAL EDITION (B) — scoped to #modalImages.is-ed ===== */
+  .ed-switch{ position:fixed; right:1.1rem; bottom:1.1rem; z-index:60; display:flex; align-items:center; gap:.25rem; padding:.3rem; background:rgba(12,10,9,.9); border:1px solid rgba(242,219,134,.35); border-radius:999px; backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); box-shadow:0 12px 30px -12px rgba(0,0,0,.8); }
+  .ed-switch span{ font-size:.58rem; letter-spacing:.2em; color:rgba(255,255,255,.45); padding:0 .55rem 0 .7rem; }
+  .ed-switch button{ font-size:.72rem; font-weight:700; letter-spacing:.04em; color:rgba(255,255,255,.7); padding:.5rem .85rem; border-radius:999px; transition:background-color .2s ease, color .2s ease; }
+  .ed-switch button.is-on{ background:var(--accent); color:#0a0a0a; }
+  .is-ed{ --ed-g:6.25%; }
+  /* opening spread */
+  .is-ed .ed-open{ background:#0b0908; }
+  .is-ed .hb-preview.ed-hero{ margin:0; aspect-ratio:16/9; max-height:86vh; width:100%; border:0; }
+  .ed-hero-cap{ position:absolute; left:var(--ed-g, 1.25rem); right:var(--ed-g, 1.25rem); bottom:1.4rem; display:flex; flex-wrap:wrap; align-items:center; gap:.6rem 1rem; font-size:.78rem; letter-spacing:.04em; color:rgba(255,255,255,.85); pointer-events:none; }
+  .ed-hero::after{ content:''; position:absolute; inset:auto 0 0 0; height:40%; background:linear-gradient(0deg, rgba(11,9,8,.85), rgba(11,9,8,0)); pointer-events:none; }
+  .ed-hero-cap{ z-index:1; }
+  .ed-pill{ display:inline-flex; align-items:center; gap:.45rem; font-size:.64rem; font-weight:800; letter-spacing:.18em; color:#0a0a0a; background:var(--accent); padding:.35rem .65rem; }
+  .ed-pill i{ width:.4rem; height:.4rem; border-radius:50%; background:#0a0a0a; }
+  .ed-intro{ display:grid; grid-template-columns:repeat(12, minmax(0,1fr)); column-gap:2rem; row-gap:1.5rem; padding:7rem var(--ed-g) 5rem; }
+  .ed-intro-kicker{ grid-column:1 / -1; font-size:.68rem; font-weight:700; letter-spacing:.22em; color:var(--accent); }
+  .ed-display{ grid-column:1 / 9; margin:0; font-size:clamp(2.6rem, 5.6vw, 5.4rem); font-weight:800; line-height:1.04; letter-spacing:-.035em; color:#fff; word-break:keep-all; }
+  .ed-display em{ font-style:normal; color:var(--accent); }
+  .ed-intro-copy{ grid-column:9 / -1; align-self:end; margin:0; padding-top:1.1rem; border-top:1px solid rgba(242,219,134,.4); font-size:.92rem; line-height:1.85; color:rgba(255,255,255,.68); word-break:keep-all; }
+  .ed-kpis{ display:grid; grid-template-columns:repeat(5, minmax(0,1fr)); margin:0 var(--ed-g); border-top:1px solid rgba(255,255,255,.14); border-bottom:1px solid rgba(255,255,255,.14); }
+  .ed-kpis > div{ padding:2.2rem 1.4rem 2rem; border-left:1px solid rgba(255,255,255,.1); }
+  .ed-kpis > div:first-child{ border-left:0; padding-left:0; }
+  .ed-kpis b{ display:block; font-size:clamp(2.8rem, 4.6vw, 4.6rem); font-weight:800; line-height:1; letter-spacing:-.04em; color:#fff; font-variant-numeric:tabular-nums; }
+  .ed-kpis b small{ font-size:.82rem; font-weight:700; letter-spacing:.08em; margin-left:.3rem; color:rgba(255,255,255,.55); }
+  .ed-kpis .is-hi b{ color:var(--accent); }
+  .ed-kpis span{ display:block; margin-top:.9rem; font-size:.74rem; line-height:1.5; color:rgba(255,255,255,.55); word-break:keep-all; }
+  .ed-spec{ display:grid; grid-template-columns:repeat(12, minmax(0,1fr)); column-gap:2rem; padding:4rem var(--ed-g) 0; }
+  .ed-facts{ grid-column:1 / 6; margin:0; display:grid; grid-template-columns:1fr 1fr; gap:1.4rem 1.5rem; }
+  .ed-facts dt{ font-size:.62rem; font-weight:700; letter-spacing:.2em; text-transform:uppercase; color:rgba(255,255,255,.4); margin-bottom:.35rem; }
+  .ed-facts dd{ margin:0; font-size:.84rem; line-height:1.5; color:rgba(255,255,255,.85); word-break:keep-all; }
+  .ed-points{ grid-column:7 / -1; list-style:none; margin:0; padding:0; display:grid; grid-template-columns:1fr 1fr; gap:1.6rem 2rem; }
+  .ed-points li{ font-size:.84rem; line-height:1.6; color:rgba(255,255,255,.62); word-break:keep-all; }
+  .ed-points i{ display:block; font-style:normal; font-size:.66rem; letter-spacing:.14em; color:var(--accent); margin-bottom:.4rem; }
+  .ed-points b{ display:block; font-size:1rem; color:#fff; margin-bottom:.2rem; }
+  .ed-press{ margin:3.5rem var(--ed-g) 0; padding:1.2rem 0; border-top:1px solid rgba(255,255,255,.1); border-bottom:1px solid rgba(255,255,255,.1); font-size:.84rem; line-height:1.7; color:rgba(255,255,255,.72); word-break:keep-all; }
+  .ed-press b{ font-size:.64rem; letter-spacing:.22em; color:var(--accent); margin-right:1rem; }
+  .ed-press span{ color:rgba(255,255,255,.4); }
+  .ed-plate{ margin:5rem 0 0; }
+  .ed-plate img{ display:block; width:100%; height:auto; }
+  .ed-plate figcaption{ display:flex; flex-wrap:wrap; gap:.4rem .5rem; padding:1.1rem var(--ed-g) 0; }
+  .ed-plate figcaption span{ font-size:.66rem; letter-spacing:.1em; color:rgba(255,255,255,.6); border:1px solid rgba(255,255,255,.18); padding:.3rem .6rem; }
+  /* chapter openers */
+  .is-ed .uxs-sec{ margin-top:0; }
+  .ed-ch{ display:grid; grid-template-columns:repeat(12, minmax(0,1fr)); column-gap:2rem; align-items:end; padding:8rem var(--ed-g) 4rem; background:#0b0908; }
+  .ed-ch-num{ grid-column:1 / 5; font-size:clamp(7rem, 15vw, 13.5rem); font-weight:800; line-height:.78; letter-spacing:-.06em; color:transparent; -webkit-text-stroke:1px rgba(242,219,134,.55); font-variant-numeric:tabular-nums; user-select:none; }
+  .ed-ch-body{ grid-column:5 / -1; }
+  .ed-ch-kicker{ display:block; font-size:.66rem; font-weight:700; letter-spacing:.22em; color:var(--accent); margin-bottom:1.1rem; }
+  .ed-ch-title{ margin:0 0 1.4rem; font-size:clamp(2.2rem, 4.4vw, 4.2rem); font-weight:800; line-height:1.06; letter-spacing:-.035em; color:#fff; word-break:keep-all; }
+  .ed-ch-lede{ max-width:38rem; margin:0; font-size:.95rem; line-height:1.8; color:rgba(255,255,255,.62); word-break:keep-all; }
+  .is-ed .ed-ch .uxs-meta{ margin-top:.8rem; }
+  /* every content block: asymmetric head, more air, no rules between blocks */
+  .is-ed .cosmos-block{ padding:6.5rem var(--ed-g); gap:3rem; }
+  .is-ed .cosmos-block + .cosmos-block{ border-top:0; }
+  .is-ed .cosmos-head{ display:grid; grid-template-columns:repeat(12, minmax(0,1fr)); column-gap:2rem; align-items:end; }
+  .is-ed .cosmos-head > *{ grid-column:1 / -1; }
+  .is-ed .cosmos-head > .cosmos-title{ grid-column:1 / 8; margin:0; font-size:clamp(2.1rem, 3.6vw, 3.4rem); line-height:1.04; letter-spacing:-.03em; word-break:keep-all; }
+  .is-ed .cosmos-head > .cosmos-title + .cosmos-copy{ grid-column:9 / -1; padding-top:1rem; border-top:1px solid rgba(242,219,134,.35); font-size:.88rem; line-height:1.8; word-break:keep-all; }
+  .is-ed .cosmos-head > .cosmos-copy:only-child{ grid-column:1 / 10; font-size:1.25rem; line-height:1.7; color:rgba(255,255,255,.8); }
+  /* editorial photo grids */
+  .ed-fig{ margin:0; min-width:0; }
+  .ed-img{ position:relative; overflow:hidden; background:#141110; }
+  .ed-img img, .ed-img video{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block; transition:transform 1.2s var(--ease-out, ease); }
+  .ed-fig:hover .ed-img img{ transform:scale(1.025); }
+  .ed-fig figcaption{ margin-top:.75rem; font-size:.74rem; line-height:1.55; color:rgba(255,255,255,.5); word-break:keep-all; }
+  .ed-fig figcaption b{ display:block; font-size:.64rem; font-weight:700; letter-spacing:.18em; color:rgba(255,255,255,.88); margin-bottom:.2rem; }
+  .ed-grid{ width:100%; display:grid; grid-template-columns:repeat(12, minmax(0,1fr)); column-gap:2rem; row-gap:4.5rem; align-items:start; }
+  .ed-quote{ margin:0; font-size:clamp(1.4rem, 2.2vw, 2rem); font-weight:700; line-height:1.4; letter-spacing:-.02em; color:#fff; word-break:keep-all; }
+  .ed-quote em{ font-style:normal; color:var(--accent); }
+  .ed-quote cite{ display:block; margin-top:1.2rem; font-style:normal; font-size:.72rem; font-weight:500; letter-spacing:.04em; line-height:1.6; color:rgba(255,255,255,.45); }
+  .ed-quote-xl{ font-size:clamp(3rem, 6.4vw, 6.2rem); line-height:.95; letter-spacing:-.045em; font-weight:800; }
+  .ed-build .g-a{ grid-column:1 / 9; }
+  .ed-build .g-q{ grid-column:9 / -1; align-self:end; padding-bottom:3.2rem; }
+  .ed-build .g-b{ grid-column:2 / 6; }
+  .ed-build .g-c{ grid-column:7 / 12; margin-top:9rem; }
+  .ed-build .g-d{ grid-column:1 / 4; margin-top:-4rem; }
+  .ed-build .g-e{ grid-column:4 / 7; margin-top:2rem; }
+  .ed-build .g-f{ grid-column:8 / -1; align-self:end; }
+  .ed-ba{ width:calc(100% + 2 * var(--ed-g) / (1 - 2 * var(--ed-g) / 100%)); }
+  .is-ed .ed-ba-blk{ padding-left:0; padding-right:0; }
+  .is-ed .ed-ba-blk > .cosmos-head{ padding:0 var(--ed-g); }
+  .ed-ba{ width:100%; display:grid; grid-template-columns:1fr 1fr; gap:4px; }
+  .ed-ba-fig{ position:relative; margin:0; aspect-ratio:1/1; overflow:hidden; }
+  .ed-ba-fig img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+  .ed-ba-fig::after{ content:''; position:absolute; inset:45% 0 0 0; background:linear-gradient(0deg, rgba(0,0,0,.72), rgba(0,0,0,0)); }
+  .ed-ba-fig figcaption{ position:absolute; left:1.6rem; right:1.6rem; bottom:1.4rem; z-index:1; display:flex; align-items:baseline; justify-content:space-between; gap:1rem; font-size:.76rem; color:rgba(255,255,255,.75); }
+  .ed-ba-word{ font-size:clamp(2.6rem, 6vw, 5.6rem); font-weight:800; line-height:.85; letter-spacing:-.04em; color:transparent; -webkit-text-stroke:1px rgba(255,255,255,.85); }
+  .ed-ba-fig.is-after .ed-ba-word{ color:var(--accent); -webkit-text-stroke:0; }
+  .ed-day .g-a{ grid-column:1 / 7; grid-row:1 / 3; }
+  .ed-day .g-q{ grid-column:8 / -1; grid-row:1; align-self:start; padding-top:2rem; }
+  .ed-day .g-b{ grid-column:8 / 12; grid-row:2; align-self:end; }
+  .ed-day .g-c{ grid-column:2 / 6; grid-row:3; }
+  .ed-day .g-d{ grid-column:7 / 11; grid-row:3; margin-top:5rem; }
+  .ed-voice .g-a{ grid-column:1 / -1; }
+  .ed-voice .g-b{ grid-column:4 / -1; }
+  @media (max-width:1023px){
+    .ed-intro{ padding:4.5rem 1.25rem 3rem; }
+    .ed-display{ grid-column:1 / -1; }
+    .ed-intro-copy{ grid-column:1 / -1; }
+    .ed-kpis{ grid-template-columns:repeat(2, minmax(0,1fr)); margin:0 1.25rem; }
+    .ed-kpis > div{ padding:1.5rem 0; border-left:0; border-top:1px solid rgba(255,255,255,.1); }
+    .ed-kpis > div:nth-child(-n+2){ border-top:0; }
+    .ed-kpis > div:nth-child(even){ padding-left:1.1rem; border-left:1px solid rgba(255,255,255,.1); }
+    .ed-kpis > div:last-child{ grid-column:1 / -1; padding-left:0; border-left:0; }
+    .ed-spec{ padding:3rem 1.25rem 0; row-gap:2.5rem; }
+    .ed-facts, .ed-points{ grid-column:1 / -1; }
+    .ed-press{ margin:2.5rem 1.25rem 0; }
+    .ed-plate{ margin-top:3rem; }
+    .ed-plate figcaption{ padding:1rem 1.25rem 0; }
+    .ed-hero-cap{ left:1.25rem; right:1.25rem; bottom:1rem; font-size:.7rem; }
+    .ed-ch{ padding:5rem 1.25rem 2.5rem; row-gap:1rem; }
+    .ed-ch-num{ grid-column:1 / -1; font-size:5.5rem; }
+    .ed-ch-body{ grid-column:1 / -1; }
+    .is-ed .cosmos-block{ padding:4rem 1.25rem; gap:2rem; }
+    .is-ed .cosmos-head > .cosmos-title, .is-ed .cosmos-head > .cosmos-title + .cosmos-copy, .is-ed .cosmos-head > .cosmos-copy:only-child{ grid-column:1 / -1; }
+    .is-ed .cosmos-head > .cosmos-title + .cosmos-copy{ margin-top:1.2rem; }
+    .is-ed .cosmos-head > .cosmos-copy:only-child{ font-size:1.05rem; }
+    .ed-grid{ grid-template-columns:1fr 1fr; column-gap:.75rem; row-gap:2.25rem; }
+    .ed-grid > *{ grid-column:1 / -1 !important; grid-row:auto !important; margin-top:0 !important; padding:0 !important; align-self:start !important; }
+    .ed-build .g-b, .ed-build .g-c, .ed-build .g-d, .ed-build .g-e, .ed-day .g-b, .ed-day .g-c{ grid-column:auto !important; }
+    .ed-build .g-c, .ed-build .g-e, .ed-day .g-c{ margin-top:2.5rem !important; }
+    .ed-day .g-d{ grid-column:2 / 3 !important; }
+    .ed-ba{ grid-template-columns:1fr; }
+    .ed-ba-fig figcaption{ left:1.25rem; right:1.25rem; }
+  }
+  @media (max-width:1023px){ .ed-day .g-d{ grid-column:1 / -1 !important; width:62%; justify-self:center; } }
+  @media (min-width:768px) and (max-width:1023px){ .ed-intro, .ed-ch, .is-ed .cosmos-block{ padding-left:6.25%; padding-right:6.25%; } }
   /* HEARTBEAT · proposal vs site comparison (data-hbz): proposal on the left, draggable site-photo filmstrip on the right */
   .hbz{ width:100%; }
   .hbz-stage{ display:grid; grid-template-columns:1fr 1fr; gap:.6rem; }
@@ -5046,6 +5178,112 @@
       });
     });
   }
+
+  /* HEARTBEAT · screen recording of the official account's "tagged" grid: posts by attendees and media outlets. */
+  var hbTaggedBlock = {
+    custom: '<div class="cosmos-block">' +
+      '<div class="cosmos-head"><div class="cosmos-eyebrow">On-site · Instagram Tagged</div><h3 class="cosmos-title">TAGGED<br>ON INSTAGRAM</h3>' +
+        '<p class="cosmos-copy">행사 후 공식 인스타그램 계정을 태그해 관객과 매체가 올린 게시물입니다. 양일간의 무대 사진과 라이브 영상, 매체의 현장 콘텐츠가 이어서 올라왔습니다.</p></div>' +
+      '<figure class="hbig"><div class="hbig-frame"><video poster="' + HB + 'hb-ig-tagged-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-label="공식 인스타그램 태그된 게시물 그리드를 스크롤하는 화면 녹화"><source src="' + HB + 'hb-ig-tagged.mp4" type="video/mp4"></video></div>' +
+        '<figcaption><b>TAGGED POSTS</b>공식 계정 ‘태그됨’ 탭 화면 녹화 · 관객·매체 게시물</figcaption></figure>' +
+    '</div>'
+  };
+  /* ===== HEARTBEAT · EDITORIAL EDITION (B) =====================================
+     A second layout of the same case study, switchable with the A/B pill in the modal.
+     Same images and facts as edition A; only layout, curation (repeats/weak shots
+     dropped) and typography change. Everything here is prefixed ed- and scoped to
+     #modalImages.is-ed, so edition A is untouched. */
+  function edFig(src, cls, cap, alt, ar){
+    return '<figure class="ed-fig ' + (cls || '') + '"><div class="ed-img"' + (ar ? ' style="aspect-ratio:' + ar + '"' : '') + '><img src="' + src + '" alt="' + alt + '" loading="lazy" decoding="async"></div>' +
+      (cap ? '<figcaption>' + cap + '</figcaption>' : '') + '</figure>';
+  }
+  function edHead(eyebrow, title, copy){
+    return '<div class="cosmos-head"><div class="cosmos-eyebrow">' + eyebrow + '</div><h3 class="cosmos-title">' + title + '</h3><p class="cosmos-copy">' + copy + '</p></div>';
+  }
+  var edOpenBlock = {
+    custom: '<section class="ed-open">' +
+      '<figure class="hb-preview ed-hero is-paused">' +
+        '<video poster="' + HB + 'hb-preview-poster.jpg" autoplay muted loop playsinline preload="auto" aria-label="HEARTBEAT BY DUDUDO 하이라이트 영상: 메인 무대, 현장 설치 과정, 키오스크, 공연장"><source src="' + HB + 'hb-preview.mp4" type="video/mp4"></video>' +
+        '<span class="hb-preview-play" aria-hidden="true"><i></i></span>' +
+        '<figcaption class="ed-hero-cap"><span class="ed-pill"><i aria-hidden="true"></i>COMPLETED</span><span>2026.10.17 — 10.18 · 고려대학교 화정체육관</span></figcaption>' +
+      '</figure>' +
+      '<div class="ed-intro">' +
+        '<div class="ed-intro-kicker">FESTIVAL CONCERT BRANDING · 2026</div>' +
+        '<h2 class="ed-display">처음 두근거린 그 순간,<br><em>심장박동</em>을 브랜딩하다</h2>' +
+        '<p class="ed-intro-copy">밴드와 힙합, 두 장르의 이틀이 하나의 심박으로 이어지는 페스티벌형 콘서트의 아트 디렉션을 단독으로 맡았습니다. 브랜드 아이덴티티부터 키비주얼, 모션·SNS 프로모션, 공식 MD, 현장 그래픽과 입장 팔찌까지 관객이 만나는 모든 접점을 하나의 시각 언어로 설계했습니다.</p>' +
+      '</div>' +
+      '<div class="ed-kpis">' +
+        '<div><b>2<small>DAYS</small></b><span>10.17 BAND DAY · 10.18 HIP-HOP DAY</span></div>' +
+        '<div><b>20<small>팀</small></b><span>라인업 아티스트</span></div>' +
+        '<div class="is-hi"><b>47<small>종</small></b><span>현장 출력물 디자인 · 7개 구역</span></div>' +
+        '<div><b>80<small>+</small></b><span>현수막·X배너·A보드 등 제작 수량</span></div>' +
+        '<div><b>34<small>건</small></b><span>현장 보도 콘텐츠 · 4개 매체</span></div>' +
+      '</div>' +
+      '<div class="ed-spec">' +
+        '<dl class="ed-facts">' +
+          '<div><dt>Date</dt><dd>2026.10.17(토) — 10.18(일) · 2일간</dd></div>' +
+          '<div><dt>Production</dt><dd>2026.09.14 — 10.14 · 1개월</dd></div>' +
+          '<div><dt>Venue</dt><dd>고려대학교 화정체육관</dd></div>' +
+          '<div><dt>Role</dt><dd>Art Director (단독)</dd></div>' +
+          '<div><dt>Scope</dt><dd>BI · Key Visual · Motion · SNS · MD · On-site</dd></div>' +
+          '<div><dt>Tools</dt><dd>Photoshop · Illustrator · After Effects · Figma</dd></div>' +
+        '</dl>' +
+        '<ol class="ed-points">' +
+          '<li><i>01</i><b>Direction</b>비주얼 방향 설정부터 현장 설치까지 단독 총괄</li>' +
+          '<li><i>02</i><b>Identity</b>심전도 파형 워드마크 · 유리 심장 키 오브젝트</li>' +
+          '<li><i>03</i><b>Production</b>MD 생산 관리 · 공간 그래픽 제작과 인쇄 감리</li>' +
+          '<li><i>04</i><b>On-site</b>입장 게이트 설치물 현장 시공·연출 (10.16 현장 입장 후 직접 진행)</li>' +
+        '</ol>' +
+      '</div>' +
+      '<p class="ed-press"><b>PRESS</b>뉴소스매거진 · 딥매거진 · 뉴스컬처 · 디지털데일리 엔츠 등 4개 매체에서 현장 스케치와 라이브 스테이지 콘텐츠 34건이 소개되었습니다 <span>(행사 홍보사 집계 기준)</span></p>' +
+      '<figure class="ed-plate"><img src="' + HB + 'hb-cover.jpg" alt="HEARTBEAT BY DUDUDO 포토월 · 입체 로고 조형물" loading="lazy" decoding="async">' +
+        '<figcaption><span>Art Direction</span><span>Brand Identity</span><span>Key Visual · Motion</span><span>Promotion</span><span>Merchandise</span><span>On-site Build</span><span>Design Ops</span></figcaption></figure>' +
+    '</section>'
+  };
+  var edBuildBlock = {
+    custom: '<div class="cosmos-block ed-blk">' +
+      edHead('Production · Build &amp; Direction', '행사 전날,<br>직접 세운 입구', '행사 전날부터 현장에서 직접 만들고 설치한 과정입니다. 입구 구조물과 사인을 세우고 손으로 마감하며 완성해 갔습니다.') +
+      '<div class="ed-grid ed-build">' +
+        edFig(HB + 'hb-ph-setup.jpg', 'g-a', '<b>SETUP</b>입구 게이트 설치 중', '설치 중인 화정체육관 입구 게이트와 계단', '4/3') +
+        '<blockquote class="ed-quote g-q">관객이 가장 먼저 마주하는 입구는 <em>직접 칠하고, 직접 걸었습니다.</em><cite>아크릴 물감 녹 질감 마감 · 대형 구슬 목걸이 직접 제작</cite></blockquote>' +
+        edFig(HB + 'hb-ph-ladder-b.jpg', 'g-b', '<b>DIRECTING</b>현장 설치 진행', '사다리에서 입구 사인을 설치하는 모습', '3/4') +
+        edFig(HB + 'hb-ph-signs.jpg', 'g-c', '<b>GATE DETAIL</b>비즈 목걸이와 테이프로 직접 꾸민 방향 사인', '입구 방향 사인에 비즈 목걸이를 걸어 꾸민 모습', '3/4') +
+        edFig(HB + 'hb-ph-paint.jpg', 'g-d', '<b>HAND FINISH</b>붓으로 직접 도장 작업', '나무 소품에 붓으로 도장 작업을 하는 모습', '3/4') +
+        edFig(HB + 'hb-ph-drum-sheet.jpg', 'g-e', '<b>SHEET</b>취식존 드럼통 시트지 작업', '취식존 드럼통에 붙일 시트지 로고', '3/4') +
+        edFig(HB + 'hb-ph-drums.jpg', 'g-f', '<b>FOOD ZONE</b>시트지를 붙여 완성한 드럼통 테이블', '로고 시트지를 붙인 취식존 드럼통 테이블', '4/3') +
+      '</div>' +
+    '</div>'
+  };
+  var edBaBlock = {
+    custom: '<div class="cosmos-block ed-blk ed-ba-blk">' +
+      edHead('On-site · Before &amp; After', '비어 있던 체육관이<br>공연장이 되기까지', '아무것도 없던 체육관이 공연장이 되기까지, 같은 공간의 설치 전과 공연 중 모습입니다.') +
+      '<div class="ed-ba">' +
+        '<figure class="ed-ba-fig"><img src="' + HB + 'hb-ph-before.jpg" alt="무대 설치 전의 비어 있는 체육관 내부" loading="lazy" decoding="async"><figcaption><span class="ed-ba-word">BEFORE</span><span>설치 전 체육관</span></figcaption></figure>' +
+        '<figure class="ed-ba-fig is-after"><img src="' + HB + 'hb-ph-after.jpg" alt="붉은 조명과 레이저가 가득한 공연 중 무대" loading="lazy" decoding="async"><figcaption><span class="ed-ba-word">AFTER</span><span>공연 중 무대</span></figcaption></figure>' +
+      '</div>' +
+    '</div>'
+  };
+  var edDayBlock = {
+    custom: '<div class="cosmos-block ed-blk">' +
+      edHead('On-site · The Day', '10.17 — 10.18', '행사 당일 현장 사진입니다. 직접 만든 하트 컨페티와 팔찌, 비즈 목걸이 이벤트, 현장에서 직접 시연한 태블릿 키오스크까지 설계한 굿즈와 공간이 실제로 쓰인 모습입니다.') +
+      '<div class="ed-grid ed-day">' +
+        edFig(HB + 'hb-ph-heart.jpg', 'g-a', '<b>WE BEAT AS ONE</b>직접 제작해 뿌린 하트 컨페티', '직접 제작해 현장에 뿌린 WE BEAT AS ONE 하트 컨페티', '3/4') +
+        '<blockquote class="ed-quote ed-quote-xl g-q">WE BEAT<br><em>AS ONE</em><cite>공연장에 뿌린 하트 컨페티의 문구</cite></blockquote>' +
+        edFig(HB + 'hb-ph-band.jpg', 'g-b', '<b>LIGHT BAND</b>하트 팔찌 라이트', '붉게 빛나는 하트 팔찌를 찬 손', '3/4') +
+        edFig(HB + 'hb-ph-beads.jpg', 'g-c', '<b>BEADS EVENT</b>비즈 목걸이 이벤트 코너', '비즈 목걸이 이벤트 배너와 나무 상자', '3/4') +
+        '<figure class="ed-fig g-d"><div class="ed-img" style="aspect-ratio:9/16"><video poster="' + HB + 'hb-ph-kiosk-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-label="현장 태블릿 키오스크 터치 시연"><source src="' + HB + 'hb-ph-kiosk.mp4" type="video/mp4"></video></div><figcaption><b>TOUCH KIOSK</b>현장에서 직접 시연한 태블릿 촬영 키오스크</figcaption></figure>' +
+      '</div>' +
+    '</div>'
+  };
+  var edVoiceBlock = {
+    custom: '<div class="cosmos-block ed-blk">' +
+      edHead('On-site · Audience Photos', 'FROM<br>THE VENUE', '행사 당일 관객들이 SNS에 직접 올린 후기 사진입니다. 입구의 대형 현수막과 레드카펫 계단, 공연장 안의 하트 라이트와 무대 조명까지 현장에서 구현된 분위기를 볼 수 있습니다.') +
+      '<div class="ed-grid ed-voice">' +
+        edFig(HB + 'hb-site-entrance.jpg', 'g-a', '<b>ENTRANCE</b>입구 외벽 현수막과 레드카펫 계단 · 관객 후기 사진', '화정체육관 입구의 HEARTBEAT BY DUDUDO 대형 현수막과 레드카펫 계단', '1442/529') +
+        edFig(HB + 'hb-site-lights.jpg', 'g-b', '<b>INSIDE</b>하트 라이트와 무대 조명 · 관객 후기 사진', '공연장 안에서 관객이 들어 올린 HEARTBEAT BY DUDUDO 하트 라이트와 붉은 무대 조명', '1600/1088') +
+      '</div>' +
+    '</div>'
+  };
   var projects = [
     { group:"Branding & Art Direction", key:"heartbeat", status:"", category:"Festival Art Direction · Key Visual · Spatial Graphics · On-site Build", title:"HEARTBEAT BY DUDUDO: 페스티벌 아트 디렉션 총괄", idea:"심전도 파형 하나로 묶은 양일간의 페스티벌", forms:["Identity", "Key Visual", "Motion", "MD", "On-site"], year:"2026",
       blurb:"키비주얼과 MD부터 행사장 전 구역의 공간 그래픽, 현장 설치까지. 2026년 10월 17–18일 이틀간 열린 대형 음악 페스티벌의 아트 전 과정을 단독으로 기획하고 총괄했습니다.",
@@ -5072,13 +5310,16 @@
         { id:"hb-os", short:"On-site", eyebrow:"PART 05", title:"ON-SITE DESIGN", sum:"입구 게이트·가로등 배너·길안내 트러스·포토월·홀로그램 부스·입장 팔찌·MD를 시안과 현장 사진으로 비교, 부스 태블릿 UI, 프레스존, 7개 구역 47종의 현장 출력물", period:"", tools:"",
           cover:HB + "t-onsite.jpg", coverPos:"50% 50%", show:[hbPairBlock, hbHoloBlock, hbKioskBlock, hbPressBlock, hbSiteBlock] },
         { id:"hb-prod", short:"Production", eyebrow:"PART 06", title:"PRODUCTION & SITE", sum:"행사 전날부터 직접 시공한 과정, 설치 전후의 공연장, 행사 당일 현장 기록, 실물로 제작된 비표와 입장 밴드", period:"", tools:"",
-          cover:HB + "hb-real-bands.jpg", coverPos:"50% 50%", show:[hbBuildBlock, hbBaBlock, hbDayBlock, hbRealBlock, hbVoiceBlock] },
+          cover:HB + "hb-real-bands.jpg", coverPos:"50% 50%", show:[hbBuildBlock, hbBaBlock, hbDayBlock, hbRealBlock, hbVoiceBlock, hbTaggedBlock] },
         { id:"hb-ops", short:"Design Ops", eyebrow:"PART 07", title:"DESIGN OPS", sum:"디자이너 1명으로 운영되도록 설계한 약 20종의 Figma 포맷, PM 3명 교육, PM이 직접 만드는 인스타그램 콘텐츠", period:"", tools:"Figma",
           cover:HB + "hb-figma-ops.jpg", coverPos:"40% 30%", show:[hbOpsBlock] },
         { id:"hb-early", short:"Early Work", eyebrow:"PART 08", title:"EARLY PROPOSAL", sum:"페스티벌로 개편되기 전, DUDUDO CONCERT 시절 제안한 초기 브랜드 아이덴티티와 “DON’T DO THAT” 픽토그램", period:"", tools:"Illustrator · Photoshop",
           cover:"images/dududo-concert-01.jpg", coverPos:"50% 50%", show:[{ custom:'<div class="cosmos-block"><div class="cosmos-head"><p class="cosmos-copy">페스티벌로 개편되기 전, <b>dududo concert</b>라는 이름으로 기획되던 초기 단계에 제안한 브랜드 아이덴티티입니다. 로고와 와이드 그리드 시스템, “DON’T DO THAT” 촬영 금지 픽토그램 세트, 컬러 팔레트, 포스터 배리에이션과 실사 목업까지 하나의 완결된 시스템으로 구축했고, 이후 행사가 페스티벌 형식으로 전면 개편되며 HEARTBEAT BY DUDUDO로 이어졌습니다.</p></div></div>' }, "images/dududo-concert-01.jpg","images/dududo-concert-02.jpg","images/dududo-concert-03.jpg","images/dududo-concert-04.jpg","images/dududo-concert-05.jpg","images/dududo-concert-06.jpg","images/dududo-concert-07.jpg","images/dududo-concert-08.jpg"] }
       ],
-      tail:["images/dududo-case/dh-09-outro.jpg"] },
+      tail:["images/dududo-case/dh-09-outro.jpg"],
+      /* Edition B (editorial). Same sections, chapter headlines added; PART 06 rebuilt as editorial spreads. */
+      ed:{ lead:[edOpenBlock], edTitles:{ "hb-id":"심박 하나로<br>시작한 브랜드", "hb-kv":"유리 심장과<br>잔상의 키비주얼", "hb-pr":"티켓이<br>열리기까지", "hb-md":"현장에서<br>입는 브랜드", "hb-os":"시안이<br>현장이 되기까지", "hb-prod":"행사 전날,<br>비어 있던 체육관에서", "hb-ops":"디자이너 1명으로<br>굴러가는 시스템", "hb-early":"페스티벌 이전의<br>첫 제안" },
+        show:{ "hb-prod":[edBuildBlock, edBaBlock, edDayBlock, edVoiceBlock, hbTaggedBlock] }, cover:{ "hb-prod":[HB + "hb-ph-after.jpg", "50% 50%"] } } },
     { group:"Branding & Art Direction", key:"dddm", category:"Channel Creative Direction · Branding · Editorial · Photo Direction · Social", title:"DDDM × MUSE.D: 음악 채널 & 매거진 크리에이티브 총괄", idea:"유튜브, 인쇄 매거진, 인스타그램을 하나의 톤으로", forms:["Brand", "Program IP", "Editorial", "Photo Direction", "Motion"], year:"2026",
       blurb:"구독자 0명에서 시작한 유튜브 음악 채널 DDDM을 초기 기획부터 혼자 만들었습니다. 채널 브랜딩과 프로그램 IP, 같은 촬영으로 엮은 인쇄 매거진 MUSE.D와 인스타그램 피드까지 크리에이티브 전 과정을 총괄했습니다.",
       desc:"아티스트와 음악을 보여주는 신규 유튜브 채널 DDDM을 구독자 0명, 초기 기획 단계부터 혼자 맡아 만들었습니다. 쇼츠 최고 조회수 143만 회, 인스타그램 팔로워 1.3만 명의 채널로 키웠습니다.\n채널 브랜딩과 다섯 개의 프로그램 IP, 썸네일과 런칭 모션, 같은 촬영으로 엮은 인쇄 매거진 MUSE.D와 인스타그램 매거진 피드까지, 세 개의 매체를 하나의 화이트 톤으로 총괄했습니다.",
@@ -6589,8 +6830,18 @@
     row.addEventListener('focusout', function(e){ if (!row.contains(e.relatedTarget)) show(-1); });
   }
 
+  function hbEdOn(){ try{ return localStorage.getItem('hbEdition') !== 'A'; }catch(e){ return true; } }
   function openModal(i){
     var p = projects[i];
+    /* Edition B (editorial) for projects that ship one; A/B pill switches and re-renders. */
+    if (p.ed && hbEdOn()){
+      var E = p.ed;
+      p = Object.assign({}, p, { _ed:true, lead:E.lead || p.lead, sections:p.sections.map(function(sec){
+        var o = Object.assign({}, sec, { edTitle:(E.edTitles || {})[sec.id] || '' });
+        if (E.show && E.show[sec.id]) o.show = E.show[sec.id];
+        if (E.cover && E.cover[sec.id]){ o.cover = E.cover[sec.id][0]; o.coverPos = E.cover[sec.id][1]; }
+        return o; }) });
+    }
     modalCategory.textContent = p.category;
     modalTitle.textContent = p.title;
     modalYear.textContent = p.year;
@@ -6714,8 +6965,9 @@
           return '<section class="uxs-sec" id="uxs-' + sec.id + '">' +
             '<div class="uxs-sticky"><span class="uxs-sticky-eyebrow">' + sec.eyebrow + '</span><span class="uxs-sticky-title">' + sec.title + '</span>' +
               (sec.period ? '<span class="uxs-sticky-period">' + sec.period + '</span>' : '') + '</div>' +
+            (p._ed ? '<header class="ed-ch"><span class="ed-ch-num" aria-hidden="true">' + sec.eyebrow.replace('PART ', '') + '</span><div class="ed-ch-body"><span class="ed-ch-kicker">' + sec.eyebrow + ' — ' + sec.title + '</span>' + (sec.edTitle ? '<h2 class="ed-ch-title">' + sec.edTitle + '</h2>' : '') + '<p class="ed-ch-lede">' + sec.sum + '</p>' + (sec.tools ? '<p class="uxs-meta">' + sec.tools + '</p>' : '') + '</div></header>' :
             '<div class="uxs-head"><p class="uxs-sum">' + sec.sum + '</p>' +
-              ((sec.period || sec.tools) ? '<p class="uxs-meta">' + (sec.period ? sec.period + (sec.tools ? ' · ' : '') : '') + sec.tools + '</p>' : '') + '</div>' +
+              ((sec.period || sec.tools) ? '<p class="uxs-meta">' + (sec.period ? sec.period + (sec.tools ? ' · ' : '') : '') + sec.tools + '</p>' : '') + '</div>') +
             renderGalleryImages(sec.show, sec.title) +
             (sec.more && sec.more.length ?
               '<button type="button" class="uxs-more" aria-expanded="false"><span class="uxs-more-label">펼쳐서 보기 (' + sec.more.length + '장 더)</span><i data-lucide="chevron-down" class="w-3.5 h-3.5 uxs-more-chev"></i></button>' +
@@ -6723,6 +6975,16 @@
           '</section>';
         }).join('')) +
         (p.tail && p.tail.length ? renderGalleryImages(p.tail, p.title) : '');
+      modalImages.classList.toggle('is-ed', !!p._ed);
+      if (projects[i].ed){
+        modalImages.insertAdjacentHTML('afterbegin', '<div class="ed-switch" role="group" aria-label="상세페이지 버전"><span>VERSION</span>' +
+          '<button type="button" data-ed-set="A" class="' + (p._ed ? '' : 'is-on') + '">A · 기존</button>' +
+          '<button type="button" data-ed-set="B" class="' + (p._ed ? 'is-on' : '') + '">B · 에디토리얼</button></div>');
+        modalImages.querySelectorAll('[data-ed-set]').forEach(function(b){ b.addEventListener('click', function(){
+          try{ localStorage.setItem('hbEdition', b.getAttribute('data-ed-set')); }catch(e){}
+          openModal(i); var sc = modalImages.closest('[class*="modal"]'); if (modalImages.scrollIntoView) modalImages.scrollIntoView({ block:'start' });
+        }); });
+      }
       modalImages.querySelectorAll('.uxs-hm-thumb').forEach(function(btn){
         btn.addEventListener('click', function(){
           var t = document.getElementById('uxs-' + btn.getAttribute('data-uxs'));
@@ -6741,6 +7003,7 @@
       });
       if (window.lucide) { lucide.createIcons(); }
     } else {
+      modalImages.classList.remove('is-ed');
       modalImages.innerHTML = (p.images && p.images.length) ? renderGalleryImages(p.images, p.title) : '';
     }
 
