@@ -1819,10 +1819,9 @@
   .ed-press{ margin:3.5rem var(--ed-g) 0; padding:1.2rem 0; border-top:1px solid rgba(255,255,255,.1); border-bottom:1px solid rgba(255,255,255,.1); font-size:.84rem; line-height:1.7; color:rgba(255,255,255,.72); word-break:keep-all; }
   .ed-press b{ font-size:.64rem; letter-spacing:.22em; color:var(--accent); margin-right:1rem; }
   .ed-press span{ color:rgba(255,255,255,.4); }
-  .ed-plate{ margin:5rem 0 0; }
-  .ed-plate img{ display:block; width:100%; height:auto; }
-  .ed-plate figcaption{ display:flex; flex-wrap:wrap; gap:.4rem .5rem; padding:1.1rem var(--ed-g) 0; }
-  .ed-plate figcaption span{ font-size:.66rem; letter-spacing:.1em; color:rgba(255,255,255,.6); border:1px solid rgba(255,255,255,.18); padding:.3rem .6rem; }
+  .ed-plate{ margin:2.5rem 0 0; padding-bottom:4.5rem; }
+  .ed-plate .ed-tags{ display:flex; flex-wrap:wrap; gap:.4rem .5rem; padding:1.1rem var(--ed-g) 0; }
+  .ed-plate .ed-tags span{ font-size:.66rem; letter-spacing:.1em; color:rgba(255,255,255,.6); border:1px solid rgba(255,255,255,.18); padding:.3rem .6rem; }
   /* chapter openers */
   .is-ed .uxs-sec{ margin-top:0; }
   .ed-ch{ display:grid; grid-template-columns:minmax(0,38.2fr) minmax(0,61.8fr); align-items:end; padding:8rem var(--ed-g) 4.5rem; background:#0b0908; }
@@ -1887,8 +1886,8 @@
     .ed-spec{ padding:3rem 1.25rem 0; row-gap:2.5rem; }
     .ed-facts, .ed-points{ grid-column:1 / -1; }
     .ed-press{ margin:2.5rem 1.25rem 0; }
-    .ed-plate{ margin-top:3rem; }
-    .ed-plate figcaption{ padding:1rem 1.25rem 0; }
+    .ed-plate{ margin-top:2rem; padding-bottom:3rem; }
+    .ed-plate .ed-tags{ padding:1rem 1.25rem 0; }
     .ed-hero-cap{ left:1.25rem; right:1.25rem; bottom:1rem; font-size:.7rem; }
     .ed-ch{ grid-template-columns:1fr; padding:5rem 1.25rem 2.5rem; row-gap:1.4rem; }
     .ed-ch-num{ grid-column:1; font-size:6.5rem; }
@@ -5114,8 +5113,8 @@
         '</ol>' +
       '</div>' +
       '<p class="ed-press"><b>PRESS</b>뉴소스매거진 · 딥매거진 · 뉴스컬처 · 디지털데일리 엔츠 등 4개 매체에서 현장 스케치와 라이브 스테이지 콘텐츠 34건이 소개되었습니다 <span>(행사 홍보사 집계 기준)</span></p>' +
-      '<figure class="ed-plate"><img src="' + HB + 'hb-cover.jpg" alt="HEARTBEAT BY DUDUDO 포토월 · 입체 로고 조형물" loading="lazy" decoding="async">' +
-        '<figcaption><span>Art Direction</span><span>Brand Identity</span><span>Key Visual · Motion</span><span>Promotion</span><span>Merchandise</span><span>On-site Build</span><span>Design Ops</span></figcaption></figure>' +
+      '<div class="ed-plate">' +
+        '<div class="ed-tags"><span>Art Direction</span><span>Brand Identity</span><span>Key Visual · Motion</span><span>Promotion</span><span>Merchandise</span><span>On-site Build</span><span>Design Ops</span></div></div>' +
     '</section>'
   };
   var edBuildBlock = {
