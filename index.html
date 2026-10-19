@@ -1779,6 +1779,39 @@
   .cx-result-num small{ font-size:.5em; font-weight:600; margin-left:.25em; color:rgba(255,255,255,.55); }
   .cx-result-note{ font-size:.75rem; color:rgba(255,255,255,.5); }
 
+
+  /* HEARTBEAT · proposal vs site comparison (data-hbz): proposal on the left, draggable site-photo filmstrip on the right */
+  .hbz{ width:100%; }
+  .hbz-stage{ display:grid; grid-template-columns:1fr 1fr; gap:.6rem; }
+  .hbz-pane{ position:relative; margin:0; aspect-ratio:5/4; overflow:hidden; background:#0d0d0d; }
+  .hbz-d img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; user-select:none; -webkit-user-drag:none; }
+  .hbz-d.is-contain img{ object-fit:contain; }
+  .hbz-tag{ position:absolute; left:.8rem; top:.8rem; z-index:3; font-size:.62rem; font-weight:700; letter-spacing:.16em; color:#fff; background:rgba(0,0,0,.55); padding:.35rem .6rem; backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px); pointer-events:none; }
+  .hbz-tag.is-site{ background:var(--accent); color:#000; }
+  .hbz-count{ position:absolute; right:.8rem; top:.8rem; z-index:3; font-size:.66rem; font-weight:700; letter-spacing:.12em; color:#fff; background:rgba(0,0,0,.55); padding:.35rem .6rem; font-variant-numeric:tabular-nums; backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px); pointer-events:none; }
+  .hbz-track{ position:absolute; inset:0; display:flex; gap:4px; overflow-x:auto; overflow-y:hidden; scroll-snap-type:x mandatory; scrollbar-width:none; -webkit-overflow-scrolling:touch; cursor:grab; overscroll-behavior-x:contain; }
+  .hbz-track::-webkit-scrollbar{ display:none; }
+  .hbz-track:focus-visible{ outline:2px solid var(--accent); outline-offset:-2px; }
+  .hbz-track.is-drag{ cursor:grabbing; scroll-snap-type:none; }
+  .hbz-slide{ position:relative; flex:0 0 auto; height:100%; margin:0; scroll-snap-align:start; background:#0d0d0d; }
+  .hbz-slide img{ display:block; height:100%; width:auto; max-width:none; user-select:none; -webkit-user-drag:none; }
+  .hbz-slide figcaption{ position:absolute; left:0; right:0; bottom:0; padding:2rem .9rem .75rem; font-size:.7rem; letter-spacing:.04em; color:rgba(255,255,255,.88); background:linear-gradient(0deg, rgba(0,0,0,.72), rgba(0,0,0,0)); pointer-events:none; }
+  .hbz-arr{ position:absolute; top:50%; z-index:4; width:2.4rem; height:2.4rem; margin-top:-1.2rem; border-radius:50%; display:flex; align-items:center; justify-content:center; color:#fff; background:rgba(0,0,0,.6); border:1px solid rgba(255,255,255,.25); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px); transition:opacity .25s ease, border-color .2s ease, background-color .2s ease, color .2s ease; }
+  .hbz-arr svg{ width:16px; height:16px; }
+  .hbz-arr.is-prev{ left:.6rem; } .hbz-arr.is-next{ right:.6rem; }
+  .hbz-arr:hover{ border-color:var(--accent); background:var(--accent); color:#0a0a0a; }
+  .hbz-arr[disabled]{ opacity:0; pointer-events:none; }
+  .hbz-hint{ position:absolute; right:.8rem; bottom:.8rem; z-index:3; font-size:.6rem; font-weight:700; letter-spacing:.2em; color:var(--accent); pointer-events:none; transition:opacity .4s ease; }
+  .hbz-hint::after{ content:' →'; }
+  .hbz-s.is-moved .hbz-hint, .hbz-s.is-end .hbz-hint{ opacity:0; }
+  .hbz-cap{ display:flex; flex-wrap:wrap; align-items:center; gap:.4rem 1rem; margin-top:1rem; }
+  .hbz-cap .cx-zone-cap-note{ flex:1 1 20rem; }
+  .hbz-next{ margin-left:auto; font-size:.7rem; font-weight:700; letter-spacing:.1em; color:var(--accent); padding:.45rem .7rem; border:1px solid rgba(242,219,134,.35); transition:background-color .2s ease, color .2s ease; }
+  .hbz-next:hover{ background:var(--accent); color:#0a0a0a; }
+  @media (max-width:767px){
+    .hbz-stage{ grid-template-columns:1fr; }
+    .hbz-next{ margin-left:0; }
+  }
   .cx-zones{ width:100%; }
   .cx-zone-tabs{ display:flex; gap:.4rem; overflow-x:auto; scrollbar-width:none; padding-bottom:.25rem; margin-bottom:1rem; }
   .cx-zone-tabs::-webkit-scrollbar{ display:none; }
@@ -4632,7 +4665,7 @@
       '</div>' +
       '<div class="cx-print hbh-3">' +
         '<figure class="cx-print-item"><div class="cx-print-img"><img src="' + HB + 'hb-holo-test.jpg" alt="홀로그램 기기에 내부 송출 영상을 넣어 테스트한 사진" loading="lazy" decoding="async"></div><figcaption><b>HOLOGRAM UNIT · TEST</b>기기 내부 송출 영상 이미지를 미리 넣어 확인한 테스트 사진</figcaption></figure>' +
-        '<figure class="cx-print-item"><div class="cx-print-img is-sheet"><img src="' + HB + 'hb-holo-sheet.jpg" alt="홀로그램 부스 외부 시트지 디자인" loading="lazy" decoding="async"></div><figcaption><b>BOOTH SHEET · DESIGN</b>홀로그램 부스 외부 시트지 디자인 (제작 진행 중)</figcaption></figure>' +
+        '<figure class="cx-print-item"><div class="cx-print-img is-sheet"><img src="' + HB + 'hb-holo-sheet.jpg" alt="홀로그램 부스 외부 시트지 디자인" loading="lazy" decoding="async"></div><figcaption><b>BOOTH SHEET · DESIGN</b>홀로그램 부스 외부 시트지 디자인 </figcaption></figure>' +
         '<figure class="cx-print-item"><div class="cx-print-img hbh-vid"><video poster="' + HB + 'hb-holo-motion-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-label="홀로그램 기기 내부 송출 영상 테스트"><source src="' + HB + 'hb-holo-motion.webm" type="video/webm"><source src="' + HB + 'hb-holo-motion.mp4" type="video/mp4"></video></div><figcaption><b>INSIDE MOTION · TEST</b>기기 안에 사람이 들어가 섰을 때의 송출 영상 테스트 — 이 모션으로 진행</figcaption></figure>' +
       '</div>' +
     '</div>'
@@ -4744,15 +4777,6 @@
       '</details>' +
     '</div>'
   };
-  var hbWristbandBlock = {
-    custom: '<div class="cosmos-block">' +
-      '<details class="hbd">' +
-        '<summary><span class="hbd-t"><span class="cosmos-eyebrow">On-site · Wristband Design</span><b>WRISTBAND SYSTEM</b><em>날짜 × 좌석 4종 컬러로 설계한 입장 팔찌 시안. 제작된 실물은 PART 06에서 볼 수 있습니다.</em></span><span class="hbd-btn"><i>+</i><span class="hbd-closed">펼쳐보기</span><span class="hbd-open">접기</span></span></summary>' +
-        '<div class="hbd-body"><img src="' + HB + 'hb-wristband.jpg" alt="날짜와 좌석 구분별 입장 팔찌 디자인" loading="lazy" decoding="async"></div>' +
-      '</details>' +
-    '</div>'
-  };
-
   /* HEARTBEAT · Admission goods, produced pieces (photos retouched onto a clean studio backdrop). */
   var hbRealBlock = {
     custom: '<div class="cosmos-block">' +
@@ -4790,37 +4814,77 @@
     '</div>'
   };
 
-  /* HEARTBEAT · design proposal vs what stood on site, same viewer as the COSMOS zones (data-zoneset="hb"). */
-  var hbZones = [
-    { id:'gate', en:'ENTRANCE GATE', kr:'입구 게이트', note:'대형 현수막과 레드카펫 계단, 방향 사인으로 이어진 입장 동선', design:HB + 'hb-gate-proposal.jpg', site:HB + 'hb-ph-gate-night.jpg' },
-    { id:'wall', en:'PHOTO WALL', kr:'포토월', note:'키 비주얼과 라인업을 담은 월, 앞에 세운 입체 로고 조형물', design:HB + 'hb-wall-proposal.jpg', site:HB + 'hb-ph-lineup.jpg' },
-    { id:'holo', en:'HOLOGRAM BOOTH', kr:'홀로그램 부스', note:'기기 안팎 그래픽을 디자인하고, 현장에서 관객이 촬영한 부스', design:HB + 'hb-holo-sheet.jpg', site:HB + 'hb-ph-holo-use.jpg', fitD:'contain' },
-    { id:'band', en:'ADMISSION BANDS', kr:'입장 팔찌', note:'날짜와 좌석 구분을 색으로 나눈 팔찌 시안과 제작된 실물', design:HB + 'hb-wristband.jpg', site:HB + 'hb-real-bands.jpg', fitD:'contain', labelS:'PRODUCED' },
-    { id:'md', en:'OFFICIAL MD', kr:'공식 MD', note:'티셔츠·볼캡·스티커 시안과 현장 MD 부스', design:HB + 'hb-merch.jpg', site:HB + 'hb-ph-md-booth.jpg', fitD:'contain' }
+  /* HEARTBEAT · design proposal vs what stood on site. Left: the proposal / print file. Right: a draggable
+     filmstrip of real photos of the same zone (swipe, drag or arrows). w/h = intrinsic size, so the strip lays
+     out before the images load. */
+  var hbPairs = [
+    { en:'ENTRANCE GATE', kr:'입구 게이트', labelD:'DESIGN PROPOSAL', note:'실제 입구 계단 사진에 현수막·계단 시트지·사인 구조물을 합성해 설계한 시안, 그리고 행사 전날 직접 시공한 현장',
+      d:{ src:HB + 'hb-gate-proposal.jpg', alt:'입장 게이트·계단·대형 현수막 디자인 시안' },
+      s:[ { src:'hb-ph-gate-night.jpg', w:1600, h:1200, cap:'ENTRANCE · 붉은 조명이 켜진 입구', alt:'밤의 화정체육관 입구 게이트와 풍선 장식' },
+          { src:'hb-ph-gate-done.jpg', w:1200, h:1600, cap:'DONE · 완성된 입구', alt:'밤에 붉은 조명이 켜진 완성된 입구' },
+          { src:'hb-ph-signs.jpg', w:1200, h:1600, cap:'DETAIL · 비즈 목걸이와 테이프로 직접 꾸민 방향 사인', alt:'입구 방향 사인에 비즈 목걸이를 걸어 꾸민 모습' },
+          { src:'hb-ph-setup.jpg', w:1600, h:1200, cap:'SETUP · 설치 중', alt:'설치 중인 화정체육관 입구 게이트와 계단' } ] },
+    { en:'LAMP-POST BANNERS', kr:'가로등 배너', labelD:'PRINT DESIGN', fit:'contain', note:'입구 동선을 따라 세운 가로등 배너 28장의 인쇄 디자인(680×1550)과 설치된 모습',
+      d:{ src:'images/hb-site/p13.jpg', alt:'가로등 배너 디자인 인쇄 파일' },
+      s:[ { src:'hb-ph-lamp-banner.jpg', w:1600, h:1200, cap:'BANNERS · 가로등 배너와 입구 현수막', alt:'가로등에 설치한 HEARTBEAT 배너와 입구 현수막' } ] },
+    { en:'WAYFINDING TRUSS', kr:'길안내 트러스', labelD:'PRINT DESIGN', fit:'contain', note:'공연장·F&B 존 길안내와 타임테이블을 담은 현수막(900×1900)을 사각 트러스에 걸어 구현',
+      d:{ src:'images/hb-site/p17.jpg', alt:'사각 트러스 길안내·타임테이블 현수막 인쇄 파일' },
+      s:[ { src:'hb-ph-truss-way.jpg', w:1200, h:1600, cap:'WAY TO THE CONCERT · 공연장 가는 길', alt:'공연장 가는 길 안내를 붙인 사각 트러스' },
+          { src:'hb-ph-truss-fb.jpg', w:1200, h:1600, cap:'F&B ZONE · 타임테이블', alt:'F&B 존 안내와 타임테이블을 붙인 사각 트러스' } ] },
+    { en:'PHOTO WALL', kr:'포토월', labelD:'DESIGN PROPOSAL', note:'키 비주얼과 라인업을 담은 월, 그 앞에 세운 입체 로고 조형물',
+      d:{ src:HB + 'hb-wall-proposal.jpg', alt:'현장 포토월·입체 로고 조형물 디자인 시안' },
+      s:[ { src:'hb-ph-lineup.jpg', w:1600, h:1200, cap:'KEY VISUAL WALL · 키 비주얼 라인업 월과 입체 로고', alt:'키 비주얼과 라인업을 담은 포토월과 입체 로고' },
+          { src:'hb-ph-wall.jpg', w:1600, h:1200, cap:'LINEUP WALL · 아티스트 컷아웃', alt:'아티스트 컷아웃 라인업 포토월' } ] },
+    { en:'HOLOGRAM BOOTH', kr:'홀로그램 부스', labelD:'DESIGN · BOOTH SHEET', fit:'contain', note:'부스 외부 시트지와 기기 내부 송출 영상을 디자인하고, 현장에서 관객이 촬영한 부스',
+      d:{ src:HB + 'hb-holo-sheet.jpg', alt:'홀로그램 부스 외부 시트지 디자인' },
+      s:[ { src:'hb-ph-holo-use.jpg', w:1600, h:900, cap:'IN USE · 촬영 중인 부스', alt:'홀로그램 포토 부스에서 촬영하는 관객' },
+          { src:'hb-ph-holo-person.jpg', w:1200, h:1600, cap:'BOOTH · 홀로그램 부스', alt:'홀로그램 부스 화면' },
+          { src:'hb-ph-holo.jpg', w:1200, h:1600, cap:'STANDBY · 대기 화면', alt:'홀로그램 포토 부스' } ] },
+    { en:'ADMISSION BANDS', kr:'입장 팔찌', labelD:'DESIGN PROPOSAL', labelS:'PRODUCED', fit:'contain', note:'날짜와 좌석 구분을 색으로 나눈 팔찌 시안, 그리고 제작되어 도착한 실물',
+      d:{ src:HB + 'hb-wristband.jpg', alt:'날짜와 좌석 구분별 입장 팔찌 디자인' },
+      s:[ { src:'hb-real-bands.jpg', w:1500, h:1240, cap:'ADMISSION BANDS · 날짜·좌석별 팔찌와 19+ 종이팔찌', alt:'날짜와 좌석 구분별 입장 밴드와 19+ 종이팔찌 실물' },
+          { src:'hb-real-vip.jpg', w:1400, h:1689, cap:'VIP PASS · 비표와 랜야드', alt:'VIP 비표와 랜야드 실물' } ] },
+    { en:'OFFICIAL MD', kr:'공식 MD', labelD:'DESIGN · MD SHEET', fit:'contain', note:'티셔츠·볼캡·스티커 구성안, 그리고 현장 MD 부스',
+      d:{ src:HB + 'hb-merch.jpg', alt:'HEARTBEAT 전체 MD 디자인 구성안' },
+      s:[ { src:'hb-ph-md-booth.jpg', w:1600, h:1200, cap:'OFFICIAL MD · 공식 MD 부스', alt:'공식 MD 부스 전경' },
+          { src:'hb-ph-md-wall.jpg', w:1600, h:1200, cap:'DISPLAY · 레드 테이프 진열 벽', alt:'레드 테이프로 꾸민 MD 진열 벽' } ] }
   ];
-  var hbZonesBlock = {
+  var hbPairBlock = {
     custom: '<div class="cosmos-block">' +
       '<div class="cosmos-head">' +
-        '<div class="cosmos-eyebrow">Space · Design Proposal to Site</div>' +
+        '<div class="cosmos-eyebrow">On-site · Design Proposal to Site</div>' +
         '<h3 class="cosmos-title">FROM PROPOSAL<br>TO SITE</h3>' +
-        '<p class="cosmos-copy">기획 단계의 디자인 시안과 실제로 구현된 모습을 공간·굿즈별로 비교했습니다.</p>' +
+        '<p class="cosmos-copy">기획 단계의 디자인과 실제로 구현된 현장을 공간·제작물별로 나란히 비교했습니다. 오른쪽 현장 사진은 드래그하거나 화살표로 넘겨 볼 수 있습니다.</p>' +
       '</div>' +
-      '<div class="cx-zones" data-cx-zones data-zoneset="hb">' +
-        '<div class="cx-zone-tabs" role="tablist" aria-label="HEARTBEAT 공간">' +
-          hbZones.map(function(z, i){
-            return '<button type="button" role="tab" class="cx-zone-tab' + (i === 0 ? ' is-on' : '') + '" data-cx-zone="' + i + '" aria-selected="' + (i === 0) + '">' +
+      '<div class="hbz" data-hbz>' +
+        '<div class="cx-zone-tabs" role="tablist" aria-label="HEARTBEAT 공간·제작물">' +
+          hbPairs.map(function(z, i){
+            return '<button type="button" role="tab" class="cx-zone-tab' + (i === 0 ? ' is-on' : '') + '" data-hbz-tab="' + i + '" aria-selected="' + (i === 0) + '">' +
               '<span class="cx-zone-tab-num">' + String(i + 1).padStart(2, '0') + '</span>' + z.en + '</button>';
           }).join('') +
         '</div>' +
-        '<div class="cx-zone-stage">' +
-          '<figure class="cx-zone-fig"><img data-cx-img="design" src="' + hbZones[0].design + '" alt="' + hbZones[0].en + ' 디자인 시안" decoding="async"><figcaption>DESIGN PROPOSAL</figcaption></figure>' +
-          '<figure class="cx-zone-fig is-site"><img data-cx-img="site" src="' + hbZones[0].site + '" alt="' + hbZones[0].en + ' 현장" decoding="async"><figcaption>ON-SITE</figcaption></figure>' +
-          '<button type="button" class="cx-zone-nav is-prev" data-cx-step="-1" aria-label="이전 공간"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg></button>' +
-          '<button type="button" class="cx-zone-nav is-next" data-cx-step="1" aria-label="다음 공간"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></button>' +
-        '</div>' +
-        '<div class="cx-zone-prog" aria-hidden="true"><i style="width:' + (100 / hbZones.length) + '%"></i></div>' +
-        '<div class="cx-zone-cap"><span class="cx-zone-cap-num">01 / ' + String(hbZones.length).padStart(2, '0') + '</span><span class="cx-zone-cap-name">' + hbZones[0].en + ' <em>' + hbZones[0].kr + '</em></span><span class="cx-zone-cap-note">' + hbZones[0].note + '</span>' +
-        '</div>' +
+        hbPairs.map(function(z, i){
+          var n = z.s.length;
+          return '<div class="hbz-panel" data-hbz-panel="' + i + '"' + (i ? ' hidden' : '') + '>' +
+            '<div class="hbz-stage">' +
+              '<figure class="hbz-pane hbz-d' + (z.fit === 'contain' ? ' is-contain' : '') + '"><img src="' + z.d.src + '" alt="' + z.d.alt + '" loading="lazy" decoding="async" draggable="false"><figcaption class="hbz-tag">' + z.labelD + '</figcaption></figure>' +
+              '<div class="hbz-pane hbz-s' + (n > 1 ? ' is-multi' : '') + '">' +
+                '<span class="hbz-tag is-site">' + (z.labelS || 'ON-SITE') + '</span>' +
+                (n > 1 ? '<span class="hbz-count" aria-live="polite">1 / ' + n + '</span>' : '') +
+                '<div class="hbz-track" tabindex="0" aria-label="' + z.en + ' 현장 사진 (좌우로 넘기기)">' +
+                  z.s.map(function(p){
+                    return '<figure class="hbz-slide" style="aspect-ratio:' + p.w + '/' + p.h + '"><img src="' + HB + p.src + '" alt="' + p.alt + '" loading="lazy" decoding="async" draggable="false"><figcaption>' + p.cap + '</figcaption></figure>';
+                  }).join('') +
+                '</div>' +
+                (n > 1 ? '<button type="button" class="hbz-arr is-prev" data-hbz-step="-1" aria-label="이전 사진"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg></button>' +
+                  '<button type="button" class="hbz-arr is-next" data-hbz-step="1" aria-label="다음 사진"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></button>' +
+                  '<span class="hbz-hint" aria-hidden="true">DRAG</span>' : '') +
+              '</div>' +
+            '</div>' +
+            '<div class="hbz-cap"><span class="cx-zone-cap-num">' + String(i + 1).padStart(2, '0') + ' / ' + String(hbPairs.length).padStart(2, '0') + '</span><span class="cx-zone-cap-name">' + z.en + ' <em>' + z.kr + '</em></span><span class="cx-zone-cap-note">' + z.note + '</span>' +
+              '<button type="button" class="hbz-next" data-hbz-zone="' + ((i + 1) % hbPairs.length) + '">다음 · ' + hbPairs[(i + 1) % hbPairs.length].en + ' <i aria-hidden="true">→</i></button></div>' +
+          '</div>';
+        }).join('') +
       '</div>' +
     '</div>'
   };
@@ -4844,18 +4908,14 @@
       '<div class="cosmos-head">' +
         '<div class="cosmos-eyebrow">On-site · Venue Photos</div>' +
         '<h3 class="cosmos-title">THE VENUE<br>ON THE DAY</h3>' +
-        '<p class="cosmos-copy">행사 당일 현장 사진입니다. 입구와 포토월, MD 부스, 홀로그램 부스, 하트 컨페티와 팔찌까지 설계한 공간과 굿즈가 실제로 쓰인 모습입니다.</p>' +
+        '<p class="cosmos-copy">행사 당일 현장 사진입니다. 홀로그램 부스와 터치 키오스크, 비즈 목걸이 이벤트, 직접 만든 하트 컨페티와 메인 무대까지 설계한 공간과 굿즈가 실제로 쓰인 모습입니다.</p>' +
       '</div>' +
       '<div class="hbr-grid hbph-grid">' +
-        '<figure class="hbr-item hbr-wide"><img src="' + HB + 'hb-ph-gate-night.jpg" alt="밤의 화정체육관 입구 게이트와 풍선 장식" loading="lazy" decoding="async"><figcaption><b>ENTRANCE</b>붉은 조명이 켜진 입구 게이트</figcaption></figure>' +
         '<figure class="hbr-item"><img src="' + HB + 'hb-ph-holo-person.jpg" alt="홀로그램 부스 화면" loading="lazy" decoding="async"><figcaption><b>HOLOGRAM BOOTH</b>홀로그램 부스</figcaption></figure>' +
         '<figure class="hbr-item"><img src="' + HB + 'hb-ph-holo.jpg" alt="홀로그램 포토 부스" loading="lazy" decoding="async"><figcaption><b>HOLOGRAM BOOTH</b>대기 화면</figcaption></figure>' +
         '<figure class="hbr-item hbr-wide"><img src="' + HB + 'hb-ph-wall.jpg" alt="아티스트 컷아웃 라인업 포토월" loading="lazy" decoding="async"><figcaption><b>LINEUP WALL</b>아티스트 컷아웃 포토월</figcaption></figure>' +
-        '<figure class="hbr-item hbr-wide"><img src="' + HB + 'hb-ph-lineup.jpg" alt="키 비주얼과 라인업을 담은 포토월과 입체 로고" loading="lazy" decoding="async"><figcaption><b>KEY VISUAL WALL</b>키 비주얼 라인업 월과 입체 로고</figcaption></figure>' +
-        '<figure class="hbr-item hbr-wide"><img src="' + HB + 'hb-ph-holo-use.jpg" alt="홀로그램 포토 부스에서 촬영하는 관객" loading="lazy" decoding="async"><figcaption><b>HOLOGRAM IN USE</b>촬영 중인 홀로그램 포토 부스</figcaption></figure>' +
         '<figure class="hbr-item"><video class="hbph-vid" poster="' + HB + 'hb-ph-kiosk-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-label="현장 태블릿 키오스크 터치 시연"><source src="' + HB + 'hb-ph-kiosk.mp4" type="video/mp4"></video><figcaption><b>TOUCH KIOSK</b>현장에서 직접 시연한 태블릿 촬영 키오스크</figcaption></figure>' +
         '<figure class="hbr-item"><img src="' + HB + 'hb-ph-beads.jpg" alt="비즈 목걸이 이벤트 배너와 나무 상자" loading="lazy" decoding="async"><figcaption><b>BEADS EVENT</b>비즈 목걸이 이벤트 코너</figcaption></figure>' +
-        '<figure class="hbr-item hbr-wide"><img src="' + HB + 'hb-ph-md-booth.jpg" alt="공식 MD 부스 전경" loading="lazy" decoding="async"><figcaption><b>OFFICIAL MD</b>공식 MD 부스</figcaption></figure>' +
         '<figure class="hbr-item hbr-wide"><img src="' + HB + 'hb-ph-md-wall.jpg" alt="레드 테이프로 꾸민 MD 진열 벽" loading="lazy" decoding="async"><figcaption><b>MD DISPLAY</b>레드 테이프 진열 벽</figcaption></figure>' +
         '<figure class="hbr-item"><img src="' + HB + 'hb-ph-heart.jpg" alt="직접 제작해 현장에 뿌린 WE BEAT AS ONE 하트 컨페티" loading="lazy" decoding="async"><figcaption><b>WE BEAT AS ONE</b>직접 제작해 뿌린 하트 컨페티</figcaption></figure>' +
         '<figure class="hbr-item"><img src="' + HB + 'hb-ph-band.jpg" alt="붉게 빛나는 하트 팔찌를 찬 손" loading="lazy" decoding="async"><figcaption><b>LIGHT BAND</b>하트 팔찌 라이트</figcaption></figure>' +
@@ -4927,26 +4987,6 @@
     '</div>'
   };
 
-  var hbGateBlock = {
-    custom: '<div class="cosmos-block hbg">' +
-      '<div class="cosmos-head">' +
-        '<div class="cosmos-eyebrow">Space · Design Proposal to Site</div>' +
-        '<h3 class="cosmos-title">ENTRANCE GATE PROPOSAL</h3>' +
-        '<p class="cosmos-copy">실제 입구 계단 사진에 대형 현수막·계단 시트지·사인 구조물을 합성해 현장 분위기를 미리 잡은 시안입니다.</p>' +
-      '</div>' +
-      '<figure class="hbo-fig"><div class="hbg-badge">DESIGN PROPOSAL</div><img src="' + HB + 'hb-gate-proposal.jpg" alt="입장 게이트·계단·대형 현수막 디자인 시안" loading="lazy" decoding="async"><figcaption>입장 게이트 · 계단 시트지 · 대형 현수막 시안 (현장 시공 전)</figcaption></figure>' +
-    '</div>'
-  };
-  var hbWallBlock = {
-    custom: '<div class="cosmos-block hbg">' +
-      '<div class="cosmos-head">' +
-        '<div class="cosmos-eyebrow">Space · Design Proposal to Site</div>' +
-        '<h3 class="cosmos-title">PHOTO WALL PROPOSAL</h3>' +
-        '<p class="cosmos-copy">키비주얼 대형 배너 앞에 입체 레드 로고 조형물을 세워, 관객이 브랜드 안에서 사진을 남기는 포토존으로 설계했습니다.</p>' +
-      '</div>' +
-      '<figure class="hbo-fig"><div class="hbg-badge">DESIGN PROPOSAL</div><img src="' + HB + 'hb-wall-proposal.jpg" alt="현장 포토월 · 입체 로고 조형물 디자인 시안" loading="lazy" decoding="async"><figcaption>현장 포토월 · 입체 로고 조형물 시안 (현장 제작 전)</figcaption></figure>' +
-    '</div>'
-  };
   var hbSignBlock = {
     custom: '<div class="cosmos-block">' +
       '<div class="cosmos-head">' +
@@ -5029,10 +5069,10 @@
           cover:HB + "t-promo.jpg", coverPos:"40% 30%", show:[HB + "hb-sns.jpg", dududoCdYtBlock, hbTicketBlock, hbTicketEventBlock, hbSiteMapBlock, dududoShowroomBlock, hbSignBlock] },
         { id:"hb-md", short:"Merchandise", eyebrow:"PART 04", title:"MERCHANDISE", sum:"최종 판매 MD로 확정된 블랙·레드 티셔츠와 자수 볼캡, 인스타그램·X배너 MD 안내, 그리고 최종안 이전의 전체 MD 디자인 구성안", period:"", tools:"",
           cover:HB + "t-md.jpg", coverPos:"50% 40%", show:[hbMdFinalBlock, hbMdGuideBlock, hbMdSheetBlock] },
-        { id:"hb-os", short:"On-site", eyebrow:"PART 05", title:"ON-SITE DESIGN", sum:"홀로그램 존과 부스 태블릿 UI, 입장 게이트·포토월·프레스존 시안, 7개 구역 47종의 현장 출력물, 날짜×좌석 4종 컬러 시스템의 입장 팔찌", period:"", tools:"",
-          cover:HB + "t-onsite.jpg", coverPos:"50% 50%", show:[hbHoloBlock, hbKioskBlock, hbGateBlock, hbWallBlock, hbPressBlock, hbSiteBlock, hbWristbandBlock] },
-        { id:"hb-prod", short:"Production", eyebrow:"PART 06", title:"PRODUCTION & SITE", sum:"시안으로 설계한 VIP 비표와 입장 밴드의 실물 제작물, 현장 시공과 행사 기록", period:"", tools:"",
-          cover:HB + "hb-real-bands.jpg", coverPos:"50% 50%", show:[hbRealBlock, hbBuildBlock, hbZonesBlock, hbBaBlock, hbDayBlock, hbVoiceBlock] },
+        { id:"hb-os", short:"On-site", eyebrow:"PART 05", title:"ON-SITE DESIGN", sum:"입구 게이트·가로등 배너·길안내 트러스·포토월·홀로그램 부스·입장 팔찌·MD를 시안과 현장 사진으로 비교, 부스 태블릿 UI, 프레스존, 7개 구역 47종의 현장 출력물", period:"", tools:"",
+          cover:HB + "t-onsite.jpg", coverPos:"50% 50%", show:[hbPairBlock, hbHoloBlock, hbKioskBlock, hbPressBlock, hbSiteBlock] },
+        { id:"hb-prod", short:"Production", eyebrow:"PART 06", title:"PRODUCTION & SITE", sum:"행사 전날부터 직접 시공한 과정, 설치 전후의 공연장, 행사 당일 현장 기록, 실물로 제작된 비표와 입장 밴드", period:"", tools:"",
+          cover:HB + "hb-real-bands.jpg", coverPos:"50% 50%", show:[hbBuildBlock, hbBaBlock, hbDayBlock, hbRealBlock, hbVoiceBlock] },
         { id:"hb-ops", short:"Design Ops", eyebrow:"PART 07", title:"DESIGN OPS", sum:"디자이너 1명으로 운영되도록 설계한 약 20종의 Figma 포맷, PM 3명 교육, PM이 직접 만드는 인스타그램 콘텐츠", period:"", tools:"Figma",
           cover:HB + "hb-figma-ops.jpg", coverPos:"40% 30%", show:[hbOpsBlock] },
         { id:"hb-early", short:"Early Work", eyebrow:"PART 08", title:"EARLY PROPOSAL", sum:"페스티벌로 개편되기 전, DUDUDO CONCERT 시절 제안한 초기 브랜드 아이덴티티와 “DON’T DO THAT” 픽토그램", period:"", tools:"Illustrator · Photoshop",
@@ -6156,7 +6196,7 @@
 
   /* COSMOS zone viewer (cxZonesBlock): tabs / arrows / ←→ keys swap the
      design proposal and on-site photo pair with a short crossfade. */
-  function cxSet(root){ return root.getAttribute('data-zoneset') === 'hb' ? hbZones : cxZones; }
+  function cxSet(root){ return cxZones; }
   function cxSrc(z, kind){ return z[kind] || (CP + 'zone-' + z.id + '-' + kind + '.jpg'); }
   function cxShowZone(root, i){
     var ZS = cxSet(root), n = ZS.length; i = (i + n) % n;
@@ -7551,6 +7591,58 @@
   };
 
 
+  /* HEARTBEAT · proposal-vs-site comparison: tabs, filmstrip arrows, mouse drag, counter. Delegated, so it works for blocks rendered later. */
+  (function(){
+    function idxOf(tr){
+      var sl = tr.querySelectorAll('.hbz-slide'), x = tr.scrollLeft, best = 0, d = 1e9;
+      for (var i = 0; i < sl.length; i++){ var k = Math.abs(sl[i].offsetLeft - x); if (k < d){ d = k; best = i; } }
+      if (tr.scrollLeft + tr.clientWidth >= tr.scrollWidth - 2) best = sl.length - 1;
+      return best;
+    }
+    function upd(tr){
+      var pane = tr.parentNode, sl = tr.querySelectorAll('.hbz-slide'), i = idxOf(tr);
+      var c = pane.querySelector('.hbz-count'); if (c) c.textContent = (i + 1) + ' / ' + sl.length;
+      var atEnd = tr.scrollLeft + tr.clientWidth >= tr.scrollWidth - 2, atStart = tr.scrollLeft <= 2;
+      var pv = pane.querySelector('.is-prev'), nx = pane.querySelector('.is-next');
+      if (pv) pv.disabled = atStart; if (nx) nx.disabled = atEnd;
+      pane.classList.toggle('is-end', atEnd);
+      if (!atStart) pane.classList.add('is-moved');
+    }
+    function goto(tr, i){ var sl = tr.querySelectorAll('.hbz-slide'); i = Math.max(0, Math.min(sl.length - 1, i)); tr.scrollTo({ left: sl[i].offsetLeft, behavior:'smooth' }); }
+    function zone(root, i){
+      root.querySelectorAll('[data-hbz-tab]').forEach(function(b){ var on = +b.getAttribute('data-hbz-tab') === i; b.classList.toggle('is-on', on); b.setAttribute('aria-selected', on); if (on && b.scrollIntoView){ try{ var t = b.parentNode; t.scrollTo({ left: b.offsetLeft - 16, behavior:'smooth' }); }catch(e){} } });
+      root.querySelectorAll('[data-hbz-panel]').forEach(function(p){ var on = +p.getAttribute('data-hbz-panel') === i; p.hidden = !on; if (on){ var tr = p.querySelector('.hbz-track'); if (tr){ tr.scrollLeft = 0; upd(tr); } } });
+    }
+    document.addEventListener('click', function(e){
+      var t = e.target.closest && e.target.closest('[data-hbz-tab],[data-hbz-step],[data-hbz-zone]'); if (!t) return;
+      var root = t.closest('[data-hbz]'); if (!root) return;
+      if (t.hasAttribute('data-hbz-tab')) zone(root, +t.getAttribute('data-hbz-tab'));
+      else if (t.hasAttribute('data-hbz-zone')){ zone(root, +t.getAttribute('data-hbz-zone')); var tabs = root.querySelector('.cx-zone-tabs'); if (tabs && tabs.scrollIntoView) tabs.scrollIntoView({ block:'nearest', behavior:'smooth' }); }
+      else { var tr = t.closest('.hbz-pane').querySelector('.hbz-track'); goto(tr, idxOf(tr) + (+t.getAttribute('data-hbz-step'))); }
+    });
+    document.addEventListener('scroll', function(e){ var t = e.target; if (t && t.classList && t.classList.contains('hbz-track')) upd(t); }, true);
+    document.addEventListener('keydown', function(e){
+      var t = e.target; if (!t || !t.classList || !t.classList.contains('hbz-track')) return;
+      if (e.key === 'ArrowRight'){ e.preventDefault(); goto(t, idxOf(t) + 1); } else if (e.key === 'ArrowLeft'){ e.preventDefault(); goto(t, idxOf(t) - 1); }
+    });
+    /* mouse drag (touch uses native scrolling) */
+    var drag = null;
+    document.addEventListener('pointerdown', function(e){
+      if (e.pointerType !== 'mouse' || e.button !== 0) return;
+      var tr = e.target.closest && e.target.closest('.hbz-track'); if (!tr) return;
+      drag = { tr:tr, x:e.clientX, l:tr.scrollLeft, moved:false };
+    });
+    document.addEventListener('pointermove', function(e){
+      if (!drag) return; var dx = e.clientX - drag.x;
+      if (!drag.moved && Math.abs(dx) > 4){ drag.moved = true; drag.tr.classList.add('is-drag'); }
+      if (drag.moved) drag.tr.scrollLeft = drag.l - dx;
+    });
+    function end(){
+      if (!drag) return; var tr = drag.tr, moved = drag.moved; drag = null; tr.classList.remove('is-drag');
+      if (moved) goto(tr, idxOf(tr));
+    }
+    document.addEventListener('pointerup', end); document.addEventListener('pointercancel', end);
+  })();
   /* HEARTBEAT highlight reel: show a play button whenever the clip is not running (e.g. autoplay blocked), tap to play/pause. */
   (function(){
     function fig(e){ var t = e.target; return t && t.tagName === 'VIDEO' ? t.closest('.hb-preview') : null; }
