@@ -1971,6 +1971,16 @@
   .vf-tags span{ font-size:.74rem; color:rgba(255,255,255,.75); border:1px solid rgba(255,255,255,.18); padding:.45rem .8rem; }
   .vf-jump{ position:sticky; }
   .vf-prog{ position:absolute; left:0; right:0; bottom:-1px; height:2px; background:var(--accent); transform:scaleX(0); transform-origin:0 50%; }
+  .vf-pair{ display:grid; grid-template-columns:minmax(0,.32fr) minmax(0,1fr); gap:1.2rem; align-items:end; padding:4.5rem var(--ed-g) 0; }
+  .vf-pair figure{ margin:0; min-width:0; }
+  .vf-pair-a img{ display:block; width:100%; height:auto; border-radius:6px; }
+  .vf-drag{ overflow-x:auto; overflow-y:hidden; scrollbar-width:none; cursor:grab; border-radius:6px; overscroll-behavior-x:contain; }
+  .vf-drag::-webkit-scrollbar{ display:none; }
+  .vf-drag.is-drag{ cursor:grabbing; }
+  .vf-drag img{ display:block; height:clamp(220px, 26vw, 400px); width:auto; max-width:none; user-select:none; -webkit-user-drag:none; }
+  .vf-pair figcaption{ margin-top:.55rem; font-size:.62rem; font-weight:600; letter-spacing:.16em; color:rgba(255,255,255,.45); }
+  .vf-pair figcaption span{ margin-left:.6rem; color:var(--accent); }
+  @media (max-width:767px){ .vf-pair{ grid-template-columns:1fr; padding:3rem 1.25rem 0; } .vf-pair-a{ width:55%; } .vf-drag img{ height:240px; } }
   .vf-crop{ position:relative; display:block; overflow:hidden; width:100%; }
   .vf-crop img{ position:absolute; max-width:none; display:block; }
   .vf-poster .vf-crop{ background:#0a0a0a; }
@@ -5236,10 +5246,10 @@
       edHead('Production · Build &amp; Direction', '행사 전날,<br>직접 세운 입구', '행사 전날부터 현장에서 직접 만들고 설치한 과정입니다. 입구 구조물과 사인을 세우고 손으로 마감하며 완성해 갔습니다.') +
       '<div class="ed-grid ed-build">' +
         edFig(HB + 'hb-ph-setup.jpg', 'g-a', '<b>SETUP</b>입구 게이트 설치 중', '설치 중인 화정체육관 입구 게이트와 계단', '4/3') +
-        '<blockquote class="ed-quote g-q">관객이 가장 먼저 마주하는 입구는 <em>직접 칠하고, 직접 걸었습니다.</em><cite>아크릴 물감 녹 질감 마감 · 대형 구슬 목걸이 직접 제작</cite></blockquote>' +
+        '<blockquote class="ed-quote g-q">관객이 가장 먼저 마주하는 입구는 <em>직접 칠하고, 직접 걸었습니다.</em><cite>구슬 목걸이 · 로고 인쇄 제작 테이프로 직접 연출·시공</cite></blockquote>' +
         edFig(HB + 'hb-ph-ladder-b.jpg', 'g-b', '<b>DIRECTING</b>현장 설치 진행', '사다리에서 입구 사인을 설치하는 모습', '3/4') +
         edFig(HB + 'hb-ph-signs.jpg', 'g-c', '<b>GATE DETAIL</b>비즈 목걸이와 테이프로 직접 꾸민 방향 사인', '입구 방향 사인에 비즈 목걸이를 걸어 꾸민 모습', '3/4') +
-        edFig(HB + 'hb-ph-paint.jpg', 'g-d', '<b>HAND FINISH</b>붓으로 직접 도장 작업', '나무 소품에 붓으로 도장 작업을 하는 모습', '3/4') +
+        edFig(HB + 'hb-ph-paint.jpg', 'g-d', '<b>HAND FINISH</b>목걸이 박스에 아크릴 물감으로 FREE 레터링', '목걸이를 담을 박스에 붓으로 레터링하는 모습', '3/4') +
         edFig(HB + 'hb-ph-drum-sheet.jpg', 'g-e', '<b>SHEET</b>취식존 드럼통 시트지 작업', '취식존 드럼통에 붙일 시트지 로고', '3/4') +
         edFig(HB + 'hb-ph-drums.jpg', 'g-f', '<b>FOOD ZONE</b>시트지를 붙여 완성한 드럼통 테이블', '로고 시트지를 붙인 취식존 드럼통 테이블', '4/3') +
       '</div>' +
@@ -5312,6 +5322,11 @@
     '<summary><span class="hbd-t"><span class="cosmos-eyebrow">Design Ops · Figma</span><b>PM이 직접 운영하는 디자인 포맷 시스템</b><em>디자이너 1명 환경에서 Figma 포맷 약 20종을 설계하고 PM 3명에게 가이드·교육 — 반복 콘텐츠는 PM이, 디자이너는 키비주얼·현장 제작에 집중</em></span><span class="hbd-btn"><i>+</i><span class="hbd-closed">펼쳐보기</span><span class="hbd-open">접기</span></span></summary>' +
     '<div class="hbd-body"><div class="hbo-figs"><figure class="hbo-fig"><img src="' + HB + 'hb-figma-ops.jpg" alt="PM용 Figma 디자인 포맷 보드" loading="lazy" decoding="async"><figcaption>PM에게 배포한 Figma 포맷 보드</figcaption></figure>' +
     '<figure class="hbo-fig hbo-fig-tall"><img src="' + HB + 'hb-figma-all.jpg" alt="Figma 디자인방 전체 보드" loading="lazy" decoding="async"><figcaption>디자인방 전체 보드</figcaption></figure></div></div></details></div>' };
+  function vfNoCopy(b){ return { custom: b.custom.replace(/<p class="cosmos-copy">[\s\S]*?<\/p>/, '') }; }
+  var vfPairBlock = { custom:'<div class="vf-pair">' +
+    '<figure class="vf-pair-a"><img src="images/dududo-ig-showroom.gif" alt="dududo showroom 인스타그램 카드뉴스" loading="lazy"><figcaption>SHOWROOM PROMOTION · 더현대 서울</figcaption></figure>' +
+    '<figure class="vf-pair-b"><div class="vf-drag" tabindex="0" aria-label="아티스트 사인용 포스터 18종 (좌우로 드래그)"><img src="' + HB + 'hb-artist-posters.jpg" alt="아티스트 사인용 포스터 18종" loading="lazy" decoding="async" draggable="false"></div><figcaption>ARTIST SIGNING POSTERS · 18종 <span>DRAG →</span></figcaption></figure>' +
+  '</div>' };
   function vfStrip(b){ return { custom: b.custom.replace(/<div class="cosmos-head">[\s\S]*?<\/p><\/div>/, '') }; }
   function vfRow(items, cols, ar, inset){
     return { custom:'<div class="vf-row' + (inset ? ' is-inset' : '') + '" style="--c:' + cols + '">' + items.map(function(it){
@@ -5343,7 +5358,7 @@
         '<div class="vf-about-text">' +
           '<h3>처음 두근거린 그 순간,<br><em>심장박동</em>을 브랜딩하다</h3>' +
           '<p>밴드와 힙합, 두 장르의 이틀이 하나의 심박으로 이어지는 페스티벌형 콘서트의 아트 디렉션을 단독으로 맡았습니다. 브랜드 아이덴티티부터 키비주얼, 모션·SNS 프로모션, 공식 MD, 현장 그래픽과 입장 팔찌까지 관객이 만나는 모든 접점을 하나의 시각 언어로 설계했습니다.</p>' +
-          '<p>관객이 가장 먼저 마주하는 입장 게이트 설치물은 행사 전날인 10월 16일 현장에 입장해 직접 시공·연출했습니다. 아크릴 물감으로 녹슨 질감을 직접 칠하고, 게이트를 장식할 대형 구슬 목걸이도 직접 제작했습니다.</p>' +
+          '<p>관객이 가장 먼저 마주하는 입장 게이트 설치물은 행사 전날인 10월 16일 현장에 입장해 직접 시공·연출했습니다. 구슬 목걸이와 로고를 인쇄한 제작 테이프로 게이트를 직접 꾸미고, 목걸이를 담을 박스에는 아크릴 물감으로 FREE를 쓰고 스티커로 장식했습니다.</p>' +
           '<p>디자이너가 1명인 환경에서 상세페이지와 SNS 콘텐츠를 PM이 직접 제작할 수 있도록 약 20종의 Figma 디자인 포맷을 설계하고 가이드를 배포했으며, PM 3명에게 Figma 사용 교육을 진행했습니다. 반복 콘텐츠는 PM이 포맷으로 만들고, 디자이너는 키비주얼·현장 출력물과 시공·홀로그램 기기 제작처럼 난도가 높은 작업에 집중하는 구조입니다.</p>' +
           '<p class="vf-press"><b>PRESS</b>뉴소스매거진 · 딥매거진 · 뉴스컬처 · 디지털데일리 엔츠 등 4개 매체에서 현장 스케치와 라이브 스테이지 콘텐츠 34건이 소개되었습니다 <span>(행사 홍보사 집계 기준)</span></p>' +
         '</div>' +
@@ -5374,13 +5389,11 @@
     vfMark('01', 'IDENTITY'), HB + 'hb-identity.jpg',
     vfMark('02', 'KEY VISUAL'), vfPosterBlock, dududoMotionBlock,
     vfMark('03', 'PROMOTION'), HB + 'hb-sns.jpg', vfCdBlock,
-    hbTicketBlock, hbTicketEventBlock, hbSiteMapBlock,
-    vfOne('images/dududo-ig-showroom.gif', 'dududo showroom 인스타그램 카드뉴스', 'SHOWROOM PROMOTION · 더현대 서울', 'is-narrow'),
-    vfOne(HB + 'hb-artist-posters.jpg', '아티스트 사인용 포스터 18종', 'ARTIST SIGNING POSTERS · 18종', 'is-inset'),
+    hbTicketBlock, vfNoCopy(hbTicketEventBlock), vfNoCopy(hbSiteMapBlock),
+    vfPairBlock,
     vfMark('04', 'MERCHANDISE'),
     vfRow([{ src:HB + 'hb-md-tee-black.jpg', alt:'공식 티셔츠 블랙', cap:'OFFICIAL TEE · BLACK' }, { src:HB + 'hb-md-tee-red.jpg', alt:'공식 티셔츠 레드', cap:'OFFICIAL TEE · RED' }, { src:HB + 'hb-md-cap.jpg', alt:'자수 볼캡', cap:'BALL CAP' }], 3, '960/1200'),
     vfRow([{ src:HB + 'hb-md-ig-list.jpg', alt:'MD LIST 카드' }, { src:HB + 'hb-md-ig-tee.jpg', alt:'티셔츠 카드' }, { src:HB + 'hb-md-ig-cap.jpg', alt:'볼캡 카드' }, { src:HB + 'hb-md-ig-sticker.jpg', alt:'스티커 세트 카드' }], 4, '900/1125', true),
-    vfMdSheetBlock,
     vfMark('05', 'ON-SITE'), vfStrip(hbPairBlock),
     vfRow([{ src:HB + 'hb-holo-test.jpg', alt:'홀로그램 기기 테스트', cap:'HOLOGRAM UNIT · TEST' }, { src:HB + 'hb-holo-sheet.jpg', alt:'홀로그램 부스 시트지 디자인', cap:'BOOTH SHEET · DESIGN', ar:'1400/1672' }, { video:HB + 'hb-holo-motion.mp4', poster:HB + 'hb-holo-motion-poster.jpg', alt:'홀로그램 송출 영상 테스트', cap:'INSIDE MOTION' }], 3, '3/4', true),
     vfRow([1,2,3,4,5].map(function(k){ return { src:HB + 'hb-kiosk-0' + k + '.jpg', alt:'부스 태블릿 화면 ' + k }; }), 5, '1200/703', true),
@@ -5395,7 +5408,7 @@
   var projects = [
     { group:"Branding & Art Direction", key:"heartbeat", status:"", category:"Festival Art Direction · Key Visual · Spatial Graphics · On-site Build", title:"HEARTBEAT BY DUDUDO: 페스티벌 아트 디렉션 총괄", idea:"심전도 파형 하나로 묶은 양일간의 페스티벌", forms:["Identity", "Key Visual", "Motion", "MD", "On-site"], year:"2026",
       blurb:"키비주얼과 MD부터 행사장 전 구역의 공간 그래픽, 현장 설치까지. 2026년 10월 17–18일 이틀간 열린 대형 음악 페스티벌의 아트 전 과정을 단독으로 기획하고 총괄했습니다.",
-      desc:"2026년 10월 17–18일 고려대학교 화정체육관에서 열린 대형 음악 페스티벌 'HEARTBEAT BY DUDUDO'의 아트 디렉션을 단독으로 맡아, 비주얼 방향 설정부터 현장 설치까지 전 과정을 이끌었습니다.\n메인 키비주얼과 포스터 배리에이션, 모션 포스터 티저로 페스티벌의 시각 언어를 정립하고 로고·심볼 에셋 시스템을 개발했습니다. 블랙·레드 티셔츠와 자수 볼캡 등 공식 MD, 가로등 배너·현수막·홀로그램 시트지 등 행사장 전 구역의 공간 그래픽을 디자인하고 제작과 인쇄 감리까지 마쳤습니다.\n디자이너가 1명인 환경에서 PM 3명이 SNS·상세페이지 콘텐츠를 직접 제작할 수 있도록 약 20종의 Figma 디자인 포맷을 설계하고 가이드와 교육을 제공했습니다. 관객이 가장 먼저 마주하는 입장 게이트 설치물은 행사 전날인 10월 16일 현장에 입장해 직접 시공·연출했습니다. 아크릴 물감으로 녹슨 질감을 직접 칠하고, 게이트를 장식할 대형 구슬 목걸이도 직접 제작했습니다.\n행사는 이틀간 진행되었고, 행사 홍보사 집계 기준 4개 매체에서 34건의 현장 보도 콘텐츠가 나왔습니다.",
+      desc:"2026년 10월 17–18일 고려대학교 화정체육관에서 열린 대형 음악 페스티벌 'HEARTBEAT BY DUDUDO'의 아트 디렉션을 단독으로 맡아, 비주얼 방향 설정부터 현장 설치까지 전 과정을 이끌었습니다.\n메인 키비주얼과 포스터 배리에이션, 모션 포스터 티저로 페스티벌의 시각 언어를 정립하고 로고·심볼 에셋 시스템을 개발했습니다. 블랙·레드 티셔츠와 자수 볼캡 등 공식 MD, 가로등 배너·현수막·홀로그램 시트지 등 행사장 전 구역의 공간 그래픽을 디자인하고 제작과 인쇄 감리까지 마쳤습니다.\n디자이너가 1명인 환경에서 PM 3명이 SNS·상세페이지 콘텐츠를 직접 제작할 수 있도록 약 20종의 Figma 디자인 포맷을 설계하고 가이드와 교육을 제공했습니다. 관객이 가장 먼저 마주하는 입장 게이트 설치물은 행사 전날인 10월 16일 현장에 입장해 직접 시공·연출했습니다. 구슬 목걸이와 로고를 인쇄한 제작 테이프로 게이트를 직접 꾸미고, 목걸이를 담을 박스에는 아크릴 물감으로 FREE를 쓰고 스티커로 장식했습니다.\n행사는 이틀간 진행되었고, 행사 홍보사 집계 기준 4개 매체에서 34건의 현장 보도 콘텐츠가 나왔습니다.",
       tools:["Illustrator", "Photoshop", "Art Direction", "현장 시공·연출"],
       thumb:"images/thumbs/heartbeat-thumb.mp4",
       links:[ { label:"티켓 예매", url:"https://tr.ee/Nwms6HjeAv", icon:"ticket" } ],
@@ -8002,6 +8015,14 @@
   };
 
 
+  /* drag-to-scroll strips (.vf-drag): mouse drag; touch uses native scrolling */
+  (function(){
+    var d = null;
+    document.addEventListener('pointerdown', function(e){ if (e.pointerType !== 'mouse' || e.button !== 0) return; var el = e.target.closest && e.target.closest('.vf-drag'); if (el) d = { el:el, x:e.clientX, l:el.scrollLeft, m:false }; });
+    document.addEventListener('pointermove', function(e){ if (!d) return; var dx = e.clientX - d.x; if (!d.m && Math.abs(dx) > 4){ d.m = true; d.el.classList.add('is-drag'); } if (d.m) d.el.scrollLeft = d.l - dx; });
+    function up(){ if (d){ d.el.classList.remove('is-drag'); d = null; } }
+    document.addEventListener('pointerup', up); document.addEventListener('pointercancel', up);
+  })();
   /* HEARTBEAT · proposal-vs-site comparison (data-hbz): zone tabs + side arrows like the COSMOS viewer; the on-site
      strip drifts slowly on its own (slides are duplicated once so it loops seamlessly) and pauses while hovered,
      dragged, swiped or wheeled. Delegated, so it works for blocks rendered later. */
