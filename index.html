@@ -3198,7 +3198,7 @@
   /* Hero background reel: key work clips looping behind the headline */
   .hero-reel{ position:absolute; inset:0; z-index:0; pointer-events:none; overflow:hidden; background:#0a0a0a; }
   .hero-reel{ background:#0a0a0a url(images/hero/hero-reel3-poster.jpg) center/cover no-repeat; }
-  .hero-reel canvas{ position:absolute; inset:0; width:100%; height:100%; display:block; }
+  .hero-reel canvas{ position:absolute; inset:-14px; width:calc(100% + 28px); height:calc(100% + 28px); display:block; }  /* bleed past the edges so the CSS blur never shows a dark rim */
   .hero-reel canvas.hero-reel-lens{ pointer-events:none; }
   .hero-reel::after{ content:''; position:absolute; inset:0;
     background:
@@ -3401,6 +3401,35 @@
      old FORMS label treatment (solid gold, semibold, wide tracking) on its own */
   .card-meta .card-cat{ color:var(--accent); font-weight:600; letter-spacing:.2em; }
   @media (max-width:767px){ .card-meta .card-cat{ letter-spacing:.07em; } }
+
+  /* ---- HERO v2 (2026-10-20): poster layout ----
+     ALL IN.'s ink spans the content edges (gutter to gutter); cap by height so the reel keeps
+     an open middle. Foot: two corners, no rules. */
+  header#top{ --g:40px; --allin:min(calc((100vw - var(--g)*2) / 2.963), calc((100svh - 64px) * .45 / .71));
+    display:flex !important; flex-direction:column; justify-content:flex-start !important; align-items:stretch !important; text-align:left !important;
+    min-height:100svh; padding:calc(64px + env(safe-area-inset-top,0px) + 2.2vh) var(--g) 2.4rem !important; }
+  header#top::before, header#top::after{ content:none !important; }
+  .hero-v2{ position:relative; z-index:1; flex:1 1 auto; display:flex; flex-direction:column; justify-content:space-between; gap:2rem; width:100%; }
+  header#top .hero-title-wrap{ display:block; }
+  header#top h1.hero-allin{ line-height:.86 !important; margin:0 0 0 calc(var(--allin) * -.022) !important; padding:.06em 0 .04em !important; width:max-content; max-width:none; }
+  header#top h1.hero-allin .line-mask{ padding:0 .08em; margin:0 -.08em; }
+  header#top h1.hero-allin .char{ padding:0 .06em; margin:0 -.06em; }  /* room for the clipped fill to cover each glyph's overhang */
+  .hero-foot{ display:flex; justify-content:space-between; align-items:flex-end; gap:2rem; }
+  .hero-foot p{ margin:0; }
+  .hero-foot-l{ font-size:clamp(1rem, 1.45vw, 1.3rem); line-height:1.5; letter-spacing:-.01em; color:rgba(255,255,255,.88); word-break:keep-all; font-weight:500; }
+  .hero-foot-r{ display:flex; flex-direction:column; align-items:flex-end; gap:.55rem; text-align:right; }
+  .hero-foot-role{ font-size:.72rem; letter-spacing:.16em; text-transform:uppercase; color:rgba(255,255,255,.6); white-space:nowrap; }
+  .hero-foot-role i{ font-style:normal; color:var(--accent); margin:0 .3em; }
+  .hero-foot-r b{ font-size:clamp(1.15rem, 1.6vw, 1.45rem); font-weight:700; letter-spacing:.06em; color:#fff; white-space:nowrap; line-height:1; }
+  .hero-foot-r b span{ font-weight:600; letter-spacing:0; margin-left:.6em; color:rgba(255,255,255,.88); }
+  @media (max-width:767px){
+    header#top{ --g:20px; --allin:min(calc((100vw - var(--g)*2) / 1.68), calc((100svh - 64px) * .27 / .71)); padding-bottom:2rem !important; }
+    header#top h1.hero-allin, header#top h1.hero-allin .line-mask, header#top h1.hero-allin .line-inner{ white-space:normal !important; }
+    header#top h1.hero-allin .char:nth-child(4){ display:block; height:0; overflow:hidden; }
+    .hero-foot{ flex-direction:column; align-items:flex-start; gap:1.4rem; }
+    .hero-foot-r{ align-items:flex-start; text-align:left; order:-1; }
+    .hero-foot-l{ font-size:1rem; }
+  }
 </style>
 </head>
 <body class="font-body">
@@ -3441,30 +3470,24 @@
 </nav>
 
 <!-- HERO -->
-<header id="top" class="relative min-h-[100svh] flex flex-col justify-center items-center text-center px-6 md:px-10 pt-24 pb-10 overflow-hidden">
+<header id="top" class="relative overflow-hidden">
   <div class="hero-reel" aria-hidden="true">
     <canvas id="hero-reel-canvas"></canvas>
   </div>
-  <div class="max-w-5xl mx-auto w-full relative" style="z-index:1">
-    <!-- 2026-10 layout: one headline + one caption row, editorial style. The caption row is exactly
-         as wide as ALL IN. (inline-grid) and sits under a hairline: the line on the left, who on
-         the right, both in the same size so the hero reads as two levels, not four. -->
-    <div class="hero-lockup">
-      <div class="hero-title-wrap">
-        <h1 class="font-display font-semibold leading-[0.92] hero-title-base hero-allin" aria-label="ALL IN. — 최아인 CHOI AIN">
-          <span class="line-mask"><span class="line-inner inline-block" data-split data-dim="1,2">ALL IN.</span></span>
-        </h1>
-      </div>
-      <div class="hero-meta" data-animate>
-        <p class="hero-meta-l">하나의 아이디어를 완성하기 위해,<br class="m-only"> 필요한 것들을 넘나듭니다.</p>
-        <p class="hero-meta-r font-display"><span class="hero-meta-name"><b>CHOI AIN</b> 최아인</span><span class="hero-meta-role">Art Director <i aria-hidden="true">·</i> Visual Designer</span></p>
-      </div>
+  <!-- 2026-10-20 layout (editorial poster): ALL IN. runs edge to edge across the top, the reel
+       plays through the open middle, and two quiet corners hold the words — the line on the left,
+       who on the right. No hairlines, no boxes. -->
+  <div class="hero-v2">
+    <div class="hero-title-wrap">
+      <h1 class="font-display font-semibold hero-title-base hero-allin" aria-label="ALL IN. — 최아인 CHOI AIN">
+        <span class="line-mask"><span class="line-inner inline-block" data-split data-dim="1,2">ALL IN.</span></span>
+      </h1>
+    </div>
+    <div class="hero-foot" data-animate>
+      <p class="hero-foot-l">하나의 아이디어를 완성하기 위해,<br> 필요한 것들을 넘나듭니다.</p>
+      <p class="hero-foot-r font-display"><span class="hero-foot-role">Art Director <i aria-hidden="true">·</i> Visual Designer</span><b>CHOI AIN<span>최아인</span></b></p>
     </div>
   </div>
-
-  <!-- 2026-10: SCROLL cue removed — it sat under the caption hairline and cluttered the lockup;
-       the client band on the hero's floor already signals there is more below -->
-
 </header>
 
 <main id="main" tabindex="-1">
@@ -8273,7 +8296,7 @@
      dims (scrubbed to scroll, so it tracks your hand exactly), handing focus
      to the next section instead of just being cut off by it. Applied to the
      wrapper, not the letters, so it never fights the intro tween above. */
-  var heroInner = document.querySelector('header#top > .max-w-5xl');
+  var heroInner = document.querySelector('header#top > .hero-v2');
   if (heroInner){
     gsap.to(heroInner, {
       yPercent: -12, opacity: 0.15, ease: 'none',
