@@ -3406,13 +3406,13 @@
   /* ---- HERO v2 (2026-10-20): poster layout ----
      ALL IN.'s ink spans the content edges (gutter to gutter); cap by height so the reel keeps
      an open middle. Foot: two corners, no rules. */
-  header#top{ container-type:inline-size; --g:clamp(24px, 4vw, 64px); --allin:min(calc(100cqw / 2.965), calc((100svh - 64px) * .45 / .71));
+  header#top{ container-type:inline-size; --g:clamp(24px, 4vw, 64px); --allin:min(calc(100cqw / 2.965), calc((100svh - 64px) * .5 / .71));
     display:flex !important; flex-direction:column; justify-content:flex-start !important; align-items:stretch !important; text-align:left !important;
     min-height:100svh; padding:calc(64px + env(safe-area-inset-top,0px) + 2.2vh) var(--g) clamp(3rem, 8vh, 5.5rem) !important; }
   header#top::before, header#top::after{ content:none !important; }
   .hero-v2{ position:relative; z-index:1; flex:1 1 auto; display:flex; flex-direction:column; justify-content:space-between; gap:2rem; width:100%; }
-  header#top .hero-title-wrap{ display:block; margin:auto 0; padding:2vh 0 4vh; }  /* centred in the open field above the foot */
-  header#top h1.hero-allin{ line-height:.86 !important; margin:0 0 0 calc(var(--allin) * -.022) !important; padding:.06em 0 .04em !important; width:max-content; max-width:none; }
+  header#top .hero-title-wrap{ display:flex; justify-content:center; margin:auto 0; padding:2vh 0 4vh; }  /* full width = edge to edge; on very short screens the height cap wins and it stays centred */  /* centred in the open field above the foot */
+  header#top h1.hero-allin{ line-height:.86 !important; margin:0 !important; position:relative; left:calc(var(--allin) * .0045); padding:.06em 0 .04em !important; width:max-content; max-width:none; }
   header#top h1.hero-allin .line-mask{ padding:0 .08em; margin:0 -.08em; }
   header#top h1.hero-allin .char{ padding:0 .06em; margin:0 -.06em; }  /* room for the clipped fill to cover each glyph's overhang */
   .hero-foot{ display:flex; justify-content:space-between; align-items:flex-end; gap:2rem; }
@@ -3425,7 +3425,8 @@
   .hero-foot-r b span{ font-weight:600; letter-spacing:0; margin-left:.6em; color:rgba(255,255,255,.88); }
   @media (max-width:767px){
     header#top{ --g:24px; --allin:min(calc(100cqw / 1.646), calc((100svh - 64px) * .27 / .71)); padding-bottom:clamp(2.6rem, 7vh, 4rem) !important; }
-    header#top .hero-title-wrap{ padding:0 0 3vh; }
+    header#top .hero-title-wrap{ display:block; padding:0 0 3vh; }
+    header#top h1.hero-allin{ left:0; margin-left:calc(var(--allin) * -.022) !important; }
     header#top h1.hero-allin, header#top h1.hero-allin .line-mask, header#top h1.hero-allin .line-inner{ white-space:normal !important; }
     header#top h1.hero-allin .char:nth-child(4){ display:block; height:0; overflow:hidden; }
     .hero-foot{ flex-direction:column; align-items:flex-start; gap:1.8rem; }
