@@ -3441,6 +3441,35 @@
   .card-head{ display:flex; align-items:baseline; justify-content:space-between; gap:1.2rem; }
   .card-head h3{ min-width:0; }
   .card-head .card-year{ flex:none; margin:0; font-size:12px; color:rgba(255,255,255,.4); letter-spacing:.04em; font-variant-numeric:tabular-nums; }
+  /* ---- HERO A/B switch ---- */
+  .hero-ab{ position:absolute; z-index:3; top:calc(64px + env(safe-area-inset-top,0px) + 14px); right:var(--g); display:flex; gap:2px; padding:3px; border-radius:999px; background:rgba(10,10,10,.55); border:1px solid rgba(255,255,255,.14); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); }
+  .hero-ab button{ font-size:11px; font-weight:700; letter-spacing:.08em; padding:.4rem .8rem; border-radius:999px; color:rgba(255,255,255,.6); }
+  .hero-ab button span{ font-weight:500; letter-spacing:0; margin-left:.3em; }
+  .hero-ab button[aria-pressed="true"]{ background:#fff; color:#0a0a0a; }
+  /* ---- HERO B: colour reel, ALL IN. bottom-left in white ---- */
+  .hero-b .hero-reel canvas{ display:none; }
+  .hero-b .hero-reel{ background:#0a0a0a url(images/hero/hero-color-poster.jpg) center/cover no-repeat; }
+  .hero-b .hero-color{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; filter:saturate(.9); }
+  .hero-b .hero-reel::after{ background:
+      linear-gradient(0deg, rgba(10,10,10,.82) 0%, rgba(10,10,10,.35) 38%, rgba(10,10,10,0) 62%),
+      linear-gradient(90deg, rgba(10,10,10,.35) 0%, rgba(10,10,10,0) 55%),
+      linear-gradient(180deg, rgba(10,10,10,.45) 0%, rgba(10,10,10,0) 18%); }
+  header#top.hero-b{ --allin:min(calc(100cqw * .5 / 1.646), calc((100svh - 64px) * .56 / 1.6)); }
+  .hero-b .hero-v2{ justify-content:flex-end; flex-direction:row; align-items:flex-end; }
+  .hero-b .hero-title-wrap{ display:block !important; margin:0 !important; padding:0 !important; flex:1 1 auto; }
+  header#top.hero-b h1.hero-allin{ left:0; margin-left:calc(var(--allin) * -.022) !important; line-height:.8 !important; padding:0 !important; margin-bottom:calc(var(--allin) * -.02) !important; }
+  .hero-b h1.hero-allin, .hero-b h1.hero-allin .line-mask, .hero-b h1.hero-allin .line-inner{ white-space:normal !important; }
+  .hero-b h1.hero-allin .char:nth-child(4){ display:block; height:0; overflow:hidden; }
+  .hero-b .hero-title-base.is-named .char:not(.char-dim){ --ink:#ffffff; }
+  .hero-b .hero-foot{ flex:none; flex-direction:column-reverse; align-items:flex-end; gap:1.1rem; text-align:right; padding-bottom:.4rem; }
+  .hero-b .hero-foot-l{ font-size:clamp(.88rem, 1vw, 1rem); color:rgba(255,255,255,.8); }
+  @media (max-width:767px){
+    .hero-b .hero-v2{ flex-direction:column; align-items:stretch; justify-content:flex-end; gap:1.6rem; }
+    .hero-b .hero-title-wrap{ flex:none !important; }
+    header#top.hero-b{ --allin:min(calc(100cqw / 1.646), calc((100svh - 64px) * .36 / 1.6)); }
+    .hero-b .hero-foot{ flex-direction:column; align-items:flex-start; text-align:left; gap:1.2rem; }
+    .hero-ab button{ padding:.35rem .65rem; font-size:10px; }
+  }
 </style>
 </head>
 <body class="font-body">
@@ -3484,6 +3513,12 @@
 <header id="top" class="relative overflow-hidden">
   <div class="hero-reel" aria-hidden="true">
     <canvas id="hero-reel-canvas"></canvas>
+  </div>
+  <!-- A/B comparison (2026-10-20): B = the reel in colour, ALL IN. bottom-left in white. ?hero=b / ?hero=a or the switch -->
+  <script>(function(){var m=null;try{var q=(location.search.match(/[?&]hero=(a|b)/)||[])[1];if(q){localStorage.setItem('heroMode',q);m=q;}else{m=localStorage.getItem('heroMode');}}catch(e){}
+    if(m==='b'){document.currentScript.parentNode.classList.add('hero-b');}})();</script>
+  <div class="hero-ab" role="group" aria-label="HERO 비교">
+    <button type="button" data-hero-mode="a">A <span>지금</span></button><button type="button" data-hero-mode="b">B <span>컬러 영상</span></button>
   </div>
   <!-- 2026-10-20 layout (editorial poster): ALL IN. runs edge to edge across the top, the reel
        plays through the open middle, and two quiet corners hold the words — the line on the left,
@@ -5869,6 +5904,20 @@
     if (b) b.addEventListener('click', function(){ if (lenis) lenis.scrollTo(0); else window.scrollTo({ top:0, behavior: reduceMotion ? 'auto' : 'smooth' }); });
   })();
 
+  /* HERO A/B switch: remembers the choice, reloads so only one reel ever runs */
+  (function(){
+    var top = document.getElementById('top'); if (!top) return;
+    var cur = top.classList.contains('hero-b') ? 'b' : 'a';
+    top.querySelectorAll('[data-hero-mode]').forEach(function(btn){
+      btn.setAttribute('aria-pressed', btn.getAttribute('data-hero-mode') === cur ? 'true' : 'false');
+      btn.addEventListener('click', function(){
+        var m = btn.getAttribute('data-hero-mode'); if (m === cur) return;
+        try{ localStorage.setItem('heroMode', m); }catch(e){}
+        location.href = location.pathname + '?hero=' + m + location.hash;
+      });
+    });
+  })();
+
   /* Disciplines band: what the work is made of, looping the opposite way to the clients band */
   (function(){
     var t = document.getElementById('disc-track'); if (!t) return;
@@ -7935,6 +7984,16 @@
      drawn to a canvas and cross-faded — images play reliably on the public artifact
      link, where <video> autoplay does not. */
   (function(){
+    var heroTop = document.getElementById('top');
+    if (heroTop && heroTop.classList.contains('hero-b')){
+      var hv = document.createElement('video');
+      hv.className = 'hero-color'; hv.muted = true; hv.loop = true; hv.autoplay = true; hv.playsInline = true;
+      hv.setAttribute('muted',''); hv.setAttribute('playsinline',''); hv.setAttribute('preload','auto');
+      hv.poster = 'images/hero/hero-color-poster.jpg'; hv.src = 'images/hero/hero-color.mp4?v=1';
+      heroTop.querySelector('.hero-reel').appendChild(hv);
+      var pr = hv.play(); if (pr && pr.catch) pr.catch(function(){});
+      return;
+    }
     var canvas = document.getElementById('hero-reel-canvas'); if (!canvas) return;
     var ctx = canvas.getContext('2d');
     var COLS = 12, CW = 480, CH = 270;
