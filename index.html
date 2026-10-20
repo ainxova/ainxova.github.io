@@ -6,6 +6,7 @@
 <title>최아인 CHOI AIN — ALL IN.</title>
 <meta name="description" content="최아인 CHOI AIN — 하나의 아이디어를 브랜드, 그래픽, 콘텐츠, 디지털, 공간으로 끝까지 완성하는 디자이너의 포트폴리오.">
 <meta name="theme-color" content="#0a0a0a">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='5' fill='%230a0a0a'/%3E%3Cpath fill='%23F2DB86' d='M12 3.5l1.9 6.6 6.6 1.9-6.6 1.9-1.9 6.6-1.9-6.6-6.6-1.9 6.6-1.9z'/%3E%3C/svg%3E">
 
 <style>
   /* Self-hosted rather than pulled from Google Fonts: Pretendard isn't on
@@ -2346,7 +2347,7 @@
   .uxs-hm-thumb.is-on img{ transform:scale(1); }
   .uxs-hm-thumb:focus-visible{ outline:2px solid var(--accent); outline-offset:2px; }
   @media (max-width:767px){
-    .uxs-hm-row{ overflow-x:auto; scrollbar-width:none; height:auto; margin:0 -1.5rem; padding:0 1.5rem; scroll-snap-type:x mandatory; }
+    .uxs-hm-row{ overflow-x:auto; scrollbar-width:none; height:auto; margin:0 -1.25rem; padding:0 1.25rem; scroll-snap-type:x mandatory; }
     .uxs-hm-row::-webkit-scrollbar{ display:none; }
     .uxs-hm-thumb{ flex:0 0 44%; aspect-ratio:4/3; scroll-snap-align:start; }
     .uxs-hm-row.is-hovering .uxs-hm-thumb{ opacity:1; filter:none; }
@@ -3676,7 +3677,7 @@
         <span class="text-xs text-white/40 leading-snug">카톡으로<br>추가하기</span>
       </div>
     </div>
-        <div class="contact-resume" data-animate><span class="contact-resume-label font-display">RESUME</span><button type="button" id="resume-toggle" class="contact-resume-toggle" aria-expanded="false" aria-controls="resume-viewer">이력서·경력기술서 보기<i data-lucide="chevron-down" class="w-3.5 h-3.5"></i></button><a href="files/ChoiAin_Resume_Print.pdf" download="최아인_이력서_경력기술서.pdf" title="인쇄용 흰 배경 PDF">PDF 다운로드<i data-lucide="download" class="w-3.5 h-3.5"></i></a></div>
+        <div class="contact-resume" data-animate><span class="contact-resume-label font-display">RESUME</span><button type="button" id="resume-toggle" class="contact-resume-toggle" aria-expanded="false" aria-controls="resume-viewer">이력서·경력기술서 보기<i data-lucide="chevron-down" class="w-3.5 h-3.5"></i></button><a href="files/ChoiAin_Resume_Print.pdf" download="최아인_이력서_경력기술서.pdf" title="인쇄용 흰 배경 PDF" id="resume-dl">PDF 다운로드<i data-lucide="download" class="w-3.5 h-3.5"></i></a></div>
       </div>
 
       <div id="contact-badge" class="contact-badge-stage" data-animate>
@@ -7566,6 +7567,23 @@
   }
   bindCopyButton('copy-email', 'copy-email-label', 'ainxova@gmail.com');
   bindCopyButton('copy-kakao', 'copy-kakao-label', 'eun_doi');
+
+  /* Resume PDF download. A plain download link works on the normal website (GitHub Pages); inside the
+     Claude artifact viewer plain downloads are blocked, so there the file is handed over through the
+     viewer's own save dialog instead. Off the artifact (no window.claude) the link is left alone. */
+  (function(){
+    var a = document.getElementById('resume-dl');
+    if (!a || !window.claude || !window.claude.use) return;
+    var dl = null;
+    window.claude.use('downloads').then(function(ns){ dl = ns; }, function(){});
+    a.addEventListener('click', function(e){
+      if (!dl) return;
+      e.preventDefault();
+      fetch(a.getAttribute('href')).then(function(r){ return r.blob(); }).then(function(blob){
+        return dl.save({ filename: a.getAttribute('download') || 'resume.pdf', data: blob });
+      }).catch(function(err){ if (err && err.code === 'unavailable') window.open(a.getAttribute('href'), '_blank', 'noopener'); });
+    });
+  })();
 
   (function(){
     var toggle = document.getElementById('resume-toggle'), rv = document.getElementById('resume-viewer');
