@@ -3439,6 +3439,8 @@
   .disc-band{ border-bottom:1px solid rgba(255,255,255,.08); }
   .disc-band + #experience{ border-top:0 !important; }
   .disc-track{ animation-name:clientsMoveRev; animation-duration:52s; }
+  /* both bands: no permanent compositor layer — a ~4600px-wide promoted layer could be left partly unpainted (blank half) */
+  .clients-track{ will-change:auto; }
   @keyframes clientsMoveRev{ from{ transform:translate3d(-50%,0,0); } to{ transform:translate3d(0,0,0); } }
   .card-head{ display:flex; align-items:baseline; justify-content:space-between; gap:1.2rem; }
   .card-head h3{ min-width:0; }
@@ -5937,6 +5939,16 @@
     var items = [['Art Direction','아트 디렉션'],['Key Visual','키비주얼'],['Space Graphics · VMD','공간'],['MD Design','굿즈'],['Logo · Branding','로고'],['Motion · Editing','영상'],['Illustration','일러스트'],['UX/UI','웹·앱']];
     var html = items.map(function(n){ return '<span class="clients-item">' + n[0] + '<small>' + n[1] + '</small></span>'; }).join('');
     t.innerHTML = html + html;
+    /* same watchdog as the clients band: some browsers drop or freeze this CSS animation (tab switches,
+       bfcache, a big composited layer that is not repainted) and the strip sits half blank; restart it. */
+    if (!reduceMotion){
+      var lastM = '', still = 0;
+      function kick(){ t.style.animation = 'none'; void t.offsetWidth; t.style.animation = ''; }
+      setInterval(function(){ if (document.hidden) return; var m = getComputedStyle(t).transform;
+        if (m === lastM){ if (++still >= 2){ kick(); still = 0; } } else still = 0; lastM = m; }, 1500);
+      window.addEventListener('pageshow', kick);
+      document.addEventListener('visibilitychange', function(){ if (!document.hidden) kick(); });
+    }
   })();
 
   /* Clients band: names behind the work, duplicated once for a seamless loop. */
