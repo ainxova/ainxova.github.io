@@ -208,6 +208,7 @@
   *{ box-sizing:border-box; }
   html{ scroll-behavior:auto; }
   body{
+    margin:0;  /* the UA's 8px margin left a dark rim round every full-bleed section and pushed the hero off-centre */
     background: var(--ink);
     color:#fff;
     font-family:'Pretendard', -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", sans-serif;
@@ -3197,7 +3198,7 @@
 
   /* Hero background reel: key work clips looping behind the headline */
   .hero-reel{ position:absolute; inset:0; z-index:0; pointer-events:none; overflow:hidden; background:#0a0a0a; }
-  .hero-reel{ background:#0a0a0a url(images/hero/hero-reel3-poster.jpg) center/cover no-repeat; }
+  .hero-reel{ background:#0a0a0a url(images/hero/hero-reel3-poster.jpg?v=2) center/cover no-repeat; }
   .hero-reel canvas{ position:absolute; inset:-14px; width:calc(100% + 28px); height:calc(100% + 28px); display:block; }  /* bleed past the edges so the CSS blur never shows a dark rim */
   .hero-reel canvas.hero-reel-lens{ pointer-events:none; }
   .hero-reel::after{ content:''; position:absolute; inset:0;
@@ -3405,7 +3406,7 @@
   /* ---- HERO v2 (2026-10-20): poster layout ----
      ALL IN.'s ink spans the content edges (gutter to gutter); cap by height so the reel keeps
      an open middle. Foot: two corners, no rules. */
-  header#top{ --g:40px; --allin:min(calc((100vw - var(--g)*2) / 2.998), calc((100svh - 64px) * .42 / .71));
+  header#top{ container-type:inline-size; --g:clamp(24px, 4vw, 64px); --allin:min(calc(100cqw / 2.965), calc((100svh - 64px) * .45 / .71));
     display:flex !important; flex-direction:column; justify-content:flex-start !important; align-items:stretch !important; text-align:left !important;
     min-height:100svh; padding:calc(64px + env(safe-area-inset-top,0px) + 2.2vh) var(--g) clamp(3rem, 8vh, 5.5rem) !important; }
   header#top::before, header#top::after{ content:none !important; }
@@ -3423,14 +3424,19 @@
   .hero-foot-r b{ font-size:clamp(1.05rem, 1.4vw, 1.3rem); font-weight:700; letter-spacing:.06em; color:#fff; white-space:nowrap; line-height:1; }
   .hero-foot-r b span{ font-weight:600; letter-spacing:0; margin-left:.6em; color:rgba(255,255,255,.88); }
   @media (max-width:767px){
-    header#top{ --g:20px; --allin:min(calc((100vw - var(--g)*2) / 1.73), calc((100svh - 64px) * .27 / .71)); padding-bottom:clamp(2.6rem, 7vh, 4rem) !important; }
+    header#top{ --g:24px; --allin:min(calc(100cqw / 1.646), calc((100svh - 64px) * .27 / .71)); padding-bottom:clamp(2.6rem, 7vh, 4rem) !important; }
     header#top .hero-title-wrap{ padding:0 0 3vh; }
     header#top h1.hero-allin, header#top h1.hero-allin .line-mask, header#top h1.hero-allin .line-inner{ white-space:normal !important; }
     header#top h1.hero-allin .char:nth-child(4){ display:block; height:0; overflow:hidden; }
     .hero-foot{ flex-direction:column; align-items:flex-start; gap:1.8rem; }
     .hero-foot-r{ align-items:flex-start; text-align:left; order:-1; }
-    .hero-foot-l{ font-size:.95rem; }
+    .hero-foot-l{ font-size:.86rem; letter-spacing:-.02em; }
+    .hero-foot-l span{ display:inline-block; }  /* if it must wrap (very narrow phones), it breaks at the comma */
   }
+  .disc-band{ border-bottom:1px solid rgba(255,255,255,.08); }
+  .disc-band + #experience{ border-top:0 !important; }
+  .disc-track{ animation-name:clientsMoveRev; animation-duration:52s; }
+  @keyframes clientsMoveRev{ from{ transform:translate3d(-50%,0,0); } to{ transform:translate3d(0,0,0); } }
 </style>
 </head>
 <body class="font-body">
@@ -3485,7 +3491,7 @@
       </h1>
     </div>
     <div class="hero-foot" data-animate>
-      <p class="hero-foot-l">하나의 아이디어를 완성하기 위해,<br> 필요한 것들을 넘나듭니다.</p>
+      <p class="hero-foot-l"><span>하나의 아이디어를 완성하기 위해,</span> <span>필요한 것들을 넘나듭니다.</span></p>
       <p class="hero-foot-r font-display"><span class="hero-foot-role">Art Director <i aria-hidden="true">·</i> Visual Designer</span><b>CHOI AIN<span>최아인</span></b></p>
     </div>
   </div>
@@ -3531,6 +3537,12 @@
     </div>
   </div>
 </section>
+
+<!-- DISCIPLINES band (2026-10-20): the same moving strip as the clients band, running the other way,
+     marks the turn from the work to the career -->
+<div class="clients-band disc-band" aria-label="Disciplines">
+  <div class="clients-marquee"><div class="clients-track disc-track" id="disc-track"></div></div>
+</div>
 
 <!-- EXPERIENCE -->
 <section id="experience" class="px-6 md:px-10 py-32 md:py-44 border-t border-white/10">
@@ -5854,6 +5866,14 @@
     if (b) b.addEventListener('click', function(){ if (lenis) lenis.scrollTo(0); else window.scrollTo({ top:0, behavior: reduceMotion ? 'auto' : 'smooth' }); });
   })();
 
+  /* Disciplines band: what the work is made of, looping the opposite way to the clients band */
+  (function(){
+    var t = document.getElementById('disc-track'); if (!t) return;
+    var items = [['Art Direction','아트 디렉션'],['Key Visual','키비주얼'],['Space Graphics · VMD','공간'],['MD Design','굿즈'],['Logo · Branding','로고'],['Motion · Editing','영상'],['Illustration','일러스트'],['UX/UI','웹·앱']];
+    var html = items.map(function(n){ return '<span class="clients-item">' + n[0] + '<small>' + n[1] + '</small></span>'; }).join('');
+    t.innerHTML = html + html;
+  })();
+
   /* Clients band: names behind the work, duplicated once for a seamless loop. */
   (function(){
     var t = document.getElementById('clients-track'); if (!t) return;
@@ -7916,7 +7936,7 @@
     var ctx = canvas.getContext('2d');
     var COLS = 12, CW = 480, CH = 270;
     /* hard-cut edit, no blending: COSMOS (2 takes, 10fps source) -> DDDM x MUSE.D (12fps) -> HEARTBEAT main stage (12fps, added 2026-10-19) */
-    var SEG = [{ n:170, fps:10 }], TOTAL = 0; SEG.forEach(function(g){ g.d = g.n / g.fps; TOTAL += g.d; });
+    var SEG = [{ n:162, fps:10 }], TOTAL = 0; SEG.forEach(function(g){ g.d = g.n / g.fps; TOTAL += g.d; });
     /* 2026-10-19: high-res source = a muted 1280×720 <video> drawn into the same canvas; the 480px sprite is only the
        fallback for when autoplay is blocked (e.g. the artifact viewer). Same edit in both. */
     var vid = null, useVid = false;
@@ -8062,7 +8082,7 @@
     /* decode the large sheet off the main thread first, so the first frame doesn't stall the page on entry */
     sprite.onload = function(){ var go = function(){ if (useVid) return; ready = true; resize(); draw(0); start(); if (lens){ intro = performance.now() + 350; lensOn = true; } }; if (sprite.decode) sprite.decode().then(go, go); else go(); };
     /* audit 2026-10: WebP sprite (~40% lighter) fetched after window load; the CSS poster covers the gap. */
-    var spriteSrc = 'images/hero/hero-reel6-sprite.webp?v=8';
+    var spriteSrc = 'images/hero/hero-reel6-sprite.webp?v=9';
     function useSprite(){ if (!sprite.src) sprite.src = spriteSrc; }
     function boot(){
       if (reduceMotion){ useSprite(); return; }
@@ -8075,7 +8095,7 @@
       vid.addEventListener('playing', function(){ if (useVid) return; clearTimeout(fell); useVid = true; ready = true; lastFi = -1; resize(); start();
         if (lens){ intro = performance.now() + 350; lensOn = true; } });
       vid.addEventListener('error', function(){ clearTimeout(fell); useSprite(); });
-      vid.src = 'images/hero/hero-reel.mp4?v=2';
+      vid.src = 'images/hero/hero-reel.mp4?v=3';
       var pr = vid.play(); if (pr && pr.catch) pr.catch(function(){ clearTimeout(fell); useSprite(); });
     }
     if (document.readyState === 'complete') boot();
