@@ -1633,9 +1633,9 @@
     .hbs-stats{ gap:1.6rem; }
   }
   /* ---- Clients band (under hero) ---- */
-  .clients-band{ position:absolute; left:0; right:0; bottom:0; z-index:1; border-top:1px solid rgba(255,255,255,.08); padding:1.1rem 0 1.2rem; overflow:hidden; background:linear-gradient(180deg, rgba(10,10,10,0), rgba(10,10,10,.72)); }
+  .clients-band{ position:relative; z-index:1; border-top:1px solid rgba(255,255,255,.08); padding:1.4rem 0 1.5rem; overflow:hidden; background:#0a0a0a; }
   .clients-head{ text-align:center; font-size:.6rem; letter-spacing:.32em; color:rgba(255,255,255,.38); margin-bottom:.7rem; }
-  #top{ padding-bottom:7.5rem !important; }
+  #top{ padding-bottom:2.5rem !important; }
   #top .hl{ white-space:nowrap; }
   @media (max-width:767px){ #top .hl{ white-space:normal; } #top .hl{ display:inline-block; } .hero-tagline, .card-forms{ letter-spacing:.14em !important; font-size:10px !important; } }
   #top .hero-scroll-indicator{ bottom:6.6rem; }
@@ -3465,10 +3465,6 @@
   <!-- 2026-10: SCROLL cue removed — it sat under the caption hairline and cluttered the lockup;
        the client band on the hero's floor already signals there is more below -->
 
-  <!-- CLIENTS: one slow line of the names behind the work, sitting on the hero's floor -->
-  <div class="clients-band" aria-label="Selected clients and projects">
-    <div class="clients-marquee"><div class="clients-track" id="clients-track"></div></div>
-  </div>
 </header>
 
 <main id="main" tabindex="-1">
@@ -3476,6 +3472,11 @@
 <section id="featured" class="border-t border-white/10">
   <div id="featured-slides"></div>
 </section>
+
+<!-- CLIENTS: one slow line of the names behind the work. 2026-10-20: moved off the hero (it cluttered the first screen) to open the work list -->
+<div class="clients-band" aria-label="Selected clients and projects">
+  <div class="clients-marquee"><div class="clients-track" id="clients-track"></div></div>
+</div>
 
 <!-- WORK -->
 <section id="work" class="px-6 md:px-10 pt-32 md:pt-52 pb-32 md:pb-44 border-t border-white/10">
