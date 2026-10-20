@@ -3448,7 +3448,7 @@
   .hero-ab button[aria-pressed="true"]{ background:#fff; color:#0a0a0a; }
   /* ---- HERO B: colour reel, ALL IN. bottom-left in white ---- */
   .hero-b .hero-reel canvas{ display:none; }
-  .hero-b .hero-reel{ background:#0a0a0a url(images/hero/hero-color-poster.jpg) center/cover no-repeat; }
+  .hero-b .hero-reel{ background:#0a0a0a url(images/hero/hero-color-poster.jpg?v=2) center/cover no-repeat; }
   .hero-b .hero-color{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; filter:saturate(.9); }
   .hero-b .hero-reel::after{ background:
       linear-gradient(0deg, rgba(10,10,10,.82) 0%, rgba(10,10,10,.35) 38%, rgba(10,10,10,0) 62%),
@@ -7994,7 +7994,7 @@
       var hv = document.createElement('video');
       hv.className = 'hero-color'; hv.muted = true; hv.loop = true; hv.autoplay = true; hv.playsInline = true;
       hv.setAttribute('muted',''); hv.setAttribute('playsinline',''); hv.setAttribute('preload','auto');
-      hv.poster = 'images/hero/hero-color-poster.jpg'; hv.src = 'images/hero/hero-color.mp4?v=2';
+      hv.poster = 'images/hero/hero-color-poster.jpg?v=2'; hv.src = 'images/hero/hero-color.mp4?v=3';
       heroTop.querySelector('.hero-reel').appendChild(hv);
       var pr = hv.play(); if (pr && pr.catch) pr.catch(function(){});
       return;
