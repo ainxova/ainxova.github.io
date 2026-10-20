@@ -2086,6 +2086,10 @@
   .dd-sr figcaption{ margin-top:.65rem; font-size:.72rem; color:rgba(0,0,0,.5); }
   .dd-sr figcaption b{ display:inline-block; margin-right:.6rem; font-size:.64rem; letter-spacing:.18em; color:#6c3bff; }
   @media (max-width:767px){ .dd-hero-cap{ padding:1rem 1.25rem 1.2rem; } .dd-hero-a{ margin-left:0; } .dd-sr{ width:78%; } }
+  .ext-links{ display:flex; flex-wrap:wrap; gap:.5rem; margin-top:1.2rem; }
+  .ext-link{ display:inline-flex; align-items:center; gap:.45rem; font-size:.74rem; font-weight:600; letter-spacing:.03em; color:#fff; border:1px solid rgba(242,219,134,.45); padding:.5rem .85rem; border-radius:999px; text-decoration:none; transition:background-color .2s ease, color .2s ease; }
+  .ext-link i{ font-style:normal; color:var(--accent); transition:color .2s ease; }
+  .ext-link:hover{ background:var(--accent); color:#0a0a0a; } .ext-link:hover i{ color:#0a0a0a; }
   .cx-zones{ width:100%; }
   .cx-zone-tabs{ display:flex; gap:.4rem; overflow-x:auto; scrollbar-width:none; padding-bottom:.25rem; margin-bottom:1rem; }
   .cx-zone-tabs::-webkit-scrollbar{ display:none; }
@@ -4106,6 +4110,7 @@
         '<h3 class="cosmos-title">OFFICIAL INSTAGRAM</h3>' +
         '<p class="cosmos-copy">공식 인스타그램 @cosmos.exh의 홍보 게시물 제작과 피드 비주얼 디렉팅을 맡았습니다. 오픈 공지부터 드로잉 이벤트, PHASE 2 티저, 현장 스케치까지 워드마크 위치와 블랙·레드 톤을 고정해, 피드 전체가 하나의 전시 포스터 월처럼 읽히도록 설계했습니다.</p>' +
         '<div class="cosmos-note">화면 위에 마우스를 올리면 멈춥니다.</div>' +
+        '<div class="ext-links">' + extLink('Instagram @cosmos.exh', 'https://www.instagram.com/cosmos.exh') + '</div>' +
       '</div>' +
       '<div class="cosmos-split-media">' + cosmosPhone(
         '<div class="ig-nav">' + cosmosIco.back + '<span class="ig-nav-name">cosmos.exh</span><span class="push" style="display:flex">' + cosmosIco.more + '</span></div>' +
@@ -4271,6 +4276,7 @@
         '<div class="cosmos-eyebrow">Exhibition Art Direction · 2026</div>' +
         '<h2 class="cxr-title">COSMOS<em>BIGBANG 20주년 기념 전시<br>아트 디렉션</em></h2>' +
         '<p class="cxr-meta">2026.08.24 — 09.27 · 두두두 서울 · Art Director</p>' +
+        '<div class="ext-links">' + extLink('Instagram @cosmos.exh', 'https://www.instagram.com/cosmos.exh') + '</div>' +
       '</div>' +
       '<div class="cxr-vids">' +
         '<figure class="cxr-v"><div class="cxr-frame"><video poster="images/thumbs/cosmos-bigbang-thumb-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-label="COSMOS 전시 현장 스케치 영상"><source src="images/cosmos-video/sketch-01.mp4" type="video/mp4"></video></div><figcaption><b>EXHIBITION SKETCH</b>전시 현장 스케치</figcaption></figure>' +
@@ -4531,6 +4537,7 @@
         '<h3 class="cosmos-title">팔로워 0명에서 1.3만 명까지</h3>' +
         '<p class="cosmos-copy">@dddm.official 피드를 한 권의 매거진처럼 설계했습니다. 피드 한 줄 한 줄의 색감에 맞춰 아티스트 사진을 합성·보정해 연출했습니다. 아티스트 한 팀을 매거진의 한 꼭지로 구성해, 같은 화보를 피드에서는 한 줄씩 연재하고 지면에서는 한 권으로 묶었습니다. 커버 타이틀, 아티스트 크레딧, 워드마크 위치까지 하나의 규칙으로 정리했고, 마케터와 협업해 게시물별 후킹 카피를 함께 기획했습니다.</p>' +
         '<div class="cosmos-note">화면 안에서 직접 스크롤해 실제 피드를 볼 수 있어요.</div>' +
+        '<div class="ext-links">' + extLink('Instagram 피드 보기', 'https://www.instagram.com/dddm.official/') + '</div>' +
       '</div>' +
       '<div class="cosmos-split-media">' + cosmosPhone(
         '<div class="ig-nav">' + cosmosIco.back + '<span class="ig-nav-name">dddm.official</span><span class="push" style="display:flex;gap:14px">' + cosmosIco.bell + cosmosIco.more + '</span></div>' +
@@ -4775,6 +4782,8 @@
     ['dd-sec-rt', 'Retouching'],
     ['dd-sec-guide', 'Brand Guide']
   ];
+  /* outbound channel links (opens in a new tab) */
+  function extLink(label, url){ return '<a class="ext-link" href="' + url + '" target="_blank" rel="noopener">' + label + '<i aria-hidden="true">↗</i></a>'; }
   var dddmJumpBlock = { custom:
     '<nav class="dd-jump" data-dd-jump aria-label="DDDM 상세페이지 바로가기"><div class="dd-jump-in">' +
       '<span class="dd-jump-label">바로가기</span>' +
@@ -4811,6 +4820,7 @@
         '<dt>Artists</dt><dd>' + nw(['NCT WISH', 'JAY B', 'CLOSE YOUR EYES', 'XLOV', 'YOUNG POSSE', 'FIFTY FIFTY 외']) + '</dd>' +
         '<dt>Role</dt><dd>크리에이티브 총괄 — ' + nw(['기획', '브랜딩', '촬영 디렉팅', '편집 디자인', '리터칭', '모션']) + '</dd>' +
       '</dl>' +
+      '<div class="ext-links">' + extLink('YouTube @dddm.official', 'https://www.youtube.com/@dddm.official') + extLink('Instagram @dddm.official', 'https://www.instagram.com/dddm.official/') + '</div>' +
       '<div class="cx-kpis">' +
         '<div class="cx-kpi is-hi"><div class="cx-kpi-num">579<small>만+ 회</small></div><div class="cx-kpi-label">유튜브 인기 콘텐츠 16편 조회수 합</div></div>' +
         '<div class="cx-kpi"><div class="cx-kpi-num">143<small>만 회</small></div><div class="cx-kpi-label">쇼츠 최고 조회수 (NCT WISH · H60K)</div></div>' +
@@ -4848,6 +4858,7 @@
         '<div class="cosmos-eyebrow">01 · YouTube Channel</div>' +
         '<h3 class="cosmos-title">0에서 시작해, 쇼츠 143만 회까지</h3>' +
         '<p class="cosmos-copy"><span class="copy-line">‘아티스트를 갤러리처럼 전시한다’는 화이트 톤의 미니멀한 아트 디렉션으로 채널 전체의 톤앤매너를 정의했습니다.</span><span class="copy-line">유튜브·인스타그램·틱톡 채널 아트와 H60K · POSE.D · D.STAGE · COMING SOON · S-FORM 다섯 프로그램의 로고, 썸네일 시스템을 설계했습니다. 런칭에 맞춰 After Effects로 채널 프로모 영상(OAP)과 인트로 모션도 제작했습니다.</span></p>' +
+        '<div class="ext-links">' + extLink('YouTube 채널 보기', 'https://www.youtube.com/@dddm.official') + '</div>' +
       '</div>' +
       '<div class="dd-yt-stats">' +
         '<div><b>38<small>만 회</small></b><span>동영상 최고 조회수</span></div>' +
