@@ -1410,6 +1410,8 @@
   /* ---- DDDM × MUSE.D: jump bar, media hub, chapter opener ---- */
   .dd-jump{ position:sticky; top:0; z-index:7; background:rgba(10,10,10,.9); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); border-top:1px solid rgba(255,255,255,.06); border-bottom:1px solid rgba(255,255,255,.08); }
   .dd-jump-in{ display:flex; align-items:center; gap:.35rem; padding:.7rem 4.75rem .7rem 6.25%; overflow-x:auto; scrollbar-width:none; }
+  .dd-jump-in::after{ content:""; flex:none; width:4.5rem; height:1px; }  /* flex overflow ignores padding-right: real spacer so the last pill can scroll clear of the close button */
+  @media (min-width:768px){ .dd-jump-in{ -webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 5.5rem),transparent calc(100% - 4rem)); mask-image:linear-gradient(90deg,#000 calc(100% - 5.5rem),transparent calc(100% - 4rem)); } }
   .dd-jump-in::-webkit-scrollbar{ display:none; }
   .dd-jump-label{ flex:none; font-size:.62rem; letter-spacing:.2em; color:rgba(255,255,255,.38); margin-right:.6rem; }
   .dd-jump-btn{ flex:none; font:inherit; font-size:.74rem; letter-spacing:.04em; color:rgba(255,255,255,.6); background:none; border:1px solid rgba(255,255,255,.1); border-radius:999px; padding:.42rem .82rem; cursor:var(--cur-hover, pointer); transition:color .25s, border-color .25s, background-color .25s; white-space:nowrap; }
@@ -4841,7 +4843,7 @@
       ticking = false; if (!bar.isConnected){ sc.removeEventListener('scroll', onScroll); return; }
       var line = sc.getBoundingClientRect().top + bar.offsetHeight + extra() + 80, cur = null;
       ids.forEach(function(id){ var t = document.getElementById(id); if (t && t.getBoundingClientRect().top <= line) cur = id; });
-      btns.forEach(function(b){ var on = b.getAttribute('data-dd-go') === cur; b.classList.toggle('is-on', on); if (on && b.scrollIntoView && bar.scrollWidth > bar.clientWidth) { var inn = bar.querySelector('.dd-jump-in'); inn.scrollTo({ left: b.offsetLeft - 40, behavior:'smooth' }); } });
+      btns.forEach(function(b){ var on = b.getAttribute('data-dd-go') === cur; b.classList.toggle('is-on', on); if (on && !b.classList.contains('was-on')) { var inn = bar.querySelector('.dd-jump-in'); if (inn && inn.scrollWidth > inn.clientWidth) inn.scrollTo({ left: Math.max(0, b.offsetLeft - inn.offsetLeft - 40), behavior:'smooth' }); } b.classList.toggle('was-on', on); });
       bar.classList.toggle('is-stuck', bar.getBoundingClientRect().top <= sc.getBoundingClientRect().top + 1);
     }
     function onScroll(){ if (!ticking){ ticking = true; requestAnimationFrame(spy); } }
