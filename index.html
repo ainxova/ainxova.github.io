@@ -3438,6 +3438,9 @@
   .disc-band + #experience{ border-top:0 !important; }
   .disc-track{ animation-name:clientsMoveRev; animation-duration:52s; }
   @keyframes clientsMoveRev{ from{ transform:translate3d(-50%,0,0); } to{ transform:translate3d(0,0,0); } }
+  .card-head{ display:flex; align-items:baseline; justify-content:space-between; gap:1.2rem; }
+  .card-head h3{ min-width:0; }
+  .card-head .card-year{ flex:none; margin:0; font-size:12px; color:rgba(255,255,255,.4); letter-spacing:.04em; font-variant-numeric:tabular-nums; }
 </style>
 </head>
 <body class="font-body">
@@ -5832,7 +5835,6 @@
        version: on titles like "HEARTBEAT BY DUDUDO — 페스티벌 아트 디렉션 총괄"
        that read as cutting a real part of the name off into a label. */
     var cardName = p.title;
-    var cardLabel = p.archive ? p.archive.name : categoryGroup(p.category);
     card.innerHTML =
       '<div class="card-thumb' + (hasImg ? '' : ' card-thumb-empty') + ' rounded-2xl flex items-end p-6">' +
         thumbInner +
@@ -5843,8 +5845,8 @@
         '</span>' +
       '</div>' +
       '<div class="mt-6">' +
-        '<p class="card-meta text-[10px] md:text-[11px] tracking-[0.1em] text-accent-soft mb-3 uppercase"><span class="card-cat">' + cardLabel + '</span>' + (p.status ? '<span class="card-status"><i aria-hidden="true"></i>' + p.status + '</span>' : '') + '<span class="card-year"' + (p.status ? ' style="margin-left:.75rem"' : '') + '>' + p.year + '</span></p>' +
-        '<h3 class="font-display font-bold text-lg md:text-2xl leading-snug tracking-tight m-0">' + cardName + '</h3>' +
+        /* 2026-10-20: the yellow category row is gone (three lines read busy); the year moves onto the title line */
+        '<div class="card-head"><h3 class="font-display font-bold text-lg md:text-2xl leading-snug tracking-tight m-0">' + cardName + '</h3><span class="card-year">' + p.year + '</span></div>' +
         (p.idea ? '<p class="card-idea">' + p.idea + '</p>' : (p.blurb ? '<p class="card-blurb">' + p.blurb + '</p>' : '')) +
         /* (2026-10) card numbers and the FORMS row removed — 4 cards don't need numbering,
            and the forms list repeats what the category + modal already say */
