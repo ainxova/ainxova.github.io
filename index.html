@@ -3470,6 +3470,10 @@
     .hero-b .hero-foot{ flex-direction:column; align-items:flex-start; text-align:left; gap:1.2rem; }
     .hero-ab button{ padding:.35rem .65rem; font-size:10px; }
   }
+  /* 2026-10-20: A·IN stays white once the L's fade; the yellow moves to AIN in the name, lighting up at the same beat */
+  .hero-title-base.is-named .char:not(.char-dim){ --ink:#ffffff; }
+  .hero-foot-r b em{ font-style:normal; color:#fff; transition:color 1.1s cubic-bezier(.65,0,.35,1) .2s; }
+  #top.is-named .hero-foot-r b em{ color:var(--accent); }
 </style>
 </head>
 <body class="font-body">
@@ -3531,7 +3535,7 @@
     </div>
     <div class="hero-foot" data-animate>
       <p class="hero-foot-l"><span>하나의 아이디어를 완성하기 위해,</span> <span>필요한 것들을 넘나듭니다.</span></p>
-      <p class="hero-foot-r font-display"><span class="hero-foot-role">Art Director <i aria-hidden="true">·</i> Visual Designer</span><b>CHOI AIN<span>최아인</span></b></p>
+      <p class="hero-foot-r font-display"><span class="hero-foot-role">Art Director <i aria-hidden="true">·</i> Visual Designer</span><b>CHOI <em>AIN</em><span>최아인</span></b></p>
     </div>
   </div>
 </header>
@@ -8373,7 +8377,7 @@
   var dimChars = document.querySelectorAll('header .char-dim');
   if (dimChars.length) tl.to(dimChars, { opacity: 0.16, duration: 1.1, ease: 'power2.inOut', stagger: 0.08 }, 1.9);
   /* …and the name it leaves behind lights up in the accent yellow */
-  tl.call(function(){ var h = document.querySelector('header .hero-allin'); if (h) h.classList.add('is-named'); }, null, 2.15);
+  tl.call(function(){ var h = document.querySelector('header .hero-allin'); if (h) h.classList.add('is-named'); var t = document.getElementById('top'); if (t) t.classList.add('is-named'); }, null, 2.15);
 
   /* Hero scroll-out: as you leave the hero the headline block drifts up and
      dims (scrubbed to scroll, so it tracks your hand exactly), handing focus
