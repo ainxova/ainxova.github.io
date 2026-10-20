@@ -4983,9 +4983,9 @@
           '<div class="dd-thumb-card"><i>02</i><b>직접 보정</b><p>썸네일에 쓰인 아티스트 사진을 한 장 한 장 직접 리터칭했습니다. 피부 결과 톤, 잔머리와 디테일을 정리해 작은 화면에서도 얼굴이 가장 먼저 보이도록 다듬었습니다.</p><button type="button" class="dd-thumb-link" data-dd-go="dd-sec-rt">보정 전후 보기 ↓</button></div>' +
           '<div class="dd-thumb-card is-quote"><i>03</i><b>시청자 반응</b><p class="dd-thumb-q">“썸네일 보고 들어왔어요”</p><p>영상 댓글에 꾸준히 달리는 반응입니다. 썸네일이 채널의 첫인상이자 유입 경로가 되었습니다.</p></div>' +
         '</div>' +
-        '<div class="dd-ab">' +
+        '<div class="dd-ab" id="dd-ab">' +
           '<div class="dd-ab-head"><span class="dd-yt-sub-t">A/B Test</span><h4 class="dd-thumb-title">썸네일은 <em>테스트로</em> 고릅니다</h4>' +
-            '<p class="dd-ab-copy">같은 영상(UNCHILD · POSE.D)에 두 썸네일을 올려 A/B 테스트를 진행했습니다. 정면 컷이 측면 컷을 이겼고, 이후 썸네일은 시선과 표정이 바로 보이는 정면 컷을 기준으로 만들고 있습니다.</p></div>' +
+            '<p class="dd-ab-copy">썸네일은 매번 두 안을 올려 A/B 테스트로 고르고, 이긴 패턴을 다음 썸네일에 반영해 왔습니다. 예를 들어 UNCHILD · POSE.D에서는 정면 컷이 측면 컷을 이겼고, 이후 썸네일은 시선과 표정이 바로 보이는 정면 컷을 기준으로 만들고 있습니다.</p></div>' +
           '<div class="dd-ab-pair">' +
             '<figure class="dd-ab-item is-win"><span class="dd-ab-img"><img src="images/dddm-yt/ab-front.jpg" alt="A안 · 정면 컷 썸네일 (채택)" loading="lazy" decoding="async"><em>WINNER</em></span><figcaption><b>A · 정면</b>시선과 표정이 바로 보이는 컷 · 채택</figcaption></figure>' +
             '<figure class="dd-ab-item"><span class="dd-ab-img"><img src="images/dddm-yt/ab-side.jpg" alt="B안 · 측면 컷 썸네일" loading="lazy" decoding="async"></span><figcaption><b>B · 측면</b>헤어 컬러가 돋보이는 프로필 컷</figcaption></figure>' +
@@ -5609,7 +5609,7 @@
       '<div class="vf-intro">' +
         '<p class="vf-kick">UX/UI DESIGN · APP · GAME UI · 2024 – 2025</p>' +
         '<h2 class="vf-title">UX/UI PROJECTS</h2>' +
-        '<p class="vf-lede">행사 현장에서 관객이 직접 쓴 홀로그램 부스 태블릿 UI, 그리고 인호야 · 브로큰 아카이브 · 하트싱크 · MAFIUS. 콘셉트 설계와 정보 구조, 와이어프레임, 전체 UI와 그래픽 리소스까지 단독으로 완성한 네 개의 앱·게임 프로젝트와 앱 리디자인 스터디입니다.</p>' +
+        '<p class="vf-lede">행사 현장에서 관객이 직접 쓴 홀로그램 부스 태블릿 UI, 매번 A/B 테스트로 고르는 채널 썸네일, 그리고 인호야 · 브로큰 아카이브 · 하트싱크 · MAFIUS. 콘셉트 설계와 정보 구조, 와이어프레임, 전체 UI와 그래픽 리소스까지 단독으로 완성한 네 개의 앱·게임 프로젝트와 앱 리디자인 스터디입니다.</p>' +
         '<div class="vf-tags"><span>Figma</span><span>Photoshop</span><span>Illustrator</span><span>Unity</span><span>After Effects</span></div>' +
       '</div>' +
     '</section>'
@@ -5642,6 +5642,24 @@
         '<figure><div class="uxf-v"><video poster="' + HB + 'hb-ph-holo-live-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-label="행사 당일 홀로그램 부스에서 관객이 촬영하는 현장"><source src="' + HB + 'hb-ph-holo-live.mp4" type="video/mp4"></video></div><figcaption><b>IN USE · LIVE</b>행사 당일 관객이 부스를 사용하는 실제 현장</figcaption></figure>' +
       '</div>' +
       '<button type="button" class="uxf-go" data-open-project="heartbeat"><span>HEARTBEAT 전체 케이스 보기</span><i aria-hidden="true">→</i></button>' +
+    '</section>'
+  };
+  /* UX/UI series · second field case: DDDM thumbnails chosen by A/B test every time. */
+  var uxAbBlock = {
+    custom: '<section class="cosmos-block uxf">' +
+      '<div class="cosmos-head">' +
+        '<div class="cosmos-eyebrow">Data-driven · 매번 A/B 테스트</div>' +
+        '<h3 class="cosmos-title">THUMBNAIL A/B TEST</h3>' +
+        '<p class="uxf-meta">DDDM 유튜브 채널 · 2026 · 쇼츠 최고 143만 회</p>' +
+        '<p class="cosmos-copy">썸네일은 시청자가 영상을 누를지 결정하는 첫 화면입니다. 그래서 감으로 고르지 않고, 매번 두 안을 올려 A/B 테스트로 고른 뒤 이긴 패턴을 다음 썸네일의 기준으로 반영해 왔습니다.</p>' +
+      '</div>' +
+      '<div class="dd-ab-pair">' +
+        '<figure class="dd-ab-item is-win"><span class="dd-ab-img"><img src="images/dddm-yt/ab-front.jpg" alt="A안 · 정면 컷 썸네일 (채택)" loading="lazy" decoding="async"><em>WINNER</em></span><figcaption><b>A · 정면</b>시선과 표정이 바로 보이는 컷 · 채택</figcaption></figure>' +
+        '<figure class="dd-ab-item"><span class="dd-ab-img"><img src="images/dddm-yt/ab-side.jpg" alt="B안 · 측면 컷 썸네일" loading="lazy" decoding="async"></span><figcaption><b>B · 측면</b>헤어 컬러가 돋보이는 프로필 컷</figcaption></figure>' +
+      '</div>' +
+      '<div class="uxf-result"><span>LEARNING → APPLIED</span><p>UNCHILD · POSE.D 테스트에서 정면 컷이 이긴 뒤로, 채널 썸네일은 <b>시선과 표정이 바로 보이는 정면 컷</b>을 기준으로 제작하고 있습니다.</p></div>' +
+      '<ol class="dd-ab-loop"><li><i>01</i>두 안 제작</li><li><i>02</i>A/B 테스트</li><li><i>03</i>이긴 패턴을 다음 썸네일의 기준으로</li></ol>' +
+      '<button type="button" class="uxf-go" data-open-project="dddm" data-open-target="dd-ab"><span>DDDM 전체 케이스 보기</span><i aria-hidden="true">→</i></button>' +
     '</section>'
   };
   var projects = [
@@ -5734,7 +5752,7 @@
         { id:"dg", short:"Digital", eyebrow:"PART 04", title:"DIGITAL CONTENT", sum:"공식 인스타그램 채널 세팅과 성과, COSMOS 알파벳 캐러셀, PHASE 2 티저, B.STAGE 공지(국·영문)", period:"", tools:"",
           cover:CX + "phase2-poster.jpg", coverPos:"50% 74%", show:[cosmosFeedBlock, cxSocialResultBlock, cxAcroBlock, cosmosChannelBlock, cosmosDetailPageBlock] }
       ] },
-    { group:"UX/UI", key:"uxui", category:"UX/UI Design · App · Game UI", title:"UX/UI 프로젝트 시리즈", idea:"현장에서 관객이 쓴 부스 UI와 네 개의 앱·게임", forms:["App", "Game UI", "UX Flow", "UI Resource"], year:"2024 – 2025",
+    { group:"UX/UI", key:"uxui", category:"UX/UI Design · App · Game UI", title:"UX/UI 프로젝트 시리즈", idea:"현장에서 쓰인 부스 UI, A/B 테스트, 네 개의 앱·게임", forms:["App", "Game UI", "UX Flow", "UI Resource"], year:"2024 – 2025",
       blurb:"인호야 · 브로큰 아카이브 · 하트싱크 · MAFIUS. 콘셉트부터 UI 리소스까지 단독으로 설계한 네 개의 앱·게임 프로젝트와 리디자인 스터디.",
       desc:"캐릭터 IP 기반 파티 게임 '인호야', 기존 IP의 세계관을 전환한 '브로큰 아카이브', 감정일기 기반 AI 연애 시뮬레이션 '하트싱크', GPS 기반 소셜 게임 'MAFIUS'까지. 콘셉트 설계와 정보 구조, 와이어프레임, 전체 UI 화면과 그래픽 리소스를 단독으로 완성한 프로젝트들입니다.\n여기에 유니클로·티머니 앱의 사용자 플로우를 분석해 재설계한 리디자인 스터디를 더했습니다. 아래 목차에서 프로젝트를 선택해 바로 이동할 수 있습니다.",
       tools:["Figma", "Photoshop", "Illustrator", "Unity"],
@@ -5742,7 +5760,7 @@
       images:[],
       noFold:true,
       bare:true,
-      lead:[uxOpenBlock, uxFieldBlock],
+      lead:[uxOpenBlock, uxFieldBlock, uxAbBlock],
       sections:[
         { id:"ih", short:"파티 게임 · 인호야", eyebrow:"PROJECT 03", title:"인호야", sum:"inno.N 인호 캐릭터 기반 술자리 파티 게임 UX·UI", period:"2025.09.11 – 09.30", tools:"Procreate · Photoshop · Figma · Illustrator · After Effects", cover:"images/inhoya-01.jpg",
           show:["images/inhoya-01.jpg"], more:["images/inhoya-02.jpg","images/inhoya-03.jpg","images/inhoya-04.jpg","images/inhoya-05.jpg","images/inhoya-06.jpg","images/inhoya-07.jpg","images/inhoya-08.jpg","images/inhoya-09.jpg","images/inhoya-10.jpg","images/inhoya-11.jpg"] },
@@ -7238,7 +7256,17 @@
   document.addEventListener('click', function(e){
     var b = e.target.closest && e.target.closest('[data-open-project]'); if (!b) return;
     var idx = projects.findIndex(function(x){ return x.key === b.getAttribute('data-open-project'); });
-    if (idx >= 0){ openModal(idx); setTimeout(function(){ modalScroll.scrollTop = 0; }, 60); }
+    if (idx < 0) return;
+    openModal(idx);
+    var tid = b.getAttribute('data-open-target'), stop = false;
+    if (!tid){ setTimeout(function(){ modalScroll.scrollTop = 0; }, 60); return; }
+    var halt = function(){ stop = true; };
+    modalScroll.addEventListener('wheel', halt, { once:true, passive:true });
+    modalScroll.addEventListener('touchstart', halt, { once:true, passive:true });
+    [80, 450, 1000, 1700, 2700].forEach(function(ms){ setTimeout(function(){
+      if (stop) return; var t = document.getElementById(tid); if (!t) return;
+      modalScroll.scrollTop = Math.max(0, t.getBoundingClientRect().top - modalScroll.getBoundingClientRect().top + modalScroll.scrollTop - 90);
+    }, ms); });
   });
   function openModal(i){
     var p = projects[i];
