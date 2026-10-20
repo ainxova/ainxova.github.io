@@ -2055,6 +2055,9 @@
   .hbz-s.is-moved .hbz-hint{ opacity:0; }
   .hbz-cap{ display:flex; flex-wrap:wrap; align-items:center; gap:.4rem 1rem; margin-top:1rem; }
   .hbz-cap .cx-zone-cap-note{ flex:1 1 20rem; }
+  @media (min-width:768px){ .hbz-stage.is-solo{ grid-template-columns:1fr; } }
+  .hbz-stage.is-solo .hbz-pane{ aspect-ratio:5/2; }
+  @media (max-width:767px){ .hbz-stage.is-solo .hbz-pane{ aspect-ratio:5/4; } }
   @media (max-width:767px){
     .hbz-stage{ grid-template-columns:1fr 1fr; row-gap:.6rem; }
     .hbz-stage .hbz-pane{ grid-column:1 / -1; }
@@ -2130,7 +2133,7 @@
   .cx-passes img{ width:100%; display:block; }
   .cx-passes-cap{ grid-column:1 / -1; margin:0; }
 
-  .cx-md{ display:grid; grid-template-columns:1.1fr 1fr; gap:2rem; width:100%; align-items:start; }
+  .cx-md{ display:grid; grid-template-columns:1fr; gap:2rem; width:100%; align-items:start; }
   .cx-md-lists{ display:grid; grid-template-columns:1fr 1fr; gap:.6rem; }
   .cx-md-lists figure{ margin:0; }
   .cx-md-lists img{ width:100%; display:block; }
@@ -4362,9 +4365,9 @@
           '</dl>' +
         '</div>' +
         '<div class="cx-kpis">' +
-          '<div class="cx-kpi"><div class="cx-kpi-num">21,276<small>명</small></div><div class="cx-kpi-label">총 방문객 · 31일</div></div>' +
-          '<div class="cx-kpi"><div class="cx-kpi-num">4.3<small>억 원</small></div><div class="cx-kpi-label">총 티켓 매출 · 429,775,200원</div></div>' +
-          '<div class="cx-kpi is-hi"><div class="cx-kpi-num">24.4<small>억 원</small></div><div class="cx-kpi-label">총 MD 매출 · 2,436,685,400원</div></div>' +
+          '<div class="cx-kpi"><div class="cx-kpi-num">31<small>일</small></div><div class="cx-kpi-label">전시 기간 · 08.24 — 09.27</div></div>' +
+          '<div class="cx-kpi"><div class="cx-kpi-num">11<small>개 존</small></div><div class="cx-kpi-label">콘텐츠 공간 · 동선 그래픽</div></div>' +
+          '<div class="cx-kpi is-hi"><div class="cx-kpi-num">30<small>여 종</small></div><div class="cx-kpi-label">공식 MD 라인업 리드</div></div>' +
           '<div class="cx-kpi"><div class="cx-kpi-num">250<small>만</small></div><div class="cx-kpi-label">인스타그램 총 조회수</div></div>' +
         '</div>' +
       '</div>'
@@ -4482,32 +4485,17 @@
   };
 
   /* PART 03 · MD lineup + sell-through of the MD she designed */
-  var cxMdSales = [
-    { name:'LED 키링 · BLACK', intro:4000, sales:3751 },
-    { name:'LED 키링 · WHITE', intro:3000, sales:2059 },
-    { name:'LED 키링 · SILVER', intro:3000, sales:1916 },
-    { name:'쇼핑백 C · WHITE', intro:10620, sales:6863 }
-  ];
   var cxMdBlock = {
     custom: '<div class="cosmos-block">' +
       '<div class="cosmos-head">' +
-        '<div class="cosmos-eyebrow">Merchandise · Lineup &amp; Sales</div>' +
+        '<div class="cosmos-eyebrow">Merchandise · Lineup</div>' +
         '<h3 class="cosmos-title">OFFICIAL MD — 30+ ITEMS</h3>' +
-        '<p class="cosmos-copy">30여 종 공식 MD의 라인업 기획·디자인과 퀄리티·색상 감리를 리드했습니다. LED 키링·포토카드 등 메인 굿즈는 직접 디자인했고, 전시 MD 매출은 24.4억 원입니다.</p>' +
+        '<p class="cosmos-copy">30여 종 공식 MD의 라인업 기획·디자인과 퀄리티·색상 감리를 리드했습니다. LED 키링·포토카드 등 메인 굿즈는 직접 디자인했습니다.</p>' +
       '</div>' +
       '<div class="cx-md">' +
         '<div class="cx-md-lists">' +
           '<figure><img src="' + CP + 'mdlist-1.jpg" alt="MD LIST 01" loading="lazy" decoding="async"></figure>' +
           '<figure><img src="' + CP + 'mdlist-2.jpg" alt="MD LIST 02" loading="lazy" decoding="async"></figure>' +
-        '</div>' +
-        '<div class="cx-md-sales">' +
-          '<div class="cx-md-total"><span>직접 디자인한 MD 판매량</span><b>14,589<small>개</small></b><em>LED 키링 3종 7,726개 + 쇼핑백 6,863개</em></div>' +
-          cxMdSales.map(function(m){
-            var pct = Math.round(m.sales / m.intro * 100);
-            return '<div class="cx-bar"><div class="cx-bar-top"><span>' + m.name + '</span><span><b>' + m.sales.toLocaleString() + '</b> / ' + m.intro.toLocaleString() + ' · ' + pct + '%</span></div>' +
-              '<div class="cx-bar-track"><i style="width:' + pct + '%"></i></div></div>';
-          }).join('') +
-          '<p class="cx-md-note">입고 수량 대비 판매율 · LED 키링 BLACK은 입고 4,000개 중 94% 판매</p>' +
         '</div>' +
       '</div>' +
     '</div>'
@@ -5154,13 +5142,12 @@
           { src:'hb-ph-sign-aboard.jpg', w:1600, h:1200, cap:'TICKET ZONE · 반입금지 물품·관람 안내 A보드', alt:'반입금지 물품과 관람 안내 A보드' },
           { src:'hb-ph-sign-parking.jpg', w:1200, h:1600, cap:'OUTDOOR · 주차장 이용 안내 A보드', alt:'화정체육관 주차장 이용 안내 A보드' },
           { src:'hb-ph-sign-shuttle.jpg', w:1200, h:1600, cap:'OUTDOOR · 셔틀버스 승하차장 X배너', alt:'셔틀버스 승하차장 X배너' } ] },
-    { en:'F&B ZONE', kr:'F&B 존', labelD:'SPACE BRIEF', fit:'contain', note:'공간 연출 가이드의 요청(블랙·레드 계열로 디자인된 드럼통 테이블)을 로고 시트지를 붙인 드럼통 테이블로 구현한 취식 공간',
-      d:{ src:HB + 'hb-brief-fnb.jpg', alt:'공간 연출 가이드 · 푸드 테이블 드럼통 레퍼런스' },
-      s:[ { src:'hb-ph-fnb-drums.jpg', w:1600, h:1200, cap:'DRUM TABLES · 로고 시트지를 붙인 드럼통 테이블', alt:'로고 시트지를 붙인 드럼통 테이블이 놓인 F&B 존' },
+    { en:'F&B ZONE', kr:'F&B 존', note:'로고 시트지를 붙인 드럼통 테이블과 음료 부스, 워터바로 꾸민 취식 공간',
+      s:[ { src:'hb-ph-drum-sheet.jpg', w:1200, h:1600, cap:'SHEET · 드럼통에 붙일 로고 시트지 작업', alt:'취식존 드럼통에 붙일 시트지 로고' },
+          { src:'hb-ph-fnb-drums.jpg', w:1600, h:1200, cap:'DRUM TABLES · 로고 시트지를 붙인 드럼통 테이블', alt:'로고 시트지를 붙인 드럼통 테이블이 놓인 F&B 존' },
           { src:'hb-ph-fnb-booths.jpg', w:1600, h:1200, cap:'F&B BOOTHS · 음료 부스와 대기 동선', alt:'F&B 음료 부스와 대기 동선' },
           { src:'hb-ph-water-bar.jpg', w:1200, h:1600, cap:'WATER BAR · 워터바 텐트 현수막', alt:'WATER BAR 현수막을 단 텐트' } ] },
-    { en:'BALLOON PHOTO ZONE', kr:'풍선 포토존', labelD:'SPACE BRIEF', fit:'contain', note:'공간 연출 가이드의 외부 포토존 요청(현장이 비어 보이지 않게 하는 구조물)이 블랙·레드 풍선과 로고 사인으로 완성된 모습',
-      d:{ src:HB + 'hb-brief-photozone.jpg', alt:'공간 연출 가이드 · 외부 포토존 위치와 요청 사항' },
+    { en:'BALLOON PHOTO ZONE', kr:'풍선 포토존', note:'블랙·레드 풍선과 HEARTBEAT 로고 사인으로 꾸민 외부 포토존',
       s:[ { src:'hb-ph-balloon-day.jpg', w:1200, h:1600, cap:'DAY · 블랙·레드 풍선과 로고 사인', alt:'낮의 블랙·레드 풍선 포토존과 HEARTBEAT 로고 사인' },
           { src:'hb-ph-balloon-night.jpg', w:1200, h:1600, cap:'NIGHT · 조명이 켜진 풍선 포토존', alt:'밤의 풍선 포토존' } ] },
     { en:'ADMISSION BANDS', kr:'입장 팔찌', labelD:'DESIGN PROPOSAL', labelS:'PRODUCED', fit:'contain', note:'날짜와 좌석 구분을 색으로 나눈 팔찌 시안, 그리고 제작되어 도착한 실물',
@@ -5199,8 +5186,8 @@
         hbPairs.map(function(z, i){
           var n = z.s.length;
           return '<div class="hbz-panel" data-hbz-panel="' + i + '"' + (i ? ' hidden' : '') + '>' +
-            '<div class="hbz-stage">' +
-              '<figure class="hbz-pane hbz-d' + (z.fit === 'contain' ? ' is-contain' : '') + '"><img src="' + z.d.src + '" alt="' + z.d.alt + '" loading="lazy" decoding="async" draggable="false"><figcaption class="hbz-tag">' + z.labelD + '</figcaption></figure>' +
+            '<div class="hbz-stage' + (z.d ? '' : ' is-solo') + '">' +
+              (z.d ? '<figure class="hbz-pane hbz-d' + (z.fit === 'contain' ? ' is-contain' : '') + '"><img src="' + z.d.src + '" alt="' + z.d.alt + '" loading="lazy" decoding="async" draggable="false"><figcaption class="hbz-tag">' + z.labelD + '</figcaption></figure>' : '') +
               '<div class="hbz-pane hbz-s' + (n > 1 ? ' is-multi' : '') + '">' +
                 '<span class="hbz-tag is-site">' + (z.labelS || 'ON-SITE') + '</span>' +
                 (n > 1 ? '<span class="hbz-count" aria-live="polite">1 / ' + n + '</span>' : '') +
@@ -5638,7 +5625,7 @@
       ] },
     { group:"Branding & Art Direction", key:"cosmos", category:"Exhibition Art Direction · Key Visual · Space Graphics · MD · Digital", title:"COSMOS: BIGBANG 20주년 기념 전시 아트 디렉션", idea:"무한(∞) 모티프로 이은 전시의 모든 접점", forms:["Key Visual", "Space", "VMD", "MD", "Digital"], year:"2026",
       blurb:"6종 이상의 콘셉트 시안으로 키비주얼을 도출하고, 공간 그래픽·VMD부터 30여 종의 MD와 디지털 콘텐츠까지 전시의 모든 접점을 디렉팅했습니다.",
-      desc:"BIGBANG 데뷔 20주년을 기념해 31일간 21,276명이 찾은 몰입형 미디어 전시 ‘COSMOS’의 아트 디렉션을 맡았습니다.\n메인 포스터 기획 단계에서 6종 이상의 콘셉트 시안을 제안해 전시의 키비주얼 방향을 확립했고, 무한(∞) 모티프의 아이덴티티를 SNS·팬 플랫폼 공지 같은 디지털 채널부터 전시장 동선 그래픽과 VMD, 30여 종의 공식 MD까지 하나의 시각 언어로 확장했습니다. 전시는 티켓 매출 4.3억 원, MD 매출 24.4억 원을 기록했습니다.",
+      desc:"BIGBANG 데뷔 20주년을 기념해 31일간 열린 몰입형 미디어 전시 ‘COSMOS’의 아트 디렉션을 맡았습니다.\n메인 포스터 기획 단계에서 6종 이상의 콘셉트 시안을 제안해 전시의 키비주얼 방향을 확립했고, 무한(∞) 모티프의 아이덴티티를 SNS·팬 플랫폼 공지 같은 디지털 채널부터 전시장 동선 그래픽과 VMD, 30여 종의 공식 MD까지 하나의 시각 언어로 확장했습니다.",
       tools:["Illustrator", "Photoshop", "Art Direction", "Campaign Planning", "VMD"],
       thumb:"images/thumbs/cosmos-bigbang-thumb.mp4",
       links:[ { label:"Instagram", url:"https://www.instagram.com/cosmos.exh", icon:"instagram" } ],
@@ -5654,7 +5641,7 @@
           cover:CX + "cosmos-keyvisual-960.jpg", coverPos:"50% 40%", show:[cxKeyVisualBlock, cxKvProcessBlock] },
         { id:"sp", short:"Space & VMD", eyebrow:"PART 02", title:"SPACE GRAPHICS & VMD", sum:"11개 존 동선 설계, 디자인 시안과 현장, 전시 맵·사이니지·MD존 VMD·입장 구성품", period:"", tools:"",
           cover:"images/cosmos-add/cosmos-map.jpg", coverPos:"22% 45%", show:[cosmosContentBlock, cosmosFloorplanBlock, cxZonesBlock, cosmosMapBlock, cosmosOnsiteBlock, cosmosXbannerBlock, cosmosWristbandBlock, cxEntranceKitBlock] },
-        { id:"md", short:"MD & Campaign", eyebrow:"PART 03", title:"MERCHANDISE & CAMPAIGN", sum:"30여 종 공식 MD 리드, 직접 디자인한 MD 판매 실적, 점 잇기 쇼핑백과 팬 참여 캠페인", period:"", tools:"",
+        { id:"md", short:"MD & Campaign", eyebrow:"PART 03", title:"MERCHANDISE & CAMPAIGN", sum:"30여 종 공식 MD 리드, 직접 디자인한 LED 키링·포토카드, 점 잇기 쇼핑백과 팬 참여 캠페인", period:"", tools:"",
           cover:CX + "cosmos-bag-typeA-mockup.jpg", coverPos:"30% 60%", show:[cxMdBlock, cosmosBagBlock, cosmosPromoEventsBlock] },
         { id:"dg", short:"Digital", eyebrow:"PART 04", title:"DIGITAL CONTENT", sum:"공식 인스타그램 채널 세팅과 성과, COSMOS 알파벳 캐러셀, PHASE 2 티저, B.STAGE 공지(국·영문)", period:"", tools:"",
           cover:CX + "phase2-poster.jpg", coverPos:"50% 74%", show:[cosmosFeedBlock, cxSocialResultBlock, cxAcroBlock, cosmosChannelBlock, cosmosDetailPageBlock] }
@@ -5753,7 +5740,7 @@
         { label:"COSMOS 전시 인스타그램", url:"https://www.instagram.com/cosmos.exh", icon:"instagram" },
         { label:"HEARTBEAT 인스타그램", url:"https://www.instagram.com/heartbeat.concert", icon:"instagram" }
       ] },
-    { period:"2021.10 — 2026.02", role:"Art Director", company:"(주)단꿈아이 · (주)에이치케이이노엔",
+    { period:"2021.10 — 2024.05 · 2025.01 — 2026.02", role:"Art Director", company:"(주)단꿈아이 · (주)에이치케이이노엔",
       desc:"4년 넘게 단꿈아이 브랜드들의 비주얼 방향을 정했습니다. 방송·출판·굿즈의 아이덴티티를 총괄했고, 2025년부터는 HK이노엔 공식 캐릭터 리디자인을 맡았습니다.",
       subs:[
         { period:"2025.01 — 2026.02", company:"(주)단꿈아이 · (주)에이치케이이노엔",
@@ -5767,7 +5754,7 @@
           desc:"콘텐츠기획팀 아트 디렉터로 방송 브랜딩·출판·굿즈 등 주요 프로젝트의 비주얼을 총괄했습니다.",
           links:[ { label:"dankkumi.com", url:"https://www.dankkumi.com", icon:"globe" } ] }
       ] },
-    { period:"2019.12 — 2020.12", role:"Post-Production Director", company:"(주)CJ E&M 디지털사업팀",
+    { period:"2019.12 — 2020.12", role:"Post-Production Director", company:"(주)CJ ENM 디지털사업팀",
       desc:"유튜브 채널 디글(Diggle)에서 편집과 모션으로 채널의 톤을 만들었습니다. 오프닝 타이틀 시퀀스와 OAP 채널 프로모 영상을 다수 제작했습니다.",
       links:[ { label:"cjenm.com", url:"https://www.cjenm.com/ko/", icon:"globe" }, { label:"디글(Diggle) 유튜브", url:"https://www.youtube.com/@Diggle", icon:"youtube" } ] }
   ];
