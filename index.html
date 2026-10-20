@@ -1416,6 +1416,7 @@
   .dd-subjump{ top:3.05rem; z-index:6; background:rgba(14,14,14,.94); border-top:0; }
   .dd-subjump .dd-jump-in{ padding-top:.45rem; padding-bottom:.45rem; }
   .dd-subjump .dd-jump-btn{ font-size:.66rem; padding:.3rem .7rem; letter-spacing:.06em; }
+  .dd-jump-btn.is-field{ border-color:rgba(242,219,134,.35); color:rgba(242,219,134,.85); }
   .dd-pdf-dl{ flex:none; margin-left:auto; font-size:.66rem; letter-spacing:.06em; color:var(--accent); text-decoration:none; border:1px solid rgba(242,219,134,.4); border-radius:999px; padding:.3rem .8rem; white-space:nowrap; }
   .dd-pdf-dl:hover{ background:rgba(242,219,134,.12); }
   .dd-pdf .uxs-pdf{ margin-top:0; scroll-margin-top:6.2rem; }
@@ -5617,7 +5618,7 @@
   /* UX/UI series · field case: the HEARTBEAT hologram-booth tablet UI that real audiences used on site.
      Shown right after the UX intro so UX reviewers meet a shipped, in-use UI before the personal projects. */
   var uxFieldBlock = {
-    custom: '<section class="cosmos-block uxf">' +
+    custom: '<section class="cosmos-block uxf" id="uxf-field">' +
       '<div class="cosmos-head">' +
         '<div class="cosmos-eyebrow">Field UX · 실제 현장에서 쓰인 UI</div>' +
         '<h3 class="cosmos-title">HOLOGRAM BOOTH TABLET UI</h3>' +
@@ -5646,7 +5647,7 @@
   };
   /* UX/UI series · second field case: DDDM thumbnails chosen by A/B test every time. */
   var uxAbBlock = {
-    custom: '<section class="cosmos-block uxf">' +
+    custom: '<section class="cosmos-block uxf" id="uxf-ab">' +
       '<div class="cosmos-head">' +
         '<div class="cosmos-eyebrow">Data-driven · 매번 A/B 테스트</div>' +
         '<h3 class="cosmos-title">THUMBNAIL A/B TEST</h3>' +
@@ -5761,6 +5762,7 @@
       noFold:true,
       bare:true,
       lead:[uxOpenBlock, uxFieldBlock, uxAbBlock],
+      jumpAfter:1, jumpLead:[['uxf-field','FIELD · 홀로그램 부스 UI'], ['uxf-ab','FIELD · 썸네일 A/B 테스트']],
       sections:[
         { id:"ih", short:"파티 게임 · 인호야", eyebrow:"PROJECT 03", title:"인호야", sum:"inno.N 인호 캐릭터 기반 술자리 파티 게임 UX·UI", period:"2025.09.11 – 09.30", tools:"Procreate · Photoshop · Figma · Illustrator · After Effects", cover:"images/inhoya-01.jpg",
           show:["images/inhoya-01.jpg"], more:["images/inhoya-02.jpg","images/inhoya-03.jpg","images/inhoya-04.jpg","images/inhoya-05.jpg","images/inhoya-06.jpg","images/inhoya-07.jpg","images/inhoya-08.jpg","images/inhoya-09.jpg","images/inhoya-10.jpg","images/inhoya-11.jpg"] },
@@ -7358,14 +7360,16 @@
     if (p.sections && p.sections.length){
       /* Multi-project case study: a clickable index up top, then one block per
          project (sticky title bar, a few lead images, the rest folded away). */
-      var leadHtml = (p.lead && p.lead.length ? renderGalleryImages(p.lead, p.title) : '');
+      var leadHtml = (p.lead && p.lead.length ? (p.jumpAfter ? renderGalleryImages(p.lead.slice(0, p.jumpAfter), p.title) + '<!--JUMP-->' + renderGalleryImages(p.lead.slice(p.jumpAfter), p.title) : renderGalleryImages(p.lead, p.title)) : '');
       /* Sticky jump bar (same one DDDM has) for every multi-part page that does not ship its own. */
       var autoJump = leadHtml.indexOf('data-dd-jump') < 0 ?
         '<nav class="dd-jump" data-dd-jump aria-label="' + p.title + ' 바로가기"><div class="dd-jump-in"><span class="dd-jump-label">바로가기</span>' +
+          (p.jumpLead || []).map(function(x){ return '<button type="button" class="dd-jump-btn is-field" data-dd-go="' + x[0] + '">' + x[1] + '</button>'; }).join('') +
           p.sections.map(function(sec, si){ return '<button type="button" class="dd-jump-btn" data-dd-go="uxs-' + sec.id + '">' + String(si + 1).padStart(2, '0') + ' ' + (sec.short || sec.title) + '</button>'; }).join('') +
         '</div></nav>' : '';
+      if (p.jumpAfter){ leadHtml = leadHtml.replace('<!--JUMP-->', autoJump); }
       modalImages.innerHTML =
-        leadHtml +
+        leadHtml.replace('<!--JUMP-->', '') +
         '<div class="uxs-hm" data-uxs-hm>' +
           '<div class="uxs-hm-head">' +
             '<span class="uxs-hm-mask uxs-hm-eyebrow" data-roll="eyebrow"></span>' +
@@ -7379,7 +7383,7 @@
             '</button>';
           }).join('') + '</div>' +
         '</div>' +
-        autoJump +
+        (p.jumpAfter ? '' : autoJump) +
         (p.pdfFlow ? '<div class="dd-pdf">' +
           '<nav class="dd-jump dd-subjump" data-dd-jump data-dd-sub aria-label="가이드 파트 바로가기"><div class="dd-jump-in"><span class="dd-jump-label">PARTS</span>' +
             p.sections.map(function(sec){ return '<button type="button" class="dd-jump-btn" data-dd-go="uxs-' + sec.id + '">' + (sec.short || sec.title) + '</button>'; }).join('') +
