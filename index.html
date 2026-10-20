@@ -3454,7 +3454,8 @@
       linear-gradient(0deg, rgba(10,10,10,.82) 0%, rgba(10,10,10,.35) 38%, rgba(10,10,10,0) 62%),
       linear-gradient(90deg, rgba(10,10,10,.35) 0%, rgba(10,10,10,0) 55%),
       linear-gradient(180deg, rgba(10,10,10,.45) 0%, rgba(10,10,10,0) 18%); }
-  header#top.hero-b{ --allin:min(calc(100cqw * .5 / 1.646), calc((100svh - 64px) * .56 / 1.6)); }
+  header#top.hero-b{ --allin:min(calc(100cqw * .52 / 1.93), calc((100svh - 64px) * .56 / 1.6)); }
+  header#top.hero-b h1.hero-allin .char:nth-child(5){ margin-left:.599em; }  /* IN. starts under the first L, so the column reads A·IN */
   .hero-b .hero-v2{ justify-content:flex-end; flex-direction:row; align-items:flex-end; }
   .hero-b .hero-title-wrap{ display:block !important; margin:0 !important; padding:0 !important; flex:1 1 auto; }
   header#top.hero-b h1.hero-allin{ left:0; margin-left:calc(var(--allin) * -.022) !important; line-height:.8 !important; padding:0 !important; margin-bottom:calc(var(--allin) * -.02) !important; }
@@ -3466,7 +3467,7 @@
   @media (max-width:767px){
     .hero-b .hero-v2{ flex-direction:column; align-items:stretch; justify-content:flex-end; gap:1.6rem; }
     .hero-b .hero-title-wrap{ flex:none !important; }
-    header#top.hero-b{ --allin:min(calc(100cqw / 1.646), calc((100svh - 64px) * .36 / 1.6)); }
+    header#top.hero-b{ --allin:min(calc(100cqw / 1.93), calc((100svh - 64px) * .36 / 1.6)); }
     .hero-b .hero-foot{ flex-direction:column; align-items:flex-start; text-align:left; gap:1.2rem; }
     .hero-ab button{ padding:.35rem .65rem; font-size:10px; }
   }
