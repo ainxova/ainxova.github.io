@@ -1506,6 +1506,22 @@
   .dd-logo:hover .dd-logo-box img{ transform:scale(1.05); filter:drop-shadow(0 0 18px rgba(242,219,134,.25)); }
   @media (max-width:767px){ .dd-logos-grid{ grid-template-columns:repeat(2,minmax(0,1fr)); gap:.6rem; } .dd-logo figcaption span{ overflow-wrap:anywhere; } .dd-logo.is-wide .dd-logo-box{ aspect-ratio:32/9; } .dd-logo.is-wide .dd-logo-box img{ width:50%; height:55%; } .dd-logo figcaption{ flex-direction:column; gap:.15rem; padding:.7rem .8rem; } .dd-logo figcaption span{ text-align:left; font-size:.62rem; } }
   .dd-thumb{ width:100%; }
+  .dd-ab{ margin-top:2.6rem; padding-top:2rem; border-top:1px solid rgba(255,255,255,.1); }
+  .dd-ab-head{ display:flex; flex-direction:column; gap:.55rem; margin-bottom:1.3rem; }
+  .dd-ab-head .dd-thumb-title em{ font-style:normal; color:var(--accent); }
+  .dd-ab-copy{ margin:.2rem 0 0; max-width:44rem; font-size:.92rem; line-height:1.7; color:rgba(255,255,255,.68); word-break:keep-all; }
+  .dd-ab-pair{ display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:1rem; }
+  .dd-ab-item{ margin:0; }
+  .dd-ab-img{ position:relative; display:block; aspect-ratio:16/9; overflow:hidden; border:1px solid rgba(255,255,255,.1); }
+  .dd-ab-img img{ display:block; width:100%; height:100%; object-fit:cover; }
+  .dd-ab-item:not(.is-win) .dd-ab-img img{ filter:saturate(.75) brightness(.8); }
+  .dd-ab-item.is-win .dd-ab-img{ border-color:var(--accent); box-shadow:0 0 0 1px var(--accent); }
+  .dd-ab-img em{ position:absolute; left:.7rem; top:.7rem; font-style:normal; font-size:10px; font-weight:700; letter-spacing:.18em; padding:.35rem .6rem; background:var(--accent); color:#0a0a0a; }
+  .dd-ab-item figcaption{ margin-top:.6rem; font-size:.78rem; line-height:1.55; color:rgba(255,255,255,.55); }
+  .dd-ab-item figcaption b{ display:block; color:#fff; font-weight:600; margin-bottom:.1rem; }
+  .dd-ab-loop{ list-style:none; margin:1.3rem 0 0; padding:0; display:flex; flex-wrap:wrap; gap:.5rem 1.6rem; font-size:.82rem; color:rgba(255,255,255,.75); }
+  .dd-ab-loop i{ font-style:normal; color:var(--accent); font-size:10px; letter-spacing:.16em; margin-right:.5rem; }
+  @media(max-width:600px){ .dd-ab-pair{ gap:.6rem; } .dd-ab-img em{ left:.4rem; top:.4rem; font-size:8px; padding:.25rem .45rem; } .dd-ab-loop{ flex-direction:column; } }
   .dd-thumb-head{ display:flex; flex-direction:column; gap:.55rem; margin-bottom:1.1rem; }
   .dd-thumb-title{ margin:0; font-size:clamp(1.3rem,2.2vw,1.75rem); font-weight:800; color:#fff; letter-spacing:-.02em; }
   .dd-thumb-grid{ display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:1rem; }
@@ -4966,6 +4982,15 @@
           '<div class="dd-thumb-card"><i>01</i><b>썸네일 기획</b><p>영상마다 어떤 아티스트의 어떤 컷을, 어떤 표정과 구도로 보여줄지 직접 기획했습니다. 프로그램별 로고 위치와 타이포 규칙을 정해 채널 전체가 하나의 시리즈처럼 보이도록 했습니다.</p></div>' +
           '<div class="dd-thumb-card"><i>02</i><b>직접 보정</b><p>썸네일에 쓰인 아티스트 사진을 한 장 한 장 직접 리터칭했습니다. 피부 결과 톤, 잔머리와 디테일을 정리해 작은 화면에서도 얼굴이 가장 먼저 보이도록 다듬었습니다.</p><button type="button" class="dd-thumb-link" data-dd-go="dd-sec-rt">보정 전후 보기 ↓</button></div>' +
           '<div class="dd-thumb-card is-quote"><i>03</i><b>시청자 반응</b><p class="dd-thumb-q">“썸네일 보고 들어왔어요”</p><p>영상 댓글에 꾸준히 달리는 반응입니다. 썸네일이 채널의 첫인상이자 유입 경로가 되었습니다.</p></div>' +
+        '</div>' +
+        '<div class="dd-ab">' +
+          '<div class="dd-ab-head"><span class="dd-yt-sub-t">A/B Test</span><h4 class="dd-thumb-title">썸네일은 <em>테스트로</em> 고릅니다</h4>' +
+            '<p class="dd-ab-copy">같은 영상(UNCHILD · POSE.D)에 두 썸네일을 올려 A/B 테스트를 진행했습니다. 정면 컷이 측면 컷을 이겼고, 이후 썸네일은 시선과 표정이 바로 보이는 정면 컷을 기준으로 만들고 있습니다.</p></div>' +
+          '<div class="dd-ab-pair">' +
+            '<figure class="dd-ab-item is-win"><span class="dd-ab-img"><img src="images/dddm-yt/ab-front.jpg" alt="A안 · 정면 컷 썸네일 (채택)" loading="lazy" decoding="async"><em>WINNER</em></span><figcaption><b>A · 정면</b>시선과 표정이 바로 보이는 컷 · 채택</figcaption></figure>' +
+            '<figure class="dd-ab-item"><span class="dd-ab-img"><img src="images/dddm-yt/ab-side.jpg" alt="B안 · 측면 컷 썸네일" loading="lazy" decoding="async"></span><figcaption><b>B · 측면</b>헤어 컬러가 돋보이는 프로필 컷</figcaption></figure>' +
+          '</div>' +
+          '<ol class="dd-ab-loop"><li><i>01</i>두 안 제작</li><li><i>02</i>A/B 테스트</li><li><i>03</i>이긴 패턴을 다음 썸네일의 기준으로</li></ol>' +
         '</div>' +
       '</div>' +
       '<div class="dd-yt-sub"><span class="dd-yt-sub-t">인기 쇼츠 TOP 10</span><span class="dd-yt-sub-n">옆으로 넘겨 보기 →</span></div>' +
