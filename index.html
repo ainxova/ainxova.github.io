@@ -1014,6 +1014,28 @@
   .hbk-demo video{ display:block; width:100%; height:auto; border:1px solid rgba(255,255,255,.1); background:#111; }
   .hbk-demo figcaption{ margin-top:.6rem; font-size:.74rem; line-height:1.55; color:rgba(255,255,255,.5); }
   .hbk-demo figcaption b{ display:block; color:rgba(255,255,255,.85); font-weight:600; letter-spacing:.08em; margin-bottom:.15rem; }
+  .uxf{ margin-top:clamp(3rem,6vw,5rem); }
+  .uxf-meta{ margin:.4rem 0 1rem; font-size:.78rem; letter-spacing:.06em; color:rgba(255,255,255,.45); }
+  .uxf-dec{ list-style:none; margin:1.75rem 0 0; padding:0; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:1.5rem; border-top:1px solid rgba(255,255,255,.12); }
+  .uxf-dec li{ padding-top:1.1rem; }
+  .uxf-dec span{ display:block; font-size:10px; letter-spacing:.2em; color:var(--accent); margin-bottom:.55rem; }
+  .uxf-dec b{ display:block; font-size:1rem; font-weight:600; color:#fff; margin-bottom:.4rem; }
+  .uxf-dec p{ margin:0; font-size:.86rem; line-height:1.65; color:rgba(255,255,255,.6); word-break:keep-all; }
+  .uxf-live{ margin-top:1.75rem; display:grid; grid-template-columns:minmax(0,.42fr) minmax(0,1.33fr); gap:.9rem; align-items:end; }
+  .uxf-live figure{ margin:0; }
+  .uxf-v{ aspect-ratio:16/9; background:#111; border:1px solid rgba(255,255,255,.1); overflow:hidden; }
+  .uxf-v.is-tall{ aspect-ratio:9/16; }
+  .uxf-v video{ display:block; width:100%; height:100%; object-fit:cover; }
+  .uxf-live figcaption{ margin-top:.55rem; font-size:.72rem; line-height:1.55; color:rgba(255,255,255,.5); }
+  .uxf-live figcaption b{ display:block; color:rgba(255,255,255,.85); font-weight:600; letter-spacing:.08em; margin-bottom:.15rem; }
+  .uxf-result{ margin-top:1.5rem; padding:1.1rem 1.3rem; border-left:2px solid var(--accent); background:rgba(242,219,134,.06); }
+  .uxf-result span{ display:block; font-size:10px; letter-spacing:.22em; color:var(--accent); margin-bottom:.45rem; }
+  .uxf-result p{ margin:0; font-size:.92rem; line-height:1.7; color:rgba(255,255,255,.82); word-break:keep-all; }
+  .uxf-result b{ color:#fff; font-weight:600; }
+  .uxf-go{ margin-top:1.75rem; display:inline-flex; align-items:center; gap:.7rem; padding:.85rem 1.3rem; border:1px solid rgba(255,255,255,.25); border-radius:999px; background:transparent; color:#fff; font-size:.85rem; font-weight:500; cursor:pointer; transition:background .25s, color .25s, border-color .25s; }
+  .uxf-go:hover{ background:var(--accent); border-color:var(--accent); color:#0a0a0a; }
+  .uxf-go i{ font-style:normal; }
+  @media(max-width:700px){ .uxf-dec{ grid-template-columns:1fr; gap:0; } .uxf-dec li{ padding:1rem 0; border-bottom:1px solid rgba(255,255,255,.08); } .uxf-live{ grid-template-columns:minmax(0,.55fr) minmax(0,1fr); gap:.6rem; } }
   .hbk-item{ margin:0; }
   .hbk-item img{ display:block; width:100%; height:auto; border:1px solid rgba(255,255,255,.1); }
   .hbk-item figcaption{ margin-top:.5rem; font-size:.7rem; line-height:1.55; color:rgba(255,255,255,.5); }
@@ -3654,7 +3676,7 @@
       </div>
       <ol class="about-why" data-animate aria-label="최아인과 일해야 하는 이유">
         <li><span class="about-why-k font-display">01 · END TO END</span><b>혼자서 끝까지</b><p>페스티벌 하나의 키비주얼부터 현장 출력물 47종, 입장 게이트 시공까지 단독으로 완성했습니다.</p></li>
-        <li><span class="about-why-k font-display">02 · USER FIRST</span><b>쓰는 사람의 흐름에서 출발</b><p>관객 동선과 입장 팔찌 시스템, PM이 바로 쓰는 Figma 포맷 20종까지. 보기 좋은 것보다 쓰기 좋은 것을 먼저 설계합니다.</p></li>
+        <li><span class="about-why-k font-display">02 · USER FIRST</span><b>쓰는 사람의 흐름에서 출발</b><p>관객이 설명 없이 쓰는 부스 태블릿 UI, PM이 바로 쓰는 Figma 포맷 20종, A/B 테스트로 고르는 썸네일까지. 보기 좋은 것보다 쓰기 좋은 것을 먼저 설계합니다.</p></li>
         <li><span class="about-why-k font-display">03 · PROVEN</span><b>숫자로 남는 결과</b><p>쇼츠 최고 143만 회, 인스타그램 0명에서 1.4만 명, 기업 공식 캐릭터 리디자인 채택.</p></li>
       </ol>
       <p class="about-motto font-display" data-animate aria-label="Ain't no limit."><b>AIN</b>'T <span>NO LIMIT.</span></p>
@@ -5562,9 +5584,39 @@
       '<div class="vf-intro">' +
         '<p class="vf-kick">UX/UI DESIGN · APP · GAME UI · 2024 – 2025</p>' +
         '<h2 class="vf-title">UX/UI PROJECTS</h2>' +
-        '<p class="vf-lede">인호야 · 브로큰 아카이브 · 하트싱크 · MAFIUS. 콘셉트 설계와 정보 구조, 와이어프레임, 전체 UI와 그래픽 리소스까지 단독으로 완성한 네 개의 앱·게임 프로젝트와 앱 리디자인 스터디입니다.</p>' +
+        '<p class="vf-lede">행사 현장에서 관객이 직접 쓴 홀로그램 부스 태블릿 UI, 그리고 인호야 · 브로큰 아카이브 · 하트싱크 · MAFIUS. 콘셉트 설계와 정보 구조, 와이어프레임, 전체 UI와 그래픽 리소스까지 단독으로 완성한 네 개의 앱·게임 프로젝트와 앱 리디자인 스터디입니다.</p>' +
         '<div class="vf-tags"><span>Figma</span><span>Photoshop</span><span>Illustrator</span><span>Unity</span><span>After Effects</span></div>' +
       '</div>' +
+    '</section>'
+  };
+  /* UX/UI series · field case: the HEARTBEAT hologram-booth tablet UI that real audiences used on site.
+     Shown right after the UX intro so UX reviewers meet a shipped, in-use UI before the personal projects. */
+  var uxFieldBlock = {
+    custom: '<section class="cosmos-block uxf">' +
+      '<div class="cosmos-head">' +
+        '<div class="cosmos-eyebrow">Field UX · 실제 현장에서 쓰인 UI</div>' +
+        '<h3 class="cosmos-title">HOLOGRAM BOOTH TABLET UI</h3>' +
+        '<p class="uxf-meta">HEARTBEAT BY DUDUDO · 2026.10.17–18 · 고려대학교 화정체육관</p>' +
+        '<p class="cosmos-copy">처음 보는 관객이 스태프 설명 없이, 붐비는 공연장에서 바로 눌러야 하는 홀로그램 부스의 터치 화면입니다. 개인 프로젝트와 달리 행사 이틀간 실제 관객이 직접 사용한 UI로, 행사 전 실제 기기에 넣어 화면을 미리 테스트했습니다.</p>' +
+      '</div>' +
+      '<ol class="uxf-dec">' +
+        '<li><span>01</span><b>화면당 선택은 하나</b><p>시작 → 모드 선택 → 촬영, 세 단계 5개 화면으로 흐름을 짧게 줄였습니다.</p></li>' +
+        '<li><span>02</span><b>한 번의 터치, 큰 글씨</b><p>처음 보는 화면에서도 다음에 누를 곳이 바로 보이도록 큰 글씨와 한 번의 터치로 단계를 넘기게 했습니다.</p></li>' +
+        '<li><span>03</span><b>누르는 즉시 보이는 피드백</b><p>모드를 고르면 선택하지 않은 쪽이 어두워져, 무엇을 골랐는지 바로 확인됩니다.</p></li>' +
+      '</ol>' +
+      '<div class="uxf-result"><span>ON SITE RESULT</span><p>행사 이틀간 문제없이 운영됐고, 관객은 시작부터 촬영까지 혼자 진행했습니다. 스태프 안내는 마지막 QR 다운로드 화면에서 <b>“휴대폰으로 QR을 인식하시면 됩니다”</b> 한마디뿐이었습니다.</p></div>' +
+      '<div class="hbk-grid">' +
+        '<figure class="hbk-item"><img src="' + HB + 'hb-kiosk-01.jpg" alt="홀로그램 부스 태블릿 화면 · TAP TO START" loading="lazy" decoding="async"><figcaption><i>01</i><b>TAP TO START</b>시작 화면</figcaption></figure>' +
+        '<figure class="hbk-item"><img src="' + HB + 'hb-kiosk-02.jpg" alt="홀로그램 부스 태블릿 화면 · SELECT MODE" loading="lazy" decoding="async"><figcaption><i>02</i><b>SELECT MODE</b>촬영 모드 선택 안내</figcaption></figure>' +
+        '<figure class="hbk-item"><img src="' + HB + 'hb-kiosk-03.jpg" alt="홀로그램 부스 태블릿 화면 · 3D FILTER" loading="lazy" decoding="async"><figcaption><i>03</i><b>3D FILTER</b>선택 시 반대편은 어두워짐</figcaption></figure>' +
+        '<figure class="hbk-item"><img src="' + HB + 'hb-kiosk-04.jpg" alt="홀로그램 부스 태블릿 화면 · BASIC" loading="lazy" decoding="async"><figcaption><i>04</i><b>BASIC</b>선택 시 반대편은 어두워짐</figcaption></figure>' +
+        '<figure class="hbk-item"><img src="' + HB + 'hb-kiosk-05.jpg" alt="홀로그램 부스 태블릿 화면 · ON CAMERA" loading="lazy" decoding="async"><figcaption><i>05</i><b>ON CAMERA</b>촬영 진입 화면</figcaption></figure>' +
+      '</div>' +
+      '<div class="uxf-live">' +
+        '<figure><div class="uxf-v is-tall"><video poster="' + HB + 'hb-ph-kiosk-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-label="현장 태블릿 키오스크 터치 시연"><source src="' + HB + 'hb-ph-kiosk.mp4" type="video/mp4"></video></div><figcaption><b>ON SITE · TOUCH</b>현장 태블릿에서 직접 시연한 터치 흐름</figcaption></figure>' +
+        '<figure><div class="uxf-v"><video poster="' + HB + 'hb-ph-holo-live-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-label="행사 당일 홀로그램 부스에서 관객이 촬영하는 현장"><source src="' + HB + 'hb-ph-holo-live.mp4" type="video/mp4"></video></div><figcaption><b>IN USE · LIVE</b>행사 당일 관객이 부스를 사용하는 실제 현장</figcaption></figure>' +
+      '</div>' +
+      '<button type="button" class="uxf-go" data-open-project="heartbeat"><span>HEARTBEAT 전체 케이스 보기</span><i aria-hidden="true">→</i></button>' +
     '</section>'
   };
   var projects = [
@@ -5657,7 +5709,7 @@
         { id:"dg", short:"Digital", eyebrow:"PART 04", title:"DIGITAL CONTENT", sum:"공식 인스타그램 채널 세팅과 성과, COSMOS 알파벳 캐러셀, PHASE 2 티저, B.STAGE 공지(국·영문)", period:"", tools:"",
           cover:CX + "phase2-poster.jpg", coverPos:"50% 74%", show:[cosmosFeedBlock, cxSocialResultBlock, cxAcroBlock, cosmosChannelBlock, cosmosDetailPageBlock] }
       ] },
-    { group:"UX/UI", key:"uxui", category:"UX/UI Design · App · Game UI", title:"UX/UI 프로젝트 시리즈", idea:"콘셉트부터 UI 리소스까지, 네 개의 앱·게임", forms:["App", "Game UI", "UX Flow", "UI Resource"], year:"2024 – 2025",
+    { group:"UX/UI", key:"uxui", category:"UX/UI Design · App · Game UI", title:"UX/UI 프로젝트 시리즈", idea:"현장에서 관객이 쓴 부스 UI와 네 개의 앱·게임", forms:["App", "Game UI", "UX Flow", "UI Resource"], year:"2024 – 2025",
       blurb:"인호야 · 브로큰 아카이브 · 하트싱크 · MAFIUS. 콘셉트부터 UI 리소스까지 단독으로 설계한 네 개의 앱·게임 프로젝트와 리디자인 스터디.",
       desc:"캐릭터 IP 기반 파티 게임 '인호야', 기존 IP의 세계관을 전환한 '브로큰 아카이브', 감정일기 기반 AI 연애 시뮬레이션 '하트싱크', GPS 기반 소셜 게임 'MAFIUS'까지. 콘셉트 설계와 정보 구조, 와이어프레임, 전체 UI 화면과 그래픽 리소스를 단독으로 완성한 프로젝트들입니다.\n여기에 유니클로·티머니 앱의 사용자 플로우를 분석해 재설계한 리디자인 스터디를 더했습니다. 아래 목차에서 프로젝트를 선택해 바로 이동할 수 있습니다.",
       tools:["Figma", "Photoshop", "Illustrator", "Unity"],
@@ -5665,7 +5717,7 @@
       images:[],
       noFold:true,
       bare:true,
-      lead:[uxOpenBlock],
+      lead:[uxOpenBlock, uxFieldBlock],
       sections:[
         { id:"ih", short:"파티 게임 · 인호야", eyebrow:"PROJECT 03", title:"인호야", sum:"inno.N 인호 캐릭터 기반 술자리 파티 게임 UX·UI", period:"2025.09.11 – 09.30", tools:"Procreate · Photoshop · Figma · Illustrator · After Effects", cover:"images/inhoya-01.jpg",
           show:["images/inhoya-01.jpg"], more:["images/inhoya-02.jpg","images/inhoya-03.jpg","images/inhoya-04.jpg","images/inhoya-05.jpg","images/inhoya-06.jpg","images/inhoya-07.jpg","images/inhoya-08.jpg","images/inhoya-09.jpg","images/inhoya-10.jpg","images/inhoya-11.jpg"] },
@@ -7158,6 +7210,11 @@
     row.addEventListener('focusout', function(e){ if (!row.contains(e.relatedTarget)) show(-1); });
   }
 
+  document.addEventListener('click', function(e){
+    var b = e.target.closest && e.target.closest('[data-open-project]'); if (!b) return;
+    var idx = projects.findIndex(function(x){ return x.key === b.getAttribute('data-open-project'); });
+    if (idx >= 0){ openModal(idx); setTimeout(function(){ modalScroll.scrollTop = 0; }, 60); }
+  });
   function openModal(i){
     var p = projects[i];
     /* photo-led page (HEARTBEAT): one continuous flow, reading gathered at the bottom */
