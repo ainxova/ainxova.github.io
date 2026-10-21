@@ -1517,6 +1517,10 @@
   .dd-logo b{ font-size:.86rem; color:#fff; letter-spacing:.02em; }
   .dd-logo figcaption span{ font-size:.66rem; letter-spacing:.05em; color:rgba(255,255,255,.45); }
   .dd-logo:hover{ border-color:rgba(242,219,134,.45); }
+  .dd-logo-box{ position:relative; }
+  .dd-logo-box::after{ content:""; position:absolute; inset:0; pointer-events:none; opacity:.09; background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='170' height='90'%3E%3Ctext x='0' y='50' transform='rotate(-18 85 45)' fill='%23fff' font-family='Arial,sans-serif' font-size='12' letter-spacing='2'%3E%C2%A9 DUDUDO%3C/text%3E%3C/svg%3E") repeat; }
+  .dd-logo.is-soon .dd-logo-box img{ opacity:.85; }
+  .dd-logo.is-soon:hover .dd-logo-box img{ transform:none; filter:none; }
   .dd-logo:hover .dd-logo-box img{ transform:scale(1.05); filter:drop-shadow(0 0 18px rgba(242,219,134,.25)); }
   @media (max-width:767px){ .dd-logos-grid{ grid-template-columns:repeat(2,minmax(0,1fr)); gap:.6rem; } .dd-logo figcaption span{ overflow-wrap:anywhere; } .dd-logo.is-wide .dd-logo-box{ aspect-ratio:32/9; } .dd-logo.is-wide .dd-logo-box img{ width:50%; height:55%; } .dd-logo figcaption{ flex-direction:column; gap:.15rem; padding:.7rem .8rem; } .dd-logo figcaption span{ text-align:left; font-size:.62rem; } }
   .dd-thumb{ width:100%; }
@@ -3761,7 +3765,7 @@
         <span class="text-xs text-white/40 leading-snug">카톡으로<br>추가하기</span>
       </div>
     </div>
-        <div class="contact-resume" data-animate><span class="contact-resume-label font-display">RESUME</span><button type="button" id="resume-toggle" class="contact-resume-toggle" aria-expanded="false" aria-controls="resume-viewer">이력서·경력기술서 보기<i data-lucide="chevron-down" class="w-3.5 h-3.5"></i></button><a href="files/ChoiAin_Resume_Print.pdf?v=3" download="최아인_이력서_경력기술서.pdf" title="인쇄용 흰 배경 PDF" id="resume-dl">PDF 다운로드<i data-lucide="download" class="w-3.5 h-3.5"></i></a></div>
+        <div class="contact-resume" data-animate hidden><span class="contact-resume-label font-display">RESUME</span><button type="button" id="resume-toggle" class="contact-resume-toggle" aria-expanded="false" aria-controls="resume-viewer">이력서·경력기술서 보기<i data-lucide="chevron-down" class="w-3.5 h-3.5"></i></button><a href="files/ChoiAin_Resume_Print.pdf?v=3" download="최아인_이력서_경력기술서.pdf" title="인쇄용 흰 배경 PDF" id="resume-dl">PDF 다운로드<i data-lucide="download" class="w-3.5 h-3.5"></i></a></div>
       </div>
 
       <div id="contact-badge" class="contact-badge-stage" data-animate>
@@ -3803,7 +3807,7 @@
 
     <!-- Resume viewer (2026-10): opens in place under CONTACT. Native scroll-snap track, so touch swipe /
          trackpad / arrows / ←→ all move between the 3 pages. Images load only on first open. -->
-    <div id="resume-viewer" class="rv" inert>
+    <div id="resume-viewer" class="rv" inert hidden>
       <div class="rv-inner"><div class="rv-body">
         <div class="rv-stage">
           <div class="rv-track" tabindex="0" role="region" aria-roledescription="carousel" aria-label="이력서·경력기술서 3페이지, 좌우로 넘겨 보기">
@@ -4812,7 +4816,7 @@
       '<dl class="dd-facts">' +
         '<dt>Channel</dt><dd>DDDM — 아티스트 · 음악 콘텐츠 유튜브 채널</dd>' +
         '<dt>Media</dt><dd>' + nw(['YouTube', 'MUSE.D 인쇄 매거진', 'Instagram']) + '</dd>' +
-        '<dt>Programs</dt><dd>' + nw(['H60K', 'POSE.D', 'D.STAGE', 'COMING SOON', 'S-FORM']) + '</dd>' +
+        '<dt>Programs</dt><dd>' + nw(['H60K', 'POSE.D', 'D.STAGE', 'S-FORM', 'COMING SOON', 'COMING SOON']) + '</dd>' +
         '<dt>Artists</dt><dd>' + nw(['NCT WISH', 'JAY B', 'CLOSE YOUR EYES', 'XLOV', 'YOUNG POSSE', 'FIFTY FIFTY 외']) + '</dd>' +
         '<dt>Role</dt><dd>크리에이티브 총괄 — ' + nw(['기획', '브랜딩', '촬영 디렉팅', '편집 디자인', '리터칭', '모션']) + '</dd>' +
       '</dl>' +
@@ -4827,7 +4831,7 @@
       '<div class="dd-hub">' +
         '<div class="dd-hub-head"><span class="dd-hub-eyebrow">What’s Inside</span><span class="dd-hub-note">한 번의 촬영이 세 개의 매체로 이어집니다. 카드를 누르면 해당 파트로 이동해요.</span></div>' +
         '<div class="dd-hub-grid">' +
-          card('01', 'dd-sec-yt', '<span class="dd-one-media is-yt" data-dd-cycle>' + thumbs + '</span>', 'YouTube', 'DDDM 채널', ['0에서 시작 · 쇼츠 최고 143만 회', '프로그램 로고 5종 · 단독 디자인', '썸네일 기획 · 직접 보정', '런칭 OAP · 인트로 모션'], '채널 보기') +
+          card('01', 'dd-sec-yt', '<span class="dd-one-media is-yt" data-dd-cycle>' + thumbs + '</span>', 'YouTube', 'DDDM 채널', ['0에서 시작 · 쇼츠 최고 143만 회', '프로그램 로고 6종 · 단독 디자인', '썸네일 기획 · 직접 보정', '런칭 OAP · 인트로 모션'], '채널 보기') +
           card('02', 'dd-sec-mag', '<span class="dd-one-media is-mag"><span class="dd-one-covers">' + covers + '</span></span>', 'Print Magazine', 'MUSE.D', ['매 호 촬영 기획안 작성', '화보 촬영 디렉팅 · 리터칭', '편집 디자인 · 로고', 'A5 인쇄 5권 · 인쇄 감리'], '매거진 넘겨보기') +
           card('03', 'dd-sec-ig', '<span class="dd-one-media is-ig"><img src="images/dddm-ig/dddm-feed-long.jpg" alt="" loading="lazy" decoding="async"></span>', 'Instagram', '@dddm.official', ['팔로워 0 → 1.4만 명', '매거진형 피드 그리드', '피드 색감에 맞춘 합성 · 보정 연출', '게시물 후킹 카피 기획'], '피드 보기') +
         '</div>' +
@@ -4853,7 +4857,7 @@
       '<div class="cosmos-head">' +
         '<div class="cosmos-eyebrow">01 · YouTube Channel</div>' +
         '<h3 class="cosmos-title">0에서 시작해, 쇼츠 143만 회까지</h3>' +
-        '<p class="cosmos-copy"><span class="copy-line">‘아티스트를 갤러리처럼 전시한다’는 화이트 톤의 미니멀한 아트 디렉션으로 채널 전체의 톤앤매너를 정의했습니다.</span><span class="copy-line">유튜브·인스타그램·틱톡 채널 아트와 H60K · POSE.D · D.STAGE · COMING SOON · S-FORM 다섯 프로그램의 로고, 썸네일 시스템을 설계했습니다. 런칭에 맞춰 After Effects로 채널 프로모 영상(OAP)과 인트로 모션도 제작했습니다.</span></p>' +
+        '<p class="cosmos-copy"><span class="copy-line">‘아티스트를 갤러리처럼 전시한다’는 화이트 톤의 미니멀한 아트 디렉션으로 채널 전체의 톤앤매너를 정의했습니다.</span><span class="copy-line">유튜브·인스타그램·틱톡 채널 아트와 H60K · POSE.D · D.STAGE · S-FORM을 포함한 여섯 프로그램의 로고, 썸네일 시스템을 설계했습니다. 런칭에 맞춰 After Effects로 채널 프로모 영상(OAP)과 인트로 모션도 제작했습니다.</span></p>' +
         '<div class="ext-links">' + extLink('YouTube 채널 보기', 'https://www.youtube.com/@dddm.official') + '</div>' +
       '</div>' +
       '<div class="dd-yt-stats">' +
@@ -4862,11 +4866,11 @@
       '</div>' +
       '<div class="dd-logos">' +
         '<div class="dd-logos-head">' +
-          '<div><span class="dd-yt-sub-t">Program Logos</span><h4 class="dd-thumb-title">프로그램 로고 5종,<br><em>모두 단독 디자인</em></h4></div>' +
-          '<p class="dd-logos-copy">H60K · POSE.D · D.STAGE · COMING SOON · S-FORM, 다섯 개 프로그램의 로고를 처음부터 끝까지 혼자 기획하고 디자인했습니다. 프로그램마다 성격은 살리되 컬러는 화이트 하나로 통일해, 썸네일 위에서 어떤 프로그램이든 같은 채널로 읽히도록 했습니다.</p>' +
+          '<div><span class="dd-yt-sub-t">Program Logos</span><h4 class="dd-thumb-title">프로그램 로고 6종,<br><em>모두 단독 디자인</em></h4></div>' +
+          '<p class="dd-logos-copy">H60K · POSE.D · D.STAGE · S-FORM, 그리고 공개를 앞둔 COMING SOON · COMING SOON까지 여섯 개 프로그램의 로고를 처음부터 끝까지 혼자 기획하고 디자인했습니다. 출시 예정인 두 로고는 공개 전이라 블러 처리했습니다. 프로그램마다 성격은 살리되 컬러는 화이트 하나로 통일해, 썸네일 위에서 어떤 프로그램이든 같은 채널로 읽히도록 했습니다.</p>' +
         '</div>' +
-        '<div class="dd-logos-grid">' + [['h60k','H60K','Dynamic Slant · HOOK Line'], ['posed','POSE.D','Magazine Mood · Flash Moment'], ['dstage','D.STAGE','D.Stage Mood · VR'], ['alive','COMING SOON','Next Move · Connected Form'], ['sform','S-FORM','MUSE INTERVIEW · 숏폼 인터뷰']].map(function(x, k){
-          return '<figure class="dd-logo">' + (x[3] ? '<em class="dd-logo-badge">' + x[3] + '</em>' : '') + '<span class="dd-logo-box"><img src="images/dddm-logos/' + x[0] + '.png" alt="' + x[1] + ' 로고" loading="lazy" decoding="async"></span><figcaption><b>' + x[1] + '</b><span>' + x[2] + '</span></figcaption></figure>';
+        '<div class="dd-logos-grid">' + [['h60k','H60K','Dynamic Slant · HOOK Line'], ['posed','POSE.D','Magazine Mood · Flash Moment'], ['dstage','D.STAGE','D.Stage Mood · VR'], ['sform','S-FORM','MUSE INTERVIEW · 숏폼 인터뷰'], ['program-soon-1','COMING SOON','Coming Soon','공개 전'], ['COMING SOON-soon','COMING SOON','Coming Soon','공개 전']].map(function(x, k){
+          return '<figure class="dd-logo' + (x[3] ? ' is-soon' : '') + '">' + (x[3] ? '<em class="dd-logo-badge">' + x[3] + '</em>' : '') + '<span class="dd-logo-box"><img src="images/dddm-logos/' + x[0] + '.png" alt="' + x[1] + ' 로고" loading="lazy" decoding="async"></span><figcaption><b>' + x[1] + '</b><span>' + x[2] + '</span></figcaption></figure>';
         }).join('') + '</div>' +
       '</div>' +
       '<div class="dd-thumb">' +
