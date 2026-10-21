@@ -1552,10 +1552,12 @@
   .dd-thumb-link{ align-self:flex-start; margin-top:auto; padding:0; background:none; border:0; font:inherit; font-size:.76rem; color:var(--accent); cursor:var(--cur-hover, pointer); }
   @media (max-width:767px){ .dd-thumb-grid{ grid-template-columns:1fr; } }
   .dd-asof{ margin:-1.2rem 0 0; width:100%; text-align:right; font-size:.68rem; color:rgba(255,255,255,.35); }
-  .dd-yt-stats{ width:100%; max-width:560px; display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); border-top:1px solid rgba(255,255,255,.1); border-bottom:1px solid rgba(255,255,255,.1); }
+  .dd-yt-stats{ width:100%; max-width:820px; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); border-top:1px solid rgba(255,255,255,.1); border-bottom:1px solid rgba(255,255,255,.1); }
   .dd-yt-stats > div{ padding:1.1rem 1rem; display:flex; flex-direction:column; gap:.3rem; }
   .dd-yt-stats > div + div{ border-left:1px solid rgba(255,255,255,.08); }
   .dd-yt-stats b{ font-size:1.7rem; font-weight:800; color:#fff; letter-spacing:-.02em; line-height:1; }
+  .dd-yt-stats b.is-hi{ color:var(--accent); }
+  @media (max-width:480px){ .dd-yt-stats > div{ padding:1rem .7rem; } .dd-yt-stats b{ font-size:1.45rem; } .dd-yt-stats span{ font-size:.7rem; } }
   .dd-yt-stats b small{ font-size:.75rem; font-weight:500; color:rgba(255,255,255,.55); margin-left:.25em; }
   .dd-yt-stats span{ font-size:.72rem; color:rgba(255,255,255,.5); }
   .dd-yt-sub{ width:100%; display:flex; align-items:baseline; justify-content:space-between; margin-bottom:-1rem; }
@@ -3524,6 +3526,8 @@
   .hero-reel::after{ z-index:1; }
   .hero-reel canvas.hero-reel-lens{ z-index:2; }
   .cx-overview .cx-kpis{ grid-template-columns:repeat(3,minmax(0,1fr)); }
+  .cx-overview .cx-kpis.is-4{ grid-template-columns:repeat(4,minmax(0,1fr)); }
+  @media (max-width:768px){ .cx-overview .cx-kpis.is-4{ grid-template-columns:1fr 1fr; } .cx-kpis.is-4 .cx-kpi:nth-child(3){ border-left:0; } .cx-kpis.is-4 .cx-kpi:nth-child(n+3){ border-top:1px solid rgba(255,255,255,.08); } }
   /* COSMOS campaign steps: equal-height cards, step titles on one line across all three */
   @media (min-width:768px){
     .cosmos-steps{ align-items:stretch !important; }
@@ -4822,18 +4826,18 @@
         '<dt>Role</dt><dd>크리에이티브 총괄 — ' + nw(['기획', '브랜딩', '촬영 디렉팅', '편집 디자인', '리터칭', '모션']) + '</dd>' +
       '</dl>' +
       '<div class="ext-links">' + extLink('YouTube @dddm.official', 'https://www.youtube.com/@dddm.official') + extLink('Instagram @dddm.official', 'https://www.instagram.com/dddm.official/') + '</div>' +
-      '<div class="cx-kpis">' +
+      '<div class="cx-kpis is-4">' +
         '<div class="cx-kpi is-hi"><div class="cx-kpi-num">579<small>만+ 회</small></div><div class="cx-kpi-label">유튜브 인기 콘텐츠 16편 조회수 합</div></div>' +
         '<div class="cx-kpi"><div class="cx-kpi-num">143<small>만 회</small></div><div class="cx-kpi-label">쇼츠 최고 조회수 (NCT WISH · H60K)</div></div>' +
         '<div class="cx-kpi is-hi"><div class="cx-kpi-num">1.4<small>만 명</small></div><div class="cx-kpi-label">인스타그램 팔로워 · 0명에서 시작</div></div>' +
-        '<div class="cx-kpi"><div class="cx-kpi-num">5<small>권</small></div><div class="cx-kpi-label">MUSE.D 인쇄 매거진 발행</div></div>' +
+        '<div class="cx-kpi"><div class="cx-kpi-num">5<small>권+</small></div><div class="cx-kpi-label">MUSE.D 인쇄 매거진 발행 · 계속 발행 중</div></div>' +
       '</div>' +
       '<p class="dd-asof">수치는 2026년 10월 기준</p>' +
       '<div class="dd-hub">' +
         '<div class="dd-hub-head"><span class="dd-hub-eyebrow">What’s Inside</span><span class="dd-hub-note">한 번의 촬영이 세 개의 매체로 이어집니다. 카드를 누르면 해당 파트로 이동해요.</span></div>' +
         '<div class="dd-hub-grid">' +
           card('01', 'dd-sec-yt', '<span class="dd-one-media is-yt" data-dd-cycle>' + thumbs + '</span>', 'YouTube', 'DDDM 채널', ['0에서 시작 · 쇼츠 최고 143만 회', '프로그램 로고 6종 · 단독 디자인', '썸네일 기획 · 직접 보정', '런칭 OAP · 인트로 모션'], '채널 보기') +
-          card('02', 'dd-sec-mag', '<span class="dd-one-media is-mag"><span class="dd-one-covers">' + covers + '</span></span>', 'Print Magazine', 'MUSE.D', ['매 호 촬영 기획안 작성', '화보 촬영 디렉팅 · 리터칭', '편집 디자인 · 로고', 'A5 인쇄 5권 · 인쇄 감리'], '매거진 넘겨보기') +
+          card('02', 'dd-sec-mag', '<span class="dd-one-media is-mag"><span class="dd-one-covers">' + covers + '</span></span>', 'Print Magazine', 'MUSE.D', ['매 호 촬영 기획안 작성', '화보 촬영 디렉팅 · 리터칭', '편집 디자인 · 로고', 'A5 인쇄 5권+ · 인쇄 감리'], '발행 표지 보기') +
           card('03', 'dd-sec-ig', '<span class="dd-one-media is-ig"><img src="images/dddm-ig/dddm-feed-long.jpg" alt="" loading="lazy" decoding="async"></span>', 'Instagram', '@dddm.official', ['팔로워 0 → 1.4만 명', '매거진형 피드 그리드', '피드 색감에 맞춘 합성 · 보정 연출', '게시물 후킹 카피 기획'], '피드 보기') +
         '</div>' +
         '<button type="button" class="dd-hub-rt" data-dd-go="dd-sec-rt"><span><i>ALL</i>세 매체에 쓰인 아티스트 사진 리터칭</span><b aria-hidden="true">↓</b></button>' +
@@ -4862,7 +4866,8 @@
         '<div class="ext-links">' + extLink('YouTube 채널 보기', 'https://www.youtube.com/@dddm.official') + '</div>' +
       '</div>' +
       '<div class="dd-yt-stats">' +
-        '<div><b>38<small>만 회</small></b><span>동영상 최고 조회수</span></div>' +
+        '<div><b class="is-hi">143<small>만 회</small></b><span>쇼츠 최고 조회수</span></div>' +
+        '<div><b>38<small>만 회</small></b><span>롱폼 영상 최고 조회수</span></div>' +
         '<div><b>67<small>편</small></b><span>업로드 동영상</span></div>' +
       '</div>' +
       '<div class="dd-logos">' +
