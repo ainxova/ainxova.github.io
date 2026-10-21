@@ -5383,7 +5383,7 @@
   function vfCrop(src, W, H, b, cls, alt){
     return '<span class="vf-crop ' + (cls || '') + '" style="aspect-ratio:' + b[2] + '/' + b[3] + '"><img src="' + src + '" alt="' + (alt || '') + '" loading="lazy" decoding="async" style="width:' + (W / b[2] * 100).toFixed(3) + '%;height:' + (H / b[3] * 100).toFixed(3) + '%;left:' + (-b[0] / b[2] * 100).toFixed(3) + '%;top:' + (-b[1] / b[3] * 100).toFixed(3) + '%"></span>';
   }
-  var VF_PARTS = [['01','IDENTITY'],['02','KEY VISUAL'],['03','PROMOTION'],['04','MERCHANDISE'],['05','ON-SITE'],['06','PRODUCTION'],['07','DESIGN OPS'],['08','EARLY']];
+  var VF_PARTS = [['01','IDENTITY'],['02','KEY VISUAL'],['03','PROMOTION'],['04','MERCHANDISE'],['05','ON-SITE'],['06','PRODUCTION'],['07','DESIGN OPS']];
   var vfJumpBlock = { custom:'<nav class="dd-jump vf-jump" data-dd-jump aria-label="HEARTBEAT 바로가기"><div class="dd-jump-in"><span class="dd-jump-label">바로가기</span>' +
     VF_PARTS.map(function(x){ return '<button type="button" class="dd-jump-btn" data-dd-go="vf-' + x[0] + '">' + x[0] + ' ' + x[1].charAt(0) + x[1].slice(1).toLowerCase() + '</button>'; }).join('') +
     '<button type="button" class="dd-jump-btn" data-dd-go="vf-about">About</button></div><i class="vf-prog" aria-hidden="true"></i></nav>' };
@@ -5462,7 +5462,6 @@
             '<li><i>05</i><b>On-site</b>입구 게이트·포토월·홀로그램 부스·MD 부스·배너·길안내·안내 사인·F&amp;B 존·풍선 포토존·팔찌·프레스존, 부스 태블릿 UI, 7개 구역 47종 출력물</li>' +
             '<li><i>06</i><b>Production</b>행사 전날부터 직접 시공한 입구, 설치 전후, 행사 당일 기록</li>' +
             '<li><i>07</i><b>Design Ops</b>Figma 포맷 약 20종, PM 3명 교육</li>' +
-            '<li><i>08</i><b>Early Proposal</b>페스티벌 개편 전 dududo concert 시절의 초기 아이덴티티</li>' +
           '</ol>' +
         '</div>' +
       '</div>' +
@@ -5487,8 +5486,6 @@
     vfStrip(hbSiteBlock),
     vfMark('06', 'PRODUCTION'), vfStrip(edBuildBlock), vfStrip(edBaBlock), vfStrip(edDayBlock), vfStrip(hbTaggedBlock),
     vfMark('07', 'DESIGN OPS'), vfOpsBlock,
-    vfMark('08', 'EARLY PROPOSAL'),
-    vfRow([1,2,3,4,5,6,7,8].map(function(k){ return { src:'images/dududo-concert-0' + k + '.jpg', alt:'dududo concert 초기 제안 ' + k }; }), 2, '1800/1012', true),
     vfAboutBlock
   ];
   /* UX/UI series · opening: the Broken Archive film full-bleed, then a short intro (same pattern as HEARTBEAT / DDDM / COSMOS). */
@@ -5583,8 +5580,6 @@
           cover:HB + "hb-ph-after.jpg", coverPos:"50% 50%", show:[edBuildBlock, edBaBlock, edDayBlock, hbTaggedBlock] },
         { id:"hb-ops", edTitle:"디자이너 1명으로<br>굴러가는 시스템", short:"Design Ops", eyebrow:"PART 07", title:"DESIGN OPS", sum:"디자이너 1명으로 운영되도록 설계한 약 20종의 Figma 포맷, PM 3명 교육, PM이 직접 만드는 인스타그램 콘텐츠", period:"", tools:"Figma",
           cover:HB + "hb-figma-ops.jpg", coverPos:"40% 30%", show:[hbOpsBlock] },
-        { id:"hb-early", edTitle:"페스티벌 이전의<br>첫 제안", short:"Early Work", eyebrow:"PART 08", title:"EARLY PROPOSAL", sum:"페스티벌로 개편되기 전, DUDUDO CONCERT 시절 제안한 초기 브랜드 아이덴티티와 “DON’T DO THAT” 픽토그램", period:"", tools:"Illustrator · Photoshop",
-          cover:"images/dududo-concert-01.jpg", coverPos:"50% 50%", show:[{ custom:'<div class="cosmos-block"><div class="cosmos-head"><p class="cosmos-copy">페스티벌로 개편되기 전, <b>dududo concert</b>라는 이름으로 기획되던 초기 단계에 제안한 브랜드 아이덴티티입니다. 로고와 와이드 그리드 시스템, “DON’T DO THAT” 촬영 금지 픽토그램 세트, 컬러 팔레트, 포스터 배리에이션과 실사 목업까지 하나의 완결된 시스템으로 구축했고, 이후 행사가 페스티벌 형식으로 전면 개편되며 HEARTBEAT BY DUDUDO로 이어졌습니다.</p></div></div>' }, "images/dududo-concert-01.jpg","images/dududo-concert-02.jpg","images/dududo-concert-03.jpg","images/dududo-concert-04.jpg","images/dududo-concert-05.jpg","images/dududo-concert-06.jpg","images/dududo-concert-07.jpg","images/dududo-concert-08.jpg"] }
       ],
       tail:["images/dududo-case/dh-09-outro.jpg?v=2"],
       /* Editorial layout (chapter openers + asymmetric spreads), scoped by .is-ed */
