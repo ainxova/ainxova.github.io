@@ -2524,7 +2524,7 @@
   .about-why b{ display:block; font-size:1.15rem; font-weight:600; color:#fff; margin-bottom:.6rem; letter-spacing:-.01em; }
   .about-why p{ margin:0; font-size:.92rem; line-height:1.7; color:rgba(255,255,255,.62); word-break:keep-all; }
   @media (max-width:767px){ .about-why{ grid-template-columns:1fr; gap:0; margin-top:2.8rem; } .about-why li{ padding:1.3rem 0; border-bottom:1px solid rgba(255,255,255,.08); } }
-  .about-motto{ margin:4.5rem 0 0; font-weight:700; font-size:clamp(3rem,9vw,8rem); line-height:.95; letter-spacing:-0.02em; color:#fff; text-align:center; white-space:nowrap; }
+  .about-motto{ margin:4.5rem 0 0; font-weight:700; font-size:clamp(3rem,9vw,8rem); line-height:.95; letter-spacing:-0.02em; color:#fff; text-align:left; white-space:nowrap; }
   .about-motto b{ color:var(--accent); font-weight:inherit; }
   @media (max-width:767px){ .about-motto{ margin-top:3rem; font-size:clamp(2.6rem,15vw,3.8rem); white-space:normal; } .about-motto span{ display:block; } }
   .tool-groups{ display:flex; flex-wrap:wrap; gap:1.25rem; }
@@ -3254,6 +3254,12 @@
     display:flex; justify-content:space-between; align-items:center;
     font-size:.62rem; letter-spacing:.1em; color:rgba(255,255,255,.45);
   }
+  .contact-badge-back-qr{
+    position:absolute; right:9%; bottom:17%;
+    display:flex; flex-direction:column; align-items:center; gap:4px;
+  }
+  .contact-badge-back-qr img{ width:52px; height:52px; border-radius:7px; border:1px solid rgba(255,255,255,.18); background:#fff; }
+  .contact-badge-back-qr span{ font-size:.55rem; letter-spacing:.14em; color:rgba(255,255,255,.45); }
 
   .contact-badge-slot{
     position:absolute; top:5%; left:50%; transform:translateX(-50%);
@@ -3753,7 +3759,7 @@
           LET'S MAKE<br>SOMETHING.
         </h2>
         <!-- audit 2026-10: contact actions live right under the copy (were below the 420–460px badge,
-             ~890px down on phones). Primary = open a mail draft; copy buttons + QR stay as secondary. -->
+             ~890px down on phones). Primary = open a mail draft; copy email stays as secondary. -->
         <div class="contact-actions" data-animate>
       <a href="mailto:ainxova@gmail.com" class="magnetic-btn contact-cta-primary"><i data-lucide="mail" class="w-4 h-4"></i><span>메일 보내기</span><i data-lucide="arrow-up-right" class="w-4 h-4"></i></a>
       <button id="copy-email" class="magnetic-btn group flex items-center gap-3 px-6 py-4 rounded-full border border-white/20 hover:border-accent transition-colors" title="이메일 주소 복사">
@@ -3761,15 +3767,6 @@
         <span id="copy-email-label" class="text-sm">ainxova@gmail.com</span>
         <i data-lucide="copy" class="w-3.5 h-3.5 text-white/40 group-hover:text-accent transition-colors"></i>
       </button>
-      <button id="copy-kakao" class="magnetic-btn group flex items-center gap-3 px-6 py-4 rounded-full border border-white/20 hover:border-accent transition-colors" title="카카오톡 아이디 복사">
-        <i data-lucide="message-circle" class="w-4 h-4"></i>
-        <span id="copy-kakao-label" class="text-sm">카카오톡 eun_doi</span>
-        <i data-lucide="copy" class="w-3.5 h-3.5 text-white/40 group-hover:text-accent transition-colors"></i>
-      </button>
-      <div class="flex items-center gap-3">
-        <img src="images/kakao-qr.png" alt="카카오톡 친구 추가 QR 코드" class="w-16 h-16 rounded-xl border border-white/15" loading="lazy" decoding="async">
-        <span class="text-xs text-white/40 leading-snug">카톡으로<br>추가하기</span>
-      </div>
     </div>
         <div class="contact-resume" data-animate hidden><span class="contact-resume-label font-display">RESUME</span><button type="button" id="resume-toggle" class="contact-resume-toggle" aria-expanded="false" aria-controls="resume-viewer">이력서·경력기술서 보기<i data-lucide="chevron-down" class="w-3.5 h-3.5"></i></button><a href="files/ChoiAin_Resume_Print.pdf?v=3" download="최아인_이력서_경력기술서.pdf" title="인쇄용 흰 배경 PDF" id="resume-dl">PDF 다운로드<i data-lucide="download" class="w-3.5 h-3.5"></i></a></div>
       </div>
@@ -3798,6 +3795,10 @@
               <div class="contact-badge-back-content">
                 <span class="contact-badge-back-eyebrow">CHOI AIN</span>
                 <span class="contact-badge-back-role">Art<br>Director</span>
+              </div>
+              <div class="contact-badge-back-qr">
+                <img src="images/kakao-qr.png" alt="카카오톡 친구 추가 QR 코드" loading="lazy" decoding="async" draggable="false">
+                <span>KAKAO</span>
               </div>
               <div class="contact-badge-slot" aria-hidden="true"></div>
               <div class="contact-badge-shade" aria-hidden="true"></div>
@@ -7052,6 +7053,36 @@
     window.addEventListener('load', run);
   })();
 
+  /* about-motto: stretch "AIN'T NO LIMIT." so its left/right edges line up exactly
+     with the 01-03 reasons row (same .max-w-7xl container) on desktop widths.
+     The <p> is display:block so its own box already spans the full container —
+     measure the actual glyph width with a Range instead of the element's box. */
+  (function(){
+    function textWidth(el){
+      var r = document.createRange();
+      r.selectNodeContents(el);
+      return r.getBoundingClientRect().width;
+    }
+    function fitMotto(){
+      var el = document.querySelector('.about-motto');
+      if (!el) return;
+      if (window.innerWidth < 768){ el.style.fontSize = ''; return; }
+      var container = el.closest('.max-w-7xl');
+      if (!container) return;
+      el.style.fontSize = '';
+      var targetW = container.getBoundingClientRect().width;
+      var naturalW = textWidth(el);
+      if (!naturalW || !targetW) return;
+      var base = parseFloat(getComputedStyle(el).fontSize);
+      el.style.fontSize = (base * (targetW / naturalW)) + 'px';
+    }
+    var t2 = null;
+    window.addEventListener('resize', function(){ clearTimeout(t2); t2 = setTimeout(fitMotto, 150); });
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitMotto);
+    window.addEventListener('load', fitMotto);
+    fitMotto();
+  })();
+
   /* Hover-members index (UX/UI series modal) — see the .uxs-hm CSS comment.
      roll() rebuilds a line as per-character spans: the new line's letters
      rise in from below (or drop in from above when moving left through the
@@ -7563,8 +7594,6 @@
     });
   }
   bindCopyButton('copy-email', 'copy-email-label', 'ainxova@gmail.com');
-  bindCopyButton('copy-kakao', 'copy-kakao-label', 'eun_doi');
-
   /* Resume PDF download. A plain download link works on the normal website (GitHub Pages); inside the
      Claude artifact viewer plain downloads are blocked, so there the file is handed over through the
      viewer's own save dialog instead. Off the artifact (no window.claude) the link is left alone. */
