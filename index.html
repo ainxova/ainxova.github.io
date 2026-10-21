@@ -2,6 +2,7 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow, noarchive">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>최아인 CHOI AIN — ALL IN.</title>
 <meta name="description" content="최아인 CHOI AIN — 브랜드가 사람을 만나는 화면과 지면, 공간을 하나의 경험으로 설계하는 아트 디렉터·비주얼 디자이너의 포트폴리오.">
@@ -4775,8 +4776,7 @@
     ['dd-sec-yt', '01 YouTube'],
     ['dd-sec-mag', '02 Magazine'],
     ['dd-sec-ig', '03 Instagram'],
-    ['dd-sec-rt', 'Retouching'],
-    ['dd-sec-guide', 'Brand Guide']
+    ['dd-sec-rt', 'Retouching']
   ];
   /* outbound channel links (opens in a new tab) */
   function extLink(label, url){ return '<a class="ext-link" href="' + url + '" target="_blank" rel="noopener">' + label + '<i aria-hidden="true">↗</i></a>'; }
@@ -4827,7 +4827,7 @@
       '<div class="dd-hub">' +
         '<div class="dd-hub-head"><span class="dd-hub-eyebrow">What’s Inside</span><span class="dd-hub-note">한 번의 촬영이 세 개의 매체로 이어집니다. 카드를 누르면 해당 파트로 이동해요.</span></div>' +
         '<div class="dd-hub-grid">' +
-          card('01', 'dd-sec-yt', '<span class="dd-one-media is-yt" data-dd-cycle>' + thumbs + '</span>', 'YouTube', 'DDDM 채널', ['0에서 시작 · 쇼츠 최고 143만 회', '프로그램 로고 6종 · 단독 디자인', '썸네일 기획 · 직접 보정', '런칭 OAP · 인트로 모션'], '채널 보기') +
+          card('01', 'dd-sec-yt', '<span class="dd-one-media is-yt" data-dd-cycle>' + thumbs + '</span>', 'YouTube', 'DDDM 채널', ['0에서 시작 · 쇼츠 최고 143만 회', '프로그램 로고 5종 · 단독 디자인', '썸네일 기획 · 직접 보정', '런칭 OAP · 인트로 모션'], '채널 보기') +
           card('02', 'dd-sec-mag', '<span class="dd-one-media is-mag"><span class="dd-one-covers">' + covers + '</span></span>', 'Print Magazine', 'MUSE.D', ['매 호 촬영 기획안 작성', '화보 촬영 디렉팅 · 리터칭', '편집 디자인 · 로고', 'A5 인쇄 5권 · 인쇄 감리'], '매거진 넘겨보기') +
           card('03', 'dd-sec-ig', '<span class="dd-one-media is-ig"><img src="images/dddm-ig/dddm-feed-long.jpg" alt="" loading="lazy" decoding="async"></span>', 'Instagram', '@dddm.official', ['팔로워 0 → 1.4만 명', '매거진형 피드 그리드', '피드 색감에 맞춘 합성 · 보정 연출', '게시물 후킹 카피 기획'], '피드 보기') +
         '</div>' +
@@ -4862,10 +4862,10 @@
       '</div>' +
       '<div class="dd-logos">' +
         '<div class="dd-logos-head">' +
-          '<div><span class="dd-yt-sub-t">Program Logos</span><h4 class="dd-thumb-title">프로그램 로고 6종,<br><em>모두 단독 디자인</em></h4></div>' +
-          '<p class="dd-logos-copy">H60K · POSE.D · D.STAGE · COMING SOON · S-FORM, 출시를 앞둔 VR 콘텐츠 COMING SOON까지, 여섯 개 프로그램의 로고를 처음부터 끝까지 혼자 기획하고 디자인했습니다. 프로그램마다 성격은 살리되 컬러는 화이트 하나로 통일해, 썸네일 위에서 어떤 프로그램이든 같은 채널로 읽히도록 했습니다.</p>' +
+          '<div><span class="dd-yt-sub-t">Program Logos</span><h4 class="dd-thumb-title">프로그램 로고 5종,<br><em>모두 단독 디자인</em></h4></div>' +
+          '<p class="dd-logos-copy">H60K · POSE.D · D.STAGE · COMING SOON · S-FORM, 다섯 개 프로그램의 로고를 처음부터 끝까지 혼자 기획하고 디자인했습니다. 프로그램마다 성격은 살리되 컬러는 화이트 하나로 통일해, 썸네일 위에서 어떤 프로그램이든 같은 채널로 읽히도록 했습니다.</p>' +
         '</div>' +
-        '<div class="dd-logos-grid">' + [['h60k','H60K','Dynamic Slant · HOOK Line'], ['posed','POSE.D','Magazine Mood · Flash Moment'], ['dstage','D.STAGE','D.Stage Mood · VR'], ['alive','COMING SOON','Next Move · Connected Form'], ['sform','S-FORM','MUSE INTERVIEW · 숏폼 인터뷰'], ['COMING SOON','COMING SOON','EYE + Hijacking · VR 콘텐츠','출시 예정']].map(function(x, k){
+        '<div class="dd-logos-grid">' + [['h60k','H60K','Dynamic Slant · HOOK Line'], ['posed','POSE.D','Magazine Mood · Flash Moment'], ['dstage','D.STAGE','D.Stage Mood · VR'], ['alive','COMING SOON','Next Move · Connected Form'], ['sform','S-FORM','MUSE INTERVIEW · 숏폼 인터뷰']].map(function(x, k){
           return '<figure class="dd-logo">' + (x[3] ? '<em class="dd-logo-badge">' + x[3] + '</em>' : '') + '<span class="dd-logo-box"><img src="images/dddm-logos/' + x[0] + '.png" alt="' + x[1] + ' 로고" loading="lazy" decoding="async"></span><figcaption><b>' + x[1] + '</b><span>' + x[2] + '</span></figcaption></figure>';
         }).join('') + '</div>' +
       '</div>' +
@@ -4896,7 +4896,6 @@
         return '<figure class="dd-yt-video"><img src="images/dddm-yt/' + x[0] + '.jpg" alt="' + x[1] + ' 썸네일" loading="lazy" decoding="async">' +
           '<figcaption><b>' + x[1] + '</b><span>' + x[2] + ' · 조회수 ' + x[3] + '회</span></figcaption></figure>';
       }).join('') + '</div>' +
-      '<button type="button" class="dd-hub-rt dd-guide-link" data-dd-go="dd-sec-guide"><span><i>APPENDIX</i>채널 브랜드 가이드라인 전체는 페이지 맨 아래에 있어요</span><b aria-hidden="true">↓</b></button>' +
     '</div>' };
 
   /* ================= HEARTBEAT BY DUDUDO · case study rebuilt to the COSMOS
@@ -5607,21 +5606,8 @@
          via coverPos. The reveal clip sits above the index as `lead`; the
          guide's own cover page was dropped. */
       bare:true,
-      lead:[dddmHeroBlock, dddmStoryBlock, dddmJumpBlock, dddmYtBlock, mzShelfBlock, mzDistBlock, dddmFeedBlock, dddmRetouchBlock],
-      index:{ title:"DDDM BRAND GUIDE", unit:"PARTS", label:"파트" },
-      pdfFlow:true, pdfCover:"images/dddm-guide/dddm-guide-01.jpg",
-      images:[],
-      sections:[
-        { id:"dd", eyebrow:"PART 01", title:"DDDM", sum:"심볼형·워드마크형 채널 로고와 ddd.MUSIC · ddd.STORE 서브 브랜드 체계", period:"", tools:"", cover:"images/dddm-guide/dddm-guide-03.jpg", coverPos:"66% 32%", show:["images/dddm-guide/dddm-guide-02.jpg","images/dddm-guide/dddm-guide-03.jpg"], more:["images/dddm-guide/dddm-guide-04.jpg"] },
-        { id:"ca", eyebrow:"PART 02", title:"CHANNEL ART", sum:"유튜브 배너와 유튜브·인스타그램·틱톡 프로필 이미지", period:"", tools:"", cover:"images/dddm-guide/dddm-guide-06.jpg", coverPos:"30% 55%", show:["images/dddm-guide/dddm-guide-05.jpg","images/dddm-guide/dddm-guide-06.jpg"], more:["images/dddm-guide/dddm-guide-07.jpg"] },
-        { id:"hk", eyebrow:"PART 03", title:"H60K", sum:"프로그램 로고, 컬러 베리에이션, 썸네일 시스템", period:"", tools:"", cover:"images/dddm-guide/dddm-guide-09.jpg", coverPos:"53% 42%", show:["images/dddm-guide/dddm-guide-08.jpg","images/dddm-guide/dddm-guide-09.jpg"], more:["images/dddm-guide/dddm-guide-10.jpg","images/dddm-guide/dddm-guide-11.jpg","images/dddm-guide/dddm-guide-12.jpg"] },
-        { id:"pd", eyebrow:"PART 04", title:"POSE.D", sum:"프로그램 로고, 컬러 베리에이션, 썸네일 시스템", period:"", tools:"", cover:"images/dddm-guide/dddm-guide-14.jpg", coverPos:"51% 43%", show:["images/dddm-guide/dddm-guide-13.jpg","images/dddm-guide/dddm-guide-14.jpg", dddmPosedReelBlock], more:["images/dddm-guide/dddm-guide-15.jpg","images/dddm-guide/dddm-guide-16.jpg","images/dddm-guide/dddm-guide-17.jpg"] },
-        { id:"ds", eyebrow:"PART 05", title:"D.STAGE", sum:"프로그램 로고, 컬러 베리에이션, D.Stage · D.Stage VR 썸네일 시스템", period:"", tools:"", cover:"images/dddm-guide/dddm-guide-19.jpg", coverPos:"51% 44%", show:["images/dddm-guide/dddm-guide-18.jpg","images/dddm-guide/dddm-guide-19.jpg"], more:["images/dddm-guide/dddm-guide-20.jpg","images/dddm-guide/dddm-guide-21.jpg","images/dddm-guide/dddm-guide-22.jpg","images/dddm-guide/dddm-guide-23.jpg","images/dddm-guide/dddm-guide-24.jpg"] },
-        { id:"ai", eyebrow:"PART 06", title:"COMING SOON", sum:"프로그램 로고와 컬러 베리에이션", period:"", tools:"", cover:"images/dddm-guide/dddm-guide-26.jpg", coverPos:"46% 43%", show:["images/dddm-guide/dddm-guide-25.jpg","images/dddm-guide/dddm-guide-26.jpg"], more:["images/dddm-guide/dddm-guide-27.jpg"] },
-        { id:"sf", eyebrow:"PART 07", title:"S-FORM", sum:"숏폼 인터뷰 MUSE INTERVIEW 프로그램 로고", period:"", tools:"", cover:"images/dddm-guide/dddm-guide-29.jpg", coverPos:"17% 77%", show:["images/dddm-guide/dddm-guide-28.jpg","images/dddm-guide/dddm-guide-29.jpg"] },
-        { id:"mg", eyebrow:"PART 08", title:"MAGAZINE", sum:"인스타그램 매거진 피드", period:"", tools:"", cover:"images/dddm-guide/dddm-guide-31.jpg", coverPos:"50% 50%", show:["images/dddm-guide/dddm-guide-30.jpg","images/dddm-guide/dddm-guide-31.jpg"] },
-        { id:"md", short:"MUSE.D", eyebrow:"PART 09", title:"MUSE.D", sum:"아티스트 매거진 MUSE.D 로고와 지면 디자인", period:"", tools:"", cover:"images/dddm-guide/dddm-guide-33.jpg", coverPos:"67% 20%", show:["images/dddm-guide/dddm-guide-32.jpg","images/dddm-guide/dddm-guide-33.jpg"], more:["images/dddm-guide/dddm-guide-34c.jpg","images/dddm-guide/dddm-guide-35.jpg"] }
-      ] },
+      /* 2026-10-21: internal brand-guide pages removed; the page is now just the case study */
+      images:[dddmHeroBlock, dddmStoryBlock, dddmJumpBlock, dddmYtBlock, mzShelfBlock, mzDistBlock, dddmFeedBlock, dddmRetouchBlock] },
     { group:"Branding & Art Direction", key:"cosmos", category:"Exhibition Art Direction · Key Visual · Space Graphics · MD · Digital", title:"COSMOS: BIGBANG 20주년 기념 전시 아트 디렉션", idea:"31일간 2만여 명이 찾은 전시, 무한(∞) 모티프로 이은 모든 접점", forms:["Key Visual", "Space", "VMD", "MD", "Digital"], year:"2026",
       blurb:"6종 이상의 콘셉트 시안으로 키비주얼을 도출하고, 공간 그래픽·VMD부터 30여 종의 MD와 디지털 콘텐츠까지 전시의 모든 접점을 디렉팅했습니다.",
       desc:"BIGBANG 데뷔 20주년을 기념해 31일간 열린 몰입형 미디어 전시 ‘COSMOS’의 아트 디렉션을 맡았습니다.\n메인 포스터 기획 단계에서 6종 이상의 콘셉트 시안을 제안해 전시의 키비주얼 방향을 확립했고, 무한(∞) 모티프의 아이덴티티를 SNS·팬 플랫폼 공지 같은 디지털 채널부터 전시장 동선 그래픽과 VMD, 30여 종의 공식 MD까지 하나의 시각 언어로 확장했습니다.",
