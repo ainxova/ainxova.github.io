@@ -3518,6 +3518,11 @@
   .hero-reel::after{ z-index:1; }
   .hero-reel canvas.hero-reel-lens{ z-index:2; }
   .cx-overview .cx-kpis{ grid-template-columns:repeat(3,minmax(0,1fr)); }
+  /* COSMOS campaign steps: equal-height cards, step titles on one line across all three */
+  @media (min-width:768px){
+    .cosmos-steps{ align-items:stretch !important; }
+    .cosmos-step.is-text .cosmos-step-thumb{ flex:1 1 auto; align-items:flex-start; }
+  }
 </style>
 </head>
 <body class="font-body">
@@ -4215,10 +4220,6 @@
         '<div class="cosmos-note">화면 위에 마우스를 올리면 멈춥니다.</div>' +
         '<div class="ext-links">' + extLink('Instagram @cosmos.exh', 'https://www.instagram.com/cosmos.exh') + '</div>' +
       '</div>' +
-      '<div class="cxr-vids">' +
-        '<figure class="cxr-v"><div class="cxr-frame"><video poster="images/thumbs/cosmos-bigbang-thumb-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-label="COSMOS 전시 현장 스케치 영상"><source src="images/cosmos-video/sketch-01.mp4" type="video/mp4"></video></div><figcaption><b>EXHIBITION SKETCH</b>전시 현장 스케치</figcaption></figure>' +
-        '<figure class="cxr-v is-off"><div class="cxr-frame"><video poster="images/cosmos-video/sketch-phase2-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-label="COSMOS PHASE 2 스케치 영상"><source src="images/cosmos-video/sketch-phase2.mp4" type="video/mp4"></video></div><figcaption><b>PHASE 2 SKETCH</b>PHASE 2 현장 스케치</figcaption></figure>' +
-      '</div>' +
       '<div class="cosmos-split-media">' + cosmosPhone(
         '<div class="ig-nav">' + cosmosIco.back + '<span class="ig-nav-name">cosmos.exh</span><span class="push" style="display:flex">' + cosmosIco.more + '</span></div>' +
         '<div class="ig-profile">' + igAvatar +
@@ -4384,6 +4385,10 @@
         '<h2 class="cxr-title">COSMOS<em>BIGBANG 20주년 기념 전시<br>아트 디렉션</em></h2>' +
         '<p class="cxr-meta">2026.08.24 — 09.27 · 두두두 서울 · Art Director</p>' +
         '<div class="ext-links">' + extLink('Instagram @cosmos.exh', 'https://www.instagram.com/cosmos.exh') + '</div>' +
+      '</div>' +
+      '<div class="cxr-vids">' +
+        '<figure class="cxr-v"><div class="cxr-frame"><video poster="images/thumbs/cosmos-bigbang-thumb-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-label="COSMOS 전시 현장 스케치 영상"><source src="images/cosmos-video/sketch-01.mp4" type="video/mp4"></video></div><figcaption><b>EXHIBITION SKETCH</b>전시 현장 스케치</figcaption></figure>' +
+        '<figure class="cxr-v is-off"><div class="cxr-frame"><video poster="images/cosmos-video/sketch-phase2-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-label="COSMOS PHASE 2 스케치 영상"><source src="images/cosmos-video/sketch-phase2.mp4" type="video/mp4"></video></div><figcaption><b>PHASE 2 SKETCH</b>PHASE 2 현장 스케치</figcaption></figure>' +
       '</div>' +
     '</div>'
   };
@@ -5622,7 +5627,7 @@
       index:{ title:"COSMOS EXHIBITION", unit:"PARTS", label:"파트" },
       images:[],
       sections:[
-        { id:"kv", short:"Key Visual", eyebrow:"PART 01", title:"ART DIRECTION & KEY VISUAL", sum:"6종 이상의 콘셉트 시안 → 최종 셀렉 2안 → 메인 키비주얼, 인물 컷 정밀 보정·합성", period:"", tools:"",
+        { id:"kv", short:"Key Visual", eyebrow:"PART 01", title:"ART DIRECTION & KEY VISUAL", sum:"6종 이상의 콘셉트 시안으로 키비주얼 방향 확립, 인물 컷 정밀 보정·합성", period:"", tools:"",
           cover:CX + "cosmos-keyvisual-960.jpg", coverPos:"50% 40%", show:[cxKeyVisualBlock] },
         { id:"sp", short:"Space & VMD", eyebrow:"PART 02", title:"SPACE GRAPHICS & VMD", sum:"11개 콘텐츠 공간 구성과 전시 맵, 현장 그래픽·배너·입장 팔찌", period:"", tools:"",
           cover:"images/cosmos-add/cosmos-map.jpg", coverPos:"22% 45%", show:[cosmosContentBlock, cosmosMapBlock, cosmosOnsiteBlock, cosmosXbannerBlock, cosmosWristbandBlock] },
