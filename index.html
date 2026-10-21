@@ -3530,6 +3530,8 @@
   .dd-rt-strip figure:hover img{ transform:scale(1.04); }
   .dd-rt-cap{ margin:.9rem 0 0; font-size:.72rem; letter-spacing:.06em; color:rgba(255,255,255,.45); }
   @media (max-width:767px){ .dd-rt-strip{ grid-template-columns:repeat(3,minmax(0,1fr)); gap:.5rem; } .dd-rt-strip figure:nth-child(n+4){ display:none; } }
+  .mzs-book.is-static{ cursor:default; }
+  .mzs-book.is-static .mzs-cover{ transform:none; }
 </style>
 </head>
 <body class="font-body">
@@ -4683,15 +4685,13 @@
         ['Design','로고 · 지면 편집 디자인'],
         ['Print','용지 · 제본 선정 · 인쇄 감리']
       ].map(function(st, k){ return '<li><i>' + ('0' + (k + 1)).slice(-2) + '</i><b>' + st[0] + '</b><span>' + st[1] + '</span></li>'; }).join('') + '</ol>' +
-      '<p class="dd-mz-hint">표지를 고르면 실제 인쇄본의 대표 지면을 넘겨 볼 수 있어요.</p>' +
-      '<div class="mzs-shelf" role="tablist" aria-label="MUSE.D 이슈 선택">' + MZ_ISSUES.map(function(it, k){
+      '<div class="mzs-shelf" aria-label="MUSE.D 발행 이슈 표지">' + MZ_ISSUES.map(function(it, k){
         var pages = 2 * MZ_BOOKS[it.id].length;
-        return '<button type="button" class="mzs-book' + (k === 0 ? ' is-on' : '') + '" role="tab" aria-selected="' + (k === 0) + '" data-mzs-id="' + it.id + '">' +
+        return '<div class="mzs-book is-on is-static">' +
           '<span class="mzs-cover"><img src="' + MZ_BOOKS[it.id][0][0] + '" alt="MUSE.D ' + it.name + ' 표지" loading="lazy" decoding="async"><span class="mzs-spine"></span><span class="mzs-gloss"></span></span>' +
-          '<span class="mzs-meta"><i>' + ('0' + (k + 1)).slice(-2) + '</i><b>' + it.name + '</b><em>SAMPLE</em></span>' +
-        '</button>';
+          '<span class="mzs-meta"><i>' + ('0' + (k + 1)).slice(-2) + '</i><b>' + it.name + '</b><em>ISSUE</em></span>' +
+        '</div>';
       }).join('') + '</div>' +
-      '<div class="mzs-view" aria-live="polite">' + MZ_ISSUES[0].block.custom + '</div>' +
     '</div>' };
   /* DDDM jump bar: buttons (bar + hub cards) scroll the modal to a chapter,
      offset by the sticky bar; the bar highlights whichever chapter is on screen. */
@@ -4744,7 +4744,7 @@
   }
   function initMzShelf(root){
     if (!root || root._mzs) return; root._mzs = 1;
-    var view = root.querySelector('.mzs-view'), busy = false;
+    var view = root.querySelector('.mzs-view'), busy = false; if (!view) return;  /* 2026-10-21: covers only, no inside pages */
     root.querySelectorAll('[data-mz]').forEach(function(el){ initMzBook(el); });
     root.querySelector('.mzs-shelf').addEventListener('click', function(e){
       var b = e.target.closest('.mzs-book'); if (!b || b.classList.contains('is-on') || busy) return;
