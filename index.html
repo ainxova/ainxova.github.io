@@ -4817,7 +4817,7 @@
       '<dl class="dd-facts">' +
         '<dt>Channel</dt><dd>DDDM — 아티스트 · 음악 콘텐츠 유튜브 채널</dd>' +
         '<dt>Media</dt><dd>' + nw(['YouTube', 'MUSE.D 인쇄 매거진', 'Instagram']) + '</dd>' +
-        '<dt>Programs</dt><dd>' + nw(['H60K', 'POSE.D', 'D.STAGE', 'S-FORM', 'COMING SOON', 'COMING SOON']) + '</dd>' +
+        '<dt>Programs</dt><dd>' + nw(['H60K', 'POSE.D', 'D.STAGE', 'S-FORM', '공개 예정 2종']) + '</dd>' +
         '<dt>Artists</dt><dd>' + nw(['NCT WISH', 'JAY B', 'CLOSE YOUR EYES', 'XLOV', 'YOUNG POSSE', 'FIFTY FIFTY 외']) + '</dd>' +
         '<dt>Role</dt><dd>크리에이티브 총괄 — ' + nw(['기획', '브랜딩', '촬영 디렉팅', '편집 디자인', '리터칭', '모션']) + '</dd>' +
       '</dl>' +
@@ -4868,9 +4868,9 @@
       '<div class="dd-logos">' +
         '<div class="dd-logos-head">' +
           '<div><span class="dd-yt-sub-t">Program Logos</span><h4 class="dd-thumb-title">프로그램 로고 6종,<br><em>모두 단독 디자인</em></h4></div>' +
-          '<p class="dd-logos-copy">H60K · POSE.D · D.STAGE · S-FORM, 그리고 공개를 앞둔 COMING SOON와 아직 이름을 밝힐 수 없는 신규 프로그램까지 여섯 개 프로그램의 로고를 처음부터 끝까지 혼자 기획하고 디자인했습니다. 출시 예정인 두 로고는 공개 전이라 블러 처리했습니다. 프로그램마다 성격은 살리되 컬러는 화이트 하나로 통일해, 썸네일 위에서 어떤 프로그램이든 같은 채널로 읽히도록 했습니다.</p>' +
+          '<p class="dd-logos-copy">H60K · POSE.D · D.STAGE · S-FORM, 그리고 공개를 앞둔 신규 프로그램 2종까지 여섯 개 프로그램의 로고를 처음부터 끝까지 혼자 기획하고 디자인했습니다. 출시 예정인 두 로고는 공개 전이라 블러 처리했습니다. 프로그램마다 성격은 살리되 컬러는 화이트 하나로 통일해, 썸네일 위에서 어떤 프로그램이든 같은 채널로 읽히도록 했습니다.</p>' +
         '</div>' +
-        '<div class="dd-logos-grid">' + [['h60k','H60K','Dynamic Slant · HOOK Line'], ['posed','POSE.D','Magazine Mood · Flash Moment'], ['dstage','D.STAGE','D.Stage Mood · VR'], ['sform','S-FORM','MUSE INTERVIEW · 숏폼 인터뷰'], ['program-soon-1','COMING SOON','Coming Soon','공개 전'], ['program-soon','COMING SOON','신규 프로그램 · 공개 예정','공개 전']].map(function(x, k){
+        '<div class="dd-logos-grid">' + [['h60k','H60K','Dynamic Slant · HOOK Line'], ['posed','POSE.D','Magazine Mood · Flash Moment'], ['dstage','D.STAGE','D.Stage Mood · VR'], ['sform','S-FORM','MUSE INTERVIEW · 숏폼 인터뷰'], ['program-soon-1','COMING SOON','신규 프로그램 · 공개 예정','공개 전'], ['program-soon-2','COMING SOON','신규 프로그램 · 공개 예정','공개 전']].map(function(x, k){
           return '<figure class="dd-logo' + (x[3] ? ' is-soon' : '') + '">' + (x[3] ? '<em class="dd-logo-badge">' + x[3] + '</em>' : '') + '<span class="dd-logo-box"><img src="images/dddm-logos/' + x[0] + '.png" alt="' + x[1] + ' 로고" loading="lazy" decoding="async"></span><figcaption><b>' + x[1] + '</b><span>' + x[2] + '</span></figcaption></figure>';
         }).join('') + '</div>' +
       '</div>' +
@@ -5474,7 +5474,7 @@
   };
   var hbVisualFlow = [
     vfOpenBlock, vfJumpBlock,
-    vfMark('01', 'IDENTITY'), HB + 'hb-identity.jpg?v=2',
+    vfMark('01', 'IDENTITY'), HB + 'hb-wordmark.jpg',
     vfMark('02', 'KEY VISUAL'), vfPosterBlock, dududoMotionBlock,
     vfMark('03', 'PROMOTION'), HB + 'hb-sns.jpg', vfCdBlock,
     hbTicketBlock, vfNoCopy(hbTicketEventBlock), vfNoCopy(hbSiteMapBlock),
@@ -5571,8 +5571,8 @@
       index:{ title:"HEARTBEAT BY DUDUDO", unit:"PARTS", label:"파트" },
       images:[],
       sections:[
-        { id:"hb-id", edTitle:"심박 하나로<br>시작한 브랜드", short:"Identity", eyebrow:"PART 01", title:"BRAND CONCEPT & IDENTITY", sum:"심박·유리·잔상, 세 개의 시각 언어로 정리한 브랜드 메시지와 심전도 파형 워드마크·컬러·타이포 시스템", period:"", tools:"",
-          cover:HB + "t-identity.jpg", coverPos:"30% 50%", show:[HB + "hb-concept.jpg", HB + "hb-identity.jpg"] },
+        { id:"hb-id", edTitle:"심박 하나로<br>시작한 브랜드", short:"Identity", eyebrow:"PART 01", title:"BRAND CONCEPT & IDENTITY", sum:"심박·유리·잔상, 세 개의 시각 언어로 정리한 브랜드 메시지와 심전도 파형 워드마크", period:"", tools:"",
+          cover:HB + "t-identity.jpg", coverPos:"30% 50%", show:[HB + "hb-concept.jpg", HB + "hb-wordmark.jpg"] },
         { id:"hb-kv", edTitle:"유리 심장과<br>잔상의 키비주얼", short:"Key Visual", eyebrow:"PART 02", title:"KEY VISUAL & MOTION", sum:"유리 심장 키 오브젝트, 양일간의 라인업을 한 화면에 담은 메인 포스터와 루프 모션 포스터", period:"", tools:"",
           cover:HB + "t-kv.jpg", coverPos:"35% 50%", show:[HB + "hb-keyvisual.jpg", dududoMotionBlock] },
         { id:"hb-pr", edTitle:"티켓이<br>열리기까지", short:"Promotion", eyebrow:"PART 03", title:"PROMOTION", sum:"데이별 SNS 포스터, CD 티저와 유튜브 플레이리스트 썸네일, 예매처 상세페이지, 인스타그램 티켓 이벤트, 더현대 쇼룸 프로모션, 아티스트 사인용 포스터", period:"", tools:"",
