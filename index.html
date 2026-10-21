@@ -4180,16 +4180,6 @@
   };
 
   /* 01c · Exhibition floor plan */
-  var cosmosFloorplanBlock = {
-    custom: '<div class="cosmos-block">' +
-      '<div class="cosmos-head">' +
-        '<div class="cosmos-eyebrow">Spatial Planning</div>' +
-        '<h3 class="cosmos-title">EXHIBITION FLOOR PLAN</h3>' +
-        '<p class="cosmos-copy">시청역 유휴 지하공간의 활용 방안을 기획 초기부터 함께 고민해 다수의 공간 구성 시안을 제안했고, 11개 콘텐츠 공간을 하나의 동선으로 잇는 구성도 이때 제안했습니다.</p>' +
-      '</div>' +
-      '<div class="cosmos-floorplan"><img src="images/cosmos-add/cosmos-floorplan.jpg" alt="COSMOS 전시 평면도" loading="lazy" decoding="async"></div>' +
-    '</div>'
-  };
 
   /* 01c-2 · Simplified wayfinding map — designed in-house, posted to the
      official Instagram as a 3-tile split so the whole map reads at a glance
@@ -4469,46 +4459,6 @@
     { id:'photozone', en:'HOLOGRAM PHOTO ZONE', kr:'홀로그램 포토존', note:'멤버와 함께 남기는 홀로그램 촬영 부스' },
     { id:'draw', en:'DRAW OUR COSMOS', kr:'함께 그리는 코스모스', note:'관람객의 메시지로 완성되는 마지막 벽' }
   ];
-  var cxVmdBlock = {
-    custom: '<div class="cosmos-block">' +
-      '<div class="cosmos-head">' +
-        '<div class="cosmos-eyebrow">VMD · MD Zone</div>' +
-        '<h3 class="cosmos-title">PIECES OF COSMOS</h3>' +
-        '<p class="cosmos-copy"><span class="copy-line">공식 MD 판매 존의 VMD를 기획하고, 현장에서 직접 디렉팅했습니다.</span><span class="copy-line">상품 진열과 동선, 조명 분위기까지 디자인 시안에서 실제 공간으로 옮기는 과정을 맡았습니다.</span></p>' +
-      '</div>' +
-      '<div class="cx-zones"><div class="cx-zone-stage">' +
-        '<figure class="cx-zone-fig"><img src="' + CP + 'zone-vmd-design.jpg" alt="MD존 VMD 디자인 시안" decoding="async"><figcaption>DESIGN PROPOSAL</figcaption></figure>' +
-        '<figure class="cx-zone-fig is-site"><img src="' + CP + 'zone-vmd-site.jpg" alt="MD존 VMD 현장" decoding="async"><figcaption>ON-SITE</figcaption></figure>' +
-      '</div>' +
-    '</div>'
-  };
-  var cxZonesBlock = {
-    custom: '<div class="cosmos-block">' +
-      '<div class="cosmos-head">' +
-        '<div class="cosmos-eyebrow">Space · Design Proposal to Site</div>' +
-        '<h3 class="cosmos-title">FROM PROPOSAL TO SITE</h3>' +
-        '<p class="cosmos-copy">기획 단계의 공간 시안이 실제 전시장으로 구현된 모습을 존별로 비교했습니다. 동선에 맞춘 사인월·사이니지 그래픽을 맡았고, MD존 VMD는 현장에서 직접 디렉팅했습니다.</p>' +
-      '</div>' +
-      '<div class="cx-zones" data-cx-zones>' +
-        '<div class="cx-zone-tabs" role="tablist" aria-label="전시 공간">' +
-          cxZones.map(function(z, i){
-            return '<button type="button" role="tab" class="cx-zone-tab' + (i === 0 ? ' is-on' : '') + '" data-cx-zone="' + i + '" aria-selected="' + (i === 0) + '">' +
-              '<span class="cx-zone-tab-num">' + String(i + 1).padStart(2, '0') + '</span>' + z.en + '</button>';
-          }).join('') +
-        '</div>' +
-        '<div class="cx-zone-stage">' +
-          '<figure class="cx-zone-fig"><img data-cx-img="design" src="' + CP + 'zone-' + cxZones[0].id + '-design.jpg" alt="' + cxZones[0].en + ' 디자인 시안" decoding="async"><figcaption>DESIGN PROPOSAL</figcaption></figure>' +
-          '<figure class="cx-zone-fig is-site"><img data-cx-img="site" src="' + CP + 'zone-' + cxZones[0].id + '-site.jpg" alt="' + cxZones[0].en + ' 현장" decoding="async"><figcaption>ON-SITE</figcaption></figure>' +
-          '<button type="button" class="cx-zone-nav is-prev" data-cx-step="-1" aria-label="이전 공간"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg></button>' +
-          '<button type="button" class="cx-zone-nav is-next" data-cx-step="1" aria-label="다음 공간"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></button>' +
-        '</div>' +
-        /* progress line under the stage: shows how many zones are left */
-        '<div class="cx-zone-prog" aria-hidden="true"><i style="width:' + (100 / cxZones.length) + '%"></i></div>' +
-        '<div class="cx-zone-cap"><span class="cx-zone-cap-num">01 / ' + String(cxZones.length).padStart(2, '0') + '</span><span class="cx-zone-cap-name">' + cxZones[0].en + ' <em>' + cxZones[0].kr + '</em></span><span class="cx-zone-cap-note">' + cxZones[0].note + '</span>' +
-        '</div>' +
-      '</div>' +
-    '</div>'
-  };
 
   /* PART 02 · Entrance kit (operation report) */
   var cxEntranceKitBlock = {
@@ -5741,8 +5691,8 @@
       sections:[
         { id:"kv", short:"Key Visual", eyebrow:"PART 01", title:"ART DIRECTION & KEY VISUAL", sum:"6종 이상의 콘셉트 시안 → 최종 셀렉 2안 → 메인 키비주얼, 인물 컷 정밀 보정·합성", period:"", tools:"",
           cover:CX + "cosmos-keyvisual-960.jpg", coverPos:"50% 40%", show:[cxKeyVisualBlock] },
-        { id:"sp", short:"Space & VMD", eyebrow:"PART 02", title:"SPACE GRAPHICS & VMD", sum:"11개 존 동선 설계, 디자인 시안과 현장, 전시 맵·사이니지·MD존 VMD·입장 구성품", period:"", tools:"",
-          cover:"images/cosmos-add/cosmos-map.jpg", coverPos:"22% 45%", show:[cosmosContentBlock, cosmosFloorplanBlock, cxZonesBlock, cosmosMapBlock, cosmosOnsiteBlock, cosmosXbannerBlock, cosmosWristbandBlock, cxEntranceKitBlock] },
+        { id:"sp", short:"Space & VMD", eyebrow:"PART 02", title:"SPACE GRAPHICS & VMD", sum:"전시 맵·사이니지·입장 구성품", period:"", tools:"",
+          cover:"images/cosmos-add/cosmos-map.jpg", coverPos:"22% 45%", show:[cosmosContentBlock, cosmosMapBlock, cosmosOnsiteBlock, cosmosXbannerBlock, cosmosWristbandBlock, cxEntranceKitBlock] },
         { id:"md", short:"MD & Campaign", eyebrow:"PART 03", title:"MERCHANDISE & CAMPAIGN", sum:"30여 종 공식 MD 리드, 직접 디자인한 LED 키링·포토카드, 점 잇기 쇼핑백과 팬 참여 캠페인", period:"", tools:"",
           cover:CX + "cosmos-bag-typeA-mockup.jpg", coverPos:"30% 60%", show:[cxMdBlock, cosmosBagBlock, cosmosPromoEventsBlock] },
         { id:"dg", short:"Digital", eyebrow:"PART 04", title:"DIGITAL CONTENT", sum:"공식 인스타그램 채널 세팅과 성과, COSMOS 알파벳 캐러셀, PHASE 2 티저, B.STAGE 공지(국·영문)", period:"", tools:"",
