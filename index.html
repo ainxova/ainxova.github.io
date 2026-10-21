@@ -3523,6 +3523,12 @@
     .cosmos-steps{ align-items:stretch !important; }
     .cosmos-step.is-text .cosmos-step-thumb{ flex:1 1 auto; align-items:flex-start; }
   }
+  .dd-rt-strip{ display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:.75rem; margin-top:2rem; }
+  .dd-rt-strip figure{ margin:0; aspect-ratio:401/609; overflow:hidden; background:#111; border-radius:6px; }
+  .dd-rt-strip img{ width:100%; height:100%; object-fit:cover; display:block; transition:transform .6s var(--ease-out, ease); }
+  .dd-rt-strip figure:hover img{ transform:scale(1.04); }
+  .dd-rt-cap{ margin:.9rem 0 0; font-size:.72rem; letter-spacing:.06em; color:rgba(255,255,255,.45); }
+  @media (max-width:767px){ .dd-rt-strip{ grid-template-columns:repeat(3,minmax(0,1fr)); gap:.5rem; } .dd-rt-strip figure:nth-child(n+4){ display:none; } }
 </style>
 </head>
 <body class="font-body">
@@ -4545,7 +4551,10 @@
         '<div class="cosmos-eyebrow">All Media · Retouching</div>' +
         '<h3 class="cosmos-title">아티스트 사진 리터칭</h3>' +
         '<p class="cosmos-copy">유튜브 썸네일, MUSE.D 화보, 인스타그램 피드에 쓰인 아티스트 사진 대부분을 직접 보정했습니다. 피부 결과 톤, 잔머리와 의상 디테일, 배경의 색 균형까지 아티스트 본연의 분위기는 살리면서 채널의 깨끗한 화이트 톤에 맞춰 정리했습니다.</p>' +
-    '</div></div>'
+    '</div>' +
+    '<div class="dd-rt-strip">' + ['s01','s04','s07','s09','s10'].map(function(n){ return '<figure><img src="images/dddm-yt/' + n + '.jpg" alt="보정을 마친 공개 쇼츠 썸네일" loading="lazy" decoding="async"></figure>'; }).join('') + '</div>' +
+    '<p class="dd-rt-cap">채널에 공개된 썸네일 · 보정 완료본</p>' +
+    '</div>'
   };
 
   /* MUSE.D · JAY B issue — the real magazine as a book that turns its own
@@ -5600,7 +5609,7 @@
       bare:true,
       lead:[dddmHeroBlock, dddmStoryBlock, dddmJumpBlock, dddmYtBlock, mzShelfBlock, mzDistBlock, dddmFeedBlock, dddmRetouchBlock],
       index:{ title:"DDDM BRAND GUIDE", unit:"PARTS", label:"파트" },
-      pdfFlow:true, pdfFile:"images/dddm-guide/DDDM-Brand-Guide.pdf", pdfCover:"images/dddm-guide/dddm-guide-01.jpg",
+      pdfFlow:true, pdfCover:"images/dddm-guide/dddm-guide-01.jpg",
       images:[],
       sections:[
         { id:"dd", eyebrow:"PART 01", title:"DDDM", sum:"심볼형·워드마크형 채널 로고와 ddd.MUSIC · ddd.STORE 서브 브랜드 체계", period:"", tools:"", cover:"images/dddm-guide/dddm-guide-03.jpg", coverPos:"66% 32%", show:["images/dddm-guide/dddm-guide-02.jpg","images/dddm-guide/dddm-guide-03.jpg"], more:["images/dddm-guide/dddm-guide-04.jpg"] },
@@ -7270,7 +7279,6 @@
         (p.pdfFlow ? '<div class="dd-pdf">' +
           '<nav class="dd-jump dd-subjump" data-dd-jump data-dd-sub aria-label="가이드 파트 바로가기"><div class="dd-jump-in"><span class="dd-jump-label">PARTS</span>' +
             p.sections.map(function(sec){ return '<button type="button" class="dd-jump-btn" data-dd-go="uxs-' + sec.id + '">' + (sec.short || sec.title) + '</button>'; }).join('') +
-            '<a class="dd-pdf-dl" href="' + p.pdfFile + '" target="_blank" rel="noopener">PDF 전체 보기 ↗</a>' +
           '</div></nav>' +
           '<img class="modal-image" src="' + p.pdfCover + '" alt="' + p.title + ' 표지" loading="lazy" decoding="async">' +
           p.sections.map(function(sec){
