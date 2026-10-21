@@ -4455,24 +4455,6 @@
     '</div></div>'
   };
 
-  /* PART 01 · Key visual process: the two drafts that reached the final
-     selection, next to the chosen key visual */
-  var cxKvProcessBlock = {
-    custom: '<div class="cosmos-block">' +
-      '<div class="cosmos-head">' +
-        '<div class="cosmos-eyebrow">Key Visual · Process</div>' +
-        '<h3 class="cosmos-title">FROM DRAFTS TO FINAL</h3>' +
-        '<p class="cosmos-copy"><span class="copy-line">6종 이상의 콘셉트 시안 가운데 최종 셀렉 단계까지 오른 두 안과, 그 과정을 거쳐 확정된 메인 키비주얼입니다.</span><span class="copy-line">스탠딩 컷과 시팅 컷, 로고 배치와 정보 위계를 달리해 방향을 비교했고, 셀렉된 시팅 컷을 화이트 톤으로 디벨롭해 최종안을 완성했습니다.</span></p>' +
-      '</div>' +
-      '<div class="cx-kvp">' +
-        '<figure class="cx-kvp-item"><div class="cx-kvp-img"><img src="' + CP + 'kv-draft-a.jpg" alt="메인 포스터 시안 A" loading="lazy" decoding="async"></div><figcaption><span class="cx-kvp-tag">DRAFT A</span><b>Standing · Center Logo</b>스탠딩 컷, 상단 중앙 가로형 로고와 하단 정보 분할</figcaption></figure>' +
-        '<figure class="cx-kvp-item"><div class="cx-kvp-img"><img src="' + CP + 'kv-draft-b.jpg" alt="메인 포스터 시안 B" loading="lazy" decoding="async"><span class="cx-kvp-sel">SELECTED</span></div><figcaption><span class="cx-kvp-tag">DRAFT B</span><b>Seated · Symbol Logo</b>시팅 컷, 좌상단 심볼 로고와 하단 중앙 정보 정렬</figcaption></figure>' +
-        '<div class="cx-kvp-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>' +
-        '<figure class="cx-kvp-item is-final"><div class="cx-kvp-img"><img src="' + CX + 'cosmos-keyvisual-960.jpg" alt="최종 메인 키비주얼" loading="lazy" decoding="async"></div><figcaption><span class="cx-kvp-tag">FINAL</span><b>Main Key Visual</b>셀렉안을 화이트 톤·프레임 구성으로 디벨롭한 최종 아트워크</figcaption></figure>' +
-      '</div>' +
-    '</div>'
-  };
-
   /* PART 02 · Design proposal → on-site, zone by zone */
   var cxZones = [
     { id:'entrance', en:'ENTRANCE', kr:'입구 사인월', note:'역사 내 동선에서 전시를 처음 마주하는 입구 사인월' },
@@ -4534,10 +4516,9 @@
       '<div class="cosmos-head">' +
         '<div class="cosmos-eyebrow">On-site · Entrance Kit</div>' +
         '<h3 class="cosmos-title">ENTRANCE KIT &amp; PASS</h3>' +
-        '<p class="cosmos-copy">입장 구성품을 하나의 그래픽 톤으로 정리했습니다. 12컬러 입장 팔찌와 오더시트, 특전 포토카드(4종 중 1종 랜덤)·리플렛, 운영용 비표 4종까지 같은 톤으로 이어집니다.</p>' +
+        '<p class="cosmos-copy">입장 구성품을 하나의 그래픽 톤으로 정리했습니다. 12컬러 입장 팔찌와 오더시트, 리플렛, 운영용 비표 4종까지 같은 톤으로 이어집니다.</p>' +
       '</div>' +
       '<div class="cx-kit">' +
-        '<figure class="cx-kit-item"><img src="' + CP + 'photocards.jpg" alt="입장 특전 포토카드" loading="lazy" decoding="async"><figcaption><b>PHOTOCARD</b>입장 특전 4종(GD · TY · DS · BIGBANG) 중\u00a01종\u00a0랜덤</figcaption></figure>' +
         '<div class="cx-passes">' +
         ['aaa','press','vip','staff'].map(function(n){
           return '<figure><img src="' + CP + 'pass-' + n + '.jpg" alt="' + n.toUpperCase() + ' 비표" loading="lazy" decoding="async"></figure>';
@@ -5759,7 +5740,7 @@
       images:[],
       sections:[
         { id:"kv", short:"Key Visual", eyebrow:"PART 01", title:"ART DIRECTION & KEY VISUAL", sum:"6종 이상의 콘셉트 시안 → 최종 셀렉 2안 → 메인 키비주얼, 인물 컷 정밀 보정·합성", period:"", tools:"",
-          cover:CX + "cosmos-keyvisual-960.jpg", coverPos:"50% 40%", show:[cxKeyVisualBlock, cxKvProcessBlock] },
+          cover:CX + "cosmos-keyvisual-960.jpg", coverPos:"50% 40%", show:[cxKeyVisualBlock] },
         { id:"sp", short:"Space & VMD", eyebrow:"PART 02", title:"SPACE GRAPHICS & VMD", sum:"11개 존 동선 설계, 디자인 시안과 현장, 전시 맵·사이니지·MD존 VMD·입장 구성품", period:"", tools:"",
           cover:"images/cosmos-add/cosmos-map.jpg", coverPos:"22% 45%", show:[cosmosContentBlock, cosmosFloorplanBlock, cxZonesBlock, cosmosMapBlock, cosmosOnsiteBlock, cosmosXbannerBlock, cosmosWristbandBlock, cxEntranceKitBlock] },
         { id:"md", short:"MD & Campaign", eyebrow:"PART 03", title:"MERCHANDISE & CAMPAIGN", sum:"30여 종 공식 MD 리드, 직접 디자인한 LED 키링·포토카드, 점 잇기 쇼핑백과 팬 참여 캠페인", period:"", tools:"",
