@@ -3499,10 +3499,11 @@
   .hero-foot p{ margin:0; }
   .hero-foot-l{ font-size:clamp(.95rem, 1.25vw, 1.15rem); line-height:1.7; letter-spacing:-.01em; color:rgba(255,255,255,.88); word-break:keep-all; font-weight:500; }
   .hero-foot-r{ display:flex; flex-direction:column; align-items:flex-end; gap:.8rem; text-align:right; }
-  .hero-foot-role{ font-size:.72rem; letter-spacing:.16em; text-transform:uppercase; color:rgba(255,255,255,.6); white-space:nowrap; }
+  .hero-foot-role{ display:flex; flex-direction:column; gap:.3rem; align-items:flex-end; font-size:.72rem; letter-spacing:.16em; text-transform:uppercase; color:rgba(255,255,255,.6); }
+  .hero-foot-role .hfr-line{ white-space:nowrap; }
+  .hero-foot-role .hfr-line:last-child{ color:rgba(255,255,255,.88); }
   .hero-foot-role i{ font-style:normal; color:var(--accent); margin:0 .3em; }
-  .hero-role-x{ color:rgba(255,255,255,.88); }
-  @media (max-width:767px){ .hero-role-x{ display:block; margin-top:.35rem; } .hero-role-x i:first-child{ display:none; } }
+  @media (max-width:767px){ .hero-foot-role{ align-items:flex-start; } }
   .hero-foot-r b{ font-size:clamp(1.05rem, 1.4vw, 1.3rem); font-weight:700; letter-spacing:.06em; color:#fff; white-space:nowrap; line-height:1; }
   .hero-foot-r b span{ font-weight:600; letter-spacing:0; margin-left:.6em; color:rgba(255,255,255,.88); }
   @media (max-width:767px){
@@ -3602,8 +3603,8 @@
       </h1>
     </div>
     <div class="hero-foot" data-animate>
-      <p class="hero-foot-l"><span>브랜드가 사람을 만나는 모든 순간을,</span> <span>화면부터 현장까지 설계합니다.</span></p>
-      <p class="hero-foot-r font-display"><span class="hero-foot-role">Art Director <i aria-hidden="true">·</i> Visual Designer<span class="hero-role-x"> <i aria-hidden="true">·</i> Multi-Hyphenate <i aria-hidden="true">·</i> Brand&nbsp;×&nbsp;UX</span></span><b>CHOI <em>AIN</em><span>최아인</span></b></p>
+      <p class="hero-foot-l"><span>기획의 의도부터 마케팅 접점까지,</span> <span>화면과 현장을 잇는 브랜딩을 설계합니다.</span></p>
+      <p class="hero-foot-r font-display"><span class="hero-foot-role"><span class="hfr-line">Art Director <i aria-hidden="true">·</i> Visual Designer</span><span class="hfr-line">Brand Strategy <i aria-hidden="true">·</i> Marketing UX</span></span><b>CHOI <em>AIN</em><span>최아인</span></b></p>
     </div>
   </div>
 </header>
