@@ -1642,6 +1642,7 @@
   .mzs-meta i{ font-style:normal; font-size:.62rem; letter-spacing:.14em; color:rgba(242,219,134,.75); font-variant-numeric:tabular-nums; }
   .mzs-meta b{ font-size:.78rem; font-weight:600; letter-spacing:.06em; color:#fff; flex:1; min-width:0; }
   .mzs-meta em{ font-style:normal; font-size:.62rem; color:rgba(255,255,255,.4); font-variant-numeric:tabular-nums; }
+  .mzs-note{ margin:.2rem clamp(0rem,2vw,1.5rem) 0; font-size:.78rem; line-height:1.6; color:rgba(255,255,255,.42); }
   .mzs-shelf, .mzs-view{ width:100%; box-sizing:border-box; }
   .mzs-view{ margin-top:clamp(2.4rem, 5vw, 4rem); padding-top:clamp(2rem,4vw,3rem); border-top:1px solid rgba(255,255,255,.08); transition:opacity .26s ease, transform .26s ease; }
   .mzs-view.is-swap{ opacity:0; transform:translateY(12px); }
@@ -4593,7 +4594,7 @@
   }
   /* 2026-10-20: inner pages are packed 8 to a sheet (4 × 2, 860×1222 each) to stay under the artifact's per-version
      file cap; front covers stay separate (the shelf uses them). MZ_SHEET: page path -> [sheet, col, row]. */
-  var MZ_SHEET = {"images/mused-cye/inside-front.jpg":["images/mused-cye/sheet-1.jpg?v=2",0,0],"images/mused-cye/p01.jpg":["images/mused-cye/sheet-1.jpg?v=2",1,0],"images/mused-cye/p02.jpg":["images/mused-cye/sheet-1.jpg?v=2",2,0],"images/mused-cye/p03.jpg":["images/mused-cye/sheet-1.jpg?v=2",3,0],"images/mused-cye/p04.jpg":["images/mused-cye/sheet-1.jpg?v=2",0,1],"images/mused-cye/inside-back.jpg":["images/mused-cye/sheet-1.jpg?v=2",1,1],"images/mused-cye/back-cover.jpg":["images/mused-cye/sheet-1.jpg?v=2",2,1],"images/mused-jayb/inside-front.jpg":["images/mused-jayb/sheet-1.jpg?v=2",0,0],"images/mused-jayb/p03.jpg":["images/mused-jayb/sheet-1.jpg?v=2",1,0],"images/mused-jayb/p04.jpg":["images/mused-jayb/sheet-1.jpg?v=2",2,0],"images/mused-jayb/p05.jpg":["images/mused-jayb/sheet-1.jpg?v=2",3,0],"images/mused-jayb/p06.jpg":["images/mused-jayb/sheet-1.jpg?v=2",0,1],"images/mused-jayb/inside-back.jpg":["images/mused-jayb/sheet-1.jpg?v=2",1,1],"images/mused-jayb/back-cover.jpg":["images/mused-jayb/sheet-1.jpg?v=2",2,1],"images/mused-xlov/inside-front.jpg":["images/mused-xlov/sheet-1.jpg?v=2",0,0],"images/mused-xlov/p03.jpg":["images/mused-xlov/sheet-1.jpg?v=2",1,0],"images/mused-xlov/p04.jpg":["images/mused-xlov/sheet-1.jpg?v=2",2,0],"images/mused-xlov/p05.jpg":["images/mused-xlov/sheet-1.jpg?v=2",3,0],"images/mused-xlov/p06.jpg":["images/mused-xlov/sheet-1.jpg?v=2",0,1],"images/mused-xlov/inside-back.jpg":["images/mused-xlov/sheet-1.jpg?v=2",1,1],"images/mused-xlov/back-cover.jpg":["images/mused-xlov/sheet-1.jpg?v=2",2,1],"images/mused-yp/inside-front.jpg":["images/mused-yp/sheet-1.jpg?v=2",0,0],"images/mused-yp/p01.jpg":["images/mused-yp/sheet-1.jpg?v=2",1,0],"images/mused-yp/p02.jpg":["images/mused-yp/sheet-1.jpg?v=2",2,0],"images/mused-yp/p03.jpg":["images/mused-yp/sheet-1.jpg?v=2",3,0],"images/mused-yp/p04.jpg":["images/mused-yp/sheet-1.jpg?v=2",0,1],"images/mused-yp/inside-back.jpg":["images/mused-yp/sheet-1.jpg?v=2",1,1],"images/mused-yp/back-cover.jpg":["images/mused-yp/sheet-1.jpg?v=2",2,1],"images/mused-nct/inside-front.jpg":["images/mused-nct/sheet-1.jpg?v=2",0,0],"images/mused-nct/p01.jpg":["images/mused-nct/sheet-1.jpg?v=2",1,0],"images/mused-nct/p02.jpg":["images/mused-nct/sheet-1.jpg?v=2",2,0],"images/mused-nct/p03.jpg":["images/mused-nct/sheet-1.jpg?v=2",3,0],"images/mused-nct/p04.jpg":["images/mused-nct/sheet-1.jpg?v=2",0,1],"images/mused-nct/inside-back.jpg":["images/mused-nct/sheet-1.jpg?v=2",1,1],"images/mused-nct/back-cover.jpg":["images/mused-nct/sheet-1.jpg?v=2",2,1]};
+  var MZ_SHEET = {"images/mused-cye/inside-front.jpg":["images/mused-grid/sheet-1.jpg",0,0],"images/mused-cye/p01.jpg":["images/mused-grid/sheet-1.jpg",1,0],"images/mused-cye/p02.jpg":["images/mused-grid/sheet-1.jpg",2,0],"images/mused-cye/p03.jpg":["images/mused-grid/sheet-1.jpg",3,0],"images/mused-cye/p04.jpg":["images/mused-grid/sheet-1.jpg",0,1],"images/mused-cye/inside-back.jpg":["images/mused-grid/sheet-1.jpg",1,1],"images/mused-cye/back-cover.jpg":["images/mused-grid/sheet-1.jpg",2,1],"images/mused-jayb/inside-front.jpg":["images/mused-grid/sheet-1.jpg",0,0],"images/mused-jayb/p03.jpg":["images/mused-grid/sheet-1.jpg",1,0],"images/mused-jayb/p04.jpg":["images/mused-grid/sheet-1.jpg",2,0],"images/mused-jayb/p05.jpg":["images/mused-grid/sheet-1.jpg",3,0],"images/mused-jayb/p06.jpg":["images/mused-grid/sheet-1.jpg",0,1],"images/mused-jayb/inside-back.jpg":["images/mused-grid/sheet-1.jpg",1,1],"images/mused-jayb/back-cover.jpg":["images/mused-grid/sheet-1.jpg",2,1],"images/mused-xlov/inside-front.jpg":["images/mused-grid/sheet-1.jpg",0,0],"images/mused-xlov/p03.jpg":["images/mused-grid/sheet-1.jpg",1,0],"images/mused-xlov/p04.jpg":["images/mused-grid/sheet-1.jpg",2,0],"images/mused-xlov/p05.jpg":["images/mused-grid/sheet-1.jpg",3,0],"images/mused-xlov/p06.jpg":["images/mused-grid/sheet-1.jpg",0,1],"images/mused-xlov/inside-back.jpg":["images/mused-grid/sheet-1.jpg",1,1],"images/mused-xlov/back-cover.jpg":["images/mused-grid/sheet-1.jpg",2,1],"images/mused-yp/inside-front.jpg":["images/mused-grid/sheet-1.jpg",0,0],"images/mused-yp/p01.jpg":["images/mused-grid/sheet-1.jpg",1,0],"images/mused-yp/p02.jpg":["images/mused-grid/sheet-1.jpg",2,0],"images/mused-yp/p03.jpg":["images/mused-grid/sheet-1.jpg",3,0],"images/mused-yp/p04.jpg":["images/mused-grid/sheet-1.jpg",0,1],"images/mused-yp/inside-back.jpg":["images/mused-grid/sheet-1.jpg",1,1],"images/mused-yp/back-cover.jpg":["images/mused-grid/sheet-1.jpg",2,1],"images/mused-nct/inside-front.jpg":["images/mused-grid/sheet-1.jpg",0,0],"images/mused-nct/p01.jpg":["images/mused-grid/sheet-1.jpg",1,0],"images/mused-nct/p02.jpg":["images/mused-grid/sheet-1.jpg",2,0],"images/mused-nct/p03.jpg":["images/mused-grid/sheet-1.jpg",3,0],"images/mused-nct/p04.jpg":["images/mused-grid/sheet-1.jpg",0,1],"images/mused-nct/inside-back.jpg":["images/mused-grid/sheet-1.jpg",1,1],"images/mused-nct/back-cover.jpg":["images/mused-grid/sheet-1.jpg",2,1]};
   function mzSrc(src){ var c = MZ_SHEET[src]; return c ? c[0] : src; }
   function mzBg(e, src, x){
     var c = MZ_SHEET[src]; e.style.backgroundImage = 'url(' + mzSrc(src) + ')';
@@ -4636,9 +4637,9 @@
     '</div>' };
   }
   var mzCyeBlock = mzBlock('cye', 'MUSE.D — CLOSE YOUR EYES ISSUE',
-    '<span class="copy-line">실제 인쇄된 MUSE.D 클로즈 유어 아이즈 편의 표지와 대표 지면 일부를 넘겨 볼 수 있게 옮겼습니다.</span><span class="copy-line">멤버별 개인 컷과 단체 컷을 하나의 톤으로 엮어, 화보 디렉팅부터 리터칭·지면 레이아웃·표지까지 한 권의 흐름으로 설계했습니다.</span>');
+    '<span class="copy-line">실제 인쇄된 MUSE.D 클로즈 유어 아이즈 편의 표지입니다. 내지는 인물 사진·인터뷰가 포함돼 공개할 수 없어, 실제 제작에 사용한 그리드 구조로 대신 표현했습니다.</span><span class="copy-line">멤버별 개인 컷과 단체 컷을 하나의 톤으로 엮어, 화보 디렉팅부터 리터칭·지면 레이아웃·표지까지 다양한 그리드를 활용해 한 권의 흐름으로 설계했습니다.</span>');
   var mzBookBlock = mzBlock('jayb', 'MUSE.D — JAY B ISSUE',
-    '<span class="copy-line">실제 인쇄된 MUSE.D JAY B 편의 표지와 대표 지면 일부를 넘겨 볼 수 있게 옮겼습니다.</span><span class="copy-line">화보 디렉팅과 리터칭, 지면 레이아웃과 표지 디자인까지 한 권의 흐름으로 설계한 결과물입니다.</span>');
+    '<span class="copy-line">실제 인쇄된 MUSE.D JAY B 편의 표지입니다. 내지는 인물 사진·인터뷰가 포함돼 공개할 수 없어, 실제 제작에 사용한 그리드 구조로 대신 표현했습니다.</span><span class="copy-line">화보 디렉팅과 리터칭, 지면 레이아웃과 표지 디자인까지 다양한 그리드를 활용해 한 권의 흐름으로 설계한 결과물입니다.</span>');
   var mzDistBlock = {
     custom: '<div class="cosmos-block jbs">' +
       '<div class="cosmos-head">' +
@@ -4667,12 +4668,12 @@
     '</div>'
   };
   var mzXlovBlock = mzBlock('xlov', 'MUSE.D — XLOV ISSUE',
-    '<span class="copy-line">실제 인쇄된 MUSE.D 엑스러브 편의 표지와 대표 지면 일부를 넘겨 볼 수 있게 옮겼습니다.</span><span class="copy-line">화보 컷과 인터뷰 지면이 번갈아 호흡하도록 지면 리듬을 설계하고, 리터칭부터 표지 디자인까지 맡았습니다.</span>');
+    '<span class="copy-line">실제 인쇄된 MUSE.D 엑스러브 편의 표지입니다. 내지는 인물 사진·인터뷰가 포함돼 공개할 수 없어, 실제 제작에 사용한 그리드 구조로 대신 표현했습니다.</span><span class="copy-line">화보 컷과 인터뷰 지면이 번갈아 호흡하도록 다양한 그리드로 지면 리듬을 설계하고, 리터칭부터 표지 디자인까지 맡았습니다.</span>');
   var mzYpBlock = mzBlock('yp', 'MUSE.D — YOUNG POSSE ISSUE',
-    '<span class="copy-line">실제 인쇄된 MUSE.D 영파씨 편의 표지와 대표 지면 일부를 넘겨 볼 수 있게 옮겼습니다.</span><span class="copy-line">멤버별 개성이 드러나도록 컷마다 컬러 포인트와 레이아웃을 달리해 지면을 구성했습니다.</span>');
+    '<span class="copy-line">실제 인쇄된 MUSE.D 영파씨 편의 표지입니다. 내지는 인물 사진·인터뷰가 포함돼 공개할 수 없어, 실제 제작에 사용한 그리드 구조로 대신 표현했습니다.</span><span class="copy-line">멤버별 개성이 드러나도록 컷마다 컬러 포인트와 그리드·레이아웃을 달리해 지면을 구성했습니다.</span>');
 
   var mzNctBlock = mzBlock('nct', 'MUSE.D — NCT WISH ISSUE',
-    '<span class="copy-line">실제 인쇄된 MUSE.D NCT WISH 편의 표지와 대표 지면 일부를 넘겨 볼 수 있게 옮겼습니다.</span><span class="copy-line">화이트 톤의 미니멀한 화보와 멤버 친필 사인 페이지까지, 한 권의 흐름으로 지면을 구성했습니다.</span>');
+    '<span class="copy-line">실제 인쇄된 MUSE.D NCT WISH 편의 표지입니다. 내지는 인물 사진·인터뷰가 포함돼 공개할 수 없어, 실제 제작에 사용한 그리드 구조로 대신 표현했습니다.</span><span class="copy-line">화이트 톤의 미니멀한 화보와 멤버 친필 사인 페이지까지, 다양한 그리드를 설계해 한 권의 흐름으로 지면을 구성했습니다.</span>');
 
   /* MUSE.D bookshelf: the five printed issues as cover mockups on one shelf;
      picking a cover swaps the single page-turn viewer below to that issue. */
@@ -4696,13 +4697,15 @@
         ['Design','로고 · 지면 편집 디자인'],
         ['Print','용지 · 제본 선정 · 인쇄 감리']
       ].map(function(st, k){ return '<li><i>' + ('0' + (k + 1)).slice(-2) + '</i><b>' + st[0] + '</b><span>' + st[1] + '</span></li>'; }).join('') + '</ol>' +
-      '<div class="mzs-shelf" aria-label="MUSE.D 발행 이슈 표지">' + MZ_ISSUES.map(function(it, k){
+      '<div class="mzs-shelf" aria-label="MUSE.D 발행 이슈 표지" role="tablist">' + MZ_ISSUES.map(function(it, k){
         var pages = 2 * MZ_BOOKS[it.id].length;
-        return '<div class="mzs-book is-on is-static">' +
+        return '<button type="button" class="mzs-book' + (k === 0 ? ' is-on' : '') + '" data-mzs-id="' + it.id + '" role="tab" aria-selected="' + (k === 0 ? 'true' : 'false') + '">' +
           '<span class="mzs-cover"><img src="' + MZ_BOOKS[it.id][0][0] + '" alt="MUSE.D ' + it.name + ' 표지" loading="lazy" decoding="async"><span class="mzs-spine"></span><span class="mzs-gloss"></span></span>' +
           '<span class="mzs-meta"><i>' + ('0' + (k + 1)).slice(-2) + '</i><b>' + it.name + '</b><em>ISSUE</em></span>' +
-        '</div>';
+        '</button>';
       }).join('') + '</div>' +
+      '<p class="mzs-note"><span class="copy-line">내지는 인물 사진·인터뷰가 포함돼 있어 실제 지면을 공개하는 대신, 호별로 실제 제작에 활용한 그리드 구조를 그대로 옮겨 표현했습니다. 표지를 눌러 다른 호를 확인하실 수 있습니다.</span></p>' +
+      '<div class="mzs-view">' + MZ_ISSUES[0].block.custom + '</div>' +
     '</div>' };
   /* DDDM jump bar: buttons (bar + hub cards) scroll the modal to a chapter,
      offset by the sticky bar; the bar highlights whichever chapter is on screen. */
@@ -4755,7 +4758,7 @@
   }
   function initMzShelf(root){
     if (!root || root._mzs) return; root._mzs = 1;
-    var view = root.querySelector('.mzs-view'), busy = false; if (!view) return;  /* 2026-10-21: covers only, no inside pages */
+    var view = root.querySelector('.mzs-view'), busy = false; if (!view) return;  /* 2026-10-22: inner pages shown as grid diagrams, not real spreads */
     root.querySelectorAll('[data-mz]').forEach(function(el){ initMzBook(el); });
     root.querySelector('.mzs-shelf').addEventListener('click', function(e){
       var b = e.target.closest('.mzs-book'); if (!b || b.classList.contains('is-on') || busy) return;
